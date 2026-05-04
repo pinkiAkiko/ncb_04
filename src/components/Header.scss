@@ -1,0 +1,733 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+// ── Utility Bar ───────────────────────────────────────────
+.hdr-utility-bar {
+    background: $navy-900;
+    border-bottom: 1px solid rgba($white, 0.06);
+    padding: 6px 0;
+
+    @include respond(md) {
+        display: none;
+    }
+}
+
+.hdr-utility-inner {
+    @include flex-between;
+    gap: $space-3;
+}
+
+.hdr-utility-left,
+.hdr-utility-right {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+}
+
+.skip-link {
+    position: absolute;
+    left: -9999px;
+
+    &:focus {
+        left: 0;
+        z-index: 999;
+    }
+}
+
+.utility-gov-tag {
+    color: rgba($white, 0.5);
+    font-size: 0.72rem;
+    font-family: $font-body;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    i {
+        color: $gold-500;
+    }
+}
+
+.utility-divider {
+    width: 1px;
+    height: 14px;
+    background: rgba($white, 0.15);
+}
+
+.utility-link {
+    color: rgba($white, 0.55);
+    font-size: 0.72rem;
+    transition: color $transition-fast;
+
+    &:hover {
+        color: $gold-400;
+    }
+}
+
+.utility-helpline {
+    color: $gold-400;
+    font-size: 0.72rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    i {
+        color: $gold-500;
+    }
+
+    &:hover {
+        color: $gold-300;
+    }
+}
+
+.utility-lang-btn {
+    background: rgba($white, 0.06);
+    border: 1px solid rgba($white, 0.1);
+    color: rgba($white, 0.7);
+    font-size: 0.72rem;
+    padding: 3px 10px;
+    border-radius: $radius-full;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: rgba($gold-500, 0.15);
+        color: $gold-400;
+        border-color: $gold-500;
+    }
+}
+
+.utility-login-btn {
+    background: $gold-500;
+    color: $navy-900;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: $radius-sm;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: background $transition-fast;
+
+    &:hover {
+        background: $gold-400;
+    }
+}
+
+// ── Mobile helpline strip (visible only on md and below) ──
+.hdr-mobile-helpline {
+    display: none;
+    background: $navy-900;
+    padding: 5px $space-4;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba($white, 0.06);
+
+    @include respond(md) { display: flex; }
+
+    .hdr-mobile-helpline-left {
+        display: flex;
+        align-items: center;
+        gap: $space-2;
+        font-size: 0.7rem;
+        color: $gold-400;
+        font-weight: 600;
+        i { font-size: 0.72rem; }
+    }
+    .hdr-mobile-helpline-right {
+        display: flex;
+        align-items: center;
+        gap: $space-2;
+    }
+}
+
+// ── Branding Row ──────────────────────────────────────────
+.hdr-brand-row {
+    background: $navy-800;
+    padding: 14px 0;
+    transition: padding $transition-base;
+
+    &.compact {
+        padding: 8px 0;
+
+        .hdr-name {
+            font-size: 1.2rem;
+        }
+
+        .hdr-hindi {
+            display: none;
+        }
+
+        .hdr-emblem {
+            height: 40px;
+        }
+
+        .hdr-ncb-logo {
+            height: 40px;
+        }
+    }
+}
+
+.hdr-brand-inner {
+    @include flex-between;
+    gap: $space-5;
+    @include respond(sm) { gap: $space-3; }
+}
+
+.hdr-brand-left {
+    display: flex;
+    align-items: center;
+    gap: $space-4;
+}
+
+.hdr-emblem {
+    height: 56px;
+    width: auto;
+    filter: brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+    transition: height $transition-base;
+
+    @include respond(sm) {
+        height: 44px;
+    }
+}
+
+.hdr-ncb-logo {
+    height: 56px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    transition: height $transition-base;
+
+    @include respond(sm) {
+        height: 40px;
+    }
+}
+
+.hdr-logo-link {
+    display: block;
+}
+
+.hdr-org-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.hdr-govt {
+    font-size: 0.72rem;
+    color: rgba($white, 0.5);
+    letter-spacing: 0.5px;
+    font-family: $font-body;
+
+    @include respond(sm) {
+        display: none;
+    }
+}
+
+.hdr-name {
+    font-family: $font-heading;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $white;
+    letter-spacing: 0.5px;
+    line-height: 1;
+    transition: font-size $transition-base;
+
+    @include respond(md) {
+        font-size: 1.15rem;
+    }
+
+    @include respond(sm) {
+        font-size: 1rem;
+    }
+}
+
+.hdr-hindi {
+    font-size: 0.82rem;
+    color: $gold-400;
+
+    @include respond(md) {
+        display: none;
+    }
+}
+
+.hdr-brand-right {
+    display: flex;
+    align-items: center;
+    gap: $space-4;
+
+    @include respond(md) {
+        gap: $space-2;
+    }
+}
+
+.hdr-logo-right {
+    display: block;
+    flex-shrink: 0;
+}
+
+.hdr-ncb-logo-right {
+    height: 52px;
+    width: auto;
+    transition: height $transition-base;
+
+    .hdr-brand-row.compact & {
+        height: 38px;
+    }
+
+    @include respond(md) { height: 42px; }
+    @include respond(sm) { height: 34px; }
+}
+
+.hdr-partner-logos {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    padding-right: $space-3;
+    border-right: 1px solid rgba($white, 0.15);
+
+    @include respond(sm) {
+        display: none;
+    }
+}
+
+.hdr-partner-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $white;
+    border-radius: $radius-sm;
+    padding: 4px 8px;
+    height: 40px;
+    transition: box-shadow $transition-fast, transform $transition-fast;
+
+    .hdr-brand-row.compact & {
+        height: 30px;
+    }
+
+    &:hover {
+        box-shadow: 0 2px 10px rgba($gold-500, 0.4);
+        transform: translateY(-1px);
+    }
+}
+
+.hdr-partner-img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+}
+
+.hdr-search-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.hdr-search-toggle {
+    background: rgba($white, 0.08);
+    border: 1px solid rgba($white, 0.15);
+    color: $white;
+    width: 36px;
+    height: 36px;
+    border-radius: $radius-sm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background $transition-fast;
+
+    &:hover {
+        background: rgba($gold-500, 0.2);
+        border-color: $gold-500;
+        color: $gold-400;
+    }
+}
+
+.hdr-search-panel {
+    position: absolute;
+    right: calc(100% + 8px);
+    top: 50%;
+    transform: translateY(-50%);
+    background: $white;
+    border-radius: $radius-md;
+    box-shadow: $shadow-lg;
+    display: flex;
+    overflow: hidden;
+    width: 300px;
+    animation: fadeIn 0.2s ease;
+
+    @include respond(sm) {
+        position: fixed;
+        right: $space-4;
+        left: $space-4;
+        top: auto;
+        bottom: $space-6;
+        transform: none;
+        width: auto;
+    }
+
+    input {
+        flex: 1;
+        padding: $space-3 $space-4;
+        border: none;
+        outline: none;
+        font-family: $font-body;
+        font-size: 0.9rem;
+        color: $gray-700;
+    }
+}
+
+.hdr-search-submit {
+    background: $gold-500;
+    border: none;
+    color: $navy-900;
+    padding: 0 $space-4;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background $transition-fast;
+
+    &:hover {
+        background: $gold-400;
+    }
+}
+
+// ── Nav Row ───────────────────────────────────────────────
+.hdr-nav-ticker-row {
+    background: $navy-700;
+    border-bottom: 3px solid $gold-500;
+    position: relative;
+    z-index: 900;
+
+    &.sticky {
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+}
+
+// Main Nav
+.hdr-main-nav {
+    background: $navy-700;
+}
+
+.nav-inner {
+    @include flex-between;
+    position: relative;
+}
+
+.nav-hamburger {
+    display: none;
+    background: none;
+    border: none;
+    flex-direction: column;
+    gap: 5px;
+    padding: $space-3;
+    cursor: pointer;
+
+    span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: $white;
+        border-radius: 2px;
+        transition: all $transition-fast;
+    }
+
+    @include respond(lg) {
+        display: flex;
+    }
+}
+
+.nav-links {
+    display: flex;
+    align-items: stretch;
+    flex: 1;
+
+    @include respond(lg) {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: min(320px, 90vw);
+        height: 100vh;
+        background: $navy-800;
+        flex-direction: column;
+        align-items: stretch;
+        overflow-y: auto;
+        padding-bottom: $space-6;
+        z-index: 9998;
+        transition: left $transition-slow;
+        box-shadow: 4px 0 40px rgba(0, 0, 0, 0.4);
+
+        &.mobile-open {
+            left: 0;
+        }
+    }
+}
+
+.mobile-nav-header {
+    display: none;
+    align-items: center;
+    gap: $space-3;
+    padding: $space-4 $space-5;
+    border-bottom: 1px solid rgba($white, 0.1);
+    background: $navy-900;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+
+    img {
+        height: 36px;
+        filter: brightness(0) invert(1);
+    }
+
+    span {
+        font-family: $font-heading;
+        font-weight: 700;
+        color: $white;
+        font-size: 1.1rem;
+    }
+
+    button {
+        margin-left: auto;
+        background: none;
+        border: none;
+        color: $white;
+        font-size: 1.1rem;
+        cursor: pointer;
+        padding: $space-2;
+    }
+
+    @include respond(lg) {
+        display: flex;
+    }
+}
+
+// Nav items
+.nav-item-li {
+    position: relative;
+
+    @include respond(lg) {
+        &.has-dropdown {
+            flex-direction: column;
+        }
+    }
+}
+
+.nav-link-btn {
+    display: flex;
+    align-items: center;
+    gap: $space-1;
+    padding: 0 $space-4;
+    height: 52px;
+    font-family: $font-heading;
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: rgba($white, 0.85);
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color $transition-fast, border-color $transition-fast, background $transition-fast;
+
+    &:hover,
+    &.active {
+        color: $gold-400;
+        border-bottom-color: $gold-500;
+        background: rgba($white, 0.04);
+    }
+
+    .nav-arrow {
+        font-size: 0.65rem;
+        margin-left: 2px;
+        transition: transform $transition-fast;
+    }
+
+    @include respond(lg) {
+        height: auto;
+        padding: $space-3 $space-5;
+        border-bottom: none;
+        border-left: 3px solid transparent;
+        width: 100%;
+        justify-content: space-between;
+        font-size: 0.88rem;
+
+        &.active {
+            border-left-color: $gold-500;
+            border-bottom-color: transparent;
+            background: rgba($white, 0.06);
+        }
+    }
+}
+
+// Dropdown
+.nav-dropdown {
+    position: absolute;
+    top: calc(100% + 3px);
+    left: 0;
+    min-width: 240px;
+    background: $white;
+    border-radius: 0 0 $radius-md $radius-md;
+    border-top: 3px solid $gold-500;
+    box-shadow: $shadow-lg;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: all $transition-base;
+    z-index: 999;
+    padding: $space-2 0;
+
+    &.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    @include respond(lg) {
+        position: static;
+        box-shadow: none;
+        border: none;
+        border-left: 3px solid rgba($gold-500, 0.3);
+        border-radius: 0;
+        background: rgba($white, 0.04);
+        padding: 0;
+        margin-left: $space-5;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        transition: max-height $transition-base;
+
+        &.open {
+            max-height: 500px;
+            padding: $space-2 0;
+        }
+    }
+
+    // Waterfall animation for items
+    li {
+        opacity: 0;
+        transform: translateY(15px);
+        transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    &.open li {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    @for $i from 1 through 15 {
+        &.open li:nth-child(#{$i}) {
+            transition-delay: #{$i * 0.08}s;
+        }
+    }
+}
+
+.dropdown-link {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    padding: $space-3 $space-5;
+    color: $navy-700;
+    font-size: 0.85rem;
+    font-family: $font-body;
+    transition: all $transition-fast;
+
+    .drop-arrow {
+        font-size: 0.6rem;
+        color: $gold-500;
+        flex-shrink: 0;
+    }
+
+    &:hover {
+        background: $gray-100;
+        color: $navy-800;
+        padding-left: calc($space-5 + 4px);
+    }
+
+    &.active {
+        color: $gold-600;
+        background: $gold-100;
+        font-weight: 600;
+    }
+
+    @include respond(lg) {
+        color: rgba($white, 0.7);
+        font-size: 0.82rem;
+        padding: $space-2 $space-4;
+
+        &:hover {
+            background: rgba($white, 0.04);
+            color: $gold-300;
+        }
+
+        &.active {
+            color: $gold-400;
+            background: transparent;
+        }
+    }
+}
+
+// CTA in nav
+.nav-cta-li {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    padding: 0 $space-3;
+}
+
+.nav-submit-tip-btn {
+    @include gold-btn;
+    height: 36px;
+    font-size: 0.78rem;
+    padding: 0 $space-4;
+    border-radius: $radius-sm;
+    white-space: nowrap;
+
+    @include respond(lg) {
+        margin: $space-4 $space-5;
+        height: 40px;
+        justify-content: center;
+    }
+}
+
+// Mobile overlay
+.nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9997;
+
+    @media (min-width: #{$bp-lg + 1px}) {
+        display: none;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes ticker {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}

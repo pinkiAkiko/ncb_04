@@ -1,0 +1,371 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.rti-page { }
+
+// Officers grid — CBI 2-col layout
+.rti-officers-section { margin-bottom: $space-9; }
+
+.rti-officers-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-5;
+    @include respond(md) { grid-template-columns: 1fr; }
+}
+
+.rti-officer-card {
+    border-radius: $radius-lg;
+    overflow: hidden;
+    box-shadow: $shadow-md;
+    transition: transform $transition-base, box-shadow $transition-base;
+    &:hover { transform: translateY(-3px); box-shadow: $shadow-lg; }
+
+    &.rti-card--primary { border-top: 4px solid $gold-500; }
+    &.rti-card--secondary { border-top: 4px solid $navy-500; }
+}
+
+.roc-header {
+    background: $navy-800;
+    padding: $space-4 $space-5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.roc-role-tag {
+    font-family: $font-heading;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: $gold-400;
+}
+
+.roc-avatar {
+    width: 40px;
+    height: 40px;
+    background: rgba($gold-500, 0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $gold-400;
+    font-size: 1.1rem;
+}
+
+.roc-body { background: $white; padding: $space-5; }
+
+.roc-name {
+    font-family: $font-heading;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: $navy-800;
+    margin-bottom: 4px;
+}
+
+.roc-designation {
+    font-size: 0.82rem;
+    color: $gray-500;
+    margin-bottom: $space-4;
+}
+
+.roc-contact-list { display: flex; flex-direction: column; gap: $space-2; margin-bottom: $space-4; }
+
+.roc-contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-2;
+    font-size: 0.82rem;
+    color: $gray-600;
+
+    i { color: $gold-500; font-size: 0.8rem; margin-top: 2px; flex-shrink: 0; }
+    a { color: $navy-500; &:hover { color: $gold-600; text-decoration: underline; } }
+}
+
+.roc-file-btn {
+    @include gold-btn;
+    font-size: 0.8rem;
+    width: 100%;
+    justify-content: center;
+    padding: $space-3;
+}
+
+// Steps — CBI horizontal card flow
+.rti-steps-section { margin-bottom: $space-9; }
+.rti-steps-header { margin-bottom: $space-5; }
+
+.rti-steps-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: $space-4;
+    @include respond(xl) { grid-template-columns: repeat(3, 1fr); }
+    @include respond(md) { grid-template-columns: 1fr 1fr; }
+    @include respond(sm) { grid-template-columns: 1fr; }
+}
+
+.rti-step-card {
+    background: $white;
+    border: 1px solid $gray-200;
+    border-radius: $radius-lg;
+    padding: $space-5;
+    position: relative;
+    text-align: center;
+    @include card-hover;
+}
+
+.rsc-step-num {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: $gold-500;
+    color: $navy-900;
+    font-family: $font-heading;
+    font-size: 0.75rem;
+    font-weight: 700;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rsc-icon {
+    width: 52px;
+    height: 52px;
+    background: rgba($navy-500, 0.08);
+    color: $navy-500;
+    border-radius: $radius-md;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin: $space-4 auto $space-3;
+}
+
+.rsc-title {
+    font-family: $font-heading;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: $navy-800;
+    margin-bottom: $space-2;
+}
+
+.rsc-body {
+    font-size: 0.8rem;
+    color: $gray-500;
+    line-height: 1.6;
+}
+
+// Section 4 tabs — CBI sidebar layout
+.rti-17-section { margin-bottom: $space-9; }
+.rti-17-header { margin-bottom: $space-5; }
+
+.rti-tab-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 0;
+    border: 1px solid $gray-200;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    @include respond(md) { grid-template-columns: 1fr; }
+}
+
+.rti-tab-sidebar {
+    background: $navy-800;
+    display: flex;
+    flex-direction: column;
+    @include respond(md) {
+        flex-direction: row;
+        overflow-x: auto;
+        scrollbar-width: none;
+        &::-webkit-scrollbar { display: none; }
+    }
+}
+
+.rti-sidebar-tab {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    padding: $space-4 $space-5;
+    background: none;
+    border: none;
+    border-left: 4px solid transparent;
+    border-bottom: 1px solid rgba($white, 0.06);
+    color: rgba($white, 0.6);
+    font-family: $font-body;
+    font-size: 0.85rem;
+    text-align: left;
+    cursor: pointer;
+    transition: all $transition-fast;
+    white-space: nowrap;
+
+    .rt-arrow { font-size: 0.6rem; opacity: 0; transition: opacity $transition-fast; }
+
+    &.active {
+        background: rgba($gold-500, 0.1);
+        border-left-color: $gold-500;
+        color: $gold-300;
+        .rt-arrow { opacity: 1; }
+    }
+
+    &:hover:not(.active) {
+        background: rgba($white, 0.04);
+        color: $white;
+    }
+}
+
+.rti-tab-content {
+    padding: $space-5;
+    background: $white;
+}
+
+.rtc-heading {
+    font-family: $font-heading;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: $navy-800;
+    margin-bottom: $space-4;
+    @include gold-border-left;
+}
+
+.rtc-list { display: flex; flex-direction: column; gap: $space-2; }
+
+.rtc-item {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    padding: $space-3 $space-4;
+    background: $gray-100;
+    border-radius: $radius-sm;
+    transition: background $transition-fast;
+    &:hover { background: $gold-100; }
+
+    span { flex: 1; font-size: 0.85rem; color: $gray-700; }
+}
+
+.rtc-icon { color: $gold-500; font-size: 0.85rem; flex-shrink: 0; }
+
+.rtc-download-btn {
+    background: $navy-800;
+    border: none;
+    color: $white;
+    width: 30px;
+    height: 30px;
+    border-radius: $radius-sm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+    transition: background $transition-fast;
+    &:hover { background: $gold-500; color: $navy-900; }
+}
+
+// Resources grid
+.rti-resources-section { margin-bottom: $space-9; }
+
+.rti-resources-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $space-4;
+    @include respond(lg) { grid-template-columns: 1fr 1fr; }
+    @include respond(sm) { grid-template-columns: 1fr; }
+}
+
+.rti-resource-card {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-3;
+    padding: $space-4;
+    background: $white;
+    border: 1px solid $gray-200;
+    border-radius: $radius-lg;
+    @include card-hover;
+}
+
+.rrc-icon {
+    width: 44px;
+    height: 44px;
+    background: rgba($navy-500, 0.08);
+    color: $navy-500;
+    border-radius: $radius-md;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.rrc-info { flex: 1; min-width: 0; }
+
+.rrc-title {
+    font-family: $font-heading;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: $navy-800;
+    margin-bottom: 4px;
+}
+
+.rrc-desc { font-size: 0.78rem; color: $gray-500; line-height: 1.5; }
+
+.rrc-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: $space-2;
+    flex-shrink: 0;
+}
+
+.rrc-size { font-size: 0.7rem; color: $gray-400; display: flex; align-items: center; gap: 3px; }
+
+.rrc-download-btn {
+    background: $gold-500;
+    border: none;
+    color: $navy-900;
+    width: 32px;
+    height: 32px;
+    border-radius: $radius-sm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background $transition-fast;
+    &:hover { background: $gold-400; }
+}
+
+// Portal highlight
+.rti-portal-highlight {
+    display: flex;
+    align-items: center;
+    gap: $space-5;
+    background: $navy-800;
+    border-radius: $radius-lg;
+    padding: $space-5 $space-6;
+    border-left: 4px solid $gold-500;
+    @include respond(md) { flex-direction: column; text-align: center; }
+    @include respond(sm) { padding: $space-4; }
+
+    > i { font-size: 2.5rem; color: $gold-400; flex-shrink: 0; }
+
+    div { flex: 1; }
+
+    h3 {
+        font-family: $font-heading;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: $white;
+        margin-bottom: 4px;
+    }
+
+    p { font-size: 0.85rem; color: rgba($white, 0.6); line-height: 1.5; }
+}
+
+.rph-btn {
+    @include gold-btn;
+    white-space: nowrap;
+    flex-shrink: 0;
+}

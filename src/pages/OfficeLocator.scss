@@ -1,0 +1,300 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.locator-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: $space-5;
+    @include respond(lg) { grid-template-columns: 1fr; }
+}
+
+// Sidebar
+.locator-sidebar {
+    background: $white;
+    border: 1px solid $gray-200;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    height: fit-content;
+    position: sticky;
+    top: 80px;
+    @include respond(lg) { position: static; }
+}
+
+.sidebar-heading {
+    background: $navy-800;
+    color: $white;
+    font-family: $font-heading;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: $space-3 $space-4;
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    i { color: $gold-400; }
+}
+
+.zone-list {
+    list-style: none;
+    padding: 0;
+
+    @include respond(lg) {
+        display: flex;
+        overflow-x: auto;
+        scrollbar-width: none;
+        &::-webkit-scrollbar { display: none; }
+    }
+}
+
+.zone-list-btn {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    width: 100%;
+    padding: $space-3 $space-4;
+    background: none;
+    border: none;
+    border-bottom: 1px solid $gray-100;
+    cursor: pointer;
+    transition: all $transition-fast;
+    text-align: left;
+
+    @include respond(lg) { flex-shrink: 0; min-width: 150px; border-bottom: none; border-right: 1px solid rgba($white, 0.1); }
+
+    &.active {
+        background: rgba($gold-500, 0.08);
+        border-left: 3px solid $gold-500;
+        .zlb-dot { background: $gold-500; box-shadow: 0 0 0 3px rgba($gold-500, 0.2); }
+        .zlb-name { color: $navy-800; font-weight: 700; }
+        @include respond(lg) { border-left: none; border-bottom: 3px solid $gold-500; }
+    }
+
+    &:hover:not(.active) { background: $gray-100; }
+}
+
+.zlb-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: $gray-300;
+    flex-shrink: 0;
+    transition: all $transition-fast;
+}
+
+.zlb-info { flex: 1; display: flex; flex-direction: column; gap: 1px; }
+.zlb-name { font-size: 0.82rem; color: $gray-700; font-family: $font-body; transition: color $transition-fast; }
+.zlb-hq { font-size: 0.7rem; color: $gray-400; }
+
+.zlb-arrow { font-size: 0.6rem; color: $gray-300; transition: color $transition-fast; .zone-list-btn.active & { color: $gold-500; } }
+
+// Map + detail layout
+.locator-main { }
+.map-detail-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-5;
+    align-items: start;
+    @include respond(md) { grid-template-columns: 1fr; }
+}
+
+// India Map SVG
+.india-map-container {
+    background: $navy-900;
+    border-radius: $radius-lg;
+    border: 1px solid rgba($gold-500, 0.2);
+    overflow: hidden;
+    box-shadow: $shadow-md;
+}
+
+.map-inner {
+    position: relative;
+    padding: $space-3;
+}
+
+.india-map-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.zone-dot {
+    fill: rgba($gold-500, 0.4);
+    stroke: $gold-500;
+    stroke-width: 2;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    &:hover { fill: $gold-500; r: 16; }
+    &.selected {
+        fill: $gold-500;
+        stroke: $gold-300;
+        stroke-width: 3;
+        filter: drop-shadow(0 0 8px rgba($gold-500, 0.6));
+    }
+    &:focus { outline: 2px solid $gold-300; outline-offset: 3px; }
+}
+
+.zone-label {
+    fill: rgba($white, 0.55);
+    font-size: 9px;
+    font-family: $font-body;
+    pointer-events: none;
+    transition: fill 0.3s ease;
+    &.selected { fill: $gold-300; font-size: 10px; font-weight: 600; }
+}
+
+.zone-connector {
+    stroke: rgba($gold-500, 0.1);
+    stroke-width: 0.5;
+    stroke-dasharray: 3 3;
+    pointer-events: none;
+}
+
+.map-legend {
+    display: flex;
+    gap: $space-4;
+    padding: $space-2 $space-3;
+    border-top: 1px solid rgba($white, 0.05);
+}
+
+.ml-item {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    font-size: 0.7rem;
+    color: rgba($white, 0.45);
+}
+
+.ml-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba($gold-500, 0.4);
+    border: 1.5px solid $gold-500;
+    &.selected { background: $gold-500; }
+}
+
+// Detail panel
+.zone-detail-panel {
+    background: $white;
+    border: 1px solid $gray-200;
+    border-radius: $radius-lg;
+    overflow: hidden;
+}
+
+.zdp-header {
+    background: $navy-800;
+    display: flex;
+    align-items: center;
+    gap: $space-4;
+    padding: $space-4 $space-5;
+}
+
+.zdp-badge {
+    width: 44px;
+    height: 44px;
+    background: rgba($gold-500, 0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $gold-400;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.zdp-name {
+    font-family: $font-heading;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: $white;
+    margin-bottom: 2px;
+}
+
+.zdp-hq { font-size: 0.8rem; color: rgba($white, 0.55); }
+
+.zdp-states-section, .zdp-offices-section { padding: $space-4 $space-5; border-bottom: 1px solid $gray-100; }
+
+.zdp-section-heading {
+    font-family: $font-heading;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: $gray-500;
+    margin-bottom: $space-3;
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    i { color: $gold-500; }
+}
+
+.zdp-states-wrap { display: flex; flex-wrap: wrap; gap: $space-2; }
+
+.zdp-state-tag {
+    background: $gray-100;
+    color: $gray-600;
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    border-radius: $radius-full;
+    border: 1px solid $gray-200;
+}
+
+.zdp-offices-list { display: flex; flex-direction: column; gap: $space-3; }
+
+.zdp-office-card {
+    background: $gray-100;
+    border-radius: $radius-md;
+    padding: $space-3 $space-4;
+    border-left: 3px solid $gray-200;
+    &.zdp-office--zonal { border-left-color: $gold-500; background: $gold-100; }
+}
+
+.zoc-header {
+    @include flex-between;
+    margin-bottom: $space-2;
+}
+
+.zoc-city {
+    font-family: $font-heading;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: $navy-800;
+}
+
+.zoc-type-tag {
+    font-family: $font-heading;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: $radius-sm;
+
+    &.zot--zonal { background: $gold-500; color: $navy-900; }
+    &.zot--sub   { background: $navy-700; color: $white; }
+}
+
+.zoc-contacts { display: flex; flex-direction: column; gap: $space-1; }
+
+.zoc-address {
+    font-size: 0.78rem;
+    color: $gray-500;
+    display: flex;
+    align-items: flex-start;
+    gap: $space-2;
+    i { color: $gold-500; font-size: 0.7rem; margin-top: 2px; flex-shrink: 0; }
+}
+
+.zoc-phone {
+    font-size: 0.78rem;
+    color: $navy-500;
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    i { color: $gold-500; font-size: 0.7rem; }
+    &:hover { color: $gold-600; text-decoration: underline; }
+}
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.animate-fade-in { animation: fadeIn 0.3s ease; }

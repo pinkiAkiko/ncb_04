@@ -1,0 +1,61 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.not-found-page {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    background: $gray-100;
+}
+
+.nf-container {
+    text-align: center;
+    padding: $space-9 $space-5;
+}
+
+.nf-code {
+    font-family: $font-heading;
+    font-size: 8rem;
+    font-weight: 700;
+    color: $navy-800;
+    line-height: 1;
+    opacity: 0.12;
+    margin-bottom: $space-4;
+}
+
+.nf-divider {
+    width: 56px;
+    height: 3px;
+    background: $gold-500;
+    margin: 0 auto $space-4;
+}
+
+.nf-title {
+    font-family: $font-heading;
+    font-size: 2rem;
+    font-weight: 700;
+    color: $navy-800;
+    margin-bottom: $space-3;
+}
+
+.nf-desc {
+    font-size: 1rem;
+    color: $gray-500;
+    margin-bottom: $space-6;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.nf-actions {
+    display: flex;
+    gap: $space-3;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.nf-home-btn { @include gold-btn; }
+.nf-contact-btn {
+    @include navy-btn;
+    text-decoration: none;
+}

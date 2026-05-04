@@ -1,0 +1,463 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+// ── Tip Banner ────────────────────────────────────────────
+.mwf-tip-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space-5;
+    background: $navy-900;
+    border-left: 6px solid $red-500;
+    border-radius: $radius-lg;
+    padding: $space-5 $space-6;
+    margin-bottom: $space-6;
+    @include respond(md) { flex-direction: column; align-items: flex-start; }
+    @include respond(sm) { padding: $space-4; border-radius: $radius-md; }
+}
+
+.mwf-tip-left {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-4;
+    flex: 1;
+
+    > i {
+        font-size: 1.8rem;
+        color: $red-400;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    div {
+        strong { color: $white; font-size: 1rem; font-family: $font-heading; display: block; margin-bottom: 4px; }
+        p { font-size: 0.85rem; color: rgba($white, 0.6); line-height: 1.5; margin: 0; }
+    }
+}
+
+.mwf-tip-actions { display: flex; gap: $space-3; flex-wrap: wrap; }
+
+.mwf-tip-call {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-2;
+    background: $red-500;
+    color: $white;
+    font-family: $font-heading;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: $space-3 $space-5;
+    border-radius: $radius-sm;
+    transition: background $transition-fast;
+    &:hover { background: $red-600; }
+}
+
+.mwf-tip-online {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-2;
+    background: transparent;
+    border: 2px solid $gold-500;
+    color: $gold-400;
+    font-family: $font-heading;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: $space-3 $space-5;
+    border-radius: $radius-sm;
+    transition: all $transition-fast;
+    &:hover { background: $gold-500; color: $navy-900; }
+}
+
+// ── Filters ───────────────────────────────────────────────
+.mwf-filter-row {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    margin-bottom: $space-6;
+    flex-wrap: wrap;
+    @include respond(sm) { gap: $space-2; margin-bottom: $space-4; }
+}
+
+.mwf-filter-label {
+    font-family: $font-heading;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: $gray-500;
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+}
+
+.mwf-filter-btn {
+    font-family: $font-heading;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: $space-2 $space-4;
+    border-radius: $radius-full;
+    border: 2px solid;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &.flt--all    { border-color: $gray-300; color: $gray-600; background: $white; &.active, &:hover { background: $navy-800; border-color: $navy-800; color: $white; } }
+    &.flt--high-alert { border-color: $red-400; color: $red-500; background: rgba($red-500, 0.05); &.active, &:hover { background: $red-500; border-color: $red-500; color: $white; } }
+    &.flt--wanted     { border-color: $gold-500; color: $gold-600; background: rgba($gold-500, 0.05); &.active, &:hover { background: $gold-500; border-color: $gold-500; color: $navy-900; } }
+    &.flt--fugitive   { border-color: $navy-500; color: $navy-600; background: rgba($navy-500, 0.05); &.active, &:hover { background: $navy-700; border-color: $navy-700; color: $white; } }
+}
+
+.mwf-count {
+    margin-left: auto;
+    font-size: 0.78rem;
+    color: $gray-400;
+    font-family: $font-heading;
+}
+
+// ── Card List ─────────────────────────────────────────────
+.mwf-list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-5;
+    margin-bottom: $space-7;
+}
+
+.mwf-card {
+    background: $white;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    border: 1px solid $gray-200;
+    box-shadow: $shadow-sm;
+    transition: box-shadow $transition-base;
+    &:hover, &.expanded { box-shadow: $shadow-lg; }
+
+    &.mwf--high-alert {
+        .mwf-card-bar { background: $red-500; }
+        .mwf-wanted-stamp { background: $red-500; color: $white; }
+        .mwf-name { color: $red-600; }
+    }
+    &.mwf--wanted {
+        .mwf-card-bar { background: $gold-500; }
+        .mwf-wanted-stamp { background: $gold-500; color: $navy-900; }
+    }
+    &.mwf--fugitive {
+        .mwf-card-bar { background: $navy-700; }
+        .mwf-wanted-stamp { background: $navy-700; color: $white; }
+    }
+}
+
+.mwf-card-bar {
+    height: 5px;
+    width: 100%;
+}
+
+.mwf-card-main {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    @include respond(md) { grid-template-columns: 1fr; }
+}
+
+// ── Photo column ──────────────────────────────────────────
+.mwf-photo-col {
+    padding: $space-5;
+    border-right: 1px solid $gray-100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $space-4;
+    background: $gray-100;
+    @include respond(md) { flex-direction: row; border-right: none; border-bottom: 1px solid $gray-100; }
+}
+
+.mwf-wanted-stamp {
+    font-family: $font-heading;
+    font-size: 0.75rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: $space-2 $space-5;
+    border-radius: $radius-sm;
+    border: 2px solid currentColor;
+    opacity: 0.92;
+}
+
+.mwf-photo-wrap {
+    width: 160px;
+    height: 200px;
+    border-radius: $radius-md;
+    overflow: hidden;
+    border: 3px solid $gray-300;
+    background: $gray-100;
+    flex-shrink: 0;
+    @include respond(md) { width: 100px; height: 130px; }
+
+    img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+}
+
+.mwf-reward-badge {
+    background: $navy-900;
+    border-radius: $radius-md;
+    padding: $space-3 $space-4;
+    text-align: center;
+    width: 100%;
+    @include respond(md) { display: none; }
+}
+
+.mwf-reward-label {
+    display: block;
+    font-size: 0.65rem;
+    color: rgba($white, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+}
+
+.mwf-reward-amount {
+    display: block;
+    font-family: $font-heading;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: $gold-400;
+}
+
+// ── Info column ───────────────────────────────────────────
+.mwf-info-col {
+    padding: $space-5;
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+}
+
+.mwf-info-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: $space-4;
+    flex-wrap: wrap;
+}
+
+.mwf-name {
+    font-family: $font-heading;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $navy-900;
+    line-height: 1.1;
+    margin-bottom: 4px;
+}
+
+.mwf-aliases {
+    font-size: 0.82rem;
+    color: $gray-500;
+    font-style: italic;
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    i { color: $gold-500; font-size: 0.75rem; }
+}
+
+.mwf-case-id {
+    font-family: $font-body;
+    font-size: 0.72rem;
+    color: $gray-400;
+    background: $gray-100;
+    border: 1px solid $gray-200;
+    padding: 3px 10px;
+    border-radius: $radius-sm;
+    white-space: nowrap;
+}
+
+.mwf-crimes-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2;
+}
+
+.mwf-crime-tag {
+    background: rgba($red-500, 0.08);
+    color: $red-600;
+    border: 1px solid rgba($red-500, 0.2);
+    font-family: $font-heading;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: $radius-sm;
+}
+
+.mwf-physical-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $space-3 $space-4;
+    padding: $space-4;
+    background: $gray-100;
+    border-radius: $radius-md;
+    border: 1px solid $gray-100;
+    @include respond(sm) { grid-template-columns: repeat(2, 1fr); }
+}
+
+.mwf-phy-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.phy-l {
+    font-size: 0.65rem;
+    color: $gray-400;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-family: $font-heading;
+}
+
+.phy-v {
+    font-size: 0.82rem;
+    color: $gray-700;
+    font-weight: 600;
+}
+
+.mwf-location-row {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-2;
+    font-size: 0.82rem;
+    color: $gray-600;
+    i { color: $gold-500; margin-top: 2px; flex-shrink: 0; }
+    strong { color: $navy-800; }
+}
+
+.mwf-caution-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-2;
+    background: rgba($red-500, 0.07);
+    border: 1px solid rgba($red-500, 0.25);
+    border-left: 3px solid $red-500;
+    color: $red-600;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: $space-2 $space-4;
+    border-radius: $radius-sm;
+    i { font-size: 0.75rem; }
+}
+
+.mwf-card-footer {
+    @include flex-between;
+    flex-wrap: wrap;
+    gap: $space-3;
+    padding-top: $space-4;
+    border-top: 1px solid $gray-100;
+    margin-top: auto;
+}
+
+.mwf-issued-info {
+    font-size: 0.75rem;
+    color: $gray-400;
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    flex-wrap: wrap;
+    i { color: $gold-500; font-size: 0.7rem; }
+}
+
+.mwf-expand-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-2;
+    @include navy-btn;
+    font-size: 0.78rem;
+    padding: $space-2 $space-4;
+}
+
+// ── Expanded Panel ────────────────────────────────────────
+.mwf-expanded-panel {
+    border-top: 2px solid $gold-500;
+    padding: $space-5 $space-6;
+    background: $navy-900;
+    animation: panelIn 0.3s ease;
+    @include respond(sm) { padding: $space-4; }
+}
+
+.mwf-exp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-6;
+    @include respond(md) { grid-template-columns: 1fr; }
+}
+
+.mwf-exp-section { }
+
+.mwf-exp-heading {
+    font-family: $font-heading;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: $gold-400;
+    margin-bottom: $space-3;
+    padding-bottom: $space-2;
+    border-bottom: 1px solid rgba($gold-500, 0.25);
+}
+
+.mwf-exp-body {
+    font-size: 0.85rem;
+    color: rgba($white, 0.65);
+    line-height: 1.7;
+}
+
+.mwf-contact-options {
+    display: flex;
+    gap: $space-4;
+    margin-top: $space-4;
+    flex-wrap: wrap;
+}
+
+.mwf-contact-opt {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    background: rgba($white, 0.06);
+    border: 1px solid rgba($white, 0.1);
+    border-radius: $radius-md;
+    padding: $space-3 $space-4;
+    transition: all $transition-fast;
+
+    > i { font-size: 1.3rem; color: $gold-400; }
+
+    span {
+        font-size: 0.78rem;
+        color: rgba($white, 0.55);
+        line-height: 1.4;
+        strong { color: $white; display: block; font-family: $font-heading; font-size: 0.9rem; }
+    }
+
+    &:hover { background: rgba($gold-500, 0.12); border-color: rgba($gold-500, 0.35); }
+}
+
+// ── INTERPOL note ─────────────────────────────────────────
+.mwf-interpol-note {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-5;
+    background: $navy-800;
+    border-radius: $radius-lg;
+    padding: $space-5 $space-6;
+    @include respond(sm) { flex-direction: column; gap: $space-3; padding: $space-4; }
+
+    img { height: 48px; width: auto; filter: brightness(0) invert(1); flex-shrink: 0; opacity: 0.7; }
+
+    div {
+        font-size: 0.82rem;
+        color: rgba($white, 0.55);
+        line-height: 1.65;
+        strong { color: $gold-300; font-family: $font-heading; }
+    }
+}
+
+@keyframes panelIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}

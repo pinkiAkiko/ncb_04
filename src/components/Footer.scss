@@ -1,0 +1,417 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.ncb-footer {
+    background: $navy-800;
+}
+
+// ── Newsletter Band ───────────────────────────────────────
+.footer-newsletter-band {
+    background: linear-gradient(90deg, $navy-900 0%, $navy-600 100%);
+    border-top: 3px solid $gold-500;
+    border-bottom: 1px solid rgba($white, 0.08);
+    padding: $space-5 0;
+}
+
+.newsletter-inner {
+    @include flex-between;
+    gap: $space-5;
+
+    @include respond(md) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+.newsletter-text {
+    display: flex;
+    align-items: center;
+    gap: $space-4;
+    color: $white;
+
+    i {
+        font-size: 1.8rem;
+        color: $gold-400;
+        flex-shrink: 0;
+        @include respond(sm) { font-size: 1.4rem; }
+    }
+
+    div {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+}
+
+.nl-heading {
+    font-family: $font-heading;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: $white;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.nl-sub {
+    font-size: 0.82rem;
+    color: rgba($white, 0.6);
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 0;
+    flex-shrink: 0;
+
+    @include respond(md) {
+        width: 100%;
+    }
+
+    input {
+        padding: $space-3 $space-5;
+        border: 1px solid rgba($white, 0.2);
+        border-right: none;
+        background: rgba($white, 0.06);
+        color: $white;
+        font-family: $font-body;
+        font-size: 0.88rem;
+        border-radius: $radius-sm 0 0 $radius-sm;
+        outline: none;
+        min-width: 280px;
+        transition: border-color $transition-fast;
+
+        &::placeholder {
+            color: rgba($white, 0.35);
+        }
+
+        &:focus {
+            border-color: $gold-500;
+            background: rgba($white, 0.1);
+        }
+
+        @include respond(md) {
+            min-width: 0;
+            flex: 1;
+        }
+    }
+
+    button {
+        @include gold-btn;
+        border-radius: 0 $radius-sm $radius-sm 0;
+        white-space: nowrap;
+        padding: $space-3 $space-5;
+        height: 48px;
+    }
+}
+
+// ── Main Footer ───────────────────────────────────────────
+.footer-main {
+    padding: $space-6 0 $space-2;
+    @include respond(sm) { padding: $space-5 0 $space-2; }
+}
+
+.footer-main-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+    gap: $space-6 $space-5;
+
+    @include respond(xl) {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+
+    @include respond(lg) {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    @include respond(md) {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    @include respond(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.footer-brand-col {
+    @include respond(xl) {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: $space-5;
+    }
+
+    @include respond(md) {
+        grid-column: 1 / -1;
+        display: block;
+    }
+}
+
+.footer-brand-row {
+    display: flex;
+    align-items: center;
+    gap: $space-4;
+    margin-bottom: $space-3;
+}
+
+.footer-emblem {
+    height: 52px;
+    width: auto;
+}
+
+.footer-logo {
+    height: 52px;
+    width: auto;
+    filter: brightness(0) invert(1);
+}
+
+.footer-org-name {
+    font-family: $font-heading;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: $white;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: $space-1;
+}
+
+.footer-org-sub {
+    font-size: 0.78rem;
+    color: $gold-400;
+    margin-bottom: $space-3;
+    letter-spacing: 0.3px;
+}
+
+.footer-desc {
+    font-size: 0.82rem;
+    color: rgba($white, 0.55);
+    line-height: 1.6;
+    margin-bottom: $space-4;
+    max-width: 320px;
+}
+
+.footer-helpline-box {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    background: rgba($gold-500, 0.1);
+    border: 1px solid rgba($gold-500, 0.25);
+    border-radius: $radius-md;
+    padding: $space-3 $space-4;
+    margin-bottom: $space-4;
+
+    i {
+        color: $gold-500;
+        font-size: 1.2rem;
+    }
+
+    div {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+    }
+}
+
+.hl-label {
+    font-size: 0.72rem;
+    color: rgba($white, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.hl-number {
+    font-family: $font-heading;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: $gold-400;
+    letter-spacing: 1px;
+
+    &:hover {
+        color: $gold-300;
+    }
+}
+
+.footer-social-row {
+    display: flex;
+    gap: $space-2;
+}
+
+.social-icon-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: $radius-sm;
+    background: rgba($white, 0.06);
+    border: 1px solid rgba($white, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba($white, 0.6);
+    font-size: 1rem;
+    transition: all $transition-fast;
+
+    &:hover {
+        background: $gold-500;
+        color: $navy-900;
+        border-color: $gold-500;
+        transform: translateY(-2px);
+    }
+}
+
+// Link columns
+.footer-links-group {}
+
+.footer-col-heading {
+    font-family: $font-heading;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: $gold-400;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: $space-4;
+    padding-bottom: $space-2;
+    border-bottom: 1px solid rgba($gold-500, 0.25);
+}
+
+.footer-link-list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+}
+
+.footer-link {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    font-size: 0.82rem;
+    color: rgba($white, 0.6);
+    transition: all $transition-fast;
+
+    i {
+        font-size: 0.55rem;
+        color: $gold-500;
+        flex-shrink: 0;
+    }
+
+    &:hover {
+        color: $gold-300;
+        padding-left: $space-2;
+    }
+}
+
+.footer-visitor-box {
+    margin-top: $space-5;
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    background: rgba($white, 0.04);
+    border: 1px solid rgba($white, 0.08);
+    border-radius: $radius-md;
+    padding: $space-3 $space-4;
+
+    i {
+        color: $gold-500;
+        font-size: 1.1rem;
+    }
+
+    div {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+}
+
+.vis-label {
+    font-size: 0.7rem;
+    color: rgba($white, 0.45);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.vis-count {
+    font-family: $font-heading;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: $white;
+}
+
+// ── Policy Bar ────────────────────────────────────────────
+.footer-policy-bar {
+    border-top: 1px solid rgba($white, 0.08);
+    border-bottom: 1px solid rgba($white, 0.05);
+    padding: $space-3 0;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.policy-bar-inner {
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.policy-links {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 0;
+    white-space: nowrap;
+}
+
+.policy-item {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-1;
+}
+
+.policy-link {
+    font-size: 0.72rem;
+    color: rgba($white, 0.45);
+    white-space: nowrap;
+    transition: color $transition-fast;
+
+    &:hover {
+        color: $gold-300;
+    }
+}
+
+.policy-sep {
+    color: rgba($white, 0.18);
+    font-size: 0.72rem;
+    margin: 0 $space-1;
+}
+
+// ── Bottom Bar ────────────────────────────────────────────
+.footer-bottom-bar {
+    background: $navy-900;
+    padding: $space-3 0;
+}
+
+.bottom-bar-inner {
+    @include flex-between;
+    gap: $space-4;
+    flex-wrap: wrap;
+
+    @include respond(md) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: $space-2;
+    }
+}
+
+.footer-copyright,
+.footer-last-updated,
+.footer-designed-by {
+    font-size: 0.75rem;
+    color: rgba($white, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    @include respond(sm) { font-size: 0.7rem; }
+
+    i {
+        color: $gold-500;
+        font-size: 0.7rem;
+    }
+}
