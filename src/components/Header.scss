@@ -672,11 +672,29 @@
     }
 }
 
-// ── L3 Sub-dropdown — inline accordion (all screen sizes) ─
-.has-sub-dropdown { /* intentionally no position:relative */ }
+// ── L3 Sub-dropdown ───────────────────────────────────────
+.has-sub-dropdown {
+    position: relative; // anchor for desktop flyout
+}
 
 .dropdown-link--has-sub {
     justify-content: space-between;
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+
+    // Desktop: make it look like a regular dropdown link
+    @media (min-width: #{$bp-lg + 1px}) {
+        color: $navy-700;
+
+        &:hover {
+            background: $gray-100;
+            color: $navy-800;
+            padding-left: calc($space-5 + 4px);
+        }
+    }
 
     .sub-arrow {
         font-size: 0.65rem;
@@ -684,53 +702,95 @@
         flex-shrink: 0;
         margin-left: auto;
         transition: transform $transition-fast;
-        &.rotated { transform: rotate(180deg); }
+        // points right by default; rotates 90deg when open (pointing down)
+        &.rotated { transform: rotate(90deg); }
     }
 }
 
 .nav-sub-dropdown {
-    position: static;       // in-flow: no flyout, never off-screen
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.35s ease, padding $transition-fast;
-    background: $gray-100;
-    border-left: 3px solid rgba($gold-500, 0.4);
-    margin: 0 $space-3 0 $space-5;
+    // ── Desktop: right-side flyout ────────────────────────
+    @media (min-width: #{$bp-lg + 1px}) {
+        position: absolute;
+        top: 0;
+        left: 100%;
+        min-width: 220px;
+        background: $white;
+        border-radius: 0 $radius-md $radius-md 0;
+        border-top: 3px solid $gold-500;
+        border-left: 2px solid rgba($gold-500, 0.2);
+        box-shadow: 6px 4px 20px rgba(0, 0, 0, 0.12);
+        padding: $space-2 0;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(6px);
+        transition: opacity $transition-base, transform $transition-base, visibility $transition-base;
+        pointer-events: none;
+        z-index: 1000;
+        max-height: unset;
+        overflow: visible;
 
-    &.open {
-        max-height: 400px;
-        padding: $space-1 0;
-    }
-
-    // Sub-items styling
-    .sub-dropdown-link {
-        padding: $space-2 $space-5;
-        font-size: 0.81rem;
-        color: $navy-600;
-
-        .drop-arrow { color: $gold-400; font-size: 0.75rem; }
-
-        &:hover {
-            background: $gray-200;
-            color: $navy-800;
+        // Open on hover of the parent li (CSS-only on desktop)
+        .has-sub-dropdown:hover > & {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+            pointer-events: auto;
         }
 
-        &.active {
-            color: $gold-600;
-            background: rgba($gold-500, 0.08);
-            font-weight: 600;
+        // Also rotate the sub-arrow on desktop hover
+        .has-sub-dropdown:hover .sub-arrow {
+            transform: rotate(90deg);
+        }
+
+        // Sub-items on desktop
+        .sub-dropdown-link {
+            padding: $space-3 $space-5;
+            font-size: 0.83rem;
+            color: $navy-700;
+            display: flex;
+            align-items: center;
+            gap: $space-2;
+            transition: all $transition-fast;
+
+            .drop-arrow { color: $gold-400; font-size: 0.75rem; }
+
+            &:hover {
+                background: $gray-100;
+                color: $navy-800;
+                padding-left: calc($space-5 + 4px);
+            }
+
+            &.active {
+                color: $gold-600;
+                background: rgba($gold-500, 0.08);
+                font-weight: 600;
+            }
         }
     }
 
-    // Mobile drawer palette
+    // ── Mobile: inline accordion ──────────────────────────
     @include respond(lg) {
+        position: static;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        pointer-events: auto;
+        transition: max-height 0.35s ease;
         background: rgba($white, 0.03);
         border-left: 3px solid rgba($gold-500, 0.2);
         margin: 0 0 0 $space-6;
 
+        &.open {
+            max-height: 400px;
+            padding: $space-1 0;
+        }
+
         .sub-dropdown-link {
             color: rgba($white, 0.6);
             padding: $space-2 $space-4;
+            font-size: 0.82rem;
 
             .drop-arrow { color: rgba($gold-500, 0.6); }
             &:hover { color: $gold-300; background: rgba($white, 0.04); }

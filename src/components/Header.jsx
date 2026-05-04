@@ -96,12 +96,12 @@ const navItems = [
 
 
 function Header() {
-    const [menuOpen, setMenuOpen]           = useState(false);
-    const [mobileAccordion, setMobileAccordion] = useState(null);
-    const [openSubDropdown, setOpenSubDropdown] = useState(null);
-    const [scrolled, setScrolled]           = useState(false);
-    const [searchOpen, setSearchOpen]       = useState(false);
-    const [lang, setLang]                   = useState("EN");
+    const [menuOpen, setMenuOpen]               = useState(false);
+    const [mobileAccordion, setMobileAccordion]   = useState(null);
+    const [mobileSubAccordion, setMobileSubAccordion] = useState(null);
+    const [scrolled, setScrolled]               = useState(false);
+    const [searchOpen, setSearchOpen]           = useState(false);
+    const [lang, setLang]                       = useState("EN");
     const location  = useLocation();
     const navRef    = useRef(null);
 
@@ -115,7 +115,7 @@ function Header() {
     useEffect(() => {
         setMenuOpen(false);
         setMobileAccordion(null);
-        setOpenSubDropdown(null);
+        setMobileSubAccordion(null);
     }, [location.pathname]);
 
     // Lock body scroll when mobile drawer open
@@ -124,11 +124,13 @@ function Header() {
         return () => { document.body.style.overflow = ""; };
     }, [menuOpen]);
 
-    const toggleMobileAccordion = (label) =>
+    const toggleMobileAccordion = (label) => {
         setMobileAccordion(prev => prev === label ? null : label);
+        setMobileSubAccordion(null); // reset L3 when switching L1
+    };
 
-    const toggleSubDropdown = (key) =>
-        setOpenSubDropdown(prev => prev === key ? null : key);
+    const toggleMobileSubAccordion = (key) =>
+        setMobileSubAccordion(prev => prev === key ? null : key);
 
     return (
         <>
@@ -247,8 +249,6 @@ function Header() {
                                                 onClick={() => {
                                                     if (window.innerWidth <= 992) {
                                                         toggleMobileAccordion(item.label);
-                                                        // close any open sub-dropdown when switching L1 item
-                                                        setOpenSubDropdown(null);
                                                     }
                                                 }}
                                                 aria-haspopup="true"
@@ -258,33 +258,34 @@ function Header() {
                                                 <i className={`bi bi-chevron-down nav-arrow ${mobileAccordion === item.label ? "rotated" : ""}`} />
                                             </button>
 
-                                            {/* L2 dropdown */}
+                                            {/* L2 dropdown — desktop: CSS hover | mobile: .open class */}
                                             <ul
-                                                className={`nav-dropdown ${menuOpen && mobileAccordion === item.label ? "open" : ""}`}
+                                                className={`nav-dropdown ${mobileAccordion === item.label ? "open" : ""}`}
                                                 role="menu"
                                             >
                                                 {item.children.map(child => {
                                                     const subKey = `${item.label}__${child.label}`;
                                                     return child.children ? (
                                                         <li key={child.path} role="none" className="has-sub-dropdown">
+                                                            {/* Desktop: CSS hover flyout | Mobile: accordion toggle */}
                                                             <button
                                                                 className={`dropdown-link dropdown-link--has-sub ${
                                                                     location.pathname === child.path ||
                                                                     child.children.some(sc => sc.path === location.pathname)
                                                                         ? "active" : ""
                                                                 }`}
-                                                                onClick={() => toggleSubDropdown(subKey)}
-                                                                aria-expanded={openSubDropdown === subKey}
+                                                                onClick={() => toggleMobileSubAccordion(subKey)}
+                                                                aria-expanded={mobileSubAccordion === subKey}
                                                                 role="menuitem"
                                                             >
                                                                 <i className="bi bi-chevron-right drop-arrow" />
                                                                 {child.label}
-                                                                <i className={`bi bi-chevron-down sub-arrow ${openSubDropdown === subKey ? "rotated" : ""}`} />
+                                                                <i className={`bi bi-chevron-right sub-arrow ${mobileSubAccordion === subKey ? "rotated" : ""}`} />
                                                             </button>
 
-                                                            {/* L3 sub-dropdown */}
+                                                            {/* L3 — desktop flyout (CSS), mobile accordion (.open) */}
                                                             <ul
-                                                                className={`nav-sub-dropdown ${openSubDropdown === subKey ? "open" : ""}`}
+                                                                className={`nav-sub-dropdown ${mobileSubAccordion === subKey ? "open" : ""}`}
                                                                 role="menu"
                                                             >
                                                                 {child.children.map(subChild => (
