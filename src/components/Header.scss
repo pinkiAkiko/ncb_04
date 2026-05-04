@@ -549,6 +549,7 @@
         font-size: 0.65rem;
         margin-left: 2px;
         transition: transform $transition-fast;
+        &.rotated { transform: rotate(180deg); }
     }
 
     @include respond(lg) {
@@ -568,12 +569,13 @@
     }
 }
 
-// Dropdown
+// ── L2 Dropdown ───────────────────────────────────────────
 .nav-dropdown {
+    // Desktop: hidden by default, revealed by CSS :hover
     position: absolute;
     top: calc(100% + 3px);
     left: 0;
-    min-width: 240px;
+    min-width: 260px;
     background: $white;
     border-radius: 0 0 $radius-md $radius-md;
     border-top: 3px solid $gold-500;
@@ -581,16 +583,26 @@
     opacity: 0;
     visibility: hidden;
     transform: translateY(8px);
-    transition: all $transition-base;
+    transition: opacity $transition-base, transform $transition-base, visibility $transition-base;
     z-index: 999;
     padding: $space-2 0;
+    pointer-events: none;
 
-    &.open {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
+    // Desktop: open on hover (CSS-only, no JS state needed)
+    @media (min-width: #{$bp-lg + 1px}) {
+        .nav-item-li:hover > & {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        // flip chevron on hover
+        .nav-item-li:hover .nav-arrow {
+            transform: rotate(180deg);
+        }
     }
 
+    // Mobile: open via .open class (JS accordion)
     @include respond(lg) {
         position: static;
         box-shadow: none;
@@ -605,29 +617,12 @@
         opacity: 1;
         visibility: visible;
         transform: none;
-        transition: max-height $transition-base;
+        pointer-events: auto;
+        transition: max-height 0.4s ease;
 
         &.open {
-            max-height: 800px;
+            max-height: 900px;
             padding: $space-2 0;
-        }
-    }
-
-    // Waterfall animation for items
-    li {
-        opacity: 0;
-        transform: translateY(15px);
-        transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-
-    &.open li {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    @for $i from 1 through 15 {
-        &.open li:nth-child(#{$i}) {
-            transition-delay: #{$i * 0.08}s;
         }
     }
 }
@@ -677,71 +672,69 @@
     }
 }
 
-// ── Sub-dropdown (3rd level) — inline accordion ───────────
-.has-sub-dropdown {
-    // no position:relative — sub-dropdown is static/in-flow
-}
+// ── L3 Sub-dropdown — inline accordion (all screen sizes) ─
+.has-sub-dropdown { /* intentionally no position:relative */ }
 
 .dropdown-link--has-sub {
     justify-content: space-between;
 
-    .drop-arrow { flex-shrink: 0; }
-
     .sub-arrow {
-        font-size: 0.62rem;
+        font-size: 0.65rem;
         color: $gold-500;
         flex-shrink: 0;
+        margin-left: auto;
         transition: transform $transition-fast;
-    }
-
-    &[aria-expanded="true"] .sub-arrow {
-        transform: rotate(90deg);
-    }
-
-    @include respond(lg) {
-        color: rgba($white, 0.7);
-        &:hover { background: rgba($white, 0.04); color: $gold-300; }
-        .sub-arrow { color: rgba($gold-500, 0.7); }
+        &.rotated { transform: rotate(180deg); }
     }
 }
 
-// Expands inline — no flyout, no off-screen issues
 .nav-sub-dropdown {
-    position: static;
+    position: static;       // in-flow: no flyout, never off-screen
     max-height: 0;
     overflow: hidden;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
+    transition: max-height 0.35s ease, padding $transition-fast;
     background: $gray-100;
-    border-left: 3px solid rgba($gold-500, 0.35);
-    margin: 0 $space-3;
-    padding: 0;
-    transition: max-height 0.35s ease;
+    border-left: 3px solid rgba($gold-500, 0.4);
+    margin: 0 $space-3 0 $space-5;
 
     &.open {
-        max-height: 300px;
+        max-height: 400px;
         padding: $space-1 0;
     }
 
-    .dropdown-link {
-        padding-left: $space-6;
-        font-size: 0.82rem;
+    // Sub-items styling
+    .sub-dropdown-link {
+        padding: $space-2 $space-5;
+        font-size: 0.81rem;
         color: $navy-600;
 
-        &:hover { color: $navy-800; background: $gray-100; padding-left: calc($space-6 + 4px); }
+        .drop-arrow { color: $gold-400; font-size: 0.75rem; }
+
+        &:hover {
+            background: $gray-200;
+            color: $navy-800;
+        }
+
+        &.active {
+            color: $gold-600;
+            background: rgba($gold-500, 0.08);
+            font-weight: 600;
+        }
     }
 
-    // Mobile drawer — same behaviour, slightly different palette
+    // Mobile drawer palette
     @include respond(lg) {
         background: rgba($white, 0.03);
         border-left: 3px solid rgba($gold-500, 0.2);
         margin: 0 0 0 $space-6;
 
-        .dropdown-link {
+        .sub-dropdown-link {
             color: rgba($white, 0.6);
-            padding-left: $space-5;
+            padding: $space-2 $space-4;
+
+            .drop-arrow { color: rgba($gold-500, 0.6); }
             &:hover { color: $gold-300; background: rgba($white, 0.04); }
+            &.active { color: $gold-400; background: transparent; }
         }
     }
 }

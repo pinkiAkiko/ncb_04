@@ -96,15 +96,14 @@ const navItems = [
 
 
 function Header() {
-    const [menuOpen, setMenuOpen] = useState(false);
-    const [openDropdown, setOpenDropdown] = useState(null);
+    const [menuOpen, setMenuOpen]           = useState(false);
     const [mobileAccordion, setMobileAccordion] = useState(null);
     const [openSubDropdown, setOpenSubDropdown] = useState(null);
-    const [scrolled, setScrolled] = useState(false);
-    const [searchOpen, setSearchOpen] = useState(false);
-    const [lang, setLang] = useState("EN");
-    const location = useLocation();
-    const navRef = useRef(null);
+    const [scrolled, setScrolled]           = useState(false);
+    const [searchOpen, setSearchOpen]       = useState(false);
+    const [lang, setLang]                   = useState("EN");
+    const location  = useLocation();
+    const navRef    = useRef(null);
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 60);
@@ -112,34 +111,24 @@ function Header() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    // Close everything on route change
     useEffect(() => {
         setMenuOpen(false);
-        setOpenDropdown(null);
+        setMobileAccordion(null);
         setOpenSubDropdown(null);
     }, [location.pathname]);
 
-    useEffect(() => {
-        setOpenSubDropdown(null);
-    }, [openDropdown]);
-
-    useEffect(() => {
-        const handler = (e) => {
-            if (navRef.current && !navRef.current.contains(e.target)) {
-                setOpenDropdown(null);
-            }
-        };
-        document.addEventListener("mousedown", handler);
-        return () => document.removeEventListener("mousedown", handler);
-    }, []);
-
+    // Lock body scroll when mobile drawer open
     useEffect(() => {
         document.body.style.overflow = menuOpen ? "hidden" : "";
         return () => { document.body.style.overflow = ""; };
     }, [menuOpen]);
 
-    const handleMobileAccordion = (label) => {
+    const toggleMobileAccordion = (label) =>
         setMobileAccordion(prev => prev === label ? null : label);
-    };
+
+    const toggleSubDropdown = (key) =>
+        setOpenSubDropdown(prev => prev === key ? null : key);
 
     return (
         <>
@@ -170,7 +159,7 @@ function Header() {
                 </div>
             </div>
 
-            {/* ── Mobile Helpline Strip (md and below) ─────────── */}
+            {/* ── Mobile Helpline Strip ─────────────────────────── */}
             <div className="hdr-mobile-helpline">
                 <div className="hdr-mobile-helpline-left">
                     <i className="bi bi-telephone-fill" />
@@ -229,7 +218,6 @@ function Header() {
 
             {/* ── Nav Row ───────────────────────────────────────── */}
             <div className={`hdr-nav-ticker-row ${scrolled ? "sticky" : ""}`} ref={navRef}>
-                {/* Main Nav */}
                 <nav className="hdr-main-nav" aria-label="Main Navigation">
                     <div className="container nav-inner">
                         <button className="nav-hamburger" onClick={() => setMenuOpen(o => !o)} aria-label="Toggle menu">
@@ -237,7 +225,7 @@ function Header() {
                         </button>
 
                         <ul className={`nav-links ${menuOpen ? "mobile-open" : ""}`} role="menubar">
-                            {/* Mobile header */}
+                            {/* Mobile drawer header */}
                             <li className="mobile-nav-header">
                                 <img src="/logo.svg" alt="NCB" />
                                 <span>NCB India</span>
@@ -249,44 +237,52 @@ function Header() {
                             {navItems.map((item) => (
                                 <li
                                     key={item.label}
-                                    className={`nav-item-li ${item.children ? "has-dropdown" : ""} ${openDropdown === item.label ? "dropdown-open" : ""}`}
-                                    onMouseEnter={() => item.children && window.innerWidth > 992 && setOpenDropdown(item.label)}
-                                    onMouseLeave={() => item.children && window.innerWidth > 992 && setOpenDropdown(null)}
+                                    className={`nav-item-li ${item.children ? "has-dropdown" : ""}`}
                                     role="none"
                                 >
                                     {item.children ? (
                                         <>
                                             <button
                                                 className={`nav-link-btn ${[...item.children.map(c => c.path), item.path].includes(location.pathname) ? "active" : ""}`}
-                                                onClick={() => window.innerWidth <= 992 && handleMobileAccordion(item.label)}
-                                                aria-expanded={openDropdown === item.label}
+                                                onClick={() => {
+                                                    if (window.innerWidth <= 992) {
+                                                        toggleMobileAccordion(item.label);
+                                                        // close any open sub-dropdown when switching L1 item
+                                                        setOpenSubDropdown(null);
+                                                    }
+                                                }}
+                                                aria-haspopup="true"
                                                 role="menuitem"
                                             >
                                                 {item.label}
-                                                <i className={`bi bi-chevron-${openDropdown === item.label || mobileAccordion === item.label ? "up" : "down"} nav-arrow`} />
+                                                <i className={`bi bi-chevron-down nav-arrow ${mobileAccordion === item.label ? "rotated" : ""}`} />
                                             </button>
+
+                                            {/* L2 dropdown */}
                                             <ul
-                                                className={`nav-dropdown ${(openDropdown === item.label || (menuOpen && mobileAccordion === item.label)) ? "open" : ""}`}
+                                                className={`nav-dropdown ${menuOpen && mobileAccordion === item.label ? "open" : ""}`}
                                                 role="menu"
                                             >
                                                 {item.children.map(child => {
-                                                    const subKey = `${item.label}-${child.label}`;
+                                                    const subKey = `${item.label}__${child.label}`;
                                                     return child.children ? (
-                                                        <li
-                                                            key={child.path}
-                                                            role="none"
-                                                            className="has-sub-dropdown"
-                                                        >
+                                                        <li key={child.path} role="none" className="has-sub-dropdown">
                                                             <button
-                                                                className={`dropdown-link dropdown-link--has-sub ${location.pathname === child.path || child.children.some(sc => sc.path === location.pathname) ? "active" : ""}`}
-                                                                onClick={() => setOpenSubDropdown(prev => prev === subKey ? null : subKey)}
-                                                                role="menuitem"
+                                                                className={`dropdown-link dropdown-link--has-sub ${
+                                                                    location.pathname === child.path ||
+                                                                    child.children.some(sc => sc.path === location.pathname)
+                                                                        ? "active" : ""
+                                                                }`}
+                                                                onClick={() => toggleSubDropdown(subKey)}
                                                                 aria-expanded={openSubDropdown === subKey}
+                                                                role="menuitem"
                                                             >
                                                                 <i className="bi bi-chevron-right drop-arrow" />
                                                                 {child.label}
-                                                                <i className="bi bi-chevron-right sub-arrow" />
+                                                                <i className={`bi bi-chevron-down sub-arrow ${openSubDropdown === subKey ? "rotated" : ""}`} />
                                                             </button>
+
+                                                            {/* L3 sub-dropdown */}
                                                             <ul
                                                                 className={`nav-sub-dropdown ${openSubDropdown === subKey ? "open" : ""}`}
                                                                 role="menu"
@@ -295,11 +291,11 @@ function Header() {
                                                                     <li key={subChild.path} role="none">
                                                                         <NavLink
                                                                             to={subChild.path}
-                                                                            className={({ isActive }) => `dropdown-link ${isActive ? "active" : ""}`}
+                                                                            className={({ isActive }) => `dropdown-link sub-dropdown-link ${isActive ? "active" : ""}`}
                                                                             role="menuitem"
                                                                             onClick={() => setMenuOpen(false)}
                                                                         >
-                                                                            <i className="bi bi-chevron-right drop-arrow" />
+                                                                            <i className="bi bi-dash drop-arrow" />
                                                                             {subChild.label}
                                                                         </NavLink>
                                                                     </li>
