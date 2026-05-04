@@ -608,7 +608,7 @@
         transition: max-height $transition-base;
 
         &.open {
-            max-height: 500px;
+            max-height: 800px;
             padding: $space-2 0;
         }
     }
@@ -673,6 +673,75 @@
         &.active {
             color: $gold-400;
             background: transparent;
+        }
+    }
+}
+
+// ── Sub-dropdown (3rd level) — inline accordion ───────────
+.has-sub-dropdown {
+    // no position:relative — sub-dropdown is static/in-flow
+}
+
+.dropdown-link--has-sub {
+    justify-content: space-between;
+
+    .drop-arrow { flex-shrink: 0; }
+
+    .sub-arrow {
+        font-size: 0.62rem;
+        color: $gold-500;
+        flex-shrink: 0;
+        transition: transform $transition-fast;
+    }
+
+    &[aria-expanded="true"] .sub-arrow {
+        transform: rotate(90deg);
+    }
+
+    @include respond(lg) {
+        color: rgba($white, 0.7);
+        &:hover { background: rgba($white, 0.04); color: $gold-300; }
+        .sub-arrow { color: rgba($gold-500, 0.7); }
+    }
+}
+
+// Expands inline — no flyout, no off-screen issues
+.nav-sub-dropdown {
+    position: static;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    background: $gray-50;
+    border-left: 3px solid rgba($gold-500, 0.35);
+    margin: 0 $space-3;
+    padding: 0;
+    transition: max-height 0.35s ease;
+
+    &.open {
+        max-height: 300px;
+        padding: $space-1 0;
+    }
+
+    .dropdown-link {
+        padding-left: $space-6;
+        font-size: 0.82rem;
+        color: $navy-600;
+
+        &:hover { color: $navy-800; background: $gray-100; padding-left: calc($space-6 + 4px); }
+    }
+
+    // Mobile drawer — same behaviour, slightly different palette
+    @include respond(lg) {
+        background: rgba($white, 0.03);
+        border-left: 3px solid rgba($gold-500, 0.2);
+        margin: 0 0 0 $space-6;
+
+        .dropdown-link {
+            color: rgba($white, 0.6);
+            padding-left: $space-5;
+            &:hover { color: $gold-300; background: rgba($white, 0.04); }
         }
     }
 }

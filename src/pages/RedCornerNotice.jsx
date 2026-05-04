@@ -145,10 +145,7 @@ function RedCornerNotice() {
                                             <div className="mwf-photo-wrap">
                                                 <img src={person.photo} alt={person.name} />
                                             </div>
-                                            <div className="mwf-reward-badge">
-                                                <span className="mwf-reward-label">Reward up to</span>
-                                                <span className="mwf-reward-amount">{person.reward}</span>
-                                            </div>
+
                                         </div>
 
                                         {/* Info column */}

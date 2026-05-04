@@ -12,7 +12,12 @@ const navItems = [
             { label: "Mission, Vision & Motto", path: "/motto-mission-vision" },
             { label: "Hierarchy & Structure", path: "/organization" },
             { label: "Our Offices", path: "/office-locator" },
-            { label: "Our Partners", path: "/partners" },
+            {
+                label: "Our Partners", path: "/partners",
+                children: [
+                    { label: "Related Links", path: "/related-links" },
+                ]
+            },
         ]
     },
     {
@@ -20,8 +25,12 @@ const navItems = [
         children: [
             { label: "Latest News & Events", path: "/media/latest-news" },
             { label: "Important Seizures", path: "/media/seizures" },
-            { label: "Photo Gallery", path: "/media/photo-gallery" },
-            { label: "Important Visitors", path: "/media/important-visitors" },
+            {
+                label: "Photo Gallery", path: "/media/photo-gallery",
+                children: [
+                    { label: "Important Visitors", path: "/media/important-visitors" },
+                ]
+            },
             { label: "Video Gallery", path: "/media/video-gallery" },
             { label: "Press Releases", path: "/media/press-release" },
             { label: "Former NCB Heads", path: "/media/former-head" },
@@ -51,8 +60,12 @@ const navItems = [
         label: "Others", path: "/others",
         children: [
             { label: "Drug Abuse", path: "/drug-abuse" },
-            { label: "Employee Corner (APAR)", path: "/employee-corner" },
-            { label: "IGOT Karmayogi", path: "/igot-karmayogi" },
+            {
+                label: "Employee Corner (APAR)", path: "/employee-corner",
+                children: [
+                    { label: "IGOT Karmayogi", path: "/igot-karmayogi" },
+                ]
+            },
             { label: "Vigilance", path: "/vigilance" },
             { label: "Tenders", path: "/tenders" },
         ]
@@ -64,11 +77,19 @@ const navItems = [
             { label: "Disposal of Drugs", path: "/disposal-of-drugs" },
             { label: "RTI & Vigilance", path: "/rti" },
             { label: "Circulars & Orders", path: "/circulars-orders" },
-            { label: "Drug Rehab Centres", path: "/rehabilitation-centres" },
+            { label: "Drug Rehabilitation Centres in India", path: "/rehabilitation-centres" },
             { label: "Citizen Charter", path: "/citizen-charter" },
             { label: "Grievance Redressal", path: "/grievance" },
             { label: "Internal Complaint Committee", path: "/internal-complaint-committee" },
-            { label: "MoUs", path: "/mou" },
+            {
+                label: "MoUs", path: "/mou",
+                children: [
+                    { label: "CBSE", path: "/mou/cbse" },
+                    { label: "SPANDAN", path: "/mou/spandan" },
+                    { label: "RRU", path: "/mou/rru" },
+                    { label: "NFSU", path: "/mou/nfsu" },
+                ]
+            },
         ]
     },
 ];
@@ -78,6 +99,7 @@ function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState(null);
     const [mobileAccordion, setMobileAccordion] = useState(null);
+    const [openSubDropdown, setOpenSubDropdown] = useState(null);
     const [scrolled, setScrolled] = useState(false);
     const [searchOpen, setSearchOpen] = useState(false);
     const [lang, setLang] = useState("EN");
@@ -93,7 +115,12 @@ function Header() {
     useEffect(() => {
         setMenuOpen(false);
         setOpenDropdown(null);
+        setOpenSubDropdown(null);
     }, [location.pathname]);
+
+    useEffect(() => {
+        setOpenSubDropdown(null);
+    }, [openDropdown]);
 
     useEffect(() => {
         const handler = (e) => {
@@ -242,19 +269,57 @@ function Header() {
                                                 className={`nav-dropdown ${(openDropdown === item.label || (menuOpen && mobileAccordion === item.label)) ? "open" : ""}`}
                                                 role="menu"
                                             >
-                                                {item.children.map(child => (
-                                                    <li key={child.path} role="none">
-                                                        <NavLink
-                                                            to={child.path}
-                                                            className={({ isActive }) => `dropdown-link ${isActive ? "active" : ""}`}
-                                                            role="menuitem"
-                                                            onClick={() => setMenuOpen(false)}
+                                                {item.children.map(child => {
+                                                    const subKey = `${item.label}-${child.label}`;
+                                                    return child.children ? (
+                                                        <li
+                                                            key={child.path}
+                                                            role="none"
+                                                            className="has-sub-dropdown"
                                                         >
-                                                            <i className="bi bi-chevron-right drop-arrow" />
-                                                            {child.label}
-                                                        </NavLink>
-                                                    </li>
-                                                ))}
+                                                            <button
+                                                                className={`dropdown-link dropdown-link--has-sub ${location.pathname === child.path || child.children.some(sc => sc.path === location.pathname) ? "active" : ""}`}
+                                                                onClick={() => setOpenSubDropdown(prev => prev === subKey ? null : subKey)}
+                                                                role="menuitem"
+                                                                aria-expanded={openSubDropdown === subKey}
+                                                            >
+                                                                <i className="bi bi-chevron-right drop-arrow" />
+                                                                {child.label}
+                                                                <i className="bi bi-chevron-right sub-arrow" />
+                                                            </button>
+                                                            <ul
+                                                                className={`nav-sub-dropdown ${openSubDropdown === subKey ? "open" : ""}`}
+                                                                role="menu"
+                                                            >
+                                                                {child.children.map(subChild => (
+                                                                    <li key={subChild.path} role="none">
+                                                                        <NavLink
+                                                                            to={subChild.path}
+                                                                            className={({ isActive }) => `dropdown-link ${isActive ? "active" : ""}`}
+                                                                            role="menuitem"
+                                                                            onClick={() => setMenuOpen(false)}
+                                                                        >
+                                                                            <i className="bi bi-chevron-right drop-arrow" />
+                                                                            {subChild.label}
+                                                                        </NavLink>
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                        </li>
+                                                    ) : (
+                                                        <li key={child.path} role="none">
+                                                            <NavLink
+                                                                to={child.path}
+                                                                className={({ isActive }) => `dropdown-link ${isActive ? "active" : ""}`}
+                                                                role="menuitem"
+                                                                onClick={() => setMenuOpen(false)}
+                                                            >
+                                                                <i className="bi bi-chevron-right drop-arrow" />
+                                                                {child.label}
+                                                            </NavLink>
+                                                        </li>
+                                                    );
+                                                })}
                                             </ul>
                                         </>
                                     ) : (

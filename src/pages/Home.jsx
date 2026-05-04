@@ -18,6 +18,9 @@ import g7 from "../assets/gallary-img/3ncbdg.jpeg";
 import g8 from "../assets/gallary-img/4antf.jpeg";
 import g9 from "../assets/gallary-img/4ncbadg.jpeg";
 import g10 from "../assets/gallary-img/5martime.jpeg";
+import c1 from "../assets/criminal/c1.png";
+import c2 from "../assets/criminal/c2.png";
+import c3 from "../assets/criminal/c3.png";
 import manasLogo from "../assets/link-img/MANAS_LogoE.jpeg";
 import pmnrfLogo from "../assets/link-img/PMNRF.png";
 import dataGovLogo from "../assets/link-img/data-gov.png";
@@ -147,9 +150,9 @@ const aboutFacts = [
 ];
 
 const wantedPreview = [
-    { name: "Vikram Dayal", alias: "Kana", crime: "International Drug Trafficking", status: "High Alert" },
-    { name: "Harpreet Singh", alias: "Monu", crime: "Narco-Terror Network Operations", status: "Wanted" },
-    { name: "Fahim Raza", alias: "Chikna", crime: "Cross-Border Heroin Smuggling", status: "Fugitive" },
+    { name: "Vikram Dayal", alias: "Kana", crime: "International Drug Trafficking", status: "High Alert", photo: c1 },
+    { name: "Harpreet Singh", alias: "Monu", crime: "Narco-Terror Network Operations", status: "Wanted", photo: c2 },
+    { name: "Fahim Raza", alias: "Chikna", crime: "Cross-Border Heroin Smuggling", status: "Fugitive", photo: c3 },
 ];
 
 const socialEmbeds = [
@@ -200,6 +203,15 @@ function Home() {
     const [slideAnimating, setSlideAnimating] = useState(false);
     const [isPlaying, setIsPlaying] = useState(true);
     const [tickerPaused, setTickerPaused] = useState(false);
+    const [mwtIdx, setMwtIdx] = useState(0);
+
+    const mwtPrev = () => setMwtIdx(i => (i - 1 + wantedPreview.length) % wantedPreview.length);
+    const mwtNext = () => setMwtIdx(i => (i + 1) % wantedPreview.length);
+
+    useEffect(() => {
+        const t = setInterval(mwtNext, 4000);
+        return () => clearInterval(t);
+    }, []);
     const [newsHovered, setNewsHovered] = useState(false);
     const newsRef = useRef(null);
     const portalsRef = useRef(null);
@@ -566,29 +578,48 @@ function Home() {
                             <h2 className="section-title section-title--white">Most Wanted Fugitives</h2>
                             <div className="section-divider" />
                         </div>
-                        <Link to="/red-corner-notice" className="view-all-link-light">
-                            View All <i className="bi bi-arrow-right" />
+                        <Link to="/red-corner-notice" className="mwt-view-btn">
+                            View Most Wanted Fugitives
                         </Link>
                     </div>
-                    <div className="mwt-grid reveal" ref={mwtRef}>
-                        {wantedPreview.map((w, i) => (
-                            <div key={i} className="mwt-card">
-                                <div className="mwt-img-col">
-                                    <div className="mwt-silhouette">
-                                        <i className="bi bi-person-fill" />
+
+                    <div className="mwt-carousel-outer">
+                        <button className="mwt-arrow mwt-arrow--prev" onClick={mwtPrev} aria-label="Previous">
+                            <i className="bi bi-chevron-left" />
+                        </button>
+
+                        <div className="mwt-track-wrap">
+                            <div className="mwt-track" style={{ transform: `translateX(-${mwtIdx * (100 / 3)}%)` }}>
+                                {wantedPreview.map((w, i) => (
+                                    <div key={i} className="mwt-card">
+                                        <div className="mwt-img-col">
+                                            <div className="mwt-silhouette">
+                                                <img src={w.photo} alt={w.name} />
+                                            </div>
+                                            <span className={`mwt-status mwt-s--${w.status.toLowerCase().replace(" ", "-")}`}>
+                                                {w.status}
+                                            </span>
+                                        </div>
+                                        <div className="mwt-info">
+                                            <div className="mwt-name">{w.name}</div>
+                                            <div className="mwt-alias"><strong>AKA:</strong> {w.alias}</div>
+                                            <div className="mwt-crime">
+                                                <i className="bi bi-exclamation-triangle-fill" /> {w.crime}
+                                            </div>
+                                        </div>
                                     </div>
-                                    <span className={`mwt-status mwt-s--${w.status.toLowerCase().replace(" ", "-")}`}>
-                                        {w.status}
-                                    </span>
-                                </div>
-                                <div className="mwt-info">
-                                    <div className="mwt-name">{w.name}</div>
-                                    <div className="mwt-alias">Alias: {w.alias}</div>
-                                    <div className="mwt-crime">
-                                        <i className="bi bi-exclamation-triangle-fill" /> {w.crime}
-                                    </div>
-                                </div>
+                                ))}
                             </div>
+                        </div>
+
+                        <button className="mwt-arrow mwt-arrow--next" onClick={mwtNext} aria-label="Next">
+                            <i className="bi bi-chevron-right" />
+                        </button>
+                    </div>
+
+                    <div className="mwt-dots">
+                        {wantedPreview.map((_, i) => (
+                            <button key={i} className={`mwt-dot ${i === mwtIdx ? "active" : ""}`} onClick={() => setMwtIdx(i)} aria-label={`Go to card ${i + 1}`} />
                         ))}
                     </div>
                     <div className="mwt-tip-bar">
