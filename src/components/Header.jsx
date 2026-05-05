@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
+import { useLanguage, LANGUAGES } from "../context/LanguageContext";
 import "./Header.scss";
 
 const navItems = [
@@ -101,7 +102,7 @@ function Header() {
     const [mobileSubAccordion, setMobileSubAccordion] = useState(null);
     const [scrolled, setScrolled]               = useState(false);
     const [searchOpen, setSearchOpen]           = useState(false);
-    const [lang, setLang]                       = useState("EN");
+    const { selectedLang, openModal }            = useLanguage();
     const location  = useLocation();
     const navRef    = useRef(null);
 
@@ -151,8 +152,8 @@ function Header() {
                         <a href="tel:1933" className="utility-helpline">
                             <i className="bi bi-telephone-fill" /> MANAS Helpline: 1933
                         </a>
-                        <button className="utility-lang-btn" onClick={() => setLang(l => l === "EN" ? "HI" : "EN")} aria-label="Toggle language">
-                            <i className="bi bi-translate" /> {lang === "EN" ? "हिंदी" : "English"}
+                        <button className="utility-lang-btn" onClick={openModal} aria-label="Change language">
+                            <i className="bi bi-translate" /> {LANGUAGES.find(l => l.code === selectedLang)?.native ?? "हिंदी"}
                         </button>
                         <Link to="/login" className="utility-login-btn">
                             <i className="bi bi-person-circle" /> Login
@@ -168,8 +169,8 @@ function Header() {
                     <a href="tel:1933" style={{ color: "inherit" }}>MANAS Helpline: 1933</a>
                 </div>
                 <div className="hdr-mobile-helpline-right">
-                    <button className="utility-lang-btn" onClick={() => setLang(l => l === "EN" ? "HI" : "EN")} aria-label="Toggle language">
-                        <i className="bi bi-translate" /> {lang === "EN" ? "हिंदी" : "English"}
+                    <button className="utility-lang-btn" onClick={openModal} aria-label="Change language">
+                        <i className="bi bi-translate" /> {LANGUAGES.find(l => l.code === selectedLang)?.native ?? "हिंदी"}
                     </button>
                 </div>
             </div>

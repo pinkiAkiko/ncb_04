@@ -3,8 +3,8 @@
 
 // ── Utility Bar ───────────────────────────────────────────
 .hdr-utility-bar {
-    background: $navy-900;
-    border-bottom: 1px solid rgba($white, 0.06);
+    background: $white;
+    border-bottom: 1px solid $gray-200;
     padding: 6px 0;
 
     @include respond(md) {
@@ -35,7 +35,7 @@
 }
 
 .utility-gov-tag {
-    color: rgba($white, 0.5);
+    color: $gray-600;
     font-size: 0.72rem;
     font-family: $font-body;
     display: flex;
@@ -43,28 +43,28 @@
     gap: 4px;
 
     i {
-        color: $gold-500;
+        color: $gold-600;
     }
 }
 
 .utility-divider {
     width: 1px;
     height: 14px;
-    background: rgba($white, 0.15);
+    background: $gray-300;
 }
 
 .utility-link {
-    color: rgba($white, 0.55);
+    color: $gray-600;
     font-size: 0.72rem;
     transition: color $transition-fast;
 
     &:hover {
-        color: $gold-400;
+        color: $gold-600;
     }
 }
 
 .utility-helpline {
-    color: $gold-400;
+    color: $navy-700;
     font-size: 0.72rem;
     font-weight: 600;
     display: flex;
@@ -72,18 +72,18 @@
     gap: 4px;
 
     i {
-        color: $gold-500;
+        color: $gold-600;
     }
 
     &:hover {
-        color: $gold-300;
+        color: $gold-700;
     }
 }
 
 .utility-lang-btn {
-    background: rgba($white, 0.06);
-    border: 1px solid rgba($white, 0.1);
-    color: rgba($white, 0.7);
+    background: $gray-100;
+    border: 1px solid $gray-300;
+    color: $navy-700;
     font-size: 0.72rem;
     padding: 3px 10px;
     border-radius: $radius-full;
@@ -120,11 +120,11 @@
 // ── Mobile helpline strip (visible only on md and below) ──
 .hdr-mobile-helpline {
     display: none;
-    background: $navy-900;
+    background: $white;
     padding: 5px $space-4;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid rgba($white, 0.06);
+    border-bottom: 1px solid $gray-200;
 
     @include respond(md) { display: flex; }
 
@@ -146,7 +146,8 @@
 
 // ── Branding Row ──────────────────────────────────────────
 .hdr-brand-row {
-    background: $navy-800;
+    background: $white;
+    border-bottom: 1px solid $gray-200;
     padding: 14px 0;
     transition: padding $transition-base;
 
@@ -186,7 +187,7 @@
 .hdr-emblem {
     height: 56px;
     width: auto;
-    filter: brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
     transition: height $transition-base;
 
     @include respond(sm) {
@@ -197,7 +198,6 @@
 .hdr-ncb-logo {
     height: 56px;
     width: auto;
-    filter: brightness(0) invert(1);
     transition: height $transition-base;
 
     @include respond(sm) {
@@ -217,7 +217,7 @@
 
 .hdr-govt {
     font-size: 0.72rem;
-    color: rgba($white, 0.5);
+    color: $gray-500;
     letter-spacing: 0.5px;
     font-family: $font-body;
 
@@ -230,7 +230,7 @@
     font-family: $font-heading;
     font-size: 1.5rem;
     font-weight: 700;
-    color: $white;
+    color: $navy-800;
     letter-spacing: 0.5px;
     line-height: 1;
     transition: font-size $transition-base;
@@ -246,7 +246,7 @@
 
 .hdr-hindi {
     font-size: 0.82rem;
-    color: $gold-400;
+    color: $gold-600;
 
     @include respond(md) {
         display: none;
@@ -286,7 +286,7 @@
     align-items: center;
     gap: $space-3;
     padding-right: $space-3;
-    border-right: 1px solid rgba($white, 0.15);
+    border-right: 1px solid $gray-200;
 
     @include respond(sm) {
         display: none;
@@ -328,9 +328,9 @@
 }
 
 .hdr-search-toggle {
-    background: rgba($white, 0.08);
-    border: 1px solid rgba($white, 0.15);
-    color: $white;
+    background: $gray-100;
+    border: 1px solid $gray-200;
+    color: $navy-700;
     width: 36px;
     height: 36px;
     border-radius: $radius-sm;
@@ -342,9 +342,9 @@
     transition: background $transition-fast;
 
     &:hover {
-        background: rgba($gold-500, 0.2);
+        background: rgba($gold-500, 0.12);
         border-color: $gold-500;
-        color: $gold-400;
+        color: $gold-600;
     }
 }
 
@@ -398,7 +398,7 @@
 
 // ── Nav Row ───────────────────────────────────────────────
 .hdr-nav-ticker-row {
-    background: $navy-700;
+    background: $white;
     border-bottom: 3px solid $gold-500;
     position: relative;
     z-index: 900;
@@ -407,13 +407,13 @@
         position: sticky;
         top: 0;
         z-index: 999;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
     }
 }
 
 // Main Nav
 .hdr-main-nav {
-    background: $navy-700;
+    background: $white;
 }
 
 .nav-inner {
@@ -434,7 +434,7 @@
         display: block;
         width: 24px;
         height: 2px;
-        background: $white;
+        background: $navy-700;
         border-radius: 2px;
         transition: all $transition-fast;
     }
@@ -530,7 +530,7 @@
     font-size: 0.82rem;
     letter-spacing: 0.8px;
     text-transform: uppercase;
-    color: rgba($white, 0.85);
+    color: $navy-700;
     background: none;
     border: none;
     border-bottom: 3px solid transparent;
@@ -540,9 +540,9 @@
 
     &:hover,
     &.active {
-        color: $gold-400;
+        color: $gold-600;
         border-bottom-color: $gold-500;
-        background: rgba($white, 0.04);
+        background: rgba($gold-500, 0.04);
     }
 
     .nav-arrow {

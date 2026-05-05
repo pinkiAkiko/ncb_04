@@ -399,8 +399,8 @@
 }
 
 .mission-card {
-    background: $white;
-    border: 1px solid $gray-200;
+    background: $navy-700;
+    border: 1px solid rgba($white, 0.08);
     border-radius: $radius-lg;
     padding: $space-6;
     position: relative;
@@ -408,9 +408,9 @@
     @include card-hover;
     border-top: 4px solid;
 
-    &--gold { border-top-color: $gold-500; .mc-icon-box { background: rgba($gold-500, 0.1); color: $gold-600; } .mc-label { color: $gold-600; } }
-    &--navy { border-top-color: $navy-500; .mc-icon-box { background: rgba($navy-500, 0.08); color: $navy-500; } .mc-label { color: $navy-500; } }
-    &--red  { border-top-color: $red-500;  .mc-icon-box { background: rgba($red-500, 0.08);  color: $red-500;  } .mc-label { color: $red-500; } }
+    &--gold { border-top-color: $gold-500; .mc-icon-box { background: rgba($gold-500, 0.18); color: $gold-400; } .mc-label { color: $gold-400; } }
+    &--navy { border-top-color: $navy-400; .mc-icon-box { background: rgba($navy-400, 0.25); color: $gold-300; } .mc-label { color: $gold-300; } }
+    &--red  { border-top-color: $red-400;  .mc-icon-box { background: rgba($red-500, 0.2);  color: $red-400;  } .mc-label { color: $red-400; } }
 
     // Background watermark icon
     &::before {
@@ -451,14 +451,14 @@
     font-family: $font-heading;
     font-size: 1.5rem;
     font-weight: 700;
-    color: $navy-800;
+    color: $white;
     line-height: 1.2;
     margin-bottom: $space-3;
 }
 
 .mc-body {
     font-size: 0.875rem;
-    color: $gray-500;
+    color: rgba($white, 0.65);
     line-height: 1.65;
     margin-bottom: $space-4;
 }
@@ -469,12 +469,12 @@
     font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
-    color: $navy-600;
+    color: $gold-400;
     display: inline-flex;
     align-items: center;
     gap: $space-2;
     transition: gap $transition-fast, color $transition-fast;
-    &:hover { gap: $space-3; color: $gold-600; }
+    &:hover { gap: $space-3; color: $gold-300; }
 }
 
 // ── 3. DG MESSAGE ────────────────────────────────────────
@@ -687,8 +687,8 @@
 
 // News col
 .news-scroll-box {
-    background: $white;
-    border: 1px solid $gray-200;
+    background: $navy-700;
+    border: 1px solid rgba($white, 0.08);
     border-radius: $radius-lg;
     height: 440px;
     overflow-y: auto;
@@ -708,11 +708,11 @@
     justify-content: space-between;
     gap: $space-3;
     padding: $space-3 $space-4;
-    border-bottom: 1px solid $gray-100;
+    border-bottom: 1px solid rgba($white, 0.07);
     cursor: pointer;
     transition: background $transition-fast;
     border-radius: $radius-sm;
-    &:hover { background: $gold-100; }
+    &:hover { background: rgba($gold-500, 0.1); }
     &:last-child { border-bottom: none; }
 }
 
@@ -722,10 +722,10 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: $navy-500;
+    background: $gold-500;
     flex-shrink: 0;
     margin-top: 6px;
-    &.alert { background: $red-500; box-shadow: 0 0 0 3px rgba($red-500, 0.2); }
+    &.alert { background: $red-400; box-shadow: 0 0 0 3px rgba($red-500, 0.2); }
 }
 
 .news-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
@@ -738,19 +738,19 @@
     text-transform: uppercase;
     padding: 1px 6px;
     border-radius: $radius-sm;
-    &.cat-alert { background: rgba($red-500, 0.1); color: $red-500; }
-    &.cat-default { background: rgba($navy-500, 0.08); color: $navy-500; }
+    &.cat-alert { background: rgba($red-500, 0.2); color: $red-400; }
+    &.cat-default { background: rgba($gold-500, 0.15); color: $gold-400; }
 }
 
 .news-title {
     font-size: 0.82rem;
-    color: $gray-700;
+    color: rgba($white, 0.85);
     line-height: 1.45;
 }
 
 .news-date {
     font-size: 0.72rem;
-    color: $gray-400;
+    color: rgba($white, 0.4);
     display: flex;
     align-items: center;
     gap: 4px;
@@ -768,8 +768,8 @@
 }
 
 .event-card {
-    background: $white;
-    border: 1px solid $gray-200;
+    background: $navy-700;
+    border: 1px solid rgba($white, 0.08);
     border-radius: $radius-lg;
     overflow: hidden;
     @include card-hover;
@@ -824,18 +824,18 @@
     font-family: $font-heading;
     font-size: 0.88rem;
     font-weight: 600;
-    color: $navy-800;
+    color: $white;
     line-height: 1.35;
     margin-bottom: $space-2;
 }
 
 .event-location {
     font-size: 0.75rem;
-    color: $gray-500;
+    color: rgba($white, 0.55);
     display: flex;
     align-items: center;
     gap: 4px;
-    i { color: $gold-500; font-size: 0.65rem; }
+    i { color: $gold-400; font-size: 0.65rem; }
 }
 
 // ── 6. QUICK ACCESS TILES ─────────────────────────────────
@@ -853,8 +853,8 @@
     align-items: center;
     gap: $space-3;
     padding: $space-5 $space-4;
-    background: $white;
-    border: 1px solid $gray-200;
+    background: $navy-700;
+    border: 1px solid rgba($white, 0.08);
     border-radius: $radius-lg;
     text-align: center;
     border-top: 3px solid;
@@ -863,14 +863,14 @@
     @include respond(sm) { padding: $space-4 $space-3; }
 
     $colors: (
-        red: ($red-500, rgba($red-500, 0.08), rgba($red-500, 0.1)),
-        gold: ($gold-500, rgba($gold-500, 0.08), rgba($gold-500, 0.1)),
-        navy: ($navy-500, rgba($navy-500, 0.06), rgba($navy-500, 0.08)),
-        green: (#16a34a, rgba(22, 163, 74, 0.08), rgba(22, 163, 74, 0.1)),
-        blue: (#2563eb, rgba(37, 99, 235, 0.06), rgba(37, 99, 235, 0.08)),
-        purple: (#7c3aed, rgba(124, 58, 237, 0.06), rgba(124, 58, 237, 0.08)),
-        orange: (#ea580c, rgba(234, 88, 12, 0.06), rgba(234, 88, 12, 0.08)),
-        teal: (#0d9488, rgba(13, 148, 136, 0.06), rgba(13, 148, 136, 0.08)),
+        red: ($red-500, rgba($red-500, 0.18), rgba($red-500, 0.25)),
+        gold: ($gold-500, rgba($gold-500, 0.18), rgba($gold-500, 0.25)),
+        navy: ($navy-400, rgba($navy-400, 0.25), rgba($navy-400, 0.35)),
+        green: (#16a34a, rgba(22, 163, 74, 0.18), rgba(22, 163, 74, 0.25)),
+        blue: (#2563eb, rgba(37, 99, 235, 0.18), rgba(37, 99, 235, 0.25)),
+        purple: (#7c3aed, rgba(124, 58, 237, 0.18), rgba(124, 58, 237, 0.25)),
+        orange: (#ea580c, rgba(234, 88, 12, 0.18), rgba(234, 88, 12, 0.25)),
+        teal: (#0d9488, rgba(13, 148, 136, 0.18), rgba(13, 148, 136, 0.25)),
     );
 
     @each $name, $vals in $colors {
@@ -898,167 +898,75 @@
     font-family: $font-heading;
     font-size: 0.8rem;
     font-weight: 600;
-    color: $navy-700;
+    color: rgba($white, 0.85);
     letter-spacing: 0.3px;
     text-align: center;
 }
 
 // ── 7. GALLERY ───────────────────────────────────────────
-.gallery-strip {
+.gallery-row-wrapper {
     position: relative;
-    height: 300px;
-    overflow: hidden;
-    @include respond(md) { height: 230px; }
-    @include respond(sm) { height: 180px; }
-}
-
-// All items sit at the horizontal & vertical center of the strip,
-// then each position class shifts them left/right symmetrically.
-.gallery-strip-item {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    border-radius: $radius-lg;
-    overflow: hidden;
-    border: 2px solid rgba($white, 0.1);
-    transition: all 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    cursor: pointer;
-
-    img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    // Default — hidden (off centre, faded)
-    &.gal-hidden {
-        width: 180px;
-        height: 140px;
-        transform: translate(-50%, -50%);
-        opacity: 0;
-        z-index: 0;
-        pointer-events: none;
-    }
-
-    // ── Sizes used per slot ───────────────────────────────
-    // center  : 380 × 260
-    // r1 / l1 : 270 × 200   offset ±350px
-    // r2 / l2 : 200 × 155   offset ±660px
-
-    &.gal-center {
-        width: 380px;
-        height: 260px;
-        transform: translate(-50%, -50%) translateX(0);
-        opacity: 1;
-        z-index: 5;
-        border-color: $gold-500;
-        box-shadow: 0 0 0 3px rgba($gold-500, 0.3), $shadow-xl;
-        pointer-events: auto;
-
-        @include respond(md) { width: 270px; height: 190px; }
-        @include respond(sm) { width: min(260px, 88vw); height: 160px; }
-    }
-
-    &.gal-r1 {
-        width: 270px;
-        height: 200px;
-        transform: translate(-50%, -50%) translateX(350px);
-        opacity: 0.72;
-        z-index: 4;
-        pointer-events: auto;
-
-        @include respond(md) { width: 200px; height: 150px; transform: translate(-50%, -50%) translateX(240px); }
-        @include respond(sm) { opacity: 0; pointer-events: none; }
-    }
-
-    &.gal-l1 {
-        width: 270px;
-        height: 200px;
-        transform: translate(-50%, -50%) translateX(-350px);
-        opacity: 0.72;
-        z-index: 4;
-        pointer-events: auto;
-
-        @include respond(md) { width: 200px; height: 150px; transform: translate(-50%, -50%) translateX(-240px); }
-        @include respond(sm) { opacity: 0; pointer-events: none; }
-    }
-
-    &.gal-r2 {
-        width: 200px;
-        height: 155px;
-        transform: translate(-50%, -50%) translateX(660px);
-        opacity: 0.38;
-        z-index: 3;
-
-        @include respond(md) { opacity: 0; pointer-events: none; }
-    }
-
-    &.gal-l2 {
-        width: 200px;
-        height: 155px;
-        transform: translate(-50%, -50%) translateX(-660px);
-        opacity: 0.38;
-        z-index: 3;
-
-        @include respond(md) { opacity: 0; pointer-events: none; }
-    }
-
-    &:hover:not(.gal-center):not(.gal-hidden) {
-        opacity: 0.9;
-        filter: brightness(1.08);
-    }
-}
-
-.gallery-nav {
     display: flex;
     align-items: center;
     gap: $space-2;
-    // On mobile the overlay buttons on the strip handle prev/next
-    @include respond(md) {
-        .gal-btn { display: none; }
+    margin-top: $space-5;
+}
+
+.gallery-row {
+    display: flex;
+    gap: $space-3;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    &::-webkit-scrollbar { display: none; }
+    flex: 1;
+}
+
+.gallery-card {
+    flex: 0 0 240px;
+    height: 175px;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    border: 2px solid rgba($white, 0.1);
+    cursor: pointer;
+    transition: border-color $transition-fast, box-shadow $transition-fast, transform $transition-fast;
+
+    @include respond(sm) { flex: 0 0 180px; height: 135px; }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.4s ease;
+    }
+
+    &:hover {
+        border-color: $gold-500;
+        box-shadow: 0 0 0 2px rgba($gold-500, 0.25), $shadow-lg;
+        transform: translateY(-3px);
+
+        img { transform: scale(1.05); }
     }
 }
 
-.gal-btn {
+.gallery-arrow {
+    flex-shrink: 0;
     width: 40px;
     height: 40px;
     border-radius: 50%;
     background: rgba($white, 0.08);
-    border: 1px solid rgba($white, 0.2);
+    border: 1px solid rgba($white, 0.22);
     color: $white;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     transition: all $transition-fast;
+
     &:hover { background: $gold-500; border-color: $gold-500; color: $navy-900; }
 }
-
-// Mobile overlay nav buttons on the gallery strip
-.gal-overlay-btn {
-    display: none;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background: rgba($navy-900, 0.7);
-    border: 1px solid rgba($gold-500, 0.5);
-    color: $gold-400;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 0.95rem;
-    backdrop-filter: blur(4px);
-    transition: all $transition-fast;
-    -webkit-tap-highlight-color: transparent;
-
-    &:hover, &:active { background: $gold-500; color: $navy-900; border-color: $gold-500; }
-
-    @include respond(md) { display: flex; }
-}
-
-.gal-overlay-prev { left: $space-3; }
-.gal-overlay-next { right: $space-3; }
 
 // ── 8. PORTALS ────────────────────────────────────────────
 .portals-track-wrapper {
@@ -1118,12 +1026,12 @@
 }
 
 .about-strip-text {
-    .section-title { color: $navy-800; }
+    .section-title { color: $white; }
 }
 
 .about-strip-desc {
     font-size: 0.93rem;
-    color: $gray-600;
+    color: rgba($white, 0.65);
     line-height: 1.75;
     margin-bottom: $space-5;
 }
@@ -1144,8 +1052,8 @@
 }
 
 .about-fact-card {
-    background: $white;
-    border: 1px solid $gray-200;
+    background: $navy-700;
+    border: 1px solid rgba($white, 0.08);
     border-radius: $radius-lg;
     padding: $space-5 $space-4;
     display: flex;
@@ -1153,9 +1061,8 @@
     align-items: center;
     gap: $space-2;
     text-align: center;
-    box-shadow: $shadow-sm;
     transition: box-shadow $transition-base, transform $transition-base;
-    &:hover { box-shadow: $shadow-md; transform: translateY(-2px); }
+    &:hover { box-shadow: 0 0 0 1px rgba($gold-500, 0.3); transform: translateY(-2px); }
 }
 
 .afc-icon {
@@ -1174,14 +1081,14 @@
     font-family: $font-heading;
     font-size: 1.5rem;
     font-weight: 700;
-    color: $navy-800;
+    color: $white;
     line-height: 1;
 }
 
 .afc-label {
     font-size: 0.72rem;
     font-weight: 600;
-    color: $gray-500;
+    color: rgba($white, 0.55);
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -1204,7 +1111,7 @@
     display: flex;
     gap: 0;
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    width: calc(100% * 3 / 3); // total cards / visible
+    width: 300%; // 9 items × (1/3 of wrap each) = 3× wrap
 }
 
 .mwt-arrow {
@@ -1244,9 +1151,9 @@
     &:hover  { background: rgba($gold-500, 0.55); }
 }
 
-// Each card = 1/3 of track
+// Each card = 1/9 of track width = 1/3 of track-wrap width
 .mwt-card {
-    flex: 0 0 calc(100% / 3);
+    flex: 0 0 calc(100% / 9);
     display: flex;
     flex-direction: column;
     background: $navy-700;
@@ -1254,9 +1161,6 @@
     border-radius: $radius-md;
     overflow: hidden;
     padding: 2px;
-
-    @include respond(md) { flex: 0 0 50%; }
-    @include respond(sm) { flex: 0 0 100%; }
 }
 
 .mwt-img-col {
@@ -1404,11 +1308,11 @@
 .sf-embed-card {
     flex: 0 0 340px;
     scroll-snap-align: start;
-    background: $white;
+    background: $navy-700;
     border-radius: $radius-lg;
     overflow: hidden;
     box-shadow: $shadow-md;
-    border: 1px solid $gray-200;
+    border: 1px solid rgba($white, 0.08);
     transition: transform $transition-base, box-shadow $transition-base;
     &:hover { transform: translateY(-3px); box-shadow: $shadow-lg; }
     @include respond(md) { flex: 0 0 min(320px, calc(100vw - 32px)); }
@@ -1421,8 +1325,8 @@
     gap: $space-3;
     padding: $space-3 $space-4;
     border-top: 3px solid transparent;
-    border-bottom: 1px solid $gray-100;
-    background: $white;
+    border-bottom: 1px solid rgba($white, 0.08);
+    background: $navy-700;
 }
 
 .sf-embed-icon {
@@ -1440,7 +1344,7 @@
     font-family: $font-heading;
     font-size: 0.88rem;
     font-weight: 700;
-    color: $navy-800;
+    color: $white;
     text-transform: uppercase;
     letter-spacing: 0.4px;
     flex: 1;
@@ -1470,20 +1374,19 @@
     transform: translateY(-50%);
     width: 42px;
     height: 42px;
-    background: $white;
-    border: 1px solid $gray-200;
+    background: $navy-600;
+    border: 1px solid rgba($white, 0.15);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: $shadow-sm;
     z-index: 2;
     font-size: 1rem;
-    color: $navy-700;
+    color: $white;
     transition: all $transition-fast;
 
-    &:hover { background: $gold-500; color: $white; border-color: $gold-500; box-shadow: $shadow-md; }
+    &:hover { background: $gold-500; color: $navy-900; border-color: $gold-500; box-shadow: $shadow-md; }
     &--prev { left: 0; }
     &--next { right: 0; }
 

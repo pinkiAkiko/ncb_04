@@ -9,8 +9,8 @@ html {
 
 body {
   font-family: $font-body;
-  color: $gray-700;
-  background: $white;
+  color: rgba(#fff, 0.85);
+  background: $navy-900;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -44,7 +44,7 @@ ul, ol { list-style: none; }
   font-family: $font-heading;
   font-size: clamp(1.6rem, 3vw, 2.2rem);
   font-weight: 700;
-  color: $navy-800;
+  color: $white;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   line-height: 1.2;
@@ -69,13 +69,13 @@ ul, ol { list-style: none; }
 }
 
 .page-section--dark {
-  background: $navy-800;
+  background: $navy-900;
   .section-title { color: $white; }
   .section-label { color: $gold-400; }
 }
 
-.page-section--gray { background: $gray-100; }
-.page-section--gold-accent { background: $gold-100; }
+.page-section--gray { background: $navy-700; }
+.page-section--gold-accent { background: $navy-700; }
 
 // Animations
 @keyframes fadeInUp {

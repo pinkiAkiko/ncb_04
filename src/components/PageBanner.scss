@@ -9,8 +9,13 @@
     padding: 56px 0 48px;
     overflow: hidden;
 
-    @include respond(md) { padding: 40px 0 36px; }
-    @include respond(sm) { padding: 32px 0 28px; }
+    @include respond(md) {
+        padding: 40px 0 36px;
+    }
+
+    @include respond(sm) {
+        padding: 32px 0 28px;
+    }
 
     // Decorative diagonal accent
     &::before {
@@ -20,7 +25,7 @@
         left: 0;
         right: 0;
         height: 40px;
-        background: $white;
+        background: $navy-900;
         clip-path: polygon(0 100%, 100% 0, 100% 100%);
     }
 }
@@ -28,11 +33,9 @@
 .page-banner-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        135deg,
-        rgba($navy-900, 0.92) 0%,
-        rgba($navy-700, 0.75) 100%
-    );
+    background: linear-gradient(135deg,
+            rgba($navy-600, 0.92) 0%,
+            rgba($navy-700, 0.75) 100%);
 }
 
 .page-banner-content {
@@ -65,7 +68,10 @@
     margin-bottom: $space-4;
     max-width: 600px;
     line-height: 1.5;
-    @include respond(sm) { font-size: 0.85rem; }
+
+    @include respond(sm) {
+        font-size: 0.85rem;
+    }
 }
 
 .banner-breadcrumb {
@@ -73,6 +79,12 @@
     align-items: center;
     gap: $space-1;
     flex-wrap: wrap;
+
+    >span {
+        display: inline-flex;
+        align-items: center;
+        gap: $space-1;
+    }
 }
 
 .bc-link {
@@ -82,11 +94,21 @@
     align-items: center;
     gap: 4px;
     transition: color $transition-fast;
-    &:hover { color: $gold-300; }
-    i { font-size: 0.75rem; }
+
+    &:hover {
+        color: $gold-300;
+    }
+
+    i {
+        font-size: 0.75rem;
+    }
 }
 
-.bc-sep { font-size: 0.6rem; color: rgba($white, 0.3); margin: 0 2px; }
+.bc-sep {
+    font-size: 0.6rem;
+    color: rgba($white, 0.3);
+    margin: 0 2px;
+}
 
 .bc-current {
     font-size: 0.8rem;

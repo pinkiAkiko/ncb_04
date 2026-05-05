@@ -1,0 +1,261 @@
+@use '../styles/variables' as *;
+
+// ── Overlay ───────────────────────────────────────────────
+.lm-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: rgba(#030810, 0.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    animation: lmFadeIn 0.45s ease both;
+
+    &--exit {
+        animation: lmFadeOut 0.38s ease forwards;
+    }
+}
+
+// ── Close button (shown when re-opening from header) ─────
+.lm-close-btn {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 6px 8px;
+    border-radius: 6px;
+    line-height: 1;
+    transition: color 0.2s, background 0.2s;
+    &:hover { color: #fff; background: rgba(255,255,255,0.08); }
+}
+
+// ── Card ─────────────────────────────────────────────────
+.lm-card {
+    position: relative;
+    background: linear-gradient(160deg, #0d2037 0%, #060f1e 100%);
+    border: 1px solid rgba($gold-500, 0.22);
+    border-radius: 20px;
+    padding: 36px 40px 28px;
+    max-width: 620px;
+    width: 100%;
+    box-shadow:
+        0 48px 96px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(255, 255, 255, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    animation: lmSlideUp 0.5s cubic-bezier(0.34, 1.3, 0.64, 1) both;
+
+    @media (max-width: 480px) {
+        padding: 28px 20px 20px;
+        border-radius: 16px;
+    }
+}
+
+// ── Header ────────────────────────────────────────────────
+.lm-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.lm-emblem {
+    height: 52px;
+    width: auto;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+
+    @media (max-width: 480px) { height: 40px; }
+}
+
+.lm-org {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+.lm-ncb-logo {
+    height: 44px;
+    width: auto;
+    flex-shrink: 0;
+    filter: brightness(0) invert(1);
+
+    @media (max-width: 480px) { height: 34px; }
+}
+
+.lm-org-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.lm-org-name {
+    font-family: $font-heading;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: $white;
+    letter-spacing: 0.3px;
+    line-height: 1.1;
+
+    @media (max-width: 480px) { font-size: 0.88rem; }
+}
+
+.lm-org-sub {
+    font-size: 0.68rem;
+    color: rgba($white, 0.45);
+    letter-spacing: 0.2px;
+
+    @media (max-width: 480px) { display: none; }
+}
+
+.lm-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba($gold-500, 0.35) 30%, rgba($gold-500, 0.35) 70%, transparent);
+    margin-bottom: 28px;
+}
+
+// ── Rotating language display ─────────────────────────────
+.lm-rotating-wrap {
+    position: relative;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+    overflow: hidden;
+}
+
+.lm-rot-item {
+    position: absolute;
+    font-family: $font-heading;
+    font-weight: 700;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    user-select: none;
+
+    &.is-hidden {
+        opacity: 0;
+        transform: translateY(28px) scale(0.8);
+        font-size: 1.2rem;
+        color: transparent;
+    }
+
+    &.is-side {
+        opacity: 0.25;
+        transform: translateY(22px) scale(0.82);
+        font-size: 1.2rem;
+        color: rgba($white, 0.5);
+    }
+
+    &.is-center {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        font-size: clamp(2rem, 5vw, 2.8rem);
+        color: $gold-400;
+        text-shadow: 0 0 40px rgba($gold-500, 0.4);
+    }
+}
+
+// ── Prompt ────────────────────────────────────────────────
+.lm-prompt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 0.8rem;
+    color: rgba($white, 0.45);
+    margin-bottom: 20px;
+    letter-spacing: 0.3px;
+}
+
+.lm-prompt-sep {
+    color: rgba($gold-500, 0.5);
+}
+
+// ── Language grid ─────────────────────────────────────────
+.lm-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+
+    @media (max-width: 480px) { grid-template-columns: repeat(3, 1fr); }
+    @media (max-width: 320px) { grid-template-columns: repeat(2, 1fr); }
+}
+
+.lm-lang-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 10px 8px;
+    background: rgba($white, 0.04);
+    border: 1px solid rgba($white, 0.08);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    font-family: $font-body;
+
+    &:hover {
+        background: rgba($gold-500, 0.12);
+        border-color: rgba($gold-500, 0.4);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba($gold-500, 0.12);
+    }
+
+    &:active { transform: translateY(0); }
+}
+
+.lm-lang-native {
+    font-family: $font-heading;
+    font-size: 1rem;
+    font-weight: 700;
+    color: $white;
+    line-height: 1.1;
+}
+
+.lm-lang-en {
+    font-size: 0.65rem;
+    color: rgba($white, 0.4);
+    letter-spacing: 0.3px;
+}
+
+// ── Skip link ─────────────────────────────────────────────
+.lm-skip {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 0.75rem;
+    color: rgba($white, 0.3);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    letter-spacing: 0.3px;
+    transition: color 0.15s ease;
+
+    &:hover { color: rgba($white, 0.6); }
+}
+
+// ── Animations ────────────────────────────────────────────
+@keyframes lmFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes lmFadeOut {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+@keyframes lmSlideUp {
+    from { opacity: 0; transform: translateY(32px) scale(0.96); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}

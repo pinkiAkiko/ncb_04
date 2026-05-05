@@ -203,13 +203,31 @@ function Home() {
     const [slideAnimating, setSlideAnimating] = useState(false);
     const [isPlaying, setIsPlaying] = useState(true);
     const [tickerPaused, setTickerPaused] = useState(false);
-    const [mwtIdx, setMwtIdx] = useState(0);
+    const MWT_TOTAL = wantedPreview.length; // 3
+    const loopItems = [...wantedPreview, ...wantedPreview, ...wantedPreview]; // 9
+    const [mwtIdx, setMwtIdx] = useState(MWT_TOTAL); // start at middle copy
+    const [mwtNoTransition, setMwtNoTransition] = useState(false);
 
-    const mwtPrev = () => setMwtIdx(i => (i - 1 + wantedPreview.length) % wantedPreview.length);
-    const mwtNext = () => setMwtIdx(i => (i + 1) % wantedPreview.length);
+    const mwtMove = (dir) => {
+        setMwtNoTransition(false);
+        setMwtIdx(prev => {
+            const next = prev + dir;
+            if (next < MWT_TOTAL || next >= MWT_TOTAL * 2) {
+                setTimeout(() => {
+                    setMwtNoTransition(true);
+                    setMwtIdx(next < MWT_TOTAL ? next + MWT_TOTAL : next - MWT_TOTAL);
+                    requestAnimationFrame(() => requestAnimationFrame(() => setMwtNoTransition(false)));
+                }, 520);
+            }
+            return next;
+        });
+    };
+
+    const mwtPrev = () => mwtMove(-1);
+    const mwtNext = () => mwtMove(1);
 
     useEffect(() => {
-        const t = setInterval(mwtNext, 4000);
+        const t = setInterval(() => mwtMove(1), 4000);
         return () => clearInterval(t);
     }, []);
     const [newsHovered, setNewsHovered] = useState(false);
@@ -229,27 +247,15 @@ function Home() {
     const aboutStripRef = useScrollReveal("is-visible");
     const mwtRef = useScrollReveal("is-visible");
     const socialRef = useScrollReveal("is-visible");
+    const galleryRowRef = useRef(null);
+    const scrollGallery = (dir) => {
+        const cardWidth = galleryRowRef.current?.firstElementChild?.offsetWidth || 240;
+        galleryRowRef.current?.scrollBy({ left: dir * (cardWidth + 16), behavior: "smooth" });
+    };
     const sfCarouselRef = useRef(null);
     const scrollSocial = (dir) => {
         const cardWidth = sfCarouselRef.current?.firstElementChild?.offsetWidth || 340;
         sfCarouselRef.current?.scrollBy({ left: dir * (cardWidth + 16), behavior: "smooth" });
-    };
-    const [galleryIdx, setGalleryIdx] = useState(0);
-    const galleryTouchStartX = useRef(null);
-
-    const handleGalleryTouchStart = (e) => {
-        galleryTouchStartX.current = e.touches[0].clientX;
-    };
-    const handleGalleryTouchEnd = (e) => {
-        if (galleryTouchStartX.current === null) return;
-        const diff = galleryTouchStartX.current - e.changedTouches[0].clientX;
-        if (Math.abs(diff) > 40) {
-            setGalleryIdx(i => diff > 0
-                ? (i + 1) % galleryImages.length
-                : (i - 1 + galleryImages.length) % galleryImages.length
-            );
-        }
-        galleryTouchStartX.current = null;
     };
 
     const goToSlide = useCallback((idx) => {
@@ -298,11 +304,6 @@ function Home() {
         return () => cancelAnimationFrame(af);
     }, []);
 
-    // Gallery auto-advance
-    useEffect(() => {
-        const t = setInterval(() => setGalleryIdx(i => (i + 1) % galleryImages.length), 3200);
-        return () => clearInterval(t);
-    }, [galleryImages.length]);
 
     useEffect(() => { document.title = "Home | Narcotics Control Bureau — Government of India"; }, []);
 
@@ -589,8 +590,8 @@ function Home() {
                         </button>
 
                         <div className="mwt-track-wrap">
-                            <div className="mwt-track" style={{ transform: `translateX(-${mwtIdx * (100 / 3)}%)` }}>
-                                {wantedPreview.map((w, i) => (
+                            <div className="mwt-track" style={{ transform: `translateX(-${mwtIdx * (100 / (MWT_TOTAL * 3))}%)`, transition: mwtNoTransition ? "none" : undefined }}>
+                                {loopItems.map((w, i) => (
                                     <div key={i} className="mwt-card">
                                         <div className="mwt-img-col">
                                             <div className="mwt-silhouette">
@@ -619,7 +620,7 @@ function Home() {
 
                     <div className="mwt-dots">
                         {wantedPreview.map((_, i) => (
-                            <button key={i} className={`mwt-dot ${i === mwtIdx ? "active" : ""}`} onClick={() => setMwtIdx(i)} aria-label={`Go to card ${i + 1}`} />
+                            <button key={i} className={`mwt-dot ${i === mwtIdx % MWT_TOTAL ? "active" : ""}`} onClick={() => { setMwtNoTransition(false); setMwtIdx(MWT_TOTAL + i); }} aria-label={`Go to card ${i + 1}`} />
                         ))}
                     </div>
                     <div className="mwt-tip-bar">
@@ -666,7 +667,7 @@ function Home() {
             </section>
 
             {/* ═══════════════════════════════════════════════════
-                7. MEDIA GALLERY — sliding strip
+                7. MEDIA GALLERY — card grid
                 ═══════════════════════════════════════════════════ */}
             <section className="gallery-section page-section page-section--dark reveal" ref={galleryRef}>
                 <div className="container">
@@ -676,50 +677,21 @@ function Home() {
                             <h2 className="section-title section-title--white">Media Gallery</h2>
                             <div className="section-divider" />
                         </div>
-                        <div className="gallery-nav">
-                            <button onClick={() => setGalleryIdx(i => (i - 1 + galleryImages.length) % galleryImages.length)} className="gal-btn" aria-label="Previous">
-                                <i className="bi bi-chevron-left" />
-                            </button>
-                            <Link to="/media/photo-gallery" className="view-all-link-light">View Gallery</Link>
-                            <button onClick={() => setGalleryIdx(i => (i + 1) % galleryImages.length)} className="gal-btn" aria-label="Next">
-                                <i className="bi bi-chevron-right" />
-                            </button>
-                        </div>
+                        <Link to="/media/photo-gallery" className="view-all-link-light">View All</Link>
                     </div>
 
-                    <div
-                        className="gallery-strip"
-                        onTouchStart={handleGalleryTouchStart}
-                        onTouchEnd={handleGalleryTouchEnd}
-                    >
-                        {galleryImages.map((img, i) => {
-                            const total = galleryImages.length;
-                            const offset = ((i - galleryIdx) + total) % total;
-                            let posClass = "gal-hidden";
-                            if (offset === 0) posClass = "gal-center";
-                            else if (offset === 1) posClass = "gal-r1";
-                            else if (offset === 2) posClass = "gal-r2";
-                            else if (offset === total - 1) posClass = "gal-l1";
-                            else if (offset === total - 2) posClass = "gal-l2";
-                            return (
-                                <div key={i} className={`gallery-strip-item ${posClass}`}>
-                                    <img src={img} alt={`Gallery ${i + 1}`} />
-                                </div>
-                            );
-                        })}
-                        {/* Mobile overlay prev/next */}
-                        <button
-                            className="gal-overlay-btn gal-overlay-prev"
-                            onClick={() => setGalleryIdx(i => (i - 1 + galleryImages.length) % galleryImages.length)}
-                            aria-label="Previous image"
-                        >
+                    <div className="gallery-row-wrapper">
+                        <button className="gallery-arrow gallery-arrow--prev" onClick={() => scrollGallery(-1)} aria-label="Previous">
                             <i className="bi bi-chevron-left" />
                         </button>
-                        <button
-                            className="gal-overlay-btn gal-overlay-next"
-                            onClick={() => setGalleryIdx(i => (i + 1) % galleryImages.length)}
-                            aria-label="Next image"
-                        >
+                        <div className="gallery-row" ref={galleryRowRef}>
+                            {galleryImages.map((img, i) => (
+                                <div key={i} className="gallery-card">
+                                    <img src={img} alt={`Gallery ${i + 1}`} />
+                                </div>
+                            ))}
+                        </div>
+                        <button className="gallery-arrow gallery-arrow--next" onClick={() => scrollGallery(1)} aria-label="Next">
                             <i className="bi bi-chevron-right" />
                         </button>
                     </div>
