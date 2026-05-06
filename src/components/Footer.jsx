@@ -196,44 +196,6 @@ function Footer() {
                 </div>
             </div>
 
-            {/* ── Digital India / NIC Band ──────────────────── */}
-            <div className="footer-digital-band">
-                <div className="container digital-band-inner">
-                    <div className="digital-band-left">
-                        <img
-                            src="/digital-india.svg"
-                            alt="Digital India"
-                            className="digital-india-logo"
-                            onError={e => { e.currentTarget.style.display = "none"; }}
-                        />
-                        <div className="digital-band-text-block">
-                            <span className="digital-band-tagline">A Government of India Initiative</span>
-                            <span className="digital-band-sub">Powered by Digital India Programme</span>
-                        </div>
-                    </div>
-                    <div className="digital-band-right">
-                        <div className="nic-credit-block">
-                            <i className="bi bi-server" aria-hidden="true" />
-                            <div>
-                                <span className="nic-label">Website hosted by</span>
-                                <a
-                                    href="https://www.nic.in"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="nic-link"
-                                >National Informatics Centre (NIC)</a>
-                            </div>
-                        </div>
-                        <div className="nic-credit-block">
-                            <i className="bi bi-code-slash" aria-hidden="true" />
-                            <div>
-                                <span className="nic-label">Designed &amp; Developed by</span>
-                                <span className="nic-dev-name">Akiko ShermanInfotech Pvt. Ltd.</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             {/* ── Bottom Bar ────────────────────────────────── */}
             <div className="footer-bottom-bar">

@@ -17,10 +17,10 @@ const barData = [
 ];
 
 const donutData = [
-    { name: "Dealers",   value: 38, color: "#4C51BF" },
-    { name: "Users",     value: 27, color: "#0BC5EA" },
-    { name: "Smugglers", value: 22, color: "#ED8936" },
-    { name: "Couriers",  value: 13, color: "#FC8181" },
+    { name: "Dealers",   value: 38, color: "#c8a84b" },
+    { name: "Users",     value: 27, color: "#3a6d9e" },
+    { name: "Smugglers", value: 22, color: "#a07c30" },
+    { name: "Couriers",  value: 13, color: "#1a4d78" },
 ];
 
 // ── Custom bar tooltip ──────────────────────────────────────
@@ -118,7 +118,7 @@ export default function EnforcementAnalytics() {
                             val2026="3,842"
                             valTotal="14,285"
                             unit=" KG"
-                            color="blue"
+                            color="gold"
                         />
                         <StatCard
                             icon="bi-file-earmark-text"
@@ -126,7 +126,7 @@ export default function EnforcementAnalytics() {
                             val2026="684"
                             valTotal="2,840"
                             unit=""
-                            color="purple"
+                            color="gold"
                         />
                         <StatCard
                             icon="bi-people"
@@ -134,7 +134,7 @@ export default function EnforcementAnalytics() {
                             val2026="1,247"
                             valTotal="5,192"
                             unit=""
-                            color="teal"
+                            color="gold"
                         />
                     </div>
 
@@ -164,7 +164,7 @@ export default function EnforcementAnalytics() {
                                     <Tooltip content={<BarTooltip />} cursor={{ fill: "rgba(200,168,75,0.08)" }} />
                                     <Bar
                                         dataKey="arrests"
-                                        fill="#4C51BF"
+                                        fill="#c8a84b"
                                         radius={[4, 4, 0, 0]}
                                         isAnimationActive
                                         animationBegin={0}

@@ -178,10 +178,10 @@
     }
 }
 
-// ── 1. HERO — Dark two-column: galaxy card + alerts ────────
+// ── 1. HERO ───────────────────────────────────────────────
 .hero-dark {
-    background: linear-gradient(140deg, $navy-900 0%, #0d1f38 60%, $navy-800 100%);
-    padding: 36px 0 32px;
+    background: $navy-900;
+    padding: 32px 0 28px;
     position: relative;
     overflow: hidden;
 
@@ -189,62 +189,81 @@
         content: "";
         position: absolute;
         inset: 0;
-        background-image: radial-gradient(circle, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-        background-size: 30px 30px;
+        background-image: radial-gradient(circle, rgba(255,255,255,0.018) 1px, transparent 1px);
+        background-size: 28px 28px;
         pointer-events: none;
+        z-index: 0;
     }
 
-    // subtle gold glow bottom-left
     &::after {
         content: "";
         position: absolute;
-        bottom: -80px;
-        left: -80px;
-        width: 400px;
-        height: 400px;
-        background: radial-gradient(circle, rgba($gold-500, 0.08) 0%, transparent 70%);
+        bottom: -100px;
+        left: -100px;
+        width: 480px;
+        height: 480px;
+        background: radial-gradient(circle, rgba($gold-500, 0.07) 0%, transparent 68%);
         pointer-events: none;
+        z-index: 0;
+    }
+}
+
+// ── Two-column grid layout ─────────────────────────────────
+.hero-layout {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 20px;
+    align-items: start;
+
+    @include respond(lg) {
+        grid-template-columns: 1fr 280px;
+        gap: 16px;
     }
 
     @include respond(md) {
-        padding: 36px 0;
+        grid-template-columns: 1fr;
     }
 }
 
-.hero-dark-inner {
-    position: relative;
-    z-index: 2;
-    padding-right: 290px; // carousel ends 290px from right → clears the alert circle content area
+.hero-carousel-col {
+    min-width: 0;
+}
 
-    @include respond(lg) {
-        padding-right: $space-5;
+.hero-alerts-col {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+
+    @include respond(md) {
+        display: none;
     }
 }
 
-// ── Galaxy image card (left) ──────────────────────────────
+// ── Carousel card ─────────────────────────────────────────
 .hero-galaxy-card {
     position: relative;
     border-radius: $radius-xl;
     overflow: hidden;
-    background: $navy-900;
+    background: #05111f;
     box-shadow:
-        0 0 0 1px rgba($gold-500, 0.15),
-        0 24px 80px rgba(0, 0, 0, 0.55),
-        0 4px 16px rgba(0, 0, 0, 0.3);
+        0 0 0 1px rgba($gold-500, 0.18),
+        0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
 .hgc-slides {
     position: relative;
     width: 100%;
-    aspect-ratio: 8/3; // matches actual banner dimensions (1521×570 ≈ 8:3)
-    background: $navy-900;
+    aspect-ratio: 8 / 3;
+    background: #05111f;
 }
 
 .hgc-slide {
     position: absolute;
     inset: 0;
     opacity: 0;
-    transition: opacity 1s ease;
+    transition: opacity 0.9s ease;
 
     &.active {
         opacity: 1;
@@ -256,7 +275,7 @@
         height: 100%;
         display: block;
         object-fit: contain;
-        background: $navy-900;
+        object-position: center;
     }
 }
 
@@ -265,266 +284,141 @@
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 80px $space-6 $space-5;
-    background: linear-gradient(to top, rgba($navy-900, 0.96) 0%, rgba($navy-900, 0.45) 60%, transparent 100%);
+    padding: 40px $space-5 44px;
+    background: linear-gradient(
+        to top,
+        rgba(#05111f, 0.82) 0%,
+        rgba(#05111f, 0.3) 55%,
+        transparent 100%
+    );
     z-index: 2;
+    pointer-events: none;
+}
+
+.hgc-caption {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 5px;
+    background: rgba(#05111f, 0.62);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba($white, 0.1);
+    border-radius: $radius-md;
+    padding: $space-3 $space-4;
+    max-width: 52%;
+    pointer-events: auto;
 }
 
 .hgc-badge {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: rgba($gold-500, 0.18);
-    border: 1px solid rgba($gold-400, 0.38);
+    background: rgba($gold-500, 0.15);
+    border: 1px solid rgba($gold-400, 0.35);
     color: $gold-300;
     font-family: $font-heading;
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     font-weight: 700;
-    letter-spacing: 1.8px;
+    letter-spacing: 2px;
     text-transform: uppercase;
     padding: 4px 12px;
     border-radius: $radius-full;
-    margin-bottom: $space-2;
-    backdrop-filter: blur(6px);
+    margin-bottom: 0;
+    backdrop-filter: blur(0);
 }
 
 .hgc-slide-title {
     font-family: $font-heading;
-    font-size: clamp(1rem, 2vw, 1.35rem);
-    font-weight: 700;
+    font-size: clamp(1rem, 1.8vw, 1.4rem);
+    font-weight: 800;
     color: $white;
-    line-height: 1.35;
-    margin: 0;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    line-height: 1.25;
+    margin: 0 0 $space-2;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+    letter-spacing: 0.3px;
 }
 
-.hgc-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 5;
-    width: 40px;
-    height: 40px;
-    background: rgba($white, 0.08);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba($white, 0.18);
-    border-radius: 50%;
-    display: flex;
+.hgc-slide-desc {
+    font-size: clamp(0.68rem, 0.95vw, 0.78rem);
+    color: rgba($white, 0.72);
+    line-height: 1.55;
+    margin: 0 0 $space-3;
+    max-width: 480px;
+}
+
+.hgc-cta {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: $white;
-    font-size: 0.95rem;
-    transition: all $transition-fast;
+    gap: 8px;
+    background: $gold-500;
+    color: $navy-900;
+    font-family: $font-heading;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 7px 18px;
+    border-radius: $radius-full;
+    text-decoration: none;
+    transition: background $transition-fast, transform $transition-fast;
 
     &:hover {
-        background: rgba($white, 0.18);
-        border-color: rgba($white, 0.4);
-        transform: translateY(-50%) scale(1.05);
+        background: $gold-400;
+        transform: translateY(-1px);
+        color: $navy-900;
     }
-}
 
-.hgc-prev {
-    left: 14px;
-}
-
-.hgc-next {
-    right: 14px;
+    i { font-size: 0.7rem; }
 }
 
 .hgc-bottom {
     position: absolute;
     bottom: 16px;
-    right: 16px;
+    left: $space-6;
+    right: $space-4;
     z-index: 5;
     display: flex;
     align-items: center;
-    gap: $space-3;
+    gap: $space-4;
+}
+
+.hgc-counter {
+    display: flex;
+    align-items: baseline;
+    gap: 3px;
+    font-family: $font-heading;
+    flex-shrink: 0;
+}
+
+.hgc-count-cur {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: $gold-400;
+    line-height: 1;
+}
+
+.hgc-count-sep {
+    font-size: 0.75rem;
+    color: rgba($white, 0.3);
+    margin: 0 1px;
+}
+
+.hgc-count-tot {
+    font-size: 0.7rem;
+    color: rgba($white, 0.4);
 }
 
 .hgc-dots {
     display: flex;
     gap: 5px;
     align-items: center;
+    flex: 1;
 }
 
 .hgc-dot {
     width: 6px;
     height: 6px;
     border-radius: $radius-full;
-    background: rgba($white, 0.35);
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    transition: all $transition-base;
-
-    &.active {
-        background: $white;
-        width: 20px;
-        border-radius: 3px;
-    }
-}
-
-.hgc-play {
-    width: 28px;
-    height: 28px;
-    background: rgba($white, 0.08);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba($white, 0.18);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: $white;
-    font-size: 0.62rem;
-    transition: background $transition-fast;
-
-    &:hover {
-        background: rgba($white, 0.2);
-    }
-}
-
-// ── Glassmorphism half-circle: absolutely positioned, full section height ──
-.hero-semicircle {
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 500px;
-    z-index: 1; // behind the carousel (z-index: 2)
-
-    border-radius: 50% 0 0 50%; // D-shape: curved left, flat right
-    background: rgba($white, 0.055);
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
-    border: 1px solid rgba($white, 0.13);
-    border-right: none;
-    box-shadow:
-        inset 0 0 90px rgba($white, 0.022),
-        -10px 0 50px rgba(0, 0, 0, 0.22);
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: $space-5;
-    padding: 20px 24px 20px 220px; // left padding clears the elliptical curve
-    text-align: center;
-
-    @include respond(lg) {
-        display: none;
-    }
-
-    // hide on mobile, carousel takes full width
-}
-
-.hsc-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: $space-3;
-    transition: opacity 0.38s ease, transform 0.38s ease;
-}
-
-.hsc-text {
-    font-family: $font-heading;
-    font-size: clamp(0.95rem, 1.55vw, 1.22rem);
-    font-weight: 700;
-    color: $white;
-    line-height: 1.58;
-    margin: 0;
-}
-
-.hsc-date {
-    font-size: 0.7rem;
-    color: rgba($white, 0.38);
-    display: flex;
-    align-items: center;
-    gap: 4px;
-
-    i {
-        font-size: 0.62rem;
-    }
-}
-
-.hsc-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: $font-heading;
-    font-size: 0.76rem;
-    font-weight: 700;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    padding: 10px 24px;
-    border-radius: $radius-full;
-    background: rgba($gold-500, 0.12);
-    border: 1.5px solid rgba($gold-400, 0.38);
-    color: $gold-300;
-    text-decoration: none;
-    transition: all $transition-fast;
-    flex-shrink: 0;
-
-    &:hover {
-        background: rgba($gold-500, 0.24);
-        border-color: rgba($gold-400, 0.65);
-        color: $gold-300;
-        transform: translateY(-1px);
-    }
-
-    i {
-        font-size: 0.7rem;
-    }
-}
-
-.hsc-pips {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-}
-
-// ── Shared fade-transition helpers ───────────────────────
-.har-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.har-hidden {
-    opacity: 0;
-    transform: translateY(10px);
-}
-
-// Alert category badge
-.har-cat {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-family: $font-heading;
-    font-size: 0.62rem;
-    font-weight: 700;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-    padding: 3px 10px;
-    border-radius: $radius-sm;
-    background: rgba($white, 0.08);
-    color: rgba($white, 0.65);
-
-    &--alert {
-        background: rgba($red-500, 0.2);
-        color: #f08080;
-
-        i {
-            font-size: 0.58rem;
-        }
-    }
-}
-
-.har-pip {
-    width: 6px;
-    height: 6px;
-    border-radius: $radius-full;
-    background: rgba($white, 0.2);
+    background: rgba($white, 0.28);
     border: none;
     cursor: pointer;
     padding: 0;
@@ -532,16 +426,289 @@
 
     &.active {
         background: $gold-400;
-        width: 18px;
+        width: 22px;
         border-radius: 3px;
     }
 
     &:hover:not(.active) {
-        background: rgba($white, 0.45);
+        background: rgba($white, 0.55);
     }
 }
 
-// ── (legacy hero classes removed) ────────────────────────
+.hgc-play {
+    width: 30px;
+    height: 30px;
+    background: rgba($white, 0.07);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba($white, 0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: $white;
+    font-size: 0.62rem;
+    flex-shrink: 0;
+    transition: background $transition-fast, border-color $transition-fast;
+
+    &:hover {
+        background: rgba($white, 0.16);
+        border-color: rgba($white, 0.35);
+    }
+}
+
+// ── Alerts Panel (right column) ───────────────────────────
+.hero-alerts-panel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    background: rgba(#081a2e, 0.92);
+    border: 1px solid rgba($gold-500, 0.2);
+    border-top: 3px solid $gold-500;
+    border-radius: $radius-xl;
+    overflow: hidden;
+    backdrop-filter: blur(16px);
+}
+
+.hap-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $space-4 $space-4 $space-3;
+    border-bottom: 1px solid rgba($white, 0.06);
+    flex-shrink: 0;
+}
+
+.hap-header-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.hap-bell {
+    color: $gold-500;
+    font-size: 0.85rem;
+}
+
+.hap-header-label {
+    font-family: $font-heading;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: $white;
+}
+
+.hap-view-all {
+    font-family: $font-heading;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: $gold-500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: color $transition-fast;
+
+    &:hover {
+        color: $gold-300;
+    }
+
+    i { font-size: 0.58rem; }
+}
+
+// Featured rotating alert
+.hap-featured {
+    padding: $space-5 $space-4;
+    background: rgba($gold-500, 0.04);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hap-featured-inner {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+    flex: 1;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.hap-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hap-hidden {
+    opacity: 0;
+    transform: translateY(8px);
+}
+
+.hap-cat {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: $font-heading;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: $radius-sm;
+    background: rgba($white, 0.08);
+    color: rgba($white, 0.6);
+    width: fit-content;
+
+    &--alert {
+        background: rgba($red-500, 0.18);
+        color: #f08080;
+
+        i { font-size: 0.55rem; }
+    }
+}
+
+.hap-featured-title {
+    font-family: $font-heading;
+    font-size: 1rem;
+    font-weight: 700;
+    color: $white;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.hap-featured-date {
+    font-size: 0.65rem;
+    color: rgba($white, 0.35);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    i { font-size: 0.6rem; }
+}
+
+.hap-pips {
+    display: flex;
+    gap: 4px;
+    margin-top: $space-3;
+}
+
+// Shared pip dots (reused in featured alert)
+.har-pip {
+    width: 5px;
+    height: 5px;
+    border-radius: $radius-full;
+    background: rgba($white, 0.18);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: all $transition-base;
+
+    &.active {
+        background: $gold-500;
+        width: 16px;
+        border-radius: 3px;
+    }
+
+    &:hover:not(.active) {
+        background: rgba($white, 0.4);
+    }
+}
+
+.hap-divider {
+    height: 1px;
+    background: rgba($white, 0.06);
+    flex-shrink: 0;
+}
+
+// News list
+.hap-list {
+    flex: 1;
+    overflow: hidden;
+    padding: $space-2 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.hap-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: $space-3 $space-4;
+    border-bottom: 1px solid rgba($white, 0.05);
+    transition: background $transition-fast;
+    cursor: default;
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    &:hover {
+        background: rgba($white, 0.03);
+    }
+}
+
+.hap-item-cat {
+    font-family: $font-heading;
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: $gold-500;
+
+    &--alert {
+        color: #f08080;
+    }
+}
+
+.hap-item-title {
+    font-size: 0.78rem;
+    color: rgba($white, 0.82);
+    line-height: 1.45;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.hap-item-date {
+    font-size: 0.62rem;
+    color: rgba($white, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    i { font-size: 0.58rem; }
+}
+
+.hap-see-all {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: $space-3 $space-4;
+    background: rgba($gold-500, 0.08);
+    border-top: 1px solid rgba($gold-500, 0.18);
+    font-family: $font-heading;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: $gold-400;
+    text-decoration: none;
+    flex-shrink: 0;
+    transition: background $transition-fast, color $transition-fast;
+
+    &:hover {
+        background: rgba($gold-500, 0.16);
+        color: $gold-300;
+    }
+
+    i { font-size: 0.62rem; }
+}
 
 .hero-v2-badge {
     display: inline-flex;
@@ -1308,65 +1475,20 @@
 
 .mission-card {
     background: $navy-700;
-    border: 1px solid rgba($white, 0.08);
+    border: 1px solid rgba($white, 0.1);
+    border-top: 3px solid $gold-500;
     border-radius: $radius-lg;
     padding: $space-6;
-    position: relative;
-    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
     @include card-hover;
-    border-top: 4px solid;
 
-    &--gold {
-        border-top-color: $gold-500;
-
-        .mc-icon-box {
-            background: rgba($gold-500, 0.18);
-            color: $gold-400;
-        }
-
-        .mc-label {
-            color: $gold-400;
-        }
+    .mc-icon-box {
+        background: rgba($gold-500, 0.12);
+        color: $gold-400;
     }
 
-    &--navy {
-        border-top-color: $navy-400;
-
-        .mc-icon-box {
-            background: rgba($navy-400, 0.25);
-            color: $gold-300;
-        }
-
-        .mc-label {
-            color: $gold-300;
-        }
-    }
-
-    &--red {
-        border-top-color: $red-400;
-
-        .mc-icon-box {
-            background: rgba($red-500, 0.2);
-            color: $red-400;
-        }
-
-        .mc-label {
-            color: $red-400;
-        }
-    }
-
-    // Background watermark icon
-    &::before {
-        content: '';
-        position: absolute;
-        bottom: -20px;
-        right: -20px;
-        width: 120px;
-        height: 120px;
-        background: currentColor;
-        opacity: 0.03;
-        border-radius: $radius-xl;
-        transform: rotate(15deg);
+    .mc-label {
+        color: $gold-400;
     }
 }
 
@@ -1948,42 +2070,28 @@
     gap: $space-3;
     padding: $space-5 $space-4;
     background: $navy-700;
-    border: 1px solid rgba($white, 0.08);
+    border: 1px solid rgba($white, 0.1);
+    border-top: 2px solid $gold-500;
     border-radius: $radius-lg;
     text-align: center;
-    border-top: 3px solid;
-    @include card-hover;
     text-decoration: none;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+    transition: background $transition-fast, transform $transition-fast, box-shadow $transition-fast;
+
+    &:hover {
+        background: $navy-600;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+
+        .qt-icon {
+            transform: scale(1.08);
+            background: rgba($gold-500, 0.22);
+        }
+    }
 
     @include respond(sm) {
         padding: $space-4 $space-3;
     }
-
-    $colors: (
-        red: ($red-500, rgba($red-500, 0.18), rgba($red-500, 0.25)),
-        gold: ($gold-500, rgba($gold-500, 0.18), rgba($gold-500, 0.25)),
-        navy: ($navy-400, rgba($navy-400, 0.25), rgba($navy-400, 0.35)),
-        green: (#16a34a, rgba(22, 163, 74, 0.18), rgba(22, 163, 74, 0.25)),
-        blue: (#2563eb, rgba(37, 99, 235, 0.18), rgba(37, 99, 235, 0.25)),
-        purple: (#7c3aed, rgba(124, 58, 237, 0.18), rgba(124, 58, 237, 0.25)),
-        orange: (#ea580c, rgba(234, 88, 12, 0.18), rgba(234, 88, 12, 0.25)),
-        teal: (#0d9488, rgba(13, 148, 136, 0.18), rgba(13, 148, 136, 0.25)),
-    );
-
-@each $name, $vals in $colors {
-    &.qt--#{$name} {
-        border-top-color: nth($vals, 1);
-
-        .qt-icon {
-            background: nth($vals, 2);
-            color: nth($vals, 1);
-        }
-
-        &:hover {
-            background: nth($vals, 3);
-        }
-    }
-}
 }
 
 .qt-icon {
@@ -1994,11 +2102,9 @@
     align-items: center;
     justify-content: center;
     font-size: 1.3rem;
-    transition: transform $transition-base;
-
-    .quick-tile:hover & {
-        transform: scale(1.08);
-    }
+    background: rgba($gold-500, 0.12);
+    color: $gold-400;
+    transition: transform $transition-base, background $transition-base;
 }
 
 .qt-label {

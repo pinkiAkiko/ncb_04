@@ -83,7 +83,6 @@ const missionItems = [
         label: "Our Mission",
         heading: "Zero Tolerance\nto Drug Trade",
         body: "Stringent enforcement of the NDPS Act to dismantle illicit networks and prevent the flow of narcotics into India, coordinating with all state agencies and international bodies.",
-        color: "gold",
         path: "/motto-mission-vision",
     },
     {
@@ -91,7 +90,6 @@ const missionItems = [
         label: "Our Goal",
         heading: "A Drug-Free\nIndia",
         body: "To reduce the demand and supply of drugs in India through comprehensive enforcement, rehabilitation support, international cooperation, and community-driven awareness campaigns.",
-        color: "navy",
         path: "/motto-mission-vision",
     },
     {
@@ -99,7 +97,6 @@ const missionItems = [
         label: "Our Vision",
         heading: "Resilient &\nIntelligence-Led",
         body: "To be a world-class narcotics control agency leveraging technology, data analytics, and inter-agency coordination to stay ahead of evolving drug trafficking threats.",
-        color: "red",
         path: "/motto-mission-vision",
     },
 ];
@@ -338,72 +335,81 @@ function Home() {
         <div className="home-page">
 
             {/* ═══════════════════════════════════════════════════
-                1. HERO — Dark two-column: galaxy image + alerts
+                1. HERO — Two-column: carousel + alerts panel
                 ═══════════════════════════════════════════════════ */}
             <section className="hero-dark" aria-label="NCB Hero">
+                <div className="container hero-layout">
 
-                {/* ── Glassmorphism half-circle: full section height, z-index 1 ── */}
-                <div className="hero-semicircle">
-                    <div className={`hsc-content ${alertVisible ? "har-visible" : "har-hidden"}`}>
-                        <span className={`har-cat ${latestNews[alertIdx].isAlert ? "har-cat--alert" : ""}`}>
-                            {latestNews[alertIdx].isAlert && <i className="bi bi-exclamation-triangle-fill" />}
-                            {latestNews[alertIdx].cat}
-                        </span>
-                        <p className="hsc-text">{latestNews[alertIdx].title}</p>
-                        <span className="hsc-date">
-                            <i className="bi bi-calendar3" /> {latestNews[alertIdx].date}
-                        </span>
-                    </div>
-                    <Link to="/media/latest-news" className="hsc-btn">
-                        See All Alerts <i className="bi bi-arrow-right" />
-                    </Link>
-                    <div className="hsc-pips">
-                        {latestNews.map((_, i) => (
-                            <button
-                                key={i}
-                                className={`har-pip ${i === alertIdx ? "active" : ""}`}
-                                onClick={() => { setAlertVisible(false); setTimeout(() => { setAlertIdx(i); setAlertVisible(true); }, 420); }}
-                                aria-label={`Alert ${i + 1}`}
-                            />
-                        ))}
-                    </div>
-                </div>
-
-                {/* ── Carousel card: z-index 2, laps slightly over the circle ── */}
-                <div className="container hero-dark-inner">
-                    <div className="hero-galaxy-card">
-                        <div className="hgc-slides">
-                            {slides.map((s, i) => (
-                                <div key={s.id} className={`hgc-slide ${i === slideIdx ? "active" : ""}`}>
-                                    <img src={s.image} alt={s.badge} />
-                                    <div className="hgc-overlay">
-                                        <span className="hgc-badge">{s.badge}</span>
-                                        <h3 className="hgc-slide-title">{s.title.replace("\n", " ")}</h3>
+                    {/* ── LEFT: Image Carousel ── */}
+                    <div className="hero-carousel-col">
+                        <div className="hero-galaxy-card">
+                            <div className="hgc-slides">
+                                {slides.map((s, i) => (
+                                    <div key={s.id} className={`hgc-slide ${i === slideIdx ? "active" : ""}`}>
+                                        <img src={s.image} alt={s.badge} />
                                     </div>
-                                </div>
-                            ))}
-                        </div>
-                        <button className="hgc-arrow hgc-prev" onClick={prevSlide} aria-label="Previous">
-                            <i className="bi bi-chevron-left" />
-                        </button>
-                        <button className="hgc-arrow hgc-next" onClick={nextSlide} aria-label="Next">
-                            <i className="bi bi-chevron-right" />
-                        </button>
-                        <div className="hgc-bottom">
-                            <div className="hgc-dots">
-                                {slides.map((_, i) => (
-                                    <button key={i} className={`hgc-dot ${i === slideIdx ? "active" : ""}`}
-                                        onClick={() => goToSlide(i)} aria-label={`Slide ${i + 1}`} />
                                 ))}
                             </div>
-                            <button className="hgc-play" onClick={() => setIsPlaying(p => !p)}
-                                aria-label={isPlaying ? "Pause" : "Play"}>
-                                <i className={`bi bi-${isPlaying ? "pause-fill" : "play-fill"}`} />
-                            </button>
+                            <div className="hgc-bottom">
+                                <div className="hgc-counter">
+                                    <span className="hgc-count-cur">{String(slideIdx + 1).padStart(2, '0')}</span>
+                                    <span className="hgc-count-sep">/</span>
+                                    <span className="hgc-count-tot">{String(slides.length).padStart(2, '0')}</span>
+                                </div>
+                                <div className="hgc-dots">
+                                    {slides.map((_, i) => (
+                                        <button key={i} className={`hgc-dot ${i === slideIdx ? "active" : ""}`}
+                                            onClick={() => goToSlide(i)} aria-label={`Slide ${i + 1}`} />
+                                    ))}
+                                </div>
+                                <button className="hgc-play" onClick={() => setIsPlaying(p => !p)}
+                                    aria-label={isPlaying ? "Pause" : "Play"}>
+                                    <i className={`bi bi-${isPlaying ? "pause-fill" : "play-fill"}`} />
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
 
+                    {/* ── RIGHT: Alerts Panel ── */}
+                    <div className="hero-alerts-col">
+                        <div className="hero-alerts-panel">
+                            <div className="hap-header">
+                                <div className="hap-header-left">
+                                    <i className="bi bi-bell-fill hap-bell" />
+                                    <span className="hap-header-label">Latest Updates</span>
+                                </div>
+                                <Link to="/media/latest-news" className="hap-view-all">
+                                    All <i className="bi bi-arrow-right" />
+                                </Link>
+                            </div>
+
+                            <div className="hap-featured">
+                                <div className={`hap-featured-inner ${alertVisible ? "hap-visible" : "hap-hidden"}`}>
+                                    <span className={`hap-cat ${latestNews[alertIdx].isAlert ? "hap-cat--alert" : ""}`}>
+                                        {latestNews[alertIdx].isAlert && <i className="bi bi-exclamation-triangle-fill" />}
+                                        {latestNews[alertIdx].cat}
+                                    </span>
+                                    <p className="hap-featured-title">{latestNews[alertIdx].title}</p>
+                                    <span className="hap-featured-date">
+                                        <i className="bi bi-calendar3" /> {latestNews[alertIdx].date}
+                                    </span>
+                                </div>
+                                <div className="hap-pips">
+                                    {latestNews.map((_, i) => (
+                                        <button key={i} className={`har-pip ${i === alertIdx ? "active" : ""}`}
+                                            onClick={() => { setAlertVisible(false); setTimeout(() => { setAlertIdx(i); setAlertVisible(true); }, 420); }}
+                                            aria-label={`Alert ${i + 1}`} />
+                                    ))}
+                                </div>
+                            </div>
+
+                            <Link to="/media/latest-news" className="hap-see-all">
+                                See All Alerts <i className="bi bi-arrow-right" />
+                            </Link>
+                        </div>
+                    </div>
+
+                </div>
             </section>
 
             {/* ═══════════════════════════════════════════════════
@@ -419,7 +425,7 @@ function Home() {
 
                     <div className="mission-cards-grid">
                         {missionItems.map((item) => (
-                            <div key={item.label} className={`mission-card mission-card--${item.color} reveal`}>
+                            <div key={item.label} className="mission-card reveal">
                                 <div className="mc-icon-box">
                                     <i className={`bi ${item.icon}`} />
                                 </div>
@@ -665,7 +671,7 @@ function Home() {
             {/* ═══════════════════════════════════════════════════
                 7. QUICK ACCESS TILES
                 ═══════════════════════════════════════════════════ */}
-            <section className="quick-access-section page-section page-section--gray">
+            <section className="quick-access-section page-section page-section--dark">
                 <div className="container">
                     <div className="section-header-row center">
                         <span className="section-label">Services</span>
@@ -675,16 +681,16 @@ function Home() {
 
                     <div className="quick-tiles-grid" ref={tilesRef}>
                         {[
-                            { icon: "bi-shield-exclamation", label: "Red Corner Notice", path: "/red-corner-notice", color: "red" },
-                            { icon: "bi-file-earmark-text", label: "RTI", path: "/rti", color: "gold" },
-                            { icon: "bi-hammer", label: "Tenders & Auctions", path: "/tenders", color: "navy" },
-                            { icon: "bi-geo-alt-fill", label: "Office Locator", path: "/office-locator", color: "green" },
-                            { icon: "bi-person-check", label: "Career", path: "/career/vacancies", color: "blue" },
-                            { icon: "bi-people-fill", label: "Grievance", path: "/grievance", color: "purple" },
-                            { icon: "bi-book-fill", label: "Legislation", path: "/legislations", color: "orange" },
-                            { icon: "bi-headset", label: "Contact", path: "/contact", color: "teal" },
+                            { icon: "bi-shield-exclamation", label: "Red Corner Notice", path: "/red-corner-notice" },
+                            { icon: "bi-file-earmark-text", label: "RTI", path: "/rti" },
+                            { icon: "bi-hammer", label: "Tenders & Auctions", path: "/tenders" },
+                            { icon: "bi-geo-alt-fill", label: "Office Locator", path: "/office-locator" },
+                            { icon: "bi-person-check", label: "Career", path: "/career/vacancies" },
+                            { icon: "bi-people-fill", label: "Grievance", path: "/grievance" },
+                            { icon: "bi-book-fill", label: "Legislation", path: "/legislations" },
+                            { icon: "bi-headset", label: "Contact", path: "/contact" },
                         ].map(tile => (
-                            <Link key={tile.label} to={tile.path} className={`quick-tile qt--${tile.color} reveal`}>
+                            <Link key={tile.label} to={tile.path} className="quick-tile reveal">
                                 <div className="qt-icon"><i className={`bi ${tile.icon}`} /></div>
                                 <span className="qt-label">{tile.label}</span>
                             </Link>
