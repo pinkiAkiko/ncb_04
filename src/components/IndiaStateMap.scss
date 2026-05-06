@@ -1,0 +1,21 @@
+.india-state-map-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+
+    path[role="button"] {
+        outline: none;
+
+        &:hover {
+            filter: brightness(1.25) !important;
+            opacity: 1 !important;
+        }
+
+        &:focus-visible {
+            stroke: rgba(200, 168, 75, 0.9) !important;
+            stroke-width: 2 !important;
+        }
+    }
+}

@@ -1,19 +1,7 @@
 import { useState } from "react";
 import PageBanner from "../components/PageBanner";
+import { IndiaStateMap, ZONE_COLORS } from "../components/IndiaStateMap";
 import "./OurOfficers.scss";
-
-// Zone colours (mirror OfficeLocator)
-const ZONE_COLORS = {
-    north:     "#1a6eb0",
-    northwest: "#7b4fa3",
-    west:      "#2a9d5c",
-    central:   "#c07c1a",
-    east:      "#b03030",
-    northeast: "#16a085",
-    south:     "#b8860b",
-    southwest: "#c0392b",
-    andaman:   "#6c3483",
-};
 
 const zones = [
     {
@@ -95,109 +83,6 @@ const officersData = {
     ],
 };
 
-// Zone polygon paths (same viewBox 0 0 600 680 as OfficeLocator)
-const zonePaths = {
-    north:     "M195,72 L355,48 L415,56 L448,84 L442,118 L420,140 L390,158 L352,170 L315,178 L278,174 L250,165 L224,152 L208,138 L196,118 L192,95 Z",
-    northwest: "M192,95 L196,118 L208,138 L224,152 L222,170 L218,202 L218,238 L222,262 L198,268 L185,258 L178,240 L174,214 L174,182 L176,152 L182,128 Z",
-    west:      "M185,258 L198,268 L222,262 L218,295 L214,330 L210,365 L208,395 L205,418 L194,428 L182,418 L176,398 L174,368 L176,335 L178,305 L180,278 Z",
-    central:   "M222,262 L218,295 L218,330 L232,348 L258,360 L282,354 L302,342 L316,322 L316,295 L308,272 L290,258 L268,252 L244,252 Z",
-    east:      "M352,170 L390,158 L418,168 L434,190 L438,222 L430,252 L415,270 L393,285 L365,292 L340,288 L318,278 L310,260 L314,238 L326,215 L340,196 Z",
-    northeast: "M415,56 L448,84 L482,110 L512,148 L530,192 L544,235 L545,268 L530,282 L512,278 L490,265 L464,254 L438,244 L430,222 L434,190 L418,168 L415,148 L420,118 L435,96 Z",
-    southwest: "M214,370 L240,365 L265,368 L290,375 L310,390 L316,415 L305,435 L282,448 L258,452 L233,445 L215,432 L208,415 Z",
-    south:     "M208,415 L215,432 L233,445 L258,452 L282,448 L305,435 L318,420 L326,440 L322,465 L312,488 L296,510 L276,526 L256,540 L235,546 L214,542 L196,530 L183,510 L178,485 L176,458 L180,438 L192,426 Z",
-    andaman:   "M558,320 L566,320 L570,335 L565,348 L556,348 L552,335 Z",
-};
-
-const hqDots = {
-    north:     { x: 305, y: 148 },
-    northwest: { x: 196, y: 228 },
-    west:      { x: 198, y: 352 },
-    central:   { x: 270, y: 308 },
-    east:      { x: 390, y: 238 },
-    northeast: { x: 490, y: 212 },
-    southwest: { x: 258, y: 408 },
-    south:     { x: 244, y: 478 },
-    andaman:   { x: 560, y: 334 },
-};
-
-function OfficersMapSVG({ selectedZone, onZoneClick }) {
-    return (
-        <svg viewBox="0 0 600 680" className="officers-map-svg" aria-label="India NCB Zones Map">
-            <rect x="0" y="0" width="600" height="680" fill="rgba(14,42,71,0.9)" rx="12" />
-
-            {zones.map(zone => {
-                const path = zonePaths[zone.id];
-                const color = ZONE_COLORS[zone.id];
-                const isSelected = selectedZone?.id === zone.id;
-                if (!path) return null;
-                return (
-                    <g
-                        key={zone.id}
-                        onClick={() => onZoneClick(zone)}
-                        onKeyDown={e => e.key === "Enter" && onZoneClick(zone)}
-                        role="button"
-                        tabIndex={0}
-                        aria-label={`${zone.name} — click to see officers`}
-                        style={{ cursor: "pointer" }}
-                    >
-                        <path
-                            d={path}
-                            fill={isSelected ? color : `${color}88`}
-                            stroke={isSelected ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.25)"}
-                            strokeWidth={isSelected ? 2 : 0.8}
-                            style={{
-                                transition: "all 0.3s ease",
-                                filter: isSelected ? `drop-shadow(0 0 12px ${color}cc)` : "none",
-                            }}
-                        />
-                        <title>{zone.name}</title>
-                    </g>
-                );
-            })}
-
-            {zones.map(zone => {
-                const dot = hqDots[zone.id];
-                const color = ZONE_COLORS[zone.id];
-                const isSelected = selectedZone?.id === zone.id;
-                if (!dot) return null;
-                return (
-                    <g key={`d-${zone.id}`} style={{ pointerEvents: "none" }}>
-                        <circle
-                            cx={dot.x} cy={dot.y}
-                            r={isSelected ? 7 : 4}
-                            fill={isSelected ? "#fff" : color}
-                            stroke={isSelected ? color : "rgba(255,255,255,0.6)"}
-                            strokeWidth={isSelected ? 2.5 : 1.5}
-                            style={{ transition: "all 0.3s ease" }}
-                        />
-                        <text
-                            x={dot.x} y={dot.y - (isSelected ? 12 : 8)}
-                            textAnchor="middle"
-                            fontSize={isSelected ? "8.5" : "7"}
-                            fontFamily="Inter, sans-serif"
-                            fontWeight={isSelected ? "700" : "500"}
-                            fill={isSelected ? "#fff" : "rgba(255,255,255,0.7)"}
-                            style={{ transition: "all 0.3s ease" }}
-                        >
-                            {zone.hq}
-                        </text>
-                    </g>
-                );
-            })}
-
-            <path
-                d="M195,72 L355,48 L415,56 L448,84 L482,110 L512,148 L530,192 L544,235 L545,268 L530,282 L512,278 L490,265 L464,254 L438,244 L430,252 L415,270 L393,285 L365,292 L340,288 L318,278 L310,260 L316,295 L316,322 L302,342 L282,354 L258,360 L232,348 L218,330 L218,295 L214,330 L210,365 L208,395 L205,418 L194,428 L182,418 L176,398 L174,368 L176,335 L178,305 L180,278 L185,258 L198,268 L222,262 L218,238 L218,202 L222,170 L224,152 L208,138 L196,118 L192,95 L195,72 Z"
-                fill="none"
-                stroke="rgba(200,168,75,0.45)"
-                strokeWidth="1.2"
-            />
-
-            <text x="300" y="660" textAnchor="middle" fontSize="8" fill="rgba(255,255,255,0.35)" fontFamily="Inter,sans-serif">
-                Click a zone to view officers
-            </text>
-        </svg>
-    );
-}
 
 function OfficerCard({ officer, zoneColor }) {
     return (
@@ -243,7 +128,7 @@ function OurOfficers() {
                         {/* ── Left: Map ── */}
                         <div className="officers-map-col">
                             <div className="officers-map-wrap">
-                                <OfficersMapSVG selectedZone={selectedZone} onZoneClick={setSelectedZone} />
+                                <IndiaStateMap zones={zones} selectedZone={selectedZone} onZoneClick={setSelectedZone} />
                             </div>
                             {/* Zone selector pills */}
                             <div className="zone-pills">
