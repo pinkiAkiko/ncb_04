@@ -7,14 +7,29 @@
     gap: $space-8;
     align-items: center;
     margin-bottom: $space-9;
-    @include respond(md) { grid-template-columns: 1fr; gap: $space-6; }
-    @include respond(sm) { gap: $space-5; margin-bottom: $space-6; }
 
-    p { font-size: 0.9rem; color: $gray-500; line-height: 1.7; margin-bottom: $space-3; }
+    @include respond(md) {
+        grid-template-columns: 1fr;
+        gap: $space-6;
+    }
+
+    @include respond(sm) {
+        gap: $space-5;
+        margin-bottom: $space-6;
+    }
+
+    p {
+        font-size: 0.9rem;
+        color: $gray-500;
+        line-height: 1.7;
+        margin-bottom: $space-3;
+    }
 }
 
 .about-intro-img {
-    @include respond(md) { order: -1; }
+    @include respond(md) {
+        order: -1;
+    }
 }
 
 .about-img-frame {
@@ -22,19 +37,32 @@
     overflow: hidden;
     border: 4px solid $gray-200;
     box-shadow: $shadow-lg;
-    img { width: 100%; height: auto; display: block; }
+
+    img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
 }
 
-.about-cta-row { display: flex; gap: $space-3; flex-wrap: wrap; margin-top: $space-5; }
+.about-cta-row {
+    display: flex;
+    gap: $space-3;
+    flex-wrap: wrap;
+    margin-top: $space-5;
+}
 
-.about-btn-primary { @include gold-btn; }
+.about-btn-primary {
+    @include gold-btn;
+}
+
 .about-btn-outline {
     display: inline-flex;
     align-items: center;
     gap: $space-2;
     padding: $space-3 $space-5;
-    border: 2px solid $navy-700;
-    color: $navy-700;
+    border: 2px solid $gray-500;
+    color: $gray-500;
     font-family: $font-heading;
     font-weight: 700;
     font-size: 0.85rem;
@@ -42,17 +70,29 @@
     text-transform: uppercase;
     border-radius: $radius-sm;
     transition: all $transition-fast;
-    &:hover { background: $navy-700; color: $white; }
+
+    &:hover {
+        background: $navy-700;
+        color: $white;
+    }
 }
 
-.about-functions-section { margin-bottom: $space-9; }
+.about-functions-section {
+    margin-bottom: $space-9;
+}
 
 .functions-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: $space-4;
-    @include respond(lg) { grid-template-columns: repeat(2, 1fr); }
-    @include respond(sm) { grid-template-columns: 1fr; }
+
+    @include respond(lg) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond(sm) {
+        grid-template-columns: 1fr;
+    }
 }
 
 .function-card {
@@ -85,7 +125,11 @@
     margin-bottom: $space-2;
 }
 
-.fc-body { font-size: 0.82rem; color: $gray-500; line-height: 1.6; }
+.fc-body {
+    font-size: 0.82rem;
+    color: $gray-500;
+    line-height: 1.6;
+}
 
 // Motto section
 .about-motto-section {
@@ -93,19 +137,35 @@
     grid-template-columns: 1fr 1fr;
     gap: $space-8;
     align-items: center;
-    @include respond(md) { grid-template-columns: 1fr; gap: $space-5; }
-    @include respond(sm) { gap: $space-4; }
+
+    @include respond(md) {
+        grid-template-columns: 1fr;
+        gap: $space-5;
+    }
+
+    @include respond(sm) {
+        gap: $space-4;
+    }
 }
 
 .motto-img-wrap {
     border-radius: $radius-lg;
     overflow: hidden;
     box-shadow: $shadow-md;
-    img { width: 100%; height: auto; }
+
+    img {
+        width: 100%;
+        height: auto;
+    }
 }
 
 .motto-text {
-    p { font-size: 0.9rem; color: $gray-500; line-height: 1.7; margin-bottom: $space-4; }
+    p {
+        font-size: 0.9rem;
+        color: $gray-500;
+        line-height: 1.7;
+        margin-bottom: $space-4;
+    }
 }
 
 .motto-quote {
@@ -119,5 +179,8 @@
     margin-bottom: $space-4;
     font-style: normal;
     line-height: 1.6;
-    strong { color: $gold-400; }
+
+    strong {
+        color: $gold-400;
+    }
 }

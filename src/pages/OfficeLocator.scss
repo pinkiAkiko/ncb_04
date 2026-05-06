@@ -5,7 +5,10 @@
     display: grid;
     grid-template-columns: 240px 1fr;
     gap: $space-5;
-    @include respond(lg) { grid-template-columns: 1fr; }
+
+    @include respond(lg) {
+        grid-template-columns: 1fr;
+    }
 }
 
 // Sidebar
@@ -17,7 +20,10 @@
     height: fit-content;
     position: sticky;
     top: 80px;
-    @include respond(lg) { position: static; }
+
+    @include respond(lg) {
+        position: static;
+    }
 }
 
 .sidebar-heading {
@@ -32,7 +38,10 @@
     display: flex;
     align-items: center;
     gap: $space-2;
-    i { color: $gold-400; }
+
+    i {
+        color: $gold-400;
+    }
 }
 
 .zone-list {
@@ -43,7 +52,10 @@
         display: flex;
         overflow-x: auto;
         scrollbar-width: none;
-        &::-webkit-scrollbar { display: none; }
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
     }
 }
 
@@ -60,17 +72,36 @@
     transition: all $transition-fast;
     text-align: left;
 
-    @include respond(lg) { flex-shrink: 0; min-width: 150px; border-bottom: none; border-right: 1px solid rgba($white, 0.1); }
+    @include respond(lg) {
+        flex-shrink: 0;
+        min-width: 150px;
+        border-bottom: none;
+        border-right: 1px solid rgba($white, 0.1);
+    }
 
     &.active {
         background: rgba($gold-500, 0.08);
         border-left: 3px solid $gold-500;
-        .zlb-dot { background: $gold-500; box-shadow: 0 0 0 3px rgba($gold-500, 0.2); }
-        .zlb-name { color: $navy-800; font-weight: 700; }
-        @include respond(lg) { border-left: none; border-bottom: 3px solid $gold-500; }
+
+        .zlb-dot {
+            background: $gold-500;
+            box-shadow: 0 0 0 3px rgba($gold-500, 0.2);
+        }
+
+        .zlb-name {
+            color: $navy-800;
+            font-weight: 700;
+        }
+
+        @include respond(lg) {
+            border-left: none;
+            border-bottom: 3px solid $gold-500;
+        }
     }
 
-    &:hover:not(.active) { background: $gray-100; }
+    &:hover:not(.active) {
+        background: $gray-100;
+    }
 }
 
 .zlb-dot {
@@ -82,20 +113,47 @@
     transition: all $transition-fast;
 }
 
-.zlb-info { flex: 1; display: flex; flex-direction: column; gap: 1px; }
-.zlb-name { font-size: 0.82rem; color: $gray-700; font-family: $font-body; transition: color $transition-fast; }
-.zlb-hq { font-size: 0.7rem; color: $gray-400; }
+.zlb-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
 
-.zlb-arrow { font-size: 0.6rem; color: $gray-300; transition: color $transition-fast; .zone-list-btn.active & { color: $gold-500; } }
+.zlb-name {
+    font-size: 0.82rem;
+    color: $gray-700;
+    font-family: $font-body;
+    transition: color $transition-fast;
+}
+
+.zlb-hq {
+    font-size: 0.7rem;
+    color: $gray-400;
+}
+
+.zlb-arrow {
+    font-size: 0.6rem;
+    color: $gray-300;
+    transition: color $transition-fast;
+
+    .zone-list-btn.active & {
+        color: $gold-500;
+    }
+}
 
 // Map + detail layout
-.locator-main { }
+.locator-main {}
+
 .map-detail-row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.2fr 0.8fr;
     gap: $space-5;
     align-items: start;
-    @include respond(md) { grid-template-columns: 1fr; }
+
+    @include respond(md) {
+        grid-template-columns: 1fr;
+    }
 }
 
 // India Map SVG
@@ -119,14 +177,31 @@
 
     // Zone paths get hover treatment
     g[role="button"] {
-        &:hover path { opacity: 1 !important; filter: brightness(1.15) !important; }
-        &:focus { outline: none; path { stroke: $gold-300 !important; stroke-width: 2.5 !important; } }
+        &:hover path {
+            opacity: 1 !important;
+            filter: brightness(1.15) !important;
+        }
+
+        &:focus {
+            outline: none;
+
+            path {
+                stroke: $gold-300 !important;
+                stroke-width: 2.5 !important;
+            }
+        }
     }
 }
 
 // Legacy legend (now embedded in SVG)
-.map-legend { display: none; }
-.ml-item, .ml-dot { display: none; }
+.map-legend {
+    display: none;
+}
+
+.ml-item,
+.ml-dot {
+    display: none;
+}
 
 // Detail panel
 .zone-detail-panel {
@@ -165,9 +240,16 @@
     margin-bottom: 2px;
 }
 
-.zdp-hq { font-size: 0.8rem; color: rgba($white, 0.55); }
+.zdp-hq {
+    font-size: 0.8rem;
+    color: rgba($white, 0.55);
+}
 
-.zdp-states-section, .zdp-offices-section { padding: $space-4 $space-5; border-bottom: 1px solid $gray-100; }
+.zdp-states-section,
+.zdp-offices-section {
+    padding: $space-4 $space-5;
+    border-bottom: 1px solid $gray-100;
+}
 
 .zdp-section-heading {
     font-family: $font-heading;
@@ -180,10 +262,17 @@
     display: flex;
     align-items: center;
     gap: $space-2;
-    i { color: $gold-500; }
+
+    i {
+        color: $gold-500;
+    }
 }
 
-.zdp-states-wrap { display: flex; flex-wrap: wrap; gap: $space-2; }
+.zdp-states-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2;
+}
 
 .zdp-state-tag {
     background: $gray-100;
@@ -194,14 +283,22 @@
     border: 1px solid $gray-200;
 }
 
-.zdp-offices-list { display: flex; flex-direction: column; gap: $space-3; }
+.zdp-offices-list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+}
 
 .zdp-office-card {
     background: $gray-100;
     border-radius: $radius-md;
     padding: $space-3 $space-4;
     border-left: 3px solid $gray-200;
-    &.zdp-office--zonal { border-left-color: $gold-500; background: $gold-100; }
+
+    &.zdp-office--zonal {
+        border-left-color: $gold-500;
+        background: $gold-100;
+    }
 }
 
 .zoc-header {
@@ -225,11 +322,22 @@
     padding: 2px 8px;
     border-radius: $radius-sm;
 
-    &.zot--zonal { background: $gold-500; color: $navy-900; }
-    &.zot--sub   { background: $navy-700; color: $white; }
+    &.zot--zonal {
+        background: $gold-500;
+        color: $navy-900;
+    }
+
+    &.zot--sub {
+        background: $navy-700;
+        color: $white;
+    }
 }
 
-.zoc-contacts { display: flex; flex-direction: column; gap: $space-1; }
+.zoc-contacts {
+    display: flex;
+    flex-direction: column;
+    gap: $space-1;
+}
 
 .zoc-address {
     font-size: 0.78rem;
@@ -237,7 +345,13 @@
     display: flex;
     align-items: flex-start;
     gap: $space-2;
-    i { color: $gold-500; font-size: 0.7rem; margin-top: 2px; flex-shrink: 0; }
+
+    i {
+        color: $gold-500;
+        font-size: 0.7rem;
+        margin-top: 2px;
+        flex-shrink: 0;
+    }
 }
 
 .zoc-phone {
@@ -246,9 +360,30 @@
     display: flex;
     align-items: center;
     gap: $space-2;
-    i { color: $gold-500; font-size: 0.7rem; }
-    &:hover { color: $gold-600; text-decoration: underline; }
+
+    i {
+        color: $gold-500;
+        font-size: 0.7rem;
+    }
+
+    &:hover {
+        color: $gold-600;
+        text-decoration: underline;
+    }
 }
 
-@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-.animate-fade-in { animation: fadeIn 0.3s ease; }
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.3s ease;
+}

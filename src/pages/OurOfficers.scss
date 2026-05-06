@@ -1,22 +1,27 @@
 @use '../styles/variables' as *;
 @use '../styles/mixins' as *;
 
-.our-officers-page { }
+.our-officers-page {}
 
 .officers-layout {
     display: grid;
-    grid-template-columns: 420px 1fr;
+    grid-template-columns: 1.5fr 1fr;
     gap: $space-6;
     align-items: start;
 
-    @include respond(lg) { grid-template-columns: 1fr; }
+    @include respond(lg) {
+        grid-template-columns: 1fr;
+    }
 }
 
 // ── Left: Map column ──────────────────────────────────────
 .officers-map-col {
     position: sticky;
     top: 90px;
-    @include respond(lg) { position: static; }
+
+    @include respond(lg) {
+        position: static;
+    }
 }
 
 .officers-map-wrap {
@@ -34,8 +39,19 @@
     display: block;
 
     g[role="button"] {
-        &:hover path { opacity: 1 !important; filter: brightness(1.2) !important; }
-        &:focus { outline: none; path { stroke: $gold-300 !important; stroke-width: 2.5 !important; } }
+        &:hover path {
+            opacity: 1 !important;
+            filter: brightness(1.2) !important;
+        }
+
+        &:focus {
+            outline: none;
+
+            path {
+                stroke: $gold-300 !important;
+                stroke-width: 2.5 !important;
+            }
+        }
     }
 }
 
@@ -43,6 +59,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: $space-2;
+    padding: 0 0 $space-4;
 }
 
 .zone-pill {
@@ -57,7 +74,9 @@
     transition: all $transition-fast;
     white-space: nowrap;
 
-    &:not(.active):hover { opacity: 0.75; }
+    &:not(.active):hover {
+        opacity: 0.75;
+    }
 }
 
 // ── Right: Officers panel ─────────────────────────────────
@@ -99,7 +118,10 @@
     margin-bottom: 2px;
 }
 
-.oph-subtitle { font-size: 0.8rem; color: $gray-500; }
+.oph-subtitle {
+    font-size: 0.8rem;
+    color: $gray-500;
+}
 
 .oph-count {
     margin-left: auto;
@@ -146,8 +168,13 @@
     border-bottom: 1px solid $gray-100;
     transition: background $transition-fast;
 
-    &:last-child { border-bottom: none; }
-    &:hover { background: $gray-100; }
+    &:last-child {
+        border-bottom: none;
+    }
+
+    &:hover {
+        background: $gray-100;
+    }
 }
 
 .oc-avatar {
@@ -168,7 +195,9 @@
     }
 }
 
-.oc-info { flex: 1; }
+.oc-info {
+    flex: 1;
+}
 
 .oc-name {
     font-family: $font-heading;
@@ -193,7 +222,12 @@
     display: flex;
     align-items: flex-start;
     gap: 5px;
-    i { color: $gold-500; margin-top: 2px; flex-shrink: 0; }
+
+    i {
+        color: $gold-500;
+        margin-top: 2px;
+        flex-shrink: 0;
+    }
 }
 
 .oc-contacts {
@@ -209,8 +243,16 @@
     align-items: center;
     gap: 5px;
     text-decoration: none;
-    i { color: $gold-500; font-size: 0.72rem; }
-    &:hover { color: $gold-600; text-decoration: underline; }
+
+    i {
+        color: $gold-500;
+        font-size: 0.72rem;
+    }
+
+    &:hover {
+        color: $gold-600;
+        text-decoration: underline;
+    }
 }
 
 .officers-empty {
@@ -221,6 +263,11 @@
     color: $gray-400;
     gap: $space-3;
 
-    i { font-size: 2.5rem; }
-    p { font-size: 0.9rem; }
+    i {
+        font-size: 2.5rem;
+    }
+
+    p {
+        font-size: 0.9rem;
+    }
 }

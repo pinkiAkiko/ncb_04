@@ -23,7 +23,7 @@
     font-family: $font-heading;
     font-size: 1.8rem;
     font-weight: 700;
-    color: $navy-800;
+    color: $gold-500;
     margin-bottom: $space-3;
 }
 
@@ -44,6 +44,17 @@
     font-size: 0.82rem;
     padding: $space-3 $space-5;
     border-radius: $radius-full;
-    i { color: $gold-400; }
-    a { color: $gold-300; font-weight: 600; &:hover { color: $gold-100; } }
+
+    i {
+        color: $gold-400;
+    }
+
+    a {
+        color: $gold-300;
+        font-weight: 600;
+
+        &:hover {
+            color: $gold-100;
+        }
+    }
 }

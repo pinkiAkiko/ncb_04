@@ -172,7 +172,7 @@ const wantedPreview = [
 
 const socialEmbeds = [
     {
-        platform: "Twitter / X", icon: "bi-twitter-x", color: "#1DA1F2",
+        platform: "Twitter / X", icon: "bi-twitter-x", color: "#062544",
         profileUrl: "https://twitter.com/NCBIndia",
         custom: "twitter",
         tweets: [
@@ -182,12 +182,12 @@ const socialEmbeds = [
         ],
     },
     {
-        platform: "Facebook", icon: "bi-facebook", color: "#1877F2",
+        platform: "Facebook", icon: "bi-facebook", color: "#062544",
         profileUrl: "https://www.facebook.com/narcoticscontrolbureauindia",
         src: "https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fnarcoticscontrolbureauindia&tabs=timeline&width=340&height=380&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=false",
     },
     {
-        platform: "YouTube", icon: "bi-youtube", color: "#FF0000",
+        platform: "YouTube", icon: "bi-youtube", color: "#062544",
         profileUrl: "https://www.youtube.com/@NCBIndiaOfficial",
         custom: "youtube",
         videos: [
@@ -197,7 +197,7 @@ const socialEmbeds = [
         ],
     },
     {
-        platform: "Instagram", icon: "bi-instagram", color: "#E1306C",
+        platform: "Instagram", icon: "bi-instagram", color: "#062544",
         profileUrl: "https://www.instagram.com/ncb_india/",
         src: "https://www.instagram.com/ncb_india/embed/",
     },

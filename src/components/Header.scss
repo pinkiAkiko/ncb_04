@@ -3,8 +3,8 @@
 
 // ── Utility Bar ───────────────────────────────────────────
 .hdr-utility-bar {
-    background: $white;
-    border-bottom: 1px solid $gray-200;
+    background: $navy-900;
+    border-bottom: 1px solid rgba($white, 0.1);
     padding: 6px 0;
 
     @include respond(md) {
@@ -44,7 +44,7 @@
 }
 
 .utility-gov-tag {
-    color: $gray-600;
+    color: $gray-300;
     font-size: 0.72rem;
     font-family: $font-body;
     display: flex;
@@ -52,28 +52,28 @@
     gap: 4px;
 
     i {
-        color: $gold-600;
+        color: $gold-500;
     }
 }
 
 .utility-divider {
     width: 1px;
     height: 14px;
-    background: $gray-300;
+    background: rgba($white, 0.2);
 }
 
 .utility-link {
-    color: $gray-600;
+    color: $gray-300;
     font-size: 0.72rem;
     transition: color $transition-fast;
 
     &:hover {
-        color: $gold-600;
+        color: $gold-400;
     }
 }
 
 .utility-helpline {
-    color: $navy-700;
+    color: $white;
     font-size: 0.72rem;
     font-weight: 600;
     display: flex;
@@ -81,14 +81,14 @@
     gap: 4px;
     white-space: nowrap;
 
-    i { color: $gold-600; }
-    &:hover { color: $gold-700; }
+    i { color: $gold-500; }
+    &:hover { color: $gold-400; }
 }
 
 .utility-lang-btn {
-    background: $gray-100;
-    border: 1px solid $gray-300;
-    color: $navy-700;
+    background: rgba($white, 0.1);
+    border: 1px solid rgba($white, 0.2);
+    color: $white;
     font-size: 0.72rem;
     padding: 3px 10px;
     border-radius: $radius-full;
@@ -99,8 +99,8 @@
     transition: all $transition-fast;
 
     &:hover {
-        background: rgba($gold-500, 0.15);
-        color: $gold-400;
+        background: $gold-500;
+        color: $navy-900;
         border-color: $gold-500;
     }
 }
@@ -125,11 +125,11 @@
 // ── Mobile helpline strip (visible only on md and below) ──
 .hdr-mobile-helpline {
     display: none;
-    background: $white;
+    background: $navy-900;
     padding: 5px $space-4;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid $gray-200;
+    border-bottom: 1px solid rgba($white, 0.1);
 
     @include respond(md) { display: flex; }
 
@@ -403,22 +403,26 @@
 
 // ── Nav Row ───────────────────────────────────────────────
 .hdr-nav-ticker-row {
-    background: $white;
+    background: $navy-900;
     border-bottom: 3px solid $gold-500;
     position: relative;
     z-index: 900;
+    transition: background $transition-base;
 
     &.sticky {
-        position: sticky;
+        position: fixed;
+        width: 100%;
         top: 0;
+        left: 0;
         z-index: 999;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+        background: $white;
     }
 }
 
 // Main Nav
 .hdr-main-nav {
-    background: $white;
+    background: transparent;
 }
 
 .nav-inner {
@@ -439,9 +443,13 @@
         display: block;
         width: 24px;
         height: 2px;
-        background: $navy-700;
+        background: $white;
         border-radius: 2px;
         transition: all $transition-fast;
+    }
+
+    .hdr-nav-ticker-row.sticky & span {
+        background: $navy-700;
     }
 
     @include respond(lg) {
@@ -535,7 +543,7 @@
     font-size: 0.82rem;
     letter-spacing: 0.8px;
     text-transform: uppercase;
-    color: $navy-700;
+    color: $white;
     background: none;
     border: none;
     border-bottom: 3px solid transparent;
@@ -545,9 +553,19 @@
 
     &:hover,
     &.active {
-        color: $gold-600;
+        color: $gold-400;
         border-bottom-color: $gold-500;
-        background: rgba($gold-500, 0.04);
+        background: rgba($white, 0.05);
+    }
+
+    .hdr-nav-ticker-row.sticky & {
+        color: $navy-700;
+        
+        &:hover,
+        &.active {
+            color: $gold-600;
+            background: rgba($gold-500, 0.04);
+        }
     }
 
     .nav-arrow {
@@ -851,16 +869,16 @@
     gap: 4px;
     font-size: 0.7rem;
     font-family: $font-body;
-    color: $gray-600;
+    color: $gray-300;
     white-space: nowrap;
     text-decoration: none;
     transition: color $transition-fast;
 
-    i { font-size: 0.8rem; color: $navy-500; }
+    i { font-size: 0.8rem; color: $gold-500; }
 
     &:hover {
-        color: $navy-700;
-        i { color: $gold-600; }
+        color: $white;
+        i { color: $gold-400; }
     }
 
     @include respond(xl) {
@@ -872,9 +890,9 @@
 
 // ── GIGW: Single Accessibility Icon Button ────────────────
 .utility-a11y-icon-btn {
-    background: $gray-100;
-    border: 1px solid $gray-300;
-    color: $navy-600;
+    background: rgba($white, 0.1);
+    border: 1px solid rgba($white, 0.2);
+    color: $white;
     width: 30px;
     height: 26px;
     border-radius: $radius-sm;
@@ -887,15 +905,15 @@
     transition: all $transition-fast;
 
     &:hover {
-        background: rgba($gold-500, 0.12);
+        background: $gold-500;
         border-color: $gold-500;
-        color: $gold-600;
+        color: $navy-900;
     }
 
     &.active {
-        background: $navy-700;
-        border-color: $navy-700;
-        color: $white;
+        background: $gold-400;
+        border-color: $gold-400;
+        color: $navy-900;
     }
 }
 

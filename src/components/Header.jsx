@@ -58,7 +58,6 @@ const navItems = [
         ]
     },
     { label: "Alert Awareness", path: "/alert-awareness" },
-    { label: "Tenders", path: "/tenders" },
     {
         label: "Others", path: "/others",
         children: [
@@ -99,38 +98,38 @@ const navItems = [
 
 // ── Accessibility tool definitions ────────────────────────
 const A11Y_TOOLS = [
-    { key: "darkContrast",   icon: "bi-brightness-high-fill", label: "Dark Contrast"  },
-    { key: "invert",         icon: "bi-circle-half",          label: "Invert"         },
-    { key: "saturation",     icon: "bi-droplet-half",         label: "Saturation"     },
-    { key: "fontLarge",      icon: null, textIcon: "A+",      label: "Text Size +"    },
-    { key: "fontSmall",      icon: null, textIcon: "A−",      label: "Text Size −"    },
-    { key: "highlightLinks", icon: "bi-link-45deg",           label: "Highlight Links"},
-    { key: "hideImages",     icon: "bi-image-slash",          label: "Hide Images"    },
-    { key: "defaultCursor",  icon: "bi-cursor-fill",          label: "Default Cursor" },
+    { key: "darkContrast", icon: "bi-brightness-high-fill", label: "Dark Contrast" },
+    { key: "invert", icon: "bi-circle-half", label: "Invert" },
+    { key: "saturation", icon: "bi-droplet-half", label: "Saturation" },
+    { key: "fontLarge", icon: null, textIcon: "A+", label: "Text Size +" },
+    { key: "fontSmall", icon: null, textIcon: "A−", label: "Text Size −" },
+    { key: "highlightLinks", icon: "bi-link-45deg", label: "Highlight Links" },
+    { key: "hideImages", icon: "bi-image-slash", label: "Hide Images" },
+    { key: "defaultCursor", icon: "bi-cursor-fill", label: "Default Cursor" },
 ];
 
 const LS = (k) => localStorage.getItem(k) === "1";
 
 function Header() {
-    const [menuOpen, setMenuOpen]           = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
     const [mobileAccordion, setMobileAccordion] = useState(null);
     const [mobileSubAccordion, setMobileSubAccordion] = useState(null);
-    const [scrolled, setScrolled]           = useState(false);
-    const [searchOpen, setSearchOpen]       = useState(false);
-    const [a11yOpen, setA11yOpen]           = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+    const [searchOpen, setSearchOpen] = useState(false);
+    const [a11yOpen, setA11yOpen] = useState(false);
 
     // ── Accessibility states ───────────────────────────────
-    const [fontSize,       setFontSize]       = useState(() => localStorage.getItem("ncb-font-size") || "normal");
-    const [darkContrast,   setDarkContrast]   = useState(() => LS("ncb-dark-contrast"));
-    const [invert,         setInvert]         = useState(() => LS("ncb-invert"));
-    const [saturation,     setSaturation]     = useState(() => LS("ncb-saturation"));
+    const [fontSize, setFontSize] = useState(() => localStorage.getItem("ncb-font-size") || "normal");
+    const [darkContrast, setDarkContrast] = useState(() => LS("ncb-dark-contrast"));
+    const [invert, setInvert] = useState(() => LS("ncb-invert"));
+    const [saturation, setSaturation] = useState(() => LS("ncb-saturation"));
     const [highlightLinks, setHighlightLinks] = useState(() => LS("ncb-highlight-links"));
-    const [hideImages,     setHideImages]     = useState(() => LS("ncb-hide-images"));
-    const [defaultCursor,  setDefaultCursor]  = useState(() => LS("ncb-default-cursor"));
+    const [hideImages, setHideImages] = useState(() => LS("ncb-hide-images"));
+    const [defaultCursor, setDefaultCursor] = useState(() => LS("ncb-default-cursor"));
 
     const { selectedLang, openModal } = useLanguage();
     const location = useLocation();
-    const navRef   = useRef(null);
+    const navRef = useRef(null);
 
     // ── GIGW: Font-size scaling ────────────────────────────
     useEffect(() => {
@@ -142,12 +141,12 @@ function Header() {
     useEffect(() => {
         const f = [];
         if (darkContrast) f.push("contrast(1.7) brightness(0.85)");
-        if (invert)       f.push("invert(1) hue-rotate(180deg)");
-        if (saturation)   f.push("grayscale(1)");
+        if (invert) f.push("invert(1) hue-rotate(180deg)");
+        if (saturation) f.push("grayscale(1)");
         document.documentElement.style.filter = f.join(" ");
         localStorage.setItem("ncb-dark-contrast", darkContrast ? "1" : "0");
-        localStorage.setItem("ncb-invert",        invert       ? "1" : "0");
-        localStorage.setItem("ncb-saturation",    saturation   ? "1" : "0");
+        localStorage.setItem("ncb-invert", invert ? "1" : "0");
+        localStorage.setItem("ncb-saturation", saturation ? "1" : "0");
     }, [darkContrast, invert, saturation]);
 
     // ── GIGW: Body-class accessibility features ────────────
@@ -184,8 +183,8 @@ function Header() {
         return () => { document.body.style.overflow = ""; };
     }, [menuOpen, a11yOpen]);
 
-    const toggleMobileAccordion    = (label) => { setMobileAccordion(p => p === label ? null : label); setMobileSubAccordion(null); };
-    const toggleMobileSubAccordion = (key)   => setMobileSubAccordion(p => p === key ? null : key);
+    const toggleMobileAccordion = (label) => { setMobileAccordion(p => p === label ? null : label); setMobileSubAccordion(null); };
+    const toggleMobileSubAccordion = (key) => setMobileSubAccordion(p => p === key ? null : key);
 
     const resetA11y = () => {
         setFontSize("normal");
@@ -199,25 +198,25 @@ function Header() {
 
     // Map tool key → toggle handler
     const toolHandlers = {
-        darkContrast:   () => setDarkContrast(v => !v),
-        invert:         () => setInvert(v => !v),
-        saturation:     () => setSaturation(v => !v),
-        fontLarge:      () => setFontSize(s => s === "large" ? "normal" : "large"),
-        fontSmall:      () => setFontSize(s => s === "small" ? "normal" : "small"),
+        darkContrast: () => setDarkContrast(v => !v),
+        invert: () => setInvert(v => !v),
+        saturation: () => setSaturation(v => !v),
+        fontLarge: () => setFontSize(s => s === "large" ? "normal" : "large"),
+        fontSmall: () => setFontSize(s => s === "small" ? "normal" : "small"),
         highlightLinks: () => setHighlightLinks(v => !v),
-        hideImages:     () => setHideImages(v => !v),
-        defaultCursor:  () => setDefaultCursor(v => !v),
+        hideImages: () => setHideImages(v => !v),
+        defaultCursor: () => setDefaultCursor(v => !v),
     };
 
     const toolActive = {
-        darkContrast:   darkContrast,
-        invert:         invert,
-        saturation:     saturation,
-        fontLarge:      fontSize === "large",
-        fontSmall:      fontSize === "small",
+        darkContrast: darkContrast,
+        invert: invert,
+        saturation: saturation,
+        fontLarge: fontSize === "large",
+        fontSmall: fontSize === "small",
         highlightLinks: highlightLinks,
-        hideImages:     hideImages,
-        defaultCursor:  defaultCursor,
+        hideImages: hideImages,
+        defaultCursor: defaultCursor,
     };
 
     const toolDisabled = {

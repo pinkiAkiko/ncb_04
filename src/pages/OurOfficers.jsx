@@ -124,24 +124,25 @@ function OurOfficers() {
 
             <div className="page-section">
                 <div className="container">
+                    {/* Zone selector pills */}
+                    <div className="zone-pills top-row">
+                        {zones.map(z => (
+                            <button
+                                key={z.id}
+                                className={`zone-pill ${selectedZone?.id === z.id ? "active" : ""}`}
+                                style={selectedZone?.id === z.id ? { background: ZONE_COLORS[z.id], borderColor: ZONE_COLORS[z.id], color: "#fff" } : { borderColor: ZONE_COLORS[z.id], color: ZONE_COLORS[z.id] }}
+                                onClick={() => setSelectedZone(z)}
+                            >
+                                {z.name}
+                            </button>
+                        ))}
+                    </div>
+
                     <div className="officers-layout">
                         {/* ── Left: Map ── */}
                         <div className="officers-map-col">
                             <div className="officers-map-wrap">
                                 <IndiaStateMap zones={zones} selectedZone={selectedZone} onZoneClick={setSelectedZone} />
-                            </div>
-                            {/* Zone selector pills */}
-                            <div className="zone-pills">
-                                {zones.map(z => (
-                                    <button
-                                        key={z.id}
-                                        className={`zone-pill ${selectedZone?.id === z.id ? "active" : ""}`}
-                                        style={selectedZone?.id === z.id ? { background: ZONE_COLORS[z.id], borderColor: ZONE_COLORS[z.id], color: "#fff" } : { borderColor: ZONE_COLORS[z.id], color: ZONE_COLORS[z.id] }}
-                                        onClick={() => setSelectedZone(z)}
-                                    >
-                                        {z.name}
-                                    </button>
-                                ))}
                             </div>
                         </div>
 
