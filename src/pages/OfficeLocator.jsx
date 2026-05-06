@@ -104,83 +104,163 @@ const zones = [
     },
 ];
 
-// Simple, clean India outline in SVG — schematic representation
+// Zone colour map
+const ZONE_COLORS = {
+    north:     { fill: "#1a6eb0", label: "#cde4f7" },
+    northwest: { fill: "#7b4fa3", label: "#e8d8f7" },
+    west:      { fill: "#2a9d5c", label: "#c8f0db" },
+    central:   { fill: "#c07c1a", label: "#fde8c2" },
+    east:      { fill: "#b03030", label: "#facccc" },
+    northeast: { fill: "#16a085", label: "#c2ede4" },
+    south:     { fill: "#b8860b", label: "#fdefc2" },
+    southwest: { fill: "#c0392b", label: "#fadad5" },
+    andaman:   { fill: "#6c3483", label: "#e8d5f5" },
+};
+
+// Each zone has a simplified polygon path (viewBox 0 0 600 680)
+// Paths trace geographic zone regions inside India's outline
+const zonePaths = {
+    north:     "M195,72 L355,48 L415,56 L448,84 L442,118 L420,140 L390,158 L352,170 L315,178 L278,174 L250,165 L224,152 L208,138 L196,118 L192,95 Z",
+    northwest: "M192,95 L196,118 L208,138 L224,152 L222,170 L218,202 L218,238 L222,262 L198,268 L185,258 L178,240 L174,214 L174,182 L176,152 L182,128 Z",
+    west:      "M185,258 L198,268 L222,262 L218,295 L214,330 L210,365 L208,395 L205,418 L194,428 L182,418 L176,398 L174,368 L176,335 L178,305 L180,278 Z",
+    central:   "M222,262 L218,295 L218,330 L232,348 L258,360 L282,354 L302,342 L316,322 L316,295 L308,272 L290,258 L268,252 L244,252 Z",
+    east:      "M352,170 L390,158 L418,168 L434,190 L438,222 L430,252 L415,270 L393,285 L365,292 L340,288 L318,278 L310,260 L314,238 L326,215 L340,196 Z",
+    northeast: "M415,56 L448,84 L482,110 L512,148 L530,192 L544,235 L545,268 L530,282 L512,278 L490,265 L464,254 L438,244 L430,222 L434,190 L418,168 L415,148 L420,118 L435,96 Z",
+    southwest: "M214,370 L240,365 L265,368 L290,375 L310,390 L316,415 L305,435 L282,448 L258,452 L233,445 L215,432 L208,415 Z",
+    south:     "M208,415 L215,432 L233,445 L258,452 L282,448 L305,435 L318,420 L326,440 L322,465 L312,488 L296,510 L276,526 L256,540 L235,546 L214,542 L196,530 L183,510 L178,485 L176,458 L180,438 L192,426 Z",
+    andaman:   "M558,320 L566,320 L570,335 L565,348 L556,348 L552,335 Z",
+};
+
+// HQ dot positions (kept from original for reference labels)
+const hqDots = {
+    north:     { x: 305, y: 148 },
+    northwest: { x: 196, y: 228 },
+    west:      { x: 198, y: 352 },
+    central:   { x: 270, y: 308 },
+    east:      { x: 390, y: 238 },
+    northeast: { x: 490, y: 212 },
+    southwest: { x: 258, y: 408 },
+    south:     { x: 244, y: 478 },
+    andaman:   { x: 560, y: 334 },
+};
+
 function IndiaMapSVG({ selectedZone, onZoneClick }) {
     return (
         <svg
-            viewBox="0 0 640 560"
+            viewBox="0 0 600 680"
             className="india-map-svg"
             aria-label="Map of India showing NCB zones"
             role="img"
         >
-            {/* India outline - simplified */}
+            {/* Ocean background */}
+            <rect x="0" y="0" width="600" height="680" fill="rgba(14,42,71,0.85)" rx="10" />
+
+            {/* India outer shadow / glow */}
             <path
-                className="india-base-path"
-                d="M180 80 L220 60 L280 55 L340 50 L400 60 L440 80 L480 110 L510 150 L530 190 L545 230 L550 270 L540 310 L520 350 L500 390 L470 420 L450 450 L430 480 L410 510 L390 530 L370 545 L350 550 L330 548 L310 540 L295 520 L280 495 L265 470 L250 445 L235 415 L220 390 L205 360 L195 330 L185 300 L178 270 L175 240 L175 210 L178 180 L180 80Z"
-                fill="none"
-                stroke="none"
+                d="M195,72 L355,48 L415,56 L448,84 L482,110 L512,148 L530,192 L544,235 L545,268 L530,282 L512,278 L490,265 L464,254 L438,244 L430,222 L434,190 L418,168 L415,148 L420,118 L435,96 L415,56 L448,84 L442,118 L420,140 L390,158 L352,170 L340,196 L326,215 L314,238 L310,260 L318,278 L340,288 L365,292 L393,285 L415,270 L430,252 L438,244 L464,254 L490,265 L512,278 L530,282 L545,268 L544,235 L530,192 L512,148 L482,110 L448,84 L415,56 L355,48 L195,72 L192,95 L182,128 L176,152 L174,182 L174,214 L178,240 L185,258 L198,268 L222,262 L218,295 L214,330 L210,365 L208,395 L205,418 L194,428 L182,418 L176,398 L174,368 L176,335 L178,305 L180,278 L185,258 L198,268 L222,262 L218,295 L218,330 L232,348 L258,360 L282,354 L302,342 L316,322 L316,295 L308,272 L290,258 L268,252 L244,252 L222,262 L218,238 L218,202 L222,170 L224,152 L250,165 L278,174 L315,178 L352,170 L390,158 L420,140 L442,118 L448,84"
+                fill="rgba(200,168,75,0.08)"
+                filter="blur(6px)"
             />
 
-            {/* Fill regions per zone — coloured zones */}
-            {zones.map(zone => (
-                <circle
-                    key={zone.id}
-                    cx={zone.cx}
-                    cy={zone.cy}
-                    r={selectedZone?.id === zone.id ? 20 : 12}
-                    className={`zone-dot ${selectedZone?.id === zone.id ? "selected" : ""}`}
-                    onClick={() => onZoneClick(zone)}
-                    role="button"
-                    tabIndex={0}
-                    aria-label={`${zone.name} - Click for details`}
-                    onKeyDown={e => e.key === "Enter" && onZoneClick(zone)}
-                >
-                    <title>{zone.name} — {zone.hq}</title>
-                </circle>
-            ))}
+            {/* Zone regions — clickable */}
+            {zones.map(zone => {
+                const path = zonePaths[zone.id];
+                const colors = ZONE_COLORS[zone.id];
+                const isSelected = selectedZone?.id === zone.id;
+                if (!path || !colors) return null;
+                return (
+                    <g
+                        key={zone.id}
+                        onClick={() => onZoneClick(zone)}
+                        onKeyDown={e => e.key === "Enter" && onZoneClick(zone)}
+                        role="button"
+                        tabIndex={0}
+                        aria-label={`${zone.name} — click for details`}
+                        style={{ cursor: "pointer" }}
+                    >
+                        <path
+                            d={path}
+                            fill={isSelected ? colors.fill : `${colors.fill}99`}
+                            stroke={isSelected ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.3)"}
+                            strokeWidth={isSelected ? 2 : 0.8}
+                            style={{
+                                transition: "all 0.3s ease",
+                                filter: isSelected ? `drop-shadow(0 0 10px ${colors.fill}cc)` : "none",
+                            }}
+                        />
+                        <title>{zone.name} — {zone.hq}</title>
+                    </g>
+                );
+            })}
 
-            {/* Zone labels */}
-            {zones.map(zone => (
-                <text
-                    key={`label-${zone.id}`}
-                    x={zone.cx}
-                    y={zone.cy + (selectedZone?.id === zone.id ? 35 : 26)}
-                    className={`zone-label ${selectedZone?.id === zone.id ? "selected" : ""}`}
-                    textAnchor="middle"
-                >
-                    {zone.hq}
-                </text>
-            ))}
+            {/* HQ city dots */}
+            {zones.map(zone => {
+                const dot = hqDots[zone.id];
+                const colors = ZONE_COLORS[zone.id];
+                const isSelected = selectedZone?.id === zone.id;
+                if (!dot || !colors) return null;
+                return (
+                    <g key={`dot-${zone.id}`} style={{ pointerEvents: "none" }}>
+                        <circle
+                            cx={dot.x} cy={dot.y}
+                            r={isSelected ? 7 : 4.5}
+                            fill={isSelected ? "#fff" : colors.fill}
+                            stroke={isSelected ? colors.fill : "rgba(255,255,255,0.7)"}
+                            strokeWidth={isSelected ? 2.5 : 1.5}
+                            style={{ transition: "all 0.3s ease" }}
+                        />
+                        <text
+                            x={dot.x}
+                            y={dot.y - (isSelected ? 13 : 9)}
+                            textAnchor="middle"
+                            fontSize={isSelected ? "9" : "7.5"}
+                            fontFamily="Inter, sans-serif"
+                            fontWeight={isSelected ? "700" : "500"}
+                            fill={isSelected ? "#fff" : "rgba(255,255,255,0.75)"}
+                            style={{ transition: "all 0.3s ease", pointerEvents: "none" }}
+                        >
+                            {zone.hq}
+                        </text>
+                    </g>
+                );
+            })}
 
-            {/* Simplified India outline shape */}
+            {/* Andaman islands label */}
+            <text x="558" y="316" textAnchor="middle" fontSize="6.5" fill="rgba(255,255,255,0.6)" fontFamily="Inter, sans-serif">A&N</text>
+
+            {/* India outline border */}
             <path
-                className="india-outline"
-                d="
-                    M 200 75 L 245 52 L 295 50 L 360 48 L 415 58 L 455 82 L 490 112
-                    L 518 152 L 535 195 L 548 238 L 552 280 L 544 318 L 524 358
-                    L 498 395 L 468 425 L 445 455 L 422 483 L 400 510 L 378 530
-                    L 358 545 L 338 552 L 318 550 L 300 542 L 283 525 L 268 500
-                    L 252 472 L 236 442 L 220 410 L 205 378 L 192 345 L 182 312
-                    L 175 278 L 173 244 L 174 210 L 178 178 L 185 145 L 195 115
-                    L 200 75 Z
-                "
+                d="M195,72 L355,48 L415,56 L448,84 L482,110 L512,148 L530,192 L544,235 L545,268 L530,282 L512,278 L490,265 L464,254 L438,244 L430,252 L415,270 L393,285 L365,292 L340,288 L318,278 L310,260 L316,295 L316,322 L302,342 L282,354 L258,360 L232,348 L218,330 L218,295 L214,330 L210,365 L208,395 L205,418 L194,428 L182,418 L176,398 L174,368 L176,335 L178,305 L180,278 L185,258 L198,268 L222,262 L218,238 L218,202 L222,170 L224,152 L208,138 L196,118 L192,95 L195,72 Z
+                M180,438 L192,426 L205,418 M326,440 L318,420 L305,435 L282,448 L258,452 L233,445 L215,432 L208,415 L194,428
+                M322,465 L312,488 L296,510 L276,526 L256,540 L235,546 L214,542 L196,530 L183,510 L178,485 L176,458 L180,438"
                 fill="none"
-                stroke="rgba(200,168,75,0.3)"
-                strokeWidth="1.5"
-                strokeDasharray="6 3"
+                stroke="rgba(200,168,75,0.55)"
+                strokeWidth="1.2"
             />
 
-            {/* Connection lines between HQ dots */}
-            {zones.map((zone, i) =>
-                i < zones.length - 1 ? (
-                    <line
-                        key={`line-${i}`}
-                        x1={zone.cx} y1={zone.cy}
-                        x2={zones[i + 1].cx} y2={zones[i + 1].cy}
-                        className="zone-connector"
-                    />
-                ) : null
-            )}
+            {/* Legend */}
+            <g transform="translate(12, 580)">
+                {Object.entries(ZONE_COLORS).slice(0, 5).map(([id, c], i) => {
+                    const z = zones.find(z => z.id === id);
+                    return (
+                        <g key={id} transform={`translate(${i * 110}, 0)`}>
+                            <rect x="0" y="0" width="10" height="10" fill={c.fill} rx="2" />
+                            <text x="14" y="9" fontSize="7" fill="rgba(255,255,255,0.65)" fontFamily="Inter,sans-serif">{z?.name}</text>
+                        </g>
+                    );
+                })}
+            </g>
+            <g transform="translate(12, 596)">
+                {Object.entries(ZONE_COLORS).slice(5).map(([id, c], i) => {
+                    const z = zones.find(z => z.id === id);
+                    return (
+                        <g key={id} transform={`translate(${i * 110}, 0)`}>
+                            <rect x="0" y="0" width="10" height="10" fill={c.fill} rx="2" />
+                            <text x="14" y="9" fontSize="7" fill="rgba(255,255,255,0.65)" fontFamily="Inter,sans-serif">{z?.name}</text>
+                        </g>
+                    );
+                })}
+            </g>
         </svg>
     );
 }
@@ -211,7 +291,7 @@ function OfficeLocator() {
                                             className={`zone-list-btn ${selectedZone?.id === zone.id ? "active" : ""}`}
                                             onClick={() => setSelectedZone(zone)}
                                         >
-                                            <span className="zlb-dot" />
+                                            <span className="zlb-dot" style={{ background: ZONE_COLORS[zone.id]?.fill }} />
                                             <div className="zlb-info">
                                                 <span className="zlb-name">{zone.name}</span>
                                                 <span className="zlb-hq">HQ: {zone.hq}</span>
@@ -233,14 +313,6 @@ function OfficeLocator() {
                                             selectedZone={selectedZone}
                                             onZoneClick={setSelectedZone}
                                         />
-                                        <div className="map-legend">
-                                            <span className="ml-item">
-                                                <span className="ml-dot selected" /> Selected Zone
-                                            </span>
-                                            <span className="ml-item">
-                                                <span className="ml-dot" /> Other Zones
-                                            </span>
-                                        </div>
                                     </div>
                                 </div>
 

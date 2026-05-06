@@ -70,7 +70,7 @@
     padding: $space-3 $space-5;
 }
 
-// ── STICKY ALERT TICKER ───────────────────────────────────
+// ── STICKY ALERT TICKER (removed from hero — element no longer in JSX) ─
 .home-ticker-bar {
     position: sticky;
     top: 52px; // sits just below the sticky nav
@@ -140,37 +140,740 @@
     &:hover { color: $gold-300; }
 }
 
-// ── 1. HERO SECTION ──────────────────────────────────────
-.hero-section {
+// ── 1. HERO — Dark two-column: galaxy card + alerts ────────
+.hero-dark {
+    background: linear-gradient(140deg, $navy-900 0%, #0d1f38 60%, $navy-800 100%);
+    padding: 52px 0 48px;
     position: relative;
-    height: 78vh;
-    min-height: 480px;
-    max-height: 660px;
+    overflow: hidden;
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(circle, rgba(255,255,255,0.025) 1px, transparent 1px);
+        background-size: 30px 30px;
+        pointer-events: none;
+    }
+
+    // subtle gold glow bottom-left
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: -80px;
+        left: -80px;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba($gold-500, 0.08) 0%, transparent 70%);
+        pointer-events: none;
+    }
+
+    @include respond(md) { padding: 36px 0; }
+}
+
+.hero-dark-inner {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 0;
+    align-items: stretch;
+    position: relative;
+    z-index: 1;
+
+    @include respond(lg) {
+        grid-template-columns: 1fr;
+        gap: $space-5;
+    }
+}
+
+// ── Galaxy image card (left) ──────────────────────────────
+.hero-galaxy-card {
+    position: relative;
+    border-radius: $radius-xl;
     overflow: hidden;
     background: $navy-900;
-
-    @include respond(md) { min-height: 380px; }
-    @include respond(sm) { height: 55vh; min-height: 300px; }
+    box-shadow:
+        0 0 0 1px rgba($gold-500, 0.15),
+        0 24px 80px rgba(0,0,0,0.55),
+        0 4px 16px rgba(0,0,0,0.3);
 }
 
-.hero-slides {
-    position: absolute;
-    inset: 0;
+.hgc-slides {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 8/3;  // matches actual banner dimensions (1521×570 ≈ 8:3)
+    background: $navy-900;
 }
 
-.hero-slide {
+.hgc-slide {
     position: absolute;
     inset: 0;
-    background-size: cover;
-    background-position: center;
     opacity: 0;
-    transform: scale(1.06);
-    transition: opacity 0.9s $transition-slower, transform 6s ease;
+    transition: opacity 1s ease;
+
+    &.active { opacity: 1; z-index: 1; }
+
+    img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: contain;
+        background: $navy-900;
+    }
+}
+
+.hgc-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 80px $space-6 $space-5;
+    background: linear-gradient(to top, rgba($navy-900, 0.96) 0%, rgba($navy-900, 0.45) 60%, transparent 100%);
+    z-index: 2;
+}
+
+.hgc-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba($gold-500, 0.18);
+    border: 1px solid rgba($gold-400, 0.38);
+    color: $gold-300;
+    font-family: $font-heading;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: $radius-full;
+    margin-bottom: $space-2;
+    backdrop-filter: blur(6px);
+}
+
+.hgc-slide-title {
+    font-family: $font-heading;
+    font-size: clamp(1rem, 2vw, 1.35rem);
+    font-weight: 700;
+    color: $white;
+    line-height: 1.35;
+    margin: 0;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.hgc-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    width: 40px;
+    height: 40px;
+    background: rgba($white, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba($white, 0.18);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: $white;
+    font-size: 0.95rem;
+    transition: all $transition-fast;
+
+    &:hover { background: rgba($white, 0.18); border-color: rgba($white, 0.4); transform: translateY(-50%) scale(1.05); }
+}
+
+.hgc-prev { left: 14px; }
+.hgc-next { right: 14px; }
+
+.hgc-bottom {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+}
+
+.hgc-dots {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.hgc-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: $radius-full;
+    background: rgba($white, 0.35);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: all $transition-base;
 
     &.active {
-        opacity: 1;
-        transform: scale(1);
+        background: $white;
+        width: 20px;
+        border-radius: 3px;
     }
+}
+
+.hgc-play {
+    width: 28px;
+    height: 28px;
+    background: rgba($white, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba($white, 0.18);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: $white;
+    font-size: 0.62rem;
+    transition: background $transition-fast;
+    &:hover { background: rgba($white, 0.2); }
+}
+
+// ── Right column: glassmorphism half-circle ───────────────
+.hero-semicircle-col {
+    display: flex;
+    align-items: stretch;
+}
+
+.hero-semicircle {
+    flex: 1;
+    border-radius: 50% 0 0 50%;       // D-shape: flat right edge, curved left
+    background: rgba($white, 0.055);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border: 1px solid rgba($white, 0.13);
+    border-right: none;
+    box-shadow:
+        inset 0 0 90px rgba($white, 0.022),
+        -8px 0 40px rgba(0, 0, 0, 0.18);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $space-5;
+    padding: 64px 28px 52px 56px;     // generous left padding to clear the curve
+    text-align: center;
+    overflow: hidden;                  // clips content to the D-shape boundary
+}
+
+.hsc-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $space-3;
+    transition: opacity 0.38s ease, transform 0.38s ease;
+}
+
+.hsc-text {
+    font-family: $font-heading;
+    font-size: clamp(0.95rem, 1.55vw, 1.22rem);
+    font-weight: 700;
+    color: $white;
+    line-height: 1.58;
+    margin: 0;
+}
+
+.hsc-date {
+    font-size: 0.7rem;
+    color: rgba($white, 0.38);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    i { font-size: 0.62rem; }
+}
+
+.hsc-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: $font-heading;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 10px 24px;
+    border-radius: $radius-full;
+    background: rgba($gold-500, 0.12);
+    border: 1.5px solid rgba($gold-400, 0.38);
+    color: $gold-300;
+    text-decoration: none;
+    transition: all $transition-fast;
+    flex-shrink: 0;
+
+    &:hover {
+        background: rgba($gold-500, 0.24);
+        border-color: rgba($gold-400, 0.65);
+        color: $gold-300;
+        transform: translateY(-1px);
+    }
+
+    i { font-size: 0.7rem; }
+}
+
+.hsc-pips {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+// ── Shared fade-transition helpers ───────────────────────
+.har-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.har-hidden {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+// Alert category badge
+.har-cat {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: $font-heading;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: $radius-sm;
+    background: rgba($white, 0.08);
+    color: rgba($white, 0.65);
+
+    &--alert {
+        background: rgba($red-500, 0.2);
+        color: #f08080;
+        i { font-size: 0.58rem; }
+    }
+}
+
+.har-pip {
+    width: 6px;
+    height: 6px;
+    border-radius: $radius-full;
+    background: rgba($white, 0.2);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: all $transition-base;
+
+    &.active {
+        background: $gold-400;
+        width: 18px;
+        border-radius: 3px;
+    }
+
+    &:hover:not(.active) { background: rgba($white, 0.45); }
+}
+
+// ── (legacy hero classes removed) ────────────────────────
+
+.hero-v2-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba($navy-600, 0.08);
+    border: 1px solid rgba($navy-600, 0.18);
+    color: $navy-600;
+    font-family: $font-body;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: $radius-full;
+    margin-bottom: $space-5;
+    i { color: $gold-500; font-size: 0.8rem; }
+}
+
+.hero-v2-heading {
+    font-family: $font-heading;
+    font-size: clamp(2.6rem, 5vw, 4rem);
+    font-weight: 800;
+    color: $navy-900;
+    line-height: 1.08;
+    letter-spacing: -0.5px;
+    margin-bottom: $space-5;
+}
+
+.hero-v2-heading-accent {
+    color: $navy-500;
+}
+
+.hero-v2-desc {
+    font-size: 1rem;
+    color: $gray-600;
+    line-height: 1.75;
+    max-width: 500px;
+    margin-bottom: $space-6;
+
+    strong { color: $navy-800; font-weight: 700; }
+}
+
+.hero-v2-actions {
+    display: flex;
+    gap: $space-4;
+    flex-wrap: wrap;
+    margin-bottom: $space-6;
+}
+
+.hero-v2-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: $font-heading;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    border-radius: $radius-md;
+    transition: all $transition-base;
+    text-decoration: none;
+    border: 2px solid transparent;
+
+    &--primary {
+        background: $navy-800;
+        color: $white;
+        border-color: $navy-800;
+        &:hover { background: $navy-600; border-color: $navy-600; color: $white; transform: translateY(-1px); }
+    }
+
+    &--outline {
+        background: transparent;
+        color: $navy-800;
+        border-color: $navy-800;
+        &:hover { background: $navy-800; color: $white; transform: translateY(-1px); }
+    }
+}
+
+.hero-v2-social {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+
+    > span {
+        font-size: 0.85rem;
+        color: $gray-500;
+        font-weight: 500;
+        margin-right: 4px;
+    }
+
+    a {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1.5px solid $gray-300;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $gray-600;
+        font-size: 0.95rem;
+        transition: all $transition-fast;
+        text-decoration: none;
+
+        &:hover {
+            border-color: $navy-500;
+            color: $navy-500;
+            background: rgba($navy-500, 0.06);
+            transform: translateY(-2px);
+        }
+    }
+}
+
+// Right card — Alerts & Announcements
+.hero-v2-alerts-card {
+    background: $white;
+    border-radius: $radius-xl;
+    box-shadow: 0 12px 48px rgba($navy-900, 0.14), 0 2px 8px rgba($navy-900, 0.06);
+    border: 1px solid $gray-200;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 420px;
+
+    @include respond(lg) { max-width: 580px; margin: 0 auto; height: 380px; }
+    @include respond(sm) { height: 320px; }
+}
+
+.hac-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $space-4 $space-5;
+    background: $navy-800;
+    flex-shrink: 0;
+}
+
+.hac-header-left {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+}
+
+.hac-pulse {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: $gold-400;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 0 rgba($gold-400, 0.6);
+    animation: hacPulse 2s infinite;
+}
+
+@keyframes hacPulse {
+    0%   { box-shadow: 0 0 0 0 rgba($gold-400, 0.6); }
+    70%  { box-shadow: 0 0 0 8px rgba($gold-400, 0); }
+    100% { box-shadow: 0 0 0 0 rgba($gold-400, 0); }
+}
+
+.hac-title {
+    font-family: $font-heading;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: $white;
+}
+
+.hac-view-all {
+    font-family: $font-heading;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: $gold-300;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: color $transition-fast;
+    &:hover { color: $gold-400; }
+    i { font-size: 0.65rem; }
+}
+
+.hac-body {
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba($navy-500, 0.2) transparent;
+    &::-webkit-scrollbar { width: 4px; }
+    &::-webkit-scrollbar-thumb { background: rgba($navy-500, 0.2); border-radius: 2px; }
+}
+
+.hac-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: $space-3 $space-5;
+    border-bottom: 1px solid $gray-100;
+    transition: background $transition-fast;
+
+    &:hover { background: $gray-100; }
+    &:last-child { border-bottom: none; }
+
+    &--alert {
+        border-left: 3px solid $red-500;
+        padding-left: calc(#{$space-5} - 3px);
+        background: rgba($red-500, 0.02);
+        &:hover { background: rgba($red-500, 0.04); }
+    }
+}
+
+.hac-item-meta {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    flex-wrap: wrap;
+}
+
+.hac-cat {
+    font-family: $font-heading;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: $radius-sm;
+    background: rgba($navy-600, 0.1);
+    color: $navy-600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    &--alert {
+        background: rgba($red-500, 0.12);
+        color: $red-600;
+        i { font-size: 0.6rem; }
+    }
+}
+
+.hac-date {
+    font-size: 0.68rem;
+    color: $gray-400;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    i { font-size: 0.62rem; }
+}
+
+.hac-text {
+    font-size: 0.82rem;
+    color: $gray-700;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.hac-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $space-3 $space-5;
+    background: rgba($navy-900, 0.04);
+    border-top: 1px solid $gray-200;
+    flex-shrink: 0;
+}
+
+.hac-helpline {
+    font-size: 0.82rem;
+    color: $navy-700;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color $transition-fast;
+    i { color: $gold-500; }
+    strong { color: $red-600; }
+    &:hover { color: $navy-500; }
+}
+
+.hac-footer-tag {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: $gray-400;
+    background: $gray-100;
+    padding: 3px 8px;
+    border-radius: $radius-full;
+}
+
+// Keep old carousel classes (used nowhere now, safe to leave)
+.hero-v2-card { }
+
+.hero-v2-card-inner {
+    position: relative;
+    border-radius: $radius-xl;
+    overflow: hidden;
+    box-shadow: 0 12px 48px rgba($navy-900, 0.18), 0 2px 8px rgba($navy-900, 0.08);
+    background: $white;
+
+    @include respond(lg) { max-width: 580px; margin: 0 auto; }
+}
+
+.hero-v2-slides {
+    position: relative;
+    height: 380px;
+    overflow: hidden;
+
+    @include respond(md) { height: 280px; }
+    @include respond(sm) { height: 220px; }
+}
+
+.hero-v2-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.85s ease;
+
+    &.active { opacity: 1; }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+}
+
+.hero-v2-prev,
+.hero-v2-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    width: 38px;
+    height: 38px;
+    background: rgba($white, 0.92);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: $navy-800;
+    font-size: 1rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    transition: all $transition-fast;
+
+    &:hover { background: $white; box-shadow: 0 4px 18px rgba(0,0,0,0.28); transform: translateY(-50%) scale(1.05); }
+}
+
+.hero-v2-prev { left: 12px; }
+.hero-v2-next { right: 12px; }
+
+.hero-v2-dots {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 4;
+}
+
+.hero-v2-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: $radius-full;
+    background: rgba($white, 0.55);
+    border: none;
+    cursor: pointer;
+    transition: all $transition-base;
+    padding: 0;
+
+    &.active {
+        background: $white;
+        width: 24px;
+        border-radius: $radius-sm;
+    }
+}
+
+.hero-v2-play-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 12px;
+    z-index: 4;
+    width: 28px;
+    height: 28px;
+    background: rgba($white, 0.75);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: $navy-800;
+    font-size: 0.7rem;
+    transition: background $transition-fast;
+    &:hover { background: $white; }
 }
 
 

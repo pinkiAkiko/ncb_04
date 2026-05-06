@@ -10,42 +10,38 @@
     background: linear-gradient(90deg, $navy-900 0%, $navy-600 100%);
     border-top: 3px solid $gold-500;
     border-bottom: 1px solid rgba($white, 0.08);
-    padding: $space-5 0;
+    padding: $space-3 0; // was $space-5
 }
 
 .newsletter-inner {
     @include flex-between;
-    gap: $space-5;
+    gap: $space-4;
 
     @include respond(md) {
         flex-direction: column;
         align-items: flex-start;
+        gap: $space-3;
     }
 }
 
 .newsletter-text {
     display: flex;
     align-items: center;
-    gap: $space-4;
+    gap: $space-3;
     color: $white;
 
     i {
-        font-size: 1.8rem;
+        font-size: 1.4rem;
         color: $gold-400;
         flex-shrink: 0;
-        @include respond(sm) { font-size: 1.4rem; }
     }
 
-    div {
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-    }
+    div { display: flex; flex-direction: column; gap: 1px; }
 }
 
 .nl-heading {
     font-family: $font-heading;
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: $white;
     text-transform: uppercase;
@@ -53,69 +49,57 @@
 }
 
 .nl-sub {
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     color: rgba($white, 0.6);
 }
 
 .newsletter-form {
     display: flex;
-    gap: 0;
     flex-shrink: 0;
 
-    @include respond(md) {
-        width: 100%;
-    }
+    @include respond(md) { width: 100%; }
 
     input {
-        padding: $space-3 $space-5;
+        padding: $space-2 $space-4;
         border: 1px solid rgba($white, 0.2);
         border-right: none;
         background: rgba($white, 0.06);
         color: $white;
         font-family: $font-body;
-        font-size: 0.88rem;
+        font-size: 0.85rem;
         border-radius: $radius-sm 0 0 $radius-sm;
         outline: none;
-        min-width: 280px;
+        min-width: 240px;
         transition: border-color $transition-fast;
 
-        &::placeholder {
-            color: rgba($white, 0.35);
-        }
+        &::placeholder { color: rgba($white, 0.35); }
+        &:focus { border-color: $gold-500; background: rgba($white, 0.1); }
 
-        &:focus {
-            border-color: $gold-500;
-            background: rgba($white, 0.1);
-        }
-
-        @include respond(md) {
-            min-width: 0;
-            flex: 1;
-        }
+        @include respond(md) { min-width: 0; flex: 1; }
     }
 
     button {
         @include gold-btn;
         border-radius: 0 $radius-sm $radius-sm 0;
         white-space: nowrap;
-        padding: $space-3 $space-5;
-        height: 48px;
+        padding: $space-2 $space-4;
+        height: 40px;
     }
 }
 
 // ── Main Footer ───────────────────────────────────────────
 .footer-main {
-    padding: $space-6 0 $space-2;
-    @include respond(sm) { padding: $space-5 0 $space-2; }
+    padding: $space-4 0 $space-3; // was $space-6
+    @include respond(sm) { padding: $space-3 0 $space-2; }
 }
 
 .footer-main-grid {
     display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
-    gap: $space-6 $space-5;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr; // 5 cols, compact
+    gap: $space-4 $space-4; // was $space-6 $space-5
 
     @include respond(xl) {
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1.4fr 1fr 1fr 1fr; // 4 cols at xl, brand stays in col 1
     }
 
     @include respond(lg) {
@@ -131,87 +115,74 @@
     }
 }
 
+// Brand column — no longer spans full width at xl
 .footer-brand-col {
-    @include respond(xl) {
-        grid-column: 1 / -1;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: $space-5;
-    }
-
     @include respond(md) {
         grid-column: 1 / -1;
-        display: block;
     }
 }
 
 .footer-brand-row {
     display: flex;
     align-items: center;
-    gap: $space-4;
-    margin-bottom: $space-3;
+    gap: $space-3;
+    margin-bottom: $space-2;
 }
 
 .footer-emblem {
-    height: 52px;
+    height: 42px;
     width: auto;
 }
 
 .footer-logo {
-    height: 52px;
+    height: 42px;
     width: auto;
     filter: brightness(0) invert(1);
 }
 
 .footer-org-name {
     font-family: $font-heading;
-    font-size: 1.15rem;
+    font-size: 1rem;
     font-weight: 700;
     color: $white;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-bottom: $space-1;
+    margin-bottom: 2px;
 }
 
 .footer-org-sub {
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     color: $gold-400;
-    margin-bottom: $space-3;
+    margin-bottom: $space-2;
     letter-spacing: 0.3px;
 }
 
 .footer-desc {
-    font-size: 0.82rem;
-    color: rgba($white, 0.55);
-    line-height: 1.6;
-    margin-bottom: $space-4;
-    max-width: 320px;
+    font-size: 0.78rem;
+    color: rgba($white, 0.5);
+    line-height: 1.55;
+    margin-bottom: $space-2;
+    max-width: 280px;
+
+    @include respond(xl) { display: none; } // save vertical space at tight widths
 }
 
 .footer-helpline-box {
     display: flex;
     align-items: center;
-    gap: $space-3;
+    gap: $space-2;
     background: rgba($gold-500, 0.1);
     border: 1px solid rgba($gold-500, 0.25);
     border-radius: $radius-md;
-    padding: $space-3 $space-4;
-    margin-bottom: $space-4;
+    padding: $space-2 $space-3; // was $space-3 $space-4
+    margin-bottom: $space-2;
 
-    i {
-        color: $gold-500;
-        font-size: 1.2rem;
-    }
-
-    div {
-        display: flex;
-        flex-direction: column;
-        gap: 1px;
-    }
+    i { color: $gold-500; font-size: 1rem; }
+    div { display: flex; flex-direction: column; gap: 1px; }
 }
 
 .hl-label {
-    font-size: 0.72rem;
+    font-size: 0.65rem;
     color: rgba($white, 0.5);
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -219,24 +190,33 @@
 
 .hl-number {
     font-family: $font-heading;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: $gold-400;
     letter-spacing: 1px;
-
-    &:hover {
-        color: $gold-300;
-    }
+    &:hover { color: $gold-300; }
 }
 
+// ── Social row ────────────────────────────────────────────
 .footer-social-row {
     display: flex;
+    align-items: center;
     gap: $space-2;
+    flex-wrap: wrap;
+}
+
+.footer-social-label {
+    font-size: 0.67rem;
+    color: rgba($white, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    white-space: nowrap;
+    margin-right: $space-1;
 }
 
 .social-icon-btn {
-    width: 36px;
-    height: 36px;
+    width: 30px;
+    height: 30px;
     border-radius: $radius-sm;
     background: rgba($white, 0.06);
     border: 1px solid rgba($white, 0.1);
@@ -244,82 +224,65 @@
     align-items: center;
     justify-content: center;
     color: rgba($white, 0.6);
-    font-size: 1rem;
+    font-size: 0.9rem;
     transition: all $transition-fast;
 
-    &:hover {
-        background: $gold-500;
-        color: $navy-900;
-        border-color: $gold-500;
-        transform: translateY(-2px);
-    }
+    &:hover { transform: translateY(-2px); border-color: transparent; }
+    &--x:hover  { background: #1a1a1a; color: #fff; }
+    &--fb:hover { background: #1877F2; color: #fff; }
+    &--yt:hover { background: #FF0000; color: #fff; }
+    &--ig:hover { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color: #fff; }
 }
 
-// Link columns
+// ── Link columns ──────────────────────────────────────────
 .footer-links-group {}
 
 .footer-col-heading {
     font-family: $font-heading;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 700;
     color: $gold-400;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    margin-bottom: $space-4;
-    padding-bottom: $space-2;
+    margin-bottom: $space-3; // was $space-4
+    padding-bottom: $space-1;
     border-bottom: 1px solid rgba($gold-500, 0.25);
 }
 
 .footer-link-list {
     display: flex;
     flex-direction: column;
-    gap: $space-2;
+    gap: 6px; // was $space-2 (8px)
 }
 
 .footer-link {
     display: flex;
     align-items: center;
     gap: $space-2;
-    font-size: 0.82rem;
+    font-size: 0.78rem; // was 0.82rem
     color: rgba($white, 0.6);
     transition: all $transition-fast;
 
-    i {
-        font-size: 0.55rem;
-        color: $gold-500;
-        flex-shrink: 0;
-    }
-
-    &:hover {
-        color: $gold-300;
-        padding-left: $space-2;
-    }
+    i { font-size: 0.52rem; color: $gold-500; flex-shrink: 0; }
+    &:hover { color: $gold-300; padding-left: $space-2; }
 }
 
 .footer-visitor-box {
-    margin-top: $space-5;
+    margin-top: $space-3; // was $space-5
     display: flex;
     align-items: center;
-    gap: $space-3;
+    gap: $space-2;
     background: rgba($white, 0.04);
     border: 1px solid rgba($white, 0.08);
     border-radius: $radius-md;
-    padding: $space-3 $space-4;
+    padding: $space-2 $space-3; // was $space-3 $space-4
 
-    i {
-        color: $gold-500;
-        font-size: 1.1rem;
-    }
-
-    div {
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-    }
+    i { color: $gold-500; font-size: 1rem; }
+    div { display: flex; flex-direction: column; gap: 1px; }
 }
 
 .vis-label {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     color: rgba($white, 0.45);
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -327,7 +290,7 @@
 
 .vis-count {
     font-family: $font-heading;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 700;
     color: $white;
 }
@@ -336,7 +299,7 @@
 .footer-policy-bar {
     border-top: 1px solid rgba($white, 0.08);
     border-bottom: 1px solid rgba($white, 0.05);
-    padding: $space-3 0;
+    padding: $space-2 0; // was $space-3
     background: rgba(0, 0, 0, 0.2);
 }
 
@@ -345,10 +308,7 @@
     align-items: center;
     overflow-x: auto;
     scrollbar-width: none;
-
-    &::-webkit-scrollbar {
-        display: none;
-    }
+    &::-webkit-scrollbar { display: none; }
 }
 
 .policy-links {
@@ -366,29 +326,27 @@
 }
 
 .policy-link {
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     color: rgba($white, 0.45);
     white-space: nowrap;
     transition: color $transition-fast;
-
-    &:hover {
-        color: $gold-300;
-    }
+    &:hover { color: $gold-300; }
 }
 
 .policy-sep {
     color: rgba($white, 0.18);
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     margin: 0 $space-1;
 }
 
-// ── Bottom Bar ────────────────────────────────────────────
-.footer-bottom-bar {
-    background: $navy-900;
-    padding: $space-3 0;
+// ── Digital India / NIC Band — compact combined row ───────
+.footer-digital-band {
+    background: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba($white, 0.06);
+    padding: $space-2 0; // was $space-4
 }
 
-.bottom-bar-inner {
+.digital-band-inner {
     @include flex-between;
     gap: $space-4;
     flex-wrap: wrap;
@@ -400,18 +358,109 @@
     }
 }
 
+.digital-band-left {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+}
+
+.digital-india-logo {
+    height: 28px; // was 36px
+    width: auto;
+    filter: brightness(0) invert(1) opacity(0.65);
+    flex-shrink: 0;
+}
+
+.digital-band-text-block {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.digital-band-tagline {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: rgba($white, 0.65);
+    font-family: $font-heading;
+    letter-spacing: 0.3px;
+}
+
+.digital-band-sub {
+    font-size: 0.65rem;
+    color: rgba($white, 0.35);
+}
+
+.digital-band-right {
+    display: flex;
+    align-items: center;
+    gap: $space-5;
+    flex-wrap: wrap;
+
+    @include respond(sm) { gap: $space-3; }
+}
+
+.nic-credit-block {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+
+    > i {
+        font-size: 0.95rem;
+        color: $gold-500;
+        opacity: 0.7;
+        flex-shrink: 0;
+    }
+
+    > div { display: flex; flex-direction: column; gap: 1px; }
+}
+
+.nic-label {
+    font-size: 0.62rem;
+    color: rgba($white, 0.35);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.nic-link {
+    font-size: 0.72rem;
+    color: $gold-400;
+    font-weight: 500;
+    transition: color $transition-fast;
+    &:hover { color: $gold-300; text-decoration: underline; }
+}
+
+.nic-dev-name {
+    font-size: 0.72rem;
+    color: rgba($white, 0.5);
+}
+
+// ── Bottom Bar ────────────────────────────────────────────
+.footer-bottom-bar {
+    background: $navy-900;
+    padding: $space-2 0; // was $space-3
+}
+
+.bottom-bar-inner {
+    @include flex-between;
+    gap: $space-3;
+    flex-wrap: wrap;
+
+    @include respond(md) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: $space-1;
+    }
+}
+
 .footer-copyright,
 .footer-last-updated,
-.footer-designed-by {
-    font-size: 0.75rem;
+.footer-website-owner {
+    font-size: 0.72rem;
     color: rgba($white, 0.4);
     display: flex;
     align-items: center;
     gap: 4px;
-    @include respond(sm) { font-size: 0.7rem; }
+    @include respond(sm) { font-size: 0.67rem; }
 
-    i {
-        color: $gold-500;
-        font-size: 0.7rem;
-    }
+    i { color: $gold-500; font-size: 0.67rem; }
 }

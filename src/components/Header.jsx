@@ -12,6 +12,7 @@ const navItems = [
             { label: "Origin & Evolution", path: "/historical-background" },
             { label: "Mission, Vision & Motto", path: "/motto-mission-vision" },
             { label: "Hierarchy & Structure", path: "/organization" },
+            { label: "Our Officers", path: "/our-officers" },
             { label: "Our Offices", path: "/office-locator" },
             {
                 label: "Our Partners", path: "/partners",
@@ -57,6 +58,7 @@ const navItems = [
         ]
     },
     { label: "Alert Awareness", path: "/alert-awareness" },
+    { label: "Tenders", path: "/tenders" },
     {
         label: "Others", path: "/others",
         children: [
@@ -95,16 +97,74 @@ const navItems = [
     },
 ];
 
+// ── Accessibility tool definitions ────────────────────────
+const A11Y_TOOLS = [
+    { key: "darkContrast",   icon: "bi-brightness-high-fill", label: "Dark Contrast"  },
+    { key: "invert",         icon: "bi-circle-half",          label: "Invert"         },
+    { key: "saturation",     icon: "bi-droplet-half",         label: "Saturation"     },
+    { key: "fontLarge",      icon: null, textIcon: "A+",      label: "Text Size +"    },
+    { key: "fontSmall",      icon: null, textIcon: "A−",      label: "Text Size −"    },
+    { key: "highlightLinks", icon: "bi-link-45deg",           label: "Highlight Links"},
+    { key: "hideImages",     icon: "bi-image-slash",          label: "Hide Images"    },
+    { key: "defaultCursor",  icon: "bi-cursor-fill",          label: "Default Cursor" },
+];
+
+const LS = (k) => localStorage.getItem(k) === "1";
 
 function Header() {
-    const [menuOpen, setMenuOpen]               = useState(false);
-    const [mobileAccordion, setMobileAccordion]   = useState(null);
+    const [menuOpen, setMenuOpen]           = useState(false);
+    const [mobileAccordion, setMobileAccordion] = useState(null);
     const [mobileSubAccordion, setMobileSubAccordion] = useState(null);
-    const [scrolled, setScrolled]               = useState(false);
-    const [searchOpen, setSearchOpen]           = useState(false);
-    const { selectedLang, openModal }            = useLanguage();
-    const location  = useLocation();
-    const navRef    = useRef(null);
+    const [scrolled, setScrolled]           = useState(false);
+    const [searchOpen, setSearchOpen]       = useState(false);
+    const [a11yOpen, setA11yOpen]           = useState(false);
+
+    // ── Accessibility states ───────────────────────────────
+    const [fontSize,       setFontSize]       = useState(() => localStorage.getItem("ncb-font-size") || "normal");
+    const [darkContrast,   setDarkContrast]   = useState(() => LS("ncb-dark-contrast"));
+    const [invert,         setInvert]         = useState(() => LS("ncb-invert"));
+    const [saturation,     setSaturation]     = useState(() => LS("ncb-saturation"));
+    const [highlightLinks, setHighlightLinks] = useState(() => LS("ncb-highlight-links"));
+    const [hideImages,     setHideImages]     = useState(() => LS("ncb-hide-images"));
+    const [defaultCursor,  setDefaultCursor]  = useState(() => LS("ncb-default-cursor"));
+
+    const { selectedLang, openModal } = useLanguage();
+    const location = useLocation();
+    const navRef   = useRef(null);
+
+    // ── GIGW: Font-size scaling ────────────────────────────
+    useEffect(() => {
+        document.documentElement.setAttribute("data-font-size", fontSize);
+        localStorage.setItem("ncb-font-size", fontSize);
+    }, [fontSize]);
+
+    // ── GIGW: Combined CSS filters (contrast / invert / grayscale) ──
+    useEffect(() => {
+        const f = [];
+        if (darkContrast) f.push("contrast(1.7) brightness(0.85)");
+        if (invert)       f.push("invert(1) hue-rotate(180deg)");
+        if (saturation)   f.push("grayscale(1)");
+        document.documentElement.style.filter = f.join(" ");
+        localStorage.setItem("ncb-dark-contrast", darkContrast ? "1" : "0");
+        localStorage.setItem("ncb-invert",        invert       ? "1" : "0");
+        localStorage.setItem("ncb-saturation",    saturation   ? "1" : "0");
+    }, [darkContrast, invert, saturation]);
+
+    // ── GIGW: Body-class accessibility features ────────────
+    useEffect(() => {
+        document.body.classList.toggle("a11y-highlight-links", highlightLinks);
+        localStorage.setItem("ncb-highlight-links", highlightLinks ? "1" : "0");
+    }, [highlightLinks]);
+
+    useEffect(() => {
+        document.body.classList.toggle("a11y-hide-images", hideImages);
+        localStorage.setItem("ncb-hide-images", hideImages ? "1" : "0");
+    }, [hideImages]);
+
+    useEffect(() => {
+        document.body.classList.toggle("a11y-default-cursor", defaultCursor);
+        localStorage.setItem("ncb-default-cursor", defaultCursor ? "1" : "0");
+    }, [defaultCursor]);
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 60);
@@ -112,26 +172,58 @@ function Header() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    // Close everything on route change
     useEffect(() => {
         setMenuOpen(false);
+        setA11yOpen(false);
         setMobileAccordion(null);
         setMobileSubAccordion(null);
     }, [location.pathname]);
 
-    // Lock body scroll when mobile drawer open
     useEffect(() => {
-        document.body.style.overflow = menuOpen ? "hidden" : "";
+        document.body.style.overflow = (menuOpen || a11yOpen) ? "hidden" : "";
         return () => { document.body.style.overflow = ""; };
-    }, [menuOpen]);
+    }, [menuOpen, a11yOpen]);
 
-    const toggleMobileAccordion = (label) => {
-        setMobileAccordion(prev => prev === label ? null : label);
-        setMobileSubAccordion(null); // reset L3 when switching L1
+    const toggleMobileAccordion    = (label) => { setMobileAccordion(p => p === label ? null : label); setMobileSubAccordion(null); };
+    const toggleMobileSubAccordion = (key)   => setMobileSubAccordion(p => p === key ? null : key);
+
+    const resetA11y = () => {
+        setFontSize("normal");
+        setDarkContrast(false);
+        setInvert(false);
+        setSaturation(false);
+        setHighlightLinks(false);
+        setHideImages(false);
+        setDefaultCursor(false);
     };
 
-    const toggleMobileSubAccordion = (key) =>
-        setMobileSubAccordion(prev => prev === key ? null : key);
+    // Map tool key → toggle handler
+    const toolHandlers = {
+        darkContrast:   () => setDarkContrast(v => !v),
+        invert:         () => setInvert(v => !v),
+        saturation:     () => setSaturation(v => !v),
+        fontLarge:      () => setFontSize(s => s === "large" ? "normal" : "large"),
+        fontSmall:      () => setFontSize(s => s === "small" ? "normal" : "small"),
+        highlightLinks: () => setHighlightLinks(v => !v),
+        hideImages:     () => setHideImages(v => !v),
+        defaultCursor:  () => setDefaultCursor(v => !v),
+    };
+
+    const toolActive = {
+        darkContrast:   darkContrast,
+        invert:         invert,
+        saturation:     saturation,
+        fontLarge:      fontSize === "large",
+        fontSmall:      fontSize === "small",
+        highlightLinks: highlightLinks,
+        hideImages:     hideImages,
+        defaultCursor:  defaultCursor,
+    };
+
+    const toolDisabled = {
+        fontLarge: fontSize === "small",
+        fontSmall: fontSize === "large",
+    };
 
     return (
         <>
@@ -158,6 +250,28 @@ function Header() {
                         <Link to="/login" className="utility-login-btn">
                             <i className="bi bi-person-circle" /> Login
                         </Link>
+                        <span className="utility-divider" />
+                        {/* Accessibility icon + Screen Reader — after Login (GIGW) */}
+                        <a
+                            href="https://www.nvaccess.org/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="utility-sr-link"
+                            aria-label="Screen Reader information"
+                            title="Screen Reader"
+                        >
+                            <i className="bi bi-ear-fill" aria-hidden="true" />
+                            <span>Screen Reader</span>
+                        </a>
+                        <button
+                            className={`utility-a11y-icon-btn${a11yOpen ? " active" : ""}`}
+                            onClick={() => setA11yOpen(o => !o)}
+                            aria-label="Accessibility options"
+                            aria-expanded={a11yOpen}
+                            title="Accessibility tools"
+                        >
+                            <i className="bi bi-universal-access" aria-hidden="true" />
+                        </button>
                     </div>
                 </div>
             </div>
@@ -169,6 +283,14 @@ function Header() {
                     <a href="tel:1933" style={{ color: "inherit" }}>MANAS Helpline: 1933</a>
                 </div>
                 <div className="hdr-mobile-helpline-right">
+                    <button
+                        className={`utility-a11y-icon-btn${a11yOpen ? " active" : ""}`}
+                        onClick={() => setA11yOpen(o => !o)}
+                        aria-label="Accessibility options"
+                        title="Accessibility"
+                    >
+                        <i className="bi bi-universal-access" aria-hidden="true" />
+                    </button>
                     <button className="utility-lang-btn" onClick={openModal} aria-label="Change language">
                         <i className="bi bi-translate" /> {LANGUAGES.find(l => l.code === selectedLang)?.native ?? "हिंदी"}
                     </button>
@@ -228,7 +350,6 @@ function Header() {
                         </button>
 
                         <ul className={`nav-links ${menuOpen ? "mobile-open" : ""}`} role="menubar">
-                            {/* Mobile drawer header */}
                             <li className="mobile-nav-header">
                                 <img src="/logo.svg" alt="NCB" />
                                 <span>NCB India</span>
@@ -238,20 +359,12 @@ function Header() {
                             </li>
 
                             {navItems.map((item) => (
-                                <li
-                                    key={item.label}
-                                    className={`nav-item-li ${item.children ? "has-dropdown" : ""}`}
-                                    role="none"
-                                >
+                                <li key={item.label} className={`nav-item-li ${item.children ? "has-dropdown" : ""}`} role="none">
                                     {item.children ? (
                                         <>
                                             <button
                                                 className={`nav-link-btn ${[...item.children.map(c => c.path), item.path].includes(location.pathname) ? "active" : ""}`}
-                                                onClick={() => {
-                                                    if (window.innerWidth <= 992) {
-                                                        toggleMobileAccordion(item.label);
-                                                    }
-                                                }}
+                                                onClick={() => { if (window.innerWidth <= 992) toggleMobileAccordion(item.label); }}
                                                 aria-haspopup="true"
                                                 role="menuitem"
                                             >
@@ -259,22 +372,13 @@ function Header() {
                                                 <i className={`bi bi-chevron-down nav-arrow ${mobileAccordion === item.label ? "rotated" : ""}`} />
                                             </button>
 
-                                            {/* L2 dropdown — desktop: CSS hover | mobile: .open class */}
-                                            <ul
-                                                className={`nav-dropdown ${mobileAccordion === item.label ? "open" : ""}`}
-                                                role="menu"
-                                            >
+                                            <ul className={`nav-dropdown ${mobileAccordion === item.label ? "open" : ""}`} role="menu">
                                                 {item.children.map(child => {
                                                     const subKey = `${item.label}__${child.label}`;
                                                     return child.children ? (
                                                         <li key={child.path} role="none" className="has-sub-dropdown">
-                                                            {/* Desktop: CSS hover flyout | Mobile: accordion toggle */}
                                                             <button
-                                                                className={`dropdown-link dropdown-link--has-sub ${
-                                                                    location.pathname === child.path ||
-                                                                    child.children.some(sc => sc.path === location.pathname)
-                                                                        ? "active" : ""
-                                                                }`}
+                                                                className={`dropdown-link dropdown-link--has-sub ${location.pathname === child.path || child.children.some(sc => sc.path === location.pathname) ? "active" : ""}`}
                                                                 onClick={() => toggleMobileSubAccordion(subKey)}
                                                                 aria-expanded={mobileSubAccordion === subKey}
                                                                 role="menuitem"
@@ -283,12 +387,7 @@ function Header() {
                                                                 {child.label}
                                                                 <i className={`bi bi-chevron-right sub-arrow ${mobileSubAccordion === subKey ? "rotated" : ""}`} />
                                                             </button>
-
-                                                            {/* L3 — desktop flyout (CSS), mobile accordion (.open) */}
-                                                            <ul
-                                                                className={`nav-sub-dropdown ${mobileSubAccordion === subKey ? "open" : ""}`}
-                                                                role="menu"
-                                                            >
+                                                            <ul className={`nav-sub-dropdown ${mobileSubAccordion === subKey ? "open" : ""}`} role="menu">
                                                                 {child.children.map(subChild => (
                                                                     <li key={subChild.path} role="none">
                                                                         <NavLink
@@ -334,12 +433,7 @@ function Header() {
                             ))}
 
                             <li className="nav-item-li nav-cta-li">
-                                <a
-                                    href="https://ncbmanas.gov.in/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="nav-submit-tip-btn"
-                                >
+                                <a href="https://ncbmanas.gov.in/" target="_blank" rel="noopener noreferrer" className="nav-submit-tip-btn">
                                     <i className="bi bi-megaphone" /> Submit Tip
                                 </a>
                             </li>
@@ -348,8 +442,92 @@ function Header() {
                 </nav>
             </div>
 
-            {/* Mobile overlay */}
+            {/* Mobile nav overlay */}
             {menuOpen && <div className="nav-overlay" onClick={() => setMenuOpen(false)} />}
+
+            {/* ── Accessibility Drawer Overlay ──────────────────── */}
+            {a11yOpen && <div className="a11y-drawer-overlay" onClick={() => setA11yOpen(false)} aria-hidden="true" />}
+
+            {/* ── Accessibility Drawer ──────────────────────────── */}
+            <div
+                className={`a11y-drawer${a11yOpen ? " open" : ""}`}
+                role="dialog"
+                aria-modal="true"
+                aria-label="Accessibility Settings"
+                aria-hidden={!a11yOpen}
+            >
+                {/* Header */}
+                <div className="a11y-drawer-header">
+                    <span className="a11y-drawer-title">
+                        <i className="bi bi-universal-access" aria-hidden="true" />
+                        Accessibility
+                    </span>
+                    <button className="a11y-drawer-close" onClick={() => setA11yOpen(false)} aria-label="Close">
+                        <i className="bi bi-x-lg" />
+                    </button>
+                </div>
+
+                {/* Screen Reader */}
+                <div className="a11y-drawer-section">
+                    <span className="a11y-drawer-label">Screen Reader</span>
+                    <a
+                        href="https://www.nvaccess.org/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="a11y-drawer-sr-btn"
+                        aria-label="Download NVDA Screen Reader"
+                    >
+                        <i className="bi bi-ear-fill" aria-hidden="true" />
+                        <div>
+                            <strong>NVDA Screen Reader</strong>
+                            <span>Free download for Windows</span>
+                        </div>
+                        <i className="bi bi-arrow-up-right" aria-hidden="true" />
+                    </a>
+                </div>
+
+                {/* 8-tile accessibility tools grid */}
+                <div className="a11y-drawer-section">
+                    <span className="a11y-drawer-label">Accessibility Tools</span>
+                    <div className="a11y-tools-grid">
+                        {A11Y_TOOLS.map(tool => (
+                            <button
+                                key={tool.key}
+                                className={`a11y-tool-btn${toolActive[tool.key] ? " active" : ""}${toolDisabled[tool.key] ? " disabled" : ""}`}
+                                onClick={toolHandlers[tool.key]}
+                                disabled={toolDisabled[tool.key]}
+                                aria-pressed={toolActive[tool.key]}
+                                aria-label={tool.label}
+                                title={tool.label}
+                            >
+                                <div className="a11y-tool-icon-wrap" aria-hidden="true">
+                                    {tool.icon
+                                        ? <i className={`bi ${tool.icon}`} />
+                                        : <span className="a11y-tool-text-icon">{tool.textIcon}</span>
+                                    }
+                                </div>
+                                <span className="a11y-tool-label">{tool.label}</span>
+                                {toolActive[tool.key] && <span className="a11y-tool-active-dot" aria-hidden="true" />}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Reset */}
+                <div className="a11y-drawer-section">
+                    <button className="a11y-drawer-reset" onClick={resetA11y}>
+                        <i className="bi bi-arrow-counterclockwise" aria-hidden="true" /> Reset All to Default
+                    </button>
+                </div>
+
+                {/* Footer */}
+                <div className="a11y-drawer-footer">
+                    <p>This website follows GIGW Guidelines (WCAG 2.1 Level AA).</p>
+                    <Link to="/accessibility" className="a11y-footer-link" onClick={() => setA11yOpen(false)}>
+                        View Accessibility Statement
+                    </Link>
+                </div>
+            </div>
         </>
     );
 }

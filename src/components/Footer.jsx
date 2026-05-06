@@ -104,12 +104,13 @@ function Footer() {
                                 <a href="tel:1933" className="hl-number">1933</a>
                             </div>
                         </div>
-                        {/* <div className="footer-social-row">
-                            <a href="https://x.com/narcoticsbureau" target="_blank" rel="noopener noreferrer" className="social-icon-btn" aria-label="X / Twitter"><i className="bi bi-twitter-x" /></a>
-                            <a href="https://www.facebook.com/narcoticscontrolbureauindia" target="_blank" rel="noopener noreferrer" className="social-icon-btn" aria-label="Facebook"><i className="bi bi-facebook" /></a>
-                            <a href="https://www.youtube.com/channel/UCb3-9pF4m0BbLpW-yfR1Ipg" target="_blank" rel="noopener noreferrer" className="social-icon-btn" aria-label="YouTube"><i className="bi bi-youtube" /></a>
-                            <a href="https://www.instagram.com/india.ncb" target="_blank" rel="noopener noreferrer" className="social-icon-btn" aria-label="Instagram"><i className="bi bi-instagram" /></a>
-                        </div> */}
+                        <div className="footer-social-row">
+                            <span className="footer-social-label">Follow Us:</span>
+                            <a href="https://x.com/narcoticsbureau" target="_blank" rel="noopener noreferrer" className="social-icon-btn social-icon-btn--x" aria-label="X / Twitter"><i className="bi bi-twitter-x" /></a>
+                            <a href="https://www.facebook.com/narcoticscontrolbureauindia" target="_blank" rel="noopener noreferrer" className="social-icon-btn social-icon-btn--fb" aria-label="Facebook"><i className="bi bi-facebook" /></a>
+                            <a href="https://www.youtube.com/channel/UCb3-9pF4m0BbLpW-yfR1Ipg" target="_blank" rel="noopener noreferrer" className="social-icon-btn social-icon-btn--yt" aria-label="YouTube"><i className="bi bi-youtube" /></a>
+                            <a href="https://www.instagram.com/india.ncb" target="_blank" rel="noopener noreferrer" className="social-icon-btn social-icon-btn--ig" aria-label="Instagram"><i className="bi bi-instagram" /></a>
+                        </div>
                     </div>
 
                     {/* Link columns */}
@@ -195,6 +196,45 @@ function Footer() {
                 </div>
             </div>
 
+            {/* ── Digital India / NIC Band ──────────────────── */}
+            <div className="footer-digital-band">
+                <div className="container digital-band-inner">
+                    <div className="digital-band-left">
+                        <img
+                            src="/digital-india.svg"
+                            alt="Digital India"
+                            className="digital-india-logo"
+                            onError={e => { e.currentTarget.style.display = "none"; }}
+                        />
+                        <div className="digital-band-text-block">
+                            <span className="digital-band-tagline">A Government of India Initiative</span>
+                            <span className="digital-band-sub">Powered by Digital India Programme</span>
+                        </div>
+                    </div>
+                    <div className="digital-band-right">
+                        <div className="nic-credit-block">
+                            <i className="bi bi-server" aria-hidden="true" />
+                            <div>
+                                <span className="nic-label">Website hosted by</span>
+                                <a
+                                    href="https://www.nic.in"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="nic-link"
+                                >National Informatics Centre (NIC)</a>
+                            </div>
+                        </div>
+                        <div className="nic-credit-block">
+                            <i className="bi bi-code-slash" aria-hidden="true" />
+                            <div>
+                                <span className="nic-label">Designed &amp; Developed by</span>
+                                <span className="nic-dev-name">Akiko ShermanInfotech Pvt. Ltd.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {/* ── Bottom Bar ────────────────────────────────── */}
             <div className="footer-bottom-bar">
                 <div className="container bottom-bar-inner">
@@ -204,8 +244,8 @@ function Footer() {
                     <span className="footer-last-updated">
                         <i className="bi bi-clock-fill" /> Last Updated: June 2026
                     </span>
-                    <span className="footer-designed-by">
-                        Designed & Developed by Akiko ShermanInfotech Pvt. Ltd.
+                    <span className="footer-website-owner">
+                        <i className="bi bi-building" /> Website Owned by: NCB, MHA
                     </span>
                 </div>
             </div>

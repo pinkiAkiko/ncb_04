@@ -1,0 +1,226 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.our-officers-page { }
+
+.officers-layout {
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: $space-6;
+    align-items: start;
+
+    @include respond(lg) { grid-template-columns: 1fr; }
+}
+
+// ── Left: Map column ──────────────────────────────────────
+.officers-map-col {
+    position: sticky;
+    top: 90px;
+    @include respond(lg) { position: static; }
+}
+
+.officers-map-wrap {
+    background: $navy-900;
+    border-radius: $radius-lg;
+    border: 1px solid rgba($gold-500, 0.2);
+    overflow: hidden;
+    box-shadow: $shadow-md;
+    margin-bottom: $space-4;
+}
+
+.officers-map-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+
+    g[role="button"] {
+        &:hover path { opacity: 1 !important; filter: brightness(1.2) !important; }
+        &:focus { outline: none; path { stroke: $gold-300 !important; stroke-width: 2.5 !important; } }
+    }
+}
+
+.zone-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2;
+}
+
+.zone-pill {
+    font-family: $font-body;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: $radius-full;
+    border: 1.5px solid currentColor;
+    background: transparent;
+    cursor: pointer;
+    transition: all $transition-fast;
+    white-space: nowrap;
+
+    &:not(.active):hover { opacity: 0.75; }
+}
+
+// ── Right: Officers panel ─────────────────────────────────
+.officers-panel {
+    background: $white;
+    border: 1px solid $gray-200;
+    border-radius: $radius-lg;
+    overflow: hidden;
+}
+
+.officers-panel-header {
+    display: flex;
+    align-items: center;
+    gap: $space-4;
+    padding: $space-4 $space-5;
+    background: $off-white;
+    border-bottom: 1px solid $gray-200;
+    border-left: 4px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.oph-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.oph-title {
+    font-family: $font-heading;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: $navy-800;
+    margin-bottom: 2px;
+}
+
+.oph-subtitle { font-size: 0.8rem; color: $gray-500; }
+
+.oph-count {
+    margin-left: auto;
+    font-family: $font-heading;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 5px 14px;
+    border-radius: $radius-full;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.oph-states {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2;
+    padding: $space-3 $space-5;
+    border-bottom: 1px solid $gray-100;
+    background: rgba($gray-100, 0.4);
+}
+
+.oph-state-tag {
+    background: $gray-100;
+    color: $gray-600;
+    font-size: 0.72rem;
+    padding: 3px 10px;
+    border-radius: $radius-full;
+    border: 1px solid $gray-200;
+}
+
+// ── Officer cards ─────────────────────────────────────────
+.officers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.officer-card {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-4;
+    padding: $space-4 $space-5;
+    border-bottom: 1px solid $gray-100;
+    transition: background $transition-fast;
+
+    &:last-child { border-bottom: none; }
+    &:hover { background: $gray-100; }
+}
+
+.oc-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    span {
+        font-family: $font-heading;
+        font-size: 1.1rem;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+    }
+}
+
+.oc-info { flex: 1; }
+
+.oc-name {
+    font-family: $font-heading;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: $navy-800;
+    margin-bottom: 2px;
+}
+
+.oc-rank {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-bottom: $space-2;
+    transition: color 0.3s ease;
+}
+
+.oc-office {
+    font-size: 0.78rem;
+    color: $gray-500;
+    margin-bottom: $space-2;
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+    i { color: $gold-500; margin-top: 2px; flex-shrink: 0; }
+}
+
+.oc-contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.oc-contact-link {
+    font-size: 0.77rem;
+    color: $navy-500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    i { color: $gold-500; font-size: 0.72rem; }
+    &:hover { color: $gold-600; text-decoration: underline; }
+}
+
+.officers-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: $space-8 $space-5;
+    color: $gray-400;
+    gap: $space-3;
+
+    i { font-size: 2.5rem; }
+    p { font-size: 0.9rem; }
+}

@@ -4,9 +4,11 @@ import "./Home.scss";
 import { useScrollReveal, useStaggerReveal } from "../hooks/useScrollReveal";
 import EnforcementAnalytics from "../components/EnforcementAnalytics";
 
-import slider1 from "../assets/slider/slider1.jpg";
-import slider2 from "../assets/slider/slider2.png";
-import slider3 from "../assets/slider/slider3.jpg";
+import Banner_1 from "../assets/slider/Banner_1.png";
+import Banner_2 from "../assets/slider/Banner_2.png";
+import Banner_3 from "../assets/slider/Banner_3.png";
+import Banner_4 from "../assets/slider/Banner_4.png";
+import Banner_5 from "../assets/slider/Banner_5.png";
 import dgProfile from "../assets/profile.jpeg";
 import g1 from "../assets/gallary-img/10trainee-bsf.jpeg";
 import g2 from "../assets/gallary-img/11apppa-51batch.jpeg";
@@ -35,7 +37,7 @@ import ncbLogo from "../assets/logo.svg";
 const slides = [
     {
         id: 1,
-        image: slider1,
+        image: Banner_1,
         badge: "National Security",
         title: "Securing the Nation\nfrom Narcotics",
         description: "The apex coordinating agency committed to a Drug-Free India through persistent enforcement, intelligence and awareness.",
@@ -43,7 +45,7 @@ const slides = [
     },
     {
         id: 2,
-        image: slider2,
+        image: Banner_2,
         badge: "Intelligence & Technology",
         title: "Modern Intelligence\n& Enforcement",
         description: "Utilizing state-of-the-art technology and intelligence networks to dismantle global drug trafficking rings.",
@@ -51,7 +53,23 @@ const slides = [
     },
     {
         id: 3,
-        image: slider3,
+        image: Banner_3,
+        badge: "Community Outreach",
+        title: "Awareness &\nCommunity Engagement",
+        description: "Empowering the youth and communities to resist drug abuse through nationwide educational programs.",
+        cta: { label: "Awareness Programs", path: "/mou" },
+    },
+    {
+        id: 4,
+        image: Banner_4,
+        badge: "Community Outreach",
+        title: "Awareness &\nCommunity Engagement",
+        description: "Empowering the youth and communities to resist drug abuse through nationwide educational programs.",
+        cta: { label: "Awareness Programs", path: "/mou" },
+    },
+    {
+        id: 5,
+        image: Banner_5,
         badge: "Community Outreach",
         title: "Awareness &\nCommunity Engagement",
         description: "Empowering the youth and communities to resist drug abuse through nationwide educational programs.",
@@ -188,21 +206,13 @@ const socialEmbeds = [
     },
 ];
 
-const tickerAlerts = [
-    "NCB conducts major drug seizure operation in Punjab — 45 kg heroin recovered",
-    "New recruitment notice: Deputy Superintendent positions — Apply by June 30, 2026",
-    "Warning: Rise in synthetic drug trafficking via darknet marketplaces",
-    "NCB signs MOU with UNODC for enhanced international drug law enforcement",
-    "Public Alert: Report suspicious activities at MANAS Helpline 1933",
-    "Annual Anti-Drug Day awareness campaign launching — June 26, 2026",
-];
-
 
 function Home() {
     const [slideIdx, setSlideIdx] = useState(0);
     const [slideAnimating, setSlideAnimating] = useState(false);
     const [isPlaying, setIsPlaying] = useState(true);
-    const [tickerPaused, setTickerPaused] = useState(false);
+    const [alertIdx, setAlertIdx] = useState(0);
+    const [alertVisible, setAlertVisible] = useState(true);
     const MWT_TOTAL = wantedPreview.length; // 3
     const loopItems = [...wantedPreview, ...wantedPreview, ...wantedPreview]; // 9
     const [mwtIdx, setMwtIdx] = useState(MWT_TOTAL); // start at middle copy
@@ -233,7 +243,6 @@ function Home() {
     const [newsHovered, setNewsHovered] = useState(false);
     const newsRef = useRef(null);
     const portalsRef = useRef(null);
-    const tickerContent = tickerAlerts.join("   ◆   ");
     const galleryImages = [g1, g2, g3, g4, g5, g6, g7, g8, g9, g10];
 
     // ── Scroll-reveal refs ────────────────────────────────
@@ -266,7 +275,7 @@ function Home() {
     }, [slideAnimating]);
 
     const nextSlide = useCallback(() => goToSlide(slideIdx + 1), [slideIdx, goToSlide]);
-    const prevSlide = () => goToSlide(slideIdx - 1);
+    const prevSlide = useCallback(() => goToSlide(slideIdx - 1), [slideIdx, goToSlide]);
 
     useEffect(() => {
         if (!isPlaying) return;
@@ -274,7 +283,19 @@ function Home() {
         return () => clearInterval(t);
     }, [isPlaying, nextSlide]);
 
-    // News auto-scroll
+    // Alert one-by-one rotation with fade
+    useEffect(() => {
+        const t = setInterval(() => {
+            setAlertVisible(false);
+            setTimeout(() => {
+                setAlertIdx(i => (i + 1) % latestNews.length);
+                setAlertVisible(true);
+            }, 420);
+        }, 4000);
+        return () => clearInterval(t);
+    }, []);
+
+    // News auto-scroll (used elsewhere on page)
     useEffect(() => {
         let af;
         const scroll = () => {
@@ -317,67 +338,91 @@ function Home() {
         <div className="home-page">
 
             {/* ═══════════════════════════════════════════════════
-                1. HERO SLIDER — NDLEA Full-width sliding visual
+                1. HERO — Dark two-column: galaxy image + alerts
                 ═══════════════════════════════════════════════════ */}
-            <section className="hero-section" aria-label="NCB Hero">
-                <div className="hero-slides">
-                    {slides.map((s, i) => (
-                        <div
-                            key={s.id}
-                            className={`hero-slide ${i === slideIdx ? "active" : ""}`}
-                            style={{ backgroundImage: `url(${s.image})` }}
-                        >
-                        </div>
-                    ))}
-                </div>
+            <section className="hero-dark" aria-label="NCB Hero">
+                <div className="container hero-dark-inner">
 
-                {/* Text content panel */}
-                {/* Controls */}
-                <div className="hero-controls">
-                    <button className="hero-arrow prev" onClick={prevSlide} aria-label="Previous slide">
-                        <i className="bi bi-chevron-left" />
-                    </button>
-                    <div className="hero-dots">
-                        {slides.map((_, i) => (
+                    {/* ── Left: Galaxy image card ── */}
+                    <div className="hero-galaxy-card">
+                        <div className="hgc-slides">
+                            {slides.map((s, i) => (
+                                <div key={s.id} className={`hgc-slide ${i === slideIdx ? "active" : ""}`}>
+                                    <img src={s.image} alt={s.badge} />
+                                    <div className="hgc-overlay">
+                                        <span className="hgc-badge">{s.badge}</span>
+                                        <h3 className="hgc-slide-title">
+                                            {s.title.replace("\n", " ")}
+                                        </h3>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        <button className="hgc-arrow hgc-prev" onClick={prevSlide} aria-label="Previous">
+                            <i className="bi bi-chevron-left" />
+                        </button>
+                        <button className="hgc-arrow hgc-next" onClick={nextSlide} aria-label="Next">
+                            <i className="bi bi-chevron-right" />
+                        </button>
+                        <div className="hgc-bottom">
+                            <div className="hgc-dots">
+                                {slides.map((_, i) => (
+                                    <button
+                                        key={i}
+                                        className={`hgc-dot ${i === slideIdx ? "active" : ""}`}
+                                        onClick={() => goToSlide(i)}
+                                        aria-label={`Slide ${i + 1}`}
+                                    />
+                                ))}
+                            </div>
                             <button
-                                key={i}
-                                className={`hero-dot ${i === slideIdx ? "active" : ""}`}
-                                onClick={() => goToSlide(i)}
-                                aria-label={`Go to slide ${i + 1}`}
-                            />
-                        ))}
+                                className="hgc-play"
+                                onClick={() => setIsPlaying(p => !p)}
+                                aria-label={isPlaying ? "Pause" : "Play"}
+                            >
+                                <i className={`bi bi-${isPlaying ? "pause-fill" : "play-fill"}`} />
+                            </button>
+                        </div>
                     </div>
-                    <button
-                        className="hero-play-btn"
-                        onClick={() => setIsPlaying(p => !p)}
-                        aria-label={isPlaying ? "Pause slideshow" : "Play slideshow"}
-                    >
-                        <i className={`bi bi-${isPlaying ? "pause-fill" : "play-fill"}`} />
-                    </button>
-                    <button className="hero-arrow next" onClick={nextSlide} aria-label="Next slide">
-                        <i className="bi bi-chevron-right" />
-                    </button>
+
+                    {/* ── Right: Glassmorphism half-circle ── */}
+                    <div className="hero-semicircle-col">
+                        <div className="hero-semicircle">
+
+                            {/* Rotating alert content */}
+                            <div className={`hsc-content ${alertVisible ? "har-visible" : "har-hidden"}`}>
+                                <span className={`har-cat ${latestNews[alertIdx].isAlert ? "har-cat--alert" : ""}`}>
+                                    {latestNews[alertIdx].isAlert && <i className="bi bi-exclamation-triangle-fill" />}
+                                    {latestNews[alertIdx].cat}
+                                </span>
+                                <p className="hsc-text">{latestNews[alertIdx].title}</p>
+                                <span className="hsc-date">
+                                    <i className="bi bi-calendar3" /> {latestNews[alertIdx].date}
+                                </span>
+                            </div>
+
+                            {/* CTA button */}
+                            <Link to="/media/latest-news" className="hsc-btn">
+                                See All Alerts <i className="bi bi-arrow-right" />
+                            </Link>
+
+                            {/* Progress pips */}
+                            <div className="hsc-pips">
+                                {latestNews.map((_, i) => (
+                                    <button
+                                        key={i}
+                                        className={`har-pip ${i === alertIdx ? "active" : ""}`}
+                                        onClick={() => { setAlertVisible(false); setTimeout(() => { setAlertIdx(i); setAlertVisible(true); }, 420); }}
+                                        aria-label={`Alert ${i + 1}`}
+                                    />
+                                ))}
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
             </section>
-
-            {/* ── STICKY ALERT TICKER — below hero ──────────────── */}
-            <div className="home-ticker-bar">
-                <div className="htb-label">
-                    <i className="bi bi-megaphone-fill" /> Alerts
-                </div>
-                <div className="htb-scroll-area">
-                    <div className={`htb-track ${tickerPaused ? "paused" : ""}`}>
-                        <span>{tickerContent}&nbsp;&nbsp;&nbsp;◆&nbsp;&nbsp;&nbsp;{tickerContent}</span>
-                    </div>
-                </div>
-                <button
-                    className="htb-pause-btn"
-                    onClick={() => setTickerPaused(p => !p)}
-                    aria-label={tickerPaused ? "Resume alerts" : "Pause alerts"}
-                >
-                    <i className={`bi bi-${tickerPaused ? "play-fill" : "pause-fill"}`} />
-                </button>
-            </div>
 
             {/* ═══════════════════════════════════════════════════
                 2. MISSION / GOAL / VISION — NDLEA card grid
@@ -638,7 +683,7 @@ function Home() {
             {/* ═══════════════════════════════════════════════════
                 7. QUICK ACCESS TILES
                 ═══════════════════════════════════════════════════ */}
-            <section className="quick-access-section page-section">
+            <section className="quick-access-section page-section page-section--gray">
                 <div className="container">
                     <div className="section-header-row center">
                         <span className="section-label">Services</span>

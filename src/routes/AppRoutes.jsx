@@ -7,6 +7,7 @@ import RTI from "../pages/RTI";
 import Tenders from "../pages/Tenders";
 import OfficeLocator from "../pages/OfficeLocator";
 import RedCornerNotice from "../pages/RedCornerNotice";
+import OurOfficers from "../pages/OurOfficers";
 import NotFound from "../pages/NotFound";
 import PageStub from "../pages/PageStub";
 
@@ -27,6 +28,7 @@ function AppRoutes() {
             <Route path="/motto-mission-vision"  element={stub("Mission, Vision & Motto", "The ethos that guides NCB", [{ label: "About", path: "/about" }, { label: "Mission, Vision & Motto", path: "/motto-mission-vision" }])} />
             <Route path="/organization"          element={stub("Hierarchy & Structure", "NCB's organizational hierarchy", [{ label: "About", path: "/about" }, { label: "Hierarchy & Structure", path: "/organization" }])} />
             <Route path="/office-locator"        element={<MainLayout><OfficeLocator /></MainLayout>} />
+            <Route path="/our-officers"          element={<MainLayout><OurOfficers /></MainLayout>} />
             <Route path="/partners"              element={stub("Our Partners", "NCB's national and international partners", [{ label: "About", path: "/about" }, { label: "Our Partners", path: "/partners" }])} />
 
             {/* ── Media, News & Events ─────────────────────── */}

@@ -109,70 +109,24 @@
 
 .map-inner {
     position: relative;
-    padding: $space-3;
+    padding: $space-2;
 }
 
 .india-map-svg {
     width: 100%;
     height: auto;
     display: block;
-}
 
-.zone-dot {
-    fill: rgba($gold-500, 0.4);
-    stroke: $gold-500;
-    stroke-width: 2;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    &:hover { fill: $gold-500; r: 16; }
-    &.selected {
-        fill: $gold-500;
-        stroke: $gold-300;
-        stroke-width: 3;
-        filter: drop-shadow(0 0 8px rgba($gold-500, 0.6));
+    // Zone paths get hover treatment
+    g[role="button"] {
+        &:hover path { opacity: 1 !important; filter: brightness(1.15) !important; }
+        &:focus { outline: none; path { stroke: $gold-300 !important; stroke-width: 2.5 !important; } }
     }
-    &:focus { outline: 2px solid $gold-300; outline-offset: 3px; }
 }
 
-.zone-label {
-    fill: rgba($white, 0.55);
-    font-size: 9px;
-    font-family: $font-body;
-    pointer-events: none;
-    transition: fill 0.3s ease;
-    &.selected { fill: $gold-300; font-size: 10px; font-weight: 600; }
-}
-
-.zone-connector {
-    stroke: rgba($gold-500, 0.1);
-    stroke-width: 0.5;
-    stroke-dasharray: 3 3;
-    pointer-events: none;
-}
-
-.map-legend {
-    display: flex;
-    gap: $space-4;
-    padding: $space-2 $space-3;
-    border-top: 1px solid rgba($white, 0.05);
-}
-
-.ml-item {
-    display: flex;
-    align-items: center;
-    gap: $space-2;
-    font-size: 0.7rem;
-    color: rgba($white, 0.45);
-}
-
-.ml-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: rgba($gold-500, 0.4);
-    border: 1.5px solid $gold-500;
-    &.selected { background: $gold-500; }
-}
+// Legacy legend (now embedded in SVG)
+.map-legend { display: none; }
+.ml-item, .ml-dot { display: none; }
 
 // Detail panel
 .zone-detail-panel {

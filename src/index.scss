@@ -5,6 +5,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  overflow-x: hidden; /* prevent horizontal shift at html level */
 }
 
 body {
@@ -14,6 +15,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  min-width: 320px;
 }
 
 a { color: inherit; text-decoration: none; }
@@ -150,5 +152,115 @@ ul, ol { list-style: none; }
   &.is-visible {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+// ── GIGW: Font-size accessibility scaling ─────────────────
+html[data-font-size="small"]  { font-size: 14px; }
+html[data-font-size="normal"] { font-size: 16px; }
+html[data-font-size="large"]  { font-size: 18px; }
+
+// ── GIGW: Keyboard focus indicators (WCAG 2.1 AA) ─────────
+:focus-visible {
+  outline: 3px solid $gold-500;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+// ── GIGW: Screen-reader-only utility ──────────────────────
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// ── GIGW: Highlight Links ─────────────────────────────────
+body.a11y-highlight-links {
+  a:not(.utility-login-btn):not(.nav-submit-tip-btn):not(.hdr-partner-link) {
+    background-color: #ffff00 !important;
+    color: #000 !important;
+    text-decoration: underline !important;
+    padding: 1px 3px !important;
+    border-radius: 2px !important;
+    outline: none;
+  }
+}
+
+// ── GIGW: Hide Images ─────────────────────────────────────
+body.a11y-hide-images {
+  img:not(.hdr-emblem):not(.footer-emblem) {
+    visibility: hidden !important;
+  }
+}
+
+// ── GIGW: Default Cursor ──────────────────────────────────
+body.a11y-default-cursor,
+body.a11y-default-cursor * {
+  cursor: default !important;
+}
+
+// ── GIGW: High Contrast Mode ──────────────────────────────
+body.hc-mode {
+  .hdr-utility-bar,
+  .hdr-brand-row        { background: #000 !important; border-color: #fff !important; }
+
+  .hdr-nav-ticker-row,
+  .hdr-main-nav         { background: #111 !important; border-bottom-color: #ffff00 !important; }
+
+  .nav-link-btn         { color: #ffff00 !important; }
+  .nav-link-btn:hover,
+  .nav-link-btn.active  { color: #fff !important; border-bottom-color: #ffff00 !important; background: #111 !important; }
+
+  .nav-dropdown,
+  .nav-sub-dropdown     { background: #000 !important; border-color: #ffff00 !important; }
+  .dropdown-link        { color: #ffff00 !important; }
+  .dropdown-link:hover  { background: #222 !important; }
+
+  .utility-link,
+  .utility-gov-tag      { color: #fff !important; }
+  .utility-gov-tag i    { color: #ffff00 !important; }
+  .utility-helpline     { color: #ffff00 !important; }
+  .utility-lang-btn     { background: #111 !important; color: #ffff00 !important; border-color: #ffff00 !important; }
+  .utility-login-btn    { background: #ffff00 !important; color: #000 !important; }
+  .a11y-font-btn        { background: #111 !important; color: #ffff00 !important; border-color: #ffff00 !important; }
+  .a11y-font-btn.active { background: #ffff00 !important; color: #000 !important; }
+  .a11y-contrast-btn    { background: #ffff00 !important; color: #000 !important; border-color: #ffff00 !important; }
+  .a11y-sr-link         { color: #ffff00 !important; }
+
+  .section-title        { color: #fff !important; }
+  .section-label        { color: #ffff00 !important; }
+  .section-divider      { background: #ffff00 !important; }
+
+  .page-section         { background: #000 !important; }
+  .page-section--dark   { background: #000 !important; }
+  .page-section--gray   { background: #0a0a0a !important; }
+
+  .ncb-footer,
+  .footer-newsletter-band,
+  .footer-main,
+  .footer-policy-bar,
+  .footer-bottom-bar    { background: #000 !important; }
+  .footer-newsletter-band { border-top-color: #ffff00 !important; }
+  .footer-digital-band  { background: #0a0a0a !important; border-color: #fff !important; }
+
+  a                     { color: #ffff00 !important; }
+  a:hover               { color: #fff !important; text-decoration: underline !important; }
+
+  button                { border: 1px solid #666 !important; }
+  .nav-submit-tip-btn,
+  .dg-read-more-btn,
+  .about-strip-btn      { background: #ffff00 !important; color: #000 !important; border-color: #ffff00 !important; }
+
+  .hdr-emblem           { filter: brightness(0) invert(1) !important; }
+
+  .home-ticker-bar      { background: #000 !important; border-color: #ffff00 !important; }
+  .htb-label            { background: #ffff00 !important; color: #000 !important; }
+
+  img:not(.hdr-emblem):not(.footer-emblem) {
+    filter: grayscale(0.3) contrast(1.1);
   }
 }
