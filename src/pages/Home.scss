@@ -4,12 +4,26 @@
 // ── Section Header helpers ────────────────────────────────
 .section-header-row {
     margin-bottom: $space-5;
-    &.center { text-align: center; .section-divider { margin-left: auto; margin-right: auto; } }
+
+    &.center {
+        text-align: center;
+
+        .section-divider {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
     &.between {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        @include respond(sm) { flex-direction: column; align-items: flex-start; gap: $space-3; }
+
+        @include respond(sm) {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: $space-3;
+        }
     }
 }
 
@@ -18,7 +32,12 @@
     justify-content: space-between;
     align-items: flex-end;
     margin-bottom: $space-5;
-    @include respond(sm) { flex-direction: column; align-items: flex-start; gap: $space-2; }
+
+    @include respond(sm) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: $space-2;
+    }
 }
 
 .view-all-link {
@@ -32,13 +51,19 @@
     align-items: center;
     gap: 4px;
     transition: color $transition-fast;
-    &:hover { color: $gold-500; }
+
+    &:hover {
+        color: $gold-500;
+    }
 }
 
 .view-all-link-light {
     @extend .view-all-link;
     color: $gold-300;
-    &:hover { color: $gold-400; }
+
+    &:hover {
+        color: $gold-400;
+    }
 }
 
 .mwt-view-row {
@@ -60,7 +85,12 @@
     text-decoration: none;
     white-space: nowrap;
     transition: background $transition-fast, transform $transition-fast;
-    &:hover { background: #1176b8; transform: translateY(-1px); color: $white; }
+
+    &:hover {
+        background: #1176b8;
+        transform: translateY(-1px);
+        color: $white;
+    }
 }
 
 .view-more-link {
@@ -82,7 +112,9 @@
     height: 38px;
     overflow: hidden;
 
-    @include respond(lg) { top: 43px; }
+    @include respond(lg) {
+        top: 43px;
+    }
 
     &:hover .htb-track {
         animation-play-state: paused;
@@ -118,7 +150,10 @@
     display: inline-flex;
     white-space: nowrap;
     animation: ticker 55s linear infinite;
-    &.paused { animation-play-state: paused; }
+
+    &.paused {
+        animation-play-state: paused;
+    }
 
     span {
         font-size: 0.8rem;
@@ -137,13 +172,16 @@
     font-size: 0.85rem;
     flex-shrink: 0;
     transition: color $transition-fast;
-    &:hover { color: $gold-300; }
+
+    &:hover {
+        color: $gold-300;
+    }
 }
 
 // ── 1. HERO — Dark two-column: galaxy card + alerts ────────
 .hero-dark {
     background: linear-gradient(140deg, $navy-900 0%, #0d1f38 60%, $navy-800 100%);
-    padding: 52px 0 48px;
+    padding: 36px 0 32px;
     position: relative;
     overflow: hidden;
 
@@ -151,7 +189,7 @@
         content: "";
         position: absolute;
         inset: 0;
-        background-image: radial-gradient(circle, rgba(255,255,255,0.025) 1px, transparent 1px);
+        background-image: radial-gradient(circle, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
         background-size: 30px 30px;
         pointer-events: none;
     }
@@ -168,20 +206,18 @@
         pointer-events: none;
     }
 
-    @include respond(md) { padding: 36px 0; }
+    @include respond(md) {
+        padding: 36px 0;
+    }
 }
 
 .hero-dark-inner {
-    display: grid;
-    grid-template-columns: 1fr 300px;
-    gap: 0;
-    align-items: stretch;
     position: relative;
-    z-index: 1;
+    z-index: 2;
+    padding-right: 290px; // carousel ends 290px from right → clears the alert circle content area
 
     @include respond(lg) {
-        grid-template-columns: 1fr;
-        gap: $space-5;
+        padding-right: $space-5;
     }
 }
 
@@ -193,14 +229,14 @@
     background: $navy-900;
     box-shadow:
         0 0 0 1px rgba($gold-500, 0.15),
-        0 24px 80px rgba(0,0,0,0.55),
-        0 4px 16px rgba(0,0,0,0.3);
+        0 24px 80px rgba(0, 0, 0, 0.55),
+        0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 .hgc-slides {
     position: relative;
     width: 100%;
-    aspect-ratio: 8/3;  // matches actual banner dimensions (1521×570 ≈ 8:3)
+    aspect-ratio: 8/3; // matches actual banner dimensions (1521×570 ≈ 8:3)
     background: $navy-900;
 }
 
@@ -210,7 +246,10 @@
     opacity: 0;
     transition: opacity 1s ease;
 
-    &.active { opacity: 1; z-index: 1; }
+    &.active {
+        opacity: 1;
+        z-index: 1;
+    }
 
     img {
         width: 100%;
@@ -256,7 +295,7 @@
     color: $white;
     line-height: 1.35;
     margin: 0;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .hgc-arrow {
@@ -278,11 +317,20 @@
     font-size: 0.95rem;
     transition: all $transition-fast;
 
-    &:hover { background: rgba($white, 0.18); border-color: rgba($white, 0.4); transform: translateY(-50%) scale(1.05); }
+    &:hover {
+        background: rgba($white, 0.18);
+        border-color: rgba($white, 0.4);
+        transform: translateY(-50%) scale(1.05);
+    }
 }
 
-.hgc-prev { left: 14px; }
-.hgc-next { right: 14px; }
+.hgc-prev {
+    left: 14px;
+}
+
+.hgc-next {
+    right: 14px;
+}
 
 .hgc-bottom {
     position: absolute;
@@ -331,18 +379,22 @@
     color: $white;
     font-size: 0.62rem;
     transition: background $transition-fast;
-    &:hover { background: rgba($white, 0.2); }
+
+    &:hover {
+        background: rgba($white, 0.2);
+    }
 }
 
-// ── Right column: glassmorphism half-circle ───────────────
-.hero-semicircle-col {
-    display: flex;
-    align-items: stretch;
-}
-
+// ── Glassmorphism half-circle: absolutely positioned, full section height ──
 .hero-semicircle {
-    flex: 1;
-    border-radius: 50% 0 0 50%;       // D-shape: flat right edge, curved left
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 500px;
+    z-index: 1; // behind the carousel (z-index: 2)
+
+    border-radius: 50% 0 0 50%; // D-shape: curved left, flat right
     background: rgba($white, 0.055);
     backdrop-filter: blur(22px);
     -webkit-backdrop-filter: blur(22px);
@@ -350,16 +402,21 @@
     border-right: none;
     box-shadow:
         inset 0 0 90px rgba($white, 0.022),
-        -8px 0 40px rgba(0, 0, 0, 0.18);
+        -10px 0 50px rgba(0, 0, 0, 0.22);
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: $space-5;
-    padding: 64px 28px 52px 56px;     // generous left padding to clear the curve
+    padding: 20px 24px 20px 220px; // left padding clears the elliptical curve
     text-align: center;
-    overflow: hidden;                  // clips content to the D-shape boundary
+
+    @include respond(lg) {
+        display: none;
+    }
+
+    // hide on mobile, carousel takes full width
 }
 
 .hsc-content {
@@ -385,7 +442,10 @@
     display: flex;
     align-items: center;
     gap: 4px;
-    i { font-size: 0.62rem; }
+
+    i {
+        font-size: 0.62rem;
+    }
 }
 
 .hsc-btn {
@@ -413,7 +473,9 @@
         transform: translateY(-1px);
     }
 
-    i { font-size: 0.7rem; }
+    i {
+        font-size: 0.7rem;
+    }
 }
 
 .hsc-pips {
@@ -451,7 +513,10 @@
     &--alert {
         background: rgba($red-500, 0.2);
         color: #f08080;
-        i { font-size: 0.58rem; }
+
+        i {
+            font-size: 0.58rem;
+        }
     }
 }
 
@@ -471,7 +536,9 @@
         border-radius: 3px;
     }
 
-    &:hover:not(.active) { background: rgba($white, 0.45); }
+    &:hover:not(.active) {
+        background: rgba($white, 0.45);
+    }
 }
 
 // ── (legacy hero classes removed) ────────────────────────
@@ -491,7 +558,11 @@
     padding: 6px 16px;
     border-radius: $radius-full;
     margin-bottom: $space-5;
-    i { color: $gold-500; font-size: 0.8rem; }
+
+    i {
+        color: $gold-500;
+        font-size: 0.8rem;
+    }
 }
 
 .hero-v2-heading {
@@ -515,7 +586,10 @@
     max-width: 500px;
     margin-bottom: $space-6;
 
-    strong { color: $navy-800; font-weight: 700; }
+    strong {
+        color: $navy-800;
+        font-weight: 700;
+    }
 }
 
 .hero-v2-actions {
@@ -544,14 +618,25 @@
         background: $navy-800;
         color: $white;
         border-color: $navy-800;
-        &:hover { background: $navy-600; border-color: $navy-600; color: $white; transform: translateY(-1px); }
+
+        &:hover {
+            background: $navy-600;
+            border-color: $navy-600;
+            color: $white;
+            transform: translateY(-1px);
+        }
     }
 
     &--outline {
         background: transparent;
         color: $navy-800;
         border-color: $navy-800;
-        &:hover { background: $navy-800; color: $white; transform: translateY(-1px); }
+
+        &:hover {
+            background: $navy-800;
+            color: $white;
+            transform: translateY(-1px);
+        }
     }
 }
 
@@ -560,7 +645,7 @@
     align-items: center;
     gap: $space-3;
 
-    > span {
+    >span {
         font-size: 0.85rem;
         color: $gray-500;
         font-weight: 500;
@@ -600,8 +685,15 @@
     overflow: hidden;
     height: 420px;
 
-    @include respond(lg) { max-width: 580px; margin: 0 auto; height: 380px; }
-    @include respond(sm) { height: 320px; }
+    @include respond(lg) {
+        max-width: 580px;
+        margin: 0 auto;
+        height: 380px;
+    }
+
+    @include respond(sm) {
+        height: 320px;
+    }
 }
 
 .hac-header {
@@ -630,9 +722,17 @@
 }
 
 @keyframes hacPulse {
-    0%   { box-shadow: 0 0 0 0 rgba($gold-400, 0.6); }
-    70%  { box-shadow: 0 0 0 8px rgba($gold-400, 0); }
-    100% { box-shadow: 0 0 0 0 rgba($gold-400, 0); }
+    0% {
+        box-shadow: 0 0 0 0 rgba($gold-400, 0.6);
+    }
+
+    70% {
+        box-shadow: 0 0 0 8px rgba($gold-400, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba($gold-400, 0);
+    }
 }
 
 .hac-title {
@@ -656,8 +756,14 @@
     align-items: center;
     gap: 4px;
     transition: color $transition-fast;
-    &:hover { color: $gold-400; }
-    i { font-size: 0.65rem; }
+
+    &:hover {
+        color: $gold-400;
+    }
+
+    i {
+        font-size: 0.65rem;
+    }
 }
 
 .hac-body {
@@ -665,8 +771,15 @@
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: rgba($navy-500, 0.2) transparent;
-    &::-webkit-scrollbar { width: 4px; }
-    &::-webkit-scrollbar-thumb { background: rgba($navy-500, 0.2); border-radius: 2px; }
+
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba($navy-500, 0.2);
+        border-radius: 2px;
+    }
 }
 
 .hac-item {
@@ -677,14 +790,22 @@
     border-bottom: 1px solid $gray-100;
     transition: background $transition-fast;
 
-    &:hover { background: $gray-100; }
-    &:last-child { border-bottom: none; }
+    &:hover {
+        background: $gray-100;
+    }
+
+    &:last-child {
+        border-bottom: none;
+    }
 
     &--alert {
         border-left: 3px solid $red-500;
         padding-left: calc(#{$space-5} - 3px);
         background: rgba($red-500, 0.02);
-        &:hover { background: rgba($red-500, 0.04); }
+
+        &:hover {
+            background: rgba($red-500, 0.04);
+        }
     }
 }
 
@@ -712,7 +833,10 @@
     &--alert {
         background: rgba($red-500, 0.12);
         color: $red-600;
-        i { font-size: 0.6rem; }
+
+        i {
+            font-size: 0.6rem;
+        }
     }
 }
 
@@ -722,7 +846,10 @@
     display: flex;
     align-items: center;
     gap: 4px;
-    i { font-size: 0.62rem; }
+
+    i {
+        font-size: 0.62rem;
+    }
 }
 
 .hac-text {
@@ -750,9 +877,18 @@
     align-items: center;
     gap: 6px;
     transition: color $transition-fast;
-    i { color: $gold-500; }
-    strong { color: $red-600; }
-    &:hover { color: $navy-500; }
+
+    i {
+        color: $gold-500;
+    }
+
+    strong {
+        color: $red-600;
+    }
+
+    &:hover {
+        color: $navy-500;
+    }
 }
 
 .hac-footer-tag {
@@ -766,7 +902,7 @@
 }
 
 // Keep old carousel classes (used nowhere now, safe to leave)
-.hero-v2-card { }
+.hero-v2-card {}
 
 .hero-v2-card-inner {
     position: relative;
@@ -775,7 +911,10 @@
     box-shadow: 0 12px 48px rgba($navy-900, 0.18), 0 2px 8px rgba($navy-900, 0.08);
     background: $white;
 
-    @include respond(lg) { max-width: 580px; margin: 0 auto; }
+    @include respond(lg) {
+        max-width: 580px;
+        margin: 0 auto;
+    }
 }
 
 .hero-v2-slides {
@@ -783,8 +922,13 @@
     height: 380px;
     overflow: hidden;
 
-    @include respond(md) { height: 280px; }
-    @include respond(sm) { height: 220px; }
+    @include respond(md) {
+        height: 280px;
+    }
+
+    @include respond(sm) {
+        height: 220px;
+    }
 }
 
 .hero-v2-slide {
@@ -793,7 +937,9 @@
     opacity: 0;
     transition: opacity 0.85s ease;
 
-    &.active { opacity: 1; }
+    &.active {
+        opacity: 1;
+    }
 
     img {
         width: 100%;
@@ -820,14 +966,23 @@
     cursor: pointer;
     color: $navy-800;
     font-size: 1rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     transition: all $transition-fast;
 
-    &:hover { background: $white; box-shadow: 0 4px 18px rgba(0,0,0,0.28); transform: translateY(-50%) scale(1.05); }
+    &:hover {
+        background: $white;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.28);
+        transform: translateY(-50%) scale(1.05);
+    }
 }
 
-.hero-v2-prev { left: 12px; }
-.hero-v2-next { right: 12px; }
+.hero-v2-prev {
+    left: 12px;
+}
+
+.hero-v2-next {
+    right: 12px;
+}
 
 .hero-v2-dots {
     position: absolute;
@@ -873,7 +1028,10 @@
     color: $navy-800;
     font-size: 0.7rem;
     transition: background $transition-fast;
-    &:hover { background: $white; }
+
+    &:hover {
+        background: $white;
+    }
 }
 
 
@@ -890,14 +1048,21 @@
     align-items: center;
     justify-content: space-between;
     gap: $space-6;
-    @include respond(lg) { flex-direction: column; align-items: flex-start; }
+
+    @include respond(lg) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
 
 .hero-text-block {
     flex: 1;
     position: relative;
     min-height: 340px;
-    @include respond(sm) { min-height: 200px; }
+
+    @include respond(sm) {
+        min-height: 200px;
+    }
 }
 
 .hero-text-item {
@@ -916,7 +1081,11 @@
         pointer-events: auto;
     }
 
-    @include respond(lg) { position: relative; top: auto; left: auto; }
+    @include respond(lg) {
+        position: relative;
+        top: auto;
+        left: auto;
+    }
 }
 
 .hero-badge {
@@ -945,7 +1114,9 @@
     letter-spacing: 0.5px;
     margin-bottom: $space-4;
 
-    span:first-child { color: $white; }
+    span:first-child {
+        color: $white;
+    }
 }
 
 .hero-desc {
@@ -985,7 +1156,12 @@
     text-transform: uppercase;
     border-radius: $radius-sm;
     transition: all $transition-fast;
-    &:hover { border-color: $gold-500; color: $gold-400; background: rgba($gold-500, 0.08); }
+
+    &:hover {
+        border-color: $gold-500;
+        color: $gold-400;
+        background: rgba($gold-500, 0.08);
+    }
 }
 
 // Quick stats
@@ -999,13 +1175,17 @@
     border-radius: $radius-lg;
     padding: $space-5;
     min-width: 160px;
+
     @include respond(lg) {
         flex-direction: row;
         min-width: 0;
         gap: $space-4;
         padding: $space-4;
     }
-    @include respond(md) { display: none; }
+
+    @include respond(md) {
+        display: none;
+    }
 }
 
 .quick-stat {
@@ -1032,7 +1212,11 @@
     width: 100%;
     height: 1px;
     background: rgba($white, 0.1);
-    @include respond(lg) { width: 1px; height: 40px; }
+
+    @include respond(lg) {
+        width: 1px;
+        height: 40px;
+    }
 }
 
 // Hero controls
@@ -1061,10 +1245,19 @@
     font-size: 1rem;
     transition: all $transition-fast;
     backdrop-filter: blur(4px);
-    &:hover { border-color: $gold-500; color: $gold-400; background: rgba($gold-500, 0.12); }
+
+    &:hover {
+        border-color: $gold-500;
+        color: $gold-400;
+        background: rgba($gold-500, 0.12);
+    }
 }
 
-.hero-dots { display: flex; gap: $space-2; align-items: center; }
+.hero-dots {
+    display: flex;
+    gap: $space-2;
+    align-items: center;
+}
 
 .hero-dot {
     width: 8px;
@@ -1074,7 +1267,12 @@
     border: none;
     cursor: pointer;
     transition: all $transition-fast;
-    &.active { background: $gold-500; width: 24px; border-radius: 4px; }
+
+    &.active {
+        background: $gold-500;
+        width: 24px;
+        border-radius: 4px;
+    }
 }
 
 .hero-play-btn {
@@ -1090,7 +1288,11 @@
     cursor: pointer;
     font-size: 0.85rem;
     transition: all $transition-fast;
-    &:hover { background: $gold-500; color: $navy-900; }
+
+    &:hover {
+        background: $gold-500;
+        color: $navy-900;
+    }
 }
 
 // ── 2. MISSION / GOAL / VISION ────────────────────────────
@@ -1098,7 +1300,10 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: $space-5;
-    @include respond(md) { grid-template-columns: 1fr; }
+
+    @include respond(md) {
+        grid-template-columns: 1fr;
+    }
 }
 
 .mission-card {
@@ -1111,9 +1316,44 @@
     @include card-hover;
     border-top: 4px solid;
 
-    &--gold { border-top-color: $gold-500; .mc-icon-box { background: rgba($gold-500, 0.18); color: $gold-400; } .mc-label { color: $gold-400; } }
-    &--navy { border-top-color: $navy-400; .mc-icon-box { background: rgba($navy-400, 0.25); color: $gold-300; } .mc-label { color: $gold-300; } }
-    &--red  { border-top-color: $red-400;  .mc-icon-box { background: rgba($red-500, 0.2);  color: $red-400;  } .mc-label { color: $red-400; } }
+    &--gold {
+        border-top-color: $gold-500;
+
+        .mc-icon-box {
+            background: rgba($gold-500, 0.18);
+            color: $gold-400;
+        }
+
+        .mc-label {
+            color: $gold-400;
+        }
+    }
+
+    &--navy {
+        border-top-color: $navy-400;
+
+        .mc-icon-box {
+            background: rgba($navy-400, 0.25);
+            color: $gold-300;
+        }
+
+        .mc-label {
+            color: $gold-300;
+        }
+    }
+
+    &--red {
+        border-top-color: $red-400;
+
+        .mc-icon-box {
+            background: rgba($red-500, 0.2);
+            color: $red-400;
+        }
+
+        .mc-label {
+            color: $red-400;
+        }
+    }
 
     // Background watermark icon
     &::before {
@@ -1177,7 +1417,11 @@
     align-items: center;
     gap: $space-2;
     transition: gap $transition-fast, color $transition-fast;
-    &:hover { gap: $space-3; color: $gold-300; }
+
+    &:hover {
+        gap: $space-3;
+        color: $gold-300;
+    }
 }
 
 // ── 3. DG MESSAGE ────────────────────────────────────────
@@ -1186,12 +1430,20 @@
     grid-template-columns: auto 1fr;
     gap: $space-8;
     align-items: center;
-    @include respond(md) { grid-template-columns: 1fr; }
+
+    @include respond(md) {
+        grid-template-columns: 1fr;
+    }
 }
 
 .dg-image-col {
     position: relative;
-    @include respond(md) { display: flex; align-items: center; gap: $space-5; }
+
+    @include respond(md) {
+        display: flex;
+        align-items: center;
+        gap: $space-5;
+    }
 }
 
 .dg-portrait-frame {
@@ -1201,8 +1453,12 @@
     border-radius: $radius-lg;
     overflow: hidden;
     border: 4px solid rgba($gold-500, 0.4);
-    box-shadow: 0 0 0 1px rgba($gold-500, 0.15), 0 24px 48px rgba(0,0,0,0.4);
-    @include respond(md) { width: 140px; height: 160px; }
+    box-shadow: 0 0 0 1px rgba($gold-500, 0.15), 0 24px 48px rgba(0, 0, 0, 0.4);
+
+    @include respond(md) {
+        width: 140px;
+        height: 160px;
+    }
 
     img {
         width: 100%;
@@ -1239,12 +1495,22 @@
     align-items: center;
     gap: $space-2;
     white-space: nowrap;
-    @include respond(md) { position: static; transform: none; align-self: flex-end; margin-bottom: $space-3; }
+
+    @include respond(md) {
+        position: static;
+        transform: none;
+        align-self: flex-end;
+        margin-bottom: $space-3;
+    }
 }
 
 .dg-text-col {
     padding-left: $space-3;
-    @include respond(md) { padding-left: 0; padding-top: $space-5; }
+
+    @include respond(md) {
+        padding-left: 0;
+        padding-top: $space-5;
+    }
 }
 
 .dg-quote-block {
@@ -1254,7 +1520,10 @@
     @include gold-border-left;
     background: rgba($white, 0.04);
     border-radius: 0 $radius-md $radius-md 0;
-    @include respond(sm) { padding: $space-4 $space-4 $space-4 $space-5; }
+
+    @include respond(sm) {
+        padding: $space-4 $space-4 $space-4 $space-5;
+    }
 }
 
 .dg-quote-icon {
@@ -1313,9 +1582,19 @@
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: $space-4;
-    @include respond(xl) { grid-template-columns: repeat(3, 1fr); }
-    @include respond(md) { grid-template-columns: repeat(2, 1fr); }
-    @include respond(sm) { grid-template-columns: 1fr 1fr; gap: $space-3; }
+
+    @include respond(xl) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include respond(md) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond(sm) {
+        grid-template-columns: 1fr 1fr;
+        gap: $space-3;
+    }
 }
 
 .kpi-item {
@@ -1324,8 +1603,14 @@
     gap: $space-3;
     padding: $space-3;
     border-right: 1px solid rgba($white, 0.06);
-    &:last-child { border-right: none; }
-    @include respond(xl) { border-right: none; }
+
+    &:last-child {
+        border-right: none;
+    }
+
+    @include respond(xl) {
+        border-right: none;
+    }
 }
 
 .kpi-icon {
@@ -1342,7 +1627,12 @@
     flex-shrink: 0;
 }
 
-.kpi-info { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+.kpi-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+}
 
 .kpi-value {
     font-family: $font-heading;
@@ -1350,7 +1640,12 @@
     font-weight: 700;
     color: $white;
     line-height: 1;
-    small { font-size: 0.7rem; color: $gray-400; margin-left: 2px; }
+
+    small {
+        font-size: 0.7rem;
+        color: $gray-400;
+        margin-left: 2px;
+    }
 }
 
 .kpi-label {
@@ -1377,7 +1672,15 @@
     display: flex;
     align-items: center;
     gap: 2px;
-    &.up { color: #4ade80; background: rgba(74, 222, 128, 0.1); i { color: #4ade80; } }
+
+    &.up {
+        color: #4ade80;
+        background: rgba(74, 222, 128, 0.1);
+
+        i {
+            color: #4ade80;
+        }
+    }
 }
 
 // ── 5. NEWS + EVENTS ─────────────────────────────────────
@@ -1385,7 +1688,10 @@
     display: grid;
     grid-template-columns: 1fr 1.5fr;
     gap: $space-6;
-    @include respond(lg) { grid-template-columns: 1fr; }
+
+    @include respond(lg) {
+        grid-template-columns: 1fr;
+    }
 }
 
 // News col
@@ -1398,12 +1704,24 @@
     scroll-behavior: auto;
     scrollbar-width: thin;
     scrollbar-color: $gold-300 transparent;
-    &::-webkit-scrollbar { width: 4px; }
-    &::-webkit-scrollbar-thumb { background: $gold-300; border-radius: 4px; }
-    @include respond(sm) { height: 300px; }
+
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $gold-300;
+        border-radius: 4px;
+    }
+
+    @include respond(sm) {
+        height: 300px;
+    }
 }
 
-.news-list { padding: $space-3; }
+.news-list {
+    padding: $space-3;
+}
 
 .news-item {
     display: flex;
@@ -1415,11 +1733,23 @@
     cursor: pointer;
     transition: background $transition-fast;
     border-radius: $radius-sm;
-    &:hover { background: rgba($gold-500, 0.1); }
-    &:last-child { border-bottom: none; }
+
+    &:hover {
+        background: rgba($gold-500, 0.1);
+    }
+
+    &:last-child {
+        border-bottom: none;
+    }
 }
 
-.news-item-left { display: flex; align-items: flex-start; gap: $space-3; flex: 1; min-width: 0; }
+.news-item-left {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-3;
+    flex: 1;
+    min-width: 0;
+}
 
 .news-dot {
     width: 8px;
@@ -1428,10 +1758,20 @@
     background: $gold-500;
     flex-shrink: 0;
     margin-top: 6px;
-    &.alert { background: $red-400; box-shadow: 0 0 0 3px rgba($red-500, 0.2); }
+
+    &.alert {
+        background: $red-400;
+        box-shadow: 0 0 0 3px rgba($red-500, 0.2);
+    }
 }
 
-.news-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.news-text {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
 
 .news-cat {
     font-family: $font-heading;
@@ -1441,8 +1781,16 @@
     text-transform: uppercase;
     padding: 1px 6px;
     border-radius: $radius-sm;
-    &.cat-alert { background: rgba($red-500, 0.2); color: $red-400; }
-    &.cat-default { background: rgba($gold-500, 0.15); color: $gold-400; }
+
+    &.cat-alert {
+        background: rgba($red-500, 0.2);
+        color: $red-400;
+    }
+
+    &.cat-default {
+        background: rgba($gold-500, 0.15);
+        color: $gold-400;
+    }
 }
 
 .news-title {
@@ -1457,17 +1805,27 @@
     display: flex;
     align-items: center;
     gap: 4px;
-    i { font-size: 0.65rem; }
+
+    i {
+        font-size: 0.65rem;
+    }
 }
 
-.news-arrow { color: $gold-500; font-size: 0.65rem; flex-shrink: 0; }
+.news-arrow {
+    color: $gold-500;
+    font-size: 0.65rem;
+    flex-shrink: 0;
+}
 
 // Events cards
 .events-cards-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: $space-4;
-    @include respond(md) { grid-template-columns: 1fr; }
+
+    @include respond(md) {
+        grid-template-columns: 1fr;
+    }
 }
 
 .event-card {
@@ -1482,8 +1840,17 @@
     position: relative;
     height: 140px;
     overflow: hidden;
-    img { width: 100%; height: 100%; object-fit: cover; transition: transform $transition-slow; }
-    &:hover img { transform: scale(1.05); }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform $transition-slow;
+    }
+
+    &:hover img {
+        transform: scale(1.05);
+    }
 }
 
 .event-cat-tag {
@@ -1518,10 +1885,24 @@
     flex-shrink: 0;
 }
 
-.ed-day { font-family: $font-heading; font-size: 1.3rem; font-weight: 700; color: $gold-400; line-height: 1; }
-.ed-month { font-size: 0.65rem; color: rgba($white, 0.5); text-transform: uppercase; letter-spacing: 0.5px; }
+.ed-day {
+    font-family: $font-heading;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: $gold-400;
+    line-height: 1;
+}
 
-.event-info { flex: 1; }
+.ed-month {
+    font-size: 0.65rem;
+    color: rgba($white, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.event-info {
+    flex: 1;
+}
 
 .event-title {
     font-family: $font-heading;
@@ -1538,7 +1919,11 @@
     display: flex;
     align-items: center;
     gap: 4px;
-    i { color: $gold-400; font-size: 0.65rem; }
+
+    i {
+        color: $gold-400;
+        font-size: 0.65rem;
+    }
 }
 
 // ── 6. QUICK ACCESS TILES ─────────────────────────────────
@@ -1546,8 +1931,14 @@
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     gap: $space-4;
-    @include respond(xl) { grid-template-columns: repeat(4, 1fr); }
-    @include respond(md) { grid-template-columns: repeat(2, 1fr); }
+
+    @include respond(xl) {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    @include respond(md) {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 .quick-tile {
@@ -1563,7 +1954,10 @@
     border-top: 3px solid;
     @include card-hover;
     text-decoration: none;
-    @include respond(sm) { padding: $space-4 $space-3; }
+
+    @include respond(sm) {
+        padding: $space-4 $space-3;
+    }
 
     $colors: (
         red: ($red-500, rgba($red-500, 0.18), rgba($red-500, 0.25)),
@@ -1576,13 +1970,20 @@
         teal: (#0d9488, rgba(13, 148, 136, 0.18), rgba(13, 148, 136, 0.25)),
     );
 
-    @each $name, $vals in $colors {
-        &.qt--#{$name} {
-            border-top-color: nth($vals, 1);
-            .qt-icon { background: nth($vals, 2); color: nth($vals, 1); }
-            &:hover { background: nth($vals, 3); }
+@each $name, $vals in $colors {
+    &.qt--#{$name} {
+        border-top-color: nth($vals, 1);
+
+        .qt-icon {
+            background: nth($vals, 2);
+            color: nth($vals, 1);
+        }
+
+        &:hover {
+            background: nth($vals, 3);
         }
     }
+}
 }
 
 .qt-icon {
@@ -1594,7 +1995,10 @@
     justify-content: center;
     font-size: 1.3rem;
     transition: transform $transition-base;
-    .quick-tile:hover & { transform: scale(1.08); }
+
+    .quick-tile:hover & {
+        transform: scale(1.08);
+    }
 }
 
 .qt-label {
@@ -1621,7 +2025,11 @@
     overflow-x: auto;
     scroll-behavior: smooth;
     scrollbar-width: none;
-    &::-webkit-scrollbar { display: none; }
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
     flex: 1;
 }
 
@@ -1634,7 +2042,10 @@
     cursor: pointer;
     transition: border-color $transition-fast, box-shadow $transition-fast, transform $transition-fast;
 
-    @include respond(sm) { flex: 0 0 180px; height: 135px; }
+    @include respond(sm) {
+        flex: 0 0 180px;
+        height: 135px;
+    }
 
     img {
         width: 100%;
@@ -1649,7 +2060,9 @@
         box-shadow: 0 0 0 2px rgba($gold-500, 0.25), $shadow-lg;
         transform: translateY(-3px);
 
-        img { transform: scale(1.05); }
+        img {
+            transform: scale(1.05);
+        }
     }
 }
 
@@ -1668,14 +2081,21 @@
     font-size: 0.95rem;
     transition: all $transition-fast;
 
-    &:hover { background: $gold-500; border-color: $gold-500; color: $navy-900; }
+    &:hover {
+        background: $gold-500;
+        border-color: $gold-500;
+        color: $navy-900;
+    }
 }
 
 // ── 8. PORTALS ────────────────────────────────────────────
 .portals-track-wrapper {
     overflow-x: hidden;
     cursor: grab;
-    &:active { cursor: grabbing; }
+
+    &:active {
+        cursor: grabbing;
+    }
 }
 
 .portals-inner-track {
@@ -1693,7 +2113,10 @@
     flex-shrink: 0;
     width: 110px;
     transition: transform $transition-fast;
-    &:hover { transform: translateY(-3px); }
+
+    &:hover {
+        transform: translateY(-3px);
+    }
 }
 
 .portal-logo-box {
@@ -1708,8 +2131,17 @@
     padding: $space-2;
     box-shadow: $shadow-sm;
     transition: box-shadow $transition-fast, border-color $transition-fast;
-    .portal-item:hover & { box-shadow: $shadow-md; border-color: $gold-300; }
-    img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+    .portal-item:hover & {
+        box-shadow: $shadow-md;
+        border-color: $gold-300;
+    }
+
+    img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
 }
 
 .portal-name {
@@ -1725,11 +2157,17 @@
     grid-template-columns: 1fr 1fr;
     gap: $space-8;
     align-items: center;
-    @include respond(lg) { grid-template-columns: 1fr; gap: $space-6; }
+
+    @include respond(lg) {
+        grid-template-columns: 1fr;
+        gap: $space-6;
+    }
 }
 
 .about-strip-text {
-    .section-title { color: $white; }
+    .section-title {
+        color: $white;
+    }
 }
 
 .about-strip-desc {
@@ -1765,7 +2203,11 @@
     gap: $space-2;
     text-align: center;
     transition: box-shadow $transition-base, transform $transition-base;
-    &:hover { box-shadow: 0 0 0 1px rgba($gold-500, 0.3); transform: translateY(-2px); }
+
+    &:hover {
+        box-shadow: 0 0 0 1px rgba($gold-500, 0.3);
+        transform: translateY(-2px);
+    }
 }
 
 .afc-icon {
@@ -1831,7 +2273,12 @@
     justify-content: center;
     cursor: pointer;
     transition: background $transition-fast, border-color $transition-fast;
-    &:hover { background: rgba($gold-500, 0.2); border-color: $gold-500; color: $gold-300; }
+
+    &:hover {
+        background: rgba($gold-500, 0.2);
+        border-color: $gold-500;
+        color: $gold-300;
+    }
 }
 
 .mwt-dots {
@@ -1850,8 +2297,15 @@
     cursor: pointer;
     padding: 0;
     transition: background $transition-fast, transform $transition-fast;
-    &.active { background: $gold-500; transform: scale(1.35); }
-    &:hover  { background: rgba($gold-500, 0.55); }
+
+    &.active {
+        background: $gold-500;
+        transform: scale(1.35);
+    }
+
+    &:hover {
+        background: rgba($gold-500, 0.55);
+    }
 }
 
 // Each card = 1/9 of track width = 1/3 of track-wrap width
@@ -1887,7 +2341,9 @@
         display: block;
     }
 
-    @include respond(md) { height: 200px; }
+    @include respond(md) {
+        height: 200px;
+    }
 }
 
 .mwt-status {
@@ -1903,9 +2359,20 @@
     white-space: nowrap;
 }
 
-.mwt-s--high-alert { background: $red-500;  color: $white; }
-.mwt-s--wanted     { background: $gold-500; color: $navy-900; }
-.mwt-s--fugitive   { background: #6B46C1;   color: $white; }
+.mwt-s--high-alert {
+    background: $red-500;
+    color: $white;
+}
+
+.mwt-s--wanted {
+    background: $gold-500;
+    color: $navy-900;
+}
+
+.mwt-s--fugitive {
+    background: #6B46C1;
+    color: $white;
+}
 
 .mwt-info {
     display: flex;
@@ -1931,20 +2398,31 @@
 .mwt-alias {
     font-size: 0.78rem;
     color: rgba($white, 0.55);
-    strong { color: rgba($white, 0.8); }
+
+    strong {
+        color: rgba($white, 0.8);
+    }
 }
 
 .mwt-crime {
     font-size: 0.75rem;
     color: rgba($white, 0.65);
     margin-top: 4px;
-    i { color: $red-400; margin-right: 4px; font-size: 0.68rem; }
+
+    i {
+        color: $red-400;
+        margin-right: 4px;
+        font-size: 0.68rem;
+    }
 }
 
 .mwt-reward {
     font-size: 0.72rem;
     color: rgba($white, 0.45);
-    strong { color: $gold-300; }
+
+    strong {
+        color: $gold-300;
+    }
 }
 
 .mwt-tip-bar {
@@ -1959,8 +2437,13 @@
     font-size: 0.85rem;
     color: rgba($white, 0.7);
 
-    i { color: $gold-400; }
-    @include respond(sm) { padding: $space-3 $space-4; }
+    i {
+        color: $gold-400;
+    }
+
+    @include respond(sm) {
+        padding: $space-3 $space-4;
+    }
 }
 
 .mwt-tip-number {
@@ -1968,7 +2451,10 @@
     font-size: 1.1rem;
     font-weight: 700;
     color: $gold-400;
-    &:hover { color: $gold-300; }
+
+    &:hover {
+        color: $gold-300;
+    }
 }
 
 .mwt-tip-btn {
@@ -1976,7 +2462,10 @@
     font-size: 0.78rem;
     padding: $space-2 $space-4;
     margin-left: auto;
-    @include respond(sm) { margin-left: 0; }
+
+    @include respond(sm) {
+        margin-left: 0;
+    }
 }
 
 // ── SOCIAL MEDIA CAROUSEL ─────────────────────────────────
@@ -1993,7 +2482,12 @@
     position: relative;
     margin-top: $space-5;
     padding: 0 $space-7;
-    @include respond(md) { padding: 0; } // no button padding needed on mobile
+
+    @include respond(md) {
+        padding: 0;
+    }
+
+    // no button padding needed on mobile
 }
 
 .sf-carousel {
@@ -2002,10 +2496,23 @@
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
-    &::-webkit-scrollbar { display: none; }
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
     padding-bottom: $space-2;
-    @include respond(md) { gap: $space-3; padding: 0 $space-4 $space-2; scroll-padding-left: $space-4; }
-    @include respond(sm) { padding: 0 $space-3 $space-2; scroll-padding-left: $space-3; }
+
+    @include respond(md) {
+        gap: $space-3;
+        padding: 0 $space-4 $space-2;
+        scroll-padding-left: $space-4;
+    }
+
+    @include respond(sm) {
+        padding: 0 $space-3 $space-2;
+        scroll-padding-left: $space-3;
+    }
 }
 
 .sf-embed-card {
@@ -2017,9 +2524,19 @@
     box-shadow: $shadow-md;
     border: 1px solid rgba($white, 0.08);
     transition: transform $transition-base, box-shadow $transition-base;
-    &:hover { transform: translateY(-3px); box-shadow: $shadow-lg; }
-    @include respond(md) { flex: 0 0 min(320px, calc(100vw - 32px)); }
-    @include respond(sm) { flex: 0 0 min(300px, calc(100vw - 24px)); }
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: $shadow-lg;
+    }
+
+    @include respond(md) {
+        flex: 0 0 min(320px, calc(100vw - 32px));
+    }
+
+    @include respond(sm) {
+        flex: 0 0 min(300px, calc(100vw - 24px));
+    }
 }
 
 .sf-embed-header {
@@ -2066,8 +2583,14 @@
     border-radius: $radius-full;
     padding: 3px 10px;
     transition: opacity $transition-fast;
-    &:hover { opacity: 0.75; }
-    i { font-size: 0.65rem; }
+
+    &:hover {
+        opacity: 0.75;
+    }
+
+    i {
+        font-size: 0.65rem;
+    }
 }
 
 // Carousel navigation arrows
@@ -2089,12 +2612,25 @@
     color: $white;
     transition: all $transition-fast;
 
-    &:hover { background: $gold-500; color: $navy-900; border-color: $gold-500; box-shadow: $shadow-md; }
-    &--prev { left: 0; }
-    &--next { right: 0; }
+    &:hover {
+        background: $gold-500;
+        color: $navy-900;
+        border-color: $gold-500;
+        box-shadow: $shadow-md;
+    }
+
+    &--prev {
+        left: 0;
+    }
+
+    &--next {
+        right: 0;
+    }
 
     // Hide on mobile — native touch swipe handles navigation
-    @include respond(md) { display: none; }
+    @include respond(md) {
+        display: none;
+    }
 }
 
 // ── Custom Twitter / YouTube cards ───────────────────────
@@ -2105,12 +2641,23 @@
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: $gray-200 transparent;
-    &::-webkit-scrollbar { width: 4px; }
-    &::-webkit-scrollbar-thumb { background: $gray-200; border-radius: 2px; }
+
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $gray-200;
+        border-radius: 2px;
+    }
 }
 
 // Twitter
-.sf-custom--twitter { background: $navy-900; padding: $space-3; gap: $space-2; }
+.sf-custom--twitter {
+    background: $navy-900;
+    padding: $space-3;
+    gap: $space-2;
+}
 
 .sf-tweet {
     display: flex;
@@ -2135,7 +2682,12 @@
     flex-shrink: 0;
 }
 
-.sf-tweet-body { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.sf-tweet-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
 
 .sf-tweet-handle {
     font-size: 0.72rem;
@@ -2159,11 +2711,19 @@
     font-size: 0.67rem;
     color: rgba($white, 0.35);
     margin-top: 2px;
-    i { margin-right: 3px; font-size: 0.62rem; }
+
+    i {
+        margin-right: 3px;
+        font-size: 0.62rem;
+    }
 }
 
 // YouTube
-.sf-custom--youtube { background: #0f0f0f; padding: $space-3; gap: $space-2; }
+.sf-custom--youtube {
+    background: #0f0f0f;
+    padding: $space-3;
+    gap: $space-2;
+}
 
 .sf-video {
     display: flex;
@@ -2181,14 +2741,18 @@
     height: 70px;
     flex-shrink: 0;
 
-    img { width: 100%; height: 100%; object-fit: cover; }
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 }
 
 .sf-video-duration {
     position: absolute;
     bottom: 4px;
     right: 4px;
-    background: rgba(0,0,0,0.85);
+    background: rgba(0, 0, 0, 0.85);
     color: $white;
     font-size: 0.6rem;
     font-weight: 700;
@@ -2202,12 +2766,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0,0,0,0.35);
+    background: rgba(0, 0, 0, 0.35);
     color: $white;
     font-size: 1.2rem;
     opacity: 0;
     transition: opacity $transition-fast;
-    .sf-video:hover & { opacity: 1; }
+
+    .sf-video:hover & {
+        opacity: 1;
+    }
 }
 
 .sf-video-info {
@@ -2234,7 +2801,10 @@
     display: flex;
     align-items: center;
     gap: 4px;
-    i { font-size: 0.62rem; }
+
+    i {
+        font-size: 0.62rem;
+    }
 }
 
 // Shared footer link for custom cards
@@ -2253,6 +2823,12 @@
     margin-top: auto;
     flex-shrink: 0;
     transition: opacity $transition-fast;
-    &:hover { opacity: 0.7; }
-    i { font-size: 0.68rem; }
+
+    &:hover {
+        opacity: 0.7;
+    }
+
+    i {
+        font-size: 0.68rem;
+    }
 }

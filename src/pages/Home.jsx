@@ -341,9 +341,36 @@ function Home() {
                 1. HERO — Dark two-column: galaxy image + alerts
                 ═══════════════════════════════════════════════════ */}
             <section className="hero-dark" aria-label="NCB Hero">
-                <div className="container hero-dark-inner">
 
-                    {/* ── Left: Galaxy image card ── */}
+                {/* ── Glassmorphism half-circle: full section height, z-index 1 ── */}
+                <div className="hero-semicircle">
+                    <div className={`hsc-content ${alertVisible ? "har-visible" : "har-hidden"}`}>
+                        <span className={`har-cat ${latestNews[alertIdx].isAlert ? "har-cat--alert" : ""}`}>
+                            {latestNews[alertIdx].isAlert && <i className="bi bi-exclamation-triangle-fill" />}
+                            {latestNews[alertIdx].cat}
+                        </span>
+                        <p className="hsc-text">{latestNews[alertIdx].title}</p>
+                        <span className="hsc-date">
+                            <i className="bi bi-calendar3" /> {latestNews[alertIdx].date}
+                        </span>
+                    </div>
+                    <Link to="/media/latest-news" className="hsc-btn">
+                        See All Alerts <i className="bi bi-arrow-right" />
+                    </Link>
+                    <div className="hsc-pips">
+                        {latestNews.map((_, i) => (
+                            <button
+                                key={i}
+                                className={`har-pip ${i === alertIdx ? "active" : ""}`}
+                                onClick={() => { setAlertVisible(false); setTimeout(() => { setAlertIdx(i); setAlertVisible(true); }, 420); }}
+                                aria-label={`Alert ${i + 1}`}
+                            />
+                        ))}
+                    </div>
+                </div>
+
+                {/* ── Carousel card: z-index 2, laps slightly over the circle ── */}
+                <div className="container hero-dark-inner">
                     <div className="hero-galaxy-card">
                         <div className="hgc-slides">
                             {slides.map((s, i) => (
@@ -351,9 +378,7 @@ function Home() {
                                     <img src={s.image} alt={s.badge} />
                                     <div className="hgc-overlay">
                                         <span className="hgc-badge">{s.badge}</span>
-                                        <h3 className="hgc-slide-title">
-                                            {s.title.replace("\n", " ")}
-                                        </h3>
+                                        <h3 className="hgc-slide-title">{s.title.replace("\n", " ")}</h3>
                                     </div>
                                 </div>
                             ))}
@@ -367,61 +392,18 @@ function Home() {
                         <div className="hgc-bottom">
                             <div className="hgc-dots">
                                 {slides.map((_, i) => (
-                                    <button
-                                        key={i}
-                                        className={`hgc-dot ${i === slideIdx ? "active" : ""}`}
-                                        onClick={() => goToSlide(i)}
-                                        aria-label={`Slide ${i + 1}`}
-                                    />
+                                    <button key={i} className={`hgc-dot ${i === slideIdx ? "active" : ""}`}
+                                        onClick={() => goToSlide(i)} aria-label={`Slide ${i + 1}`} />
                                 ))}
                             </div>
-                            <button
-                                className="hgc-play"
-                                onClick={() => setIsPlaying(p => !p)}
-                                aria-label={isPlaying ? "Pause" : "Play"}
-                            >
+                            <button className="hgc-play" onClick={() => setIsPlaying(p => !p)}
+                                aria-label={isPlaying ? "Pause" : "Play"}>
                                 <i className={`bi bi-${isPlaying ? "pause-fill" : "play-fill"}`} />
                             </button>
                         </div>
                     </div>
-
-                    {/* ── Right: Glassmorphism half-circle ── */}
-                    <div className="hero-semicircle-col">
-                        <div className="hero-semicircle">
-
-                            {/* Rotating alert content */}
-                            <div className={`hsc-content ${alertVisible ? "har-visible" : "har-hidden"}`}>
-                                <span className={`har-cat ${latestNews[alertIdx].isAlert ? "har-cat--alert" : ""}`}>
-                                    {latestNews[alertIdx].isAlert && <i className="bi bi-exclamation-triangle-fill" />}
-                                    {latestNews[alertIdx].cat}
-                                </span>
-                                <p className="hsc-text">{latestNews[alertIdx].title}</p>
-                                <span className="hsc-date">
-                                    <i className="bi bi-calendar3" /> {latestNews[alertIdx].date}
-                                </span>
-                            </div>
-
-                            {/* CTA button */}
-                            <Link to="/media/latest-news" className="hsc-btn">
-                                See All Alerts <i className="bi bi-arrow-right" />
-                            </Link>
-
-                            {/* Progress pips */}
-                            <div className="hsc-pips">
-                                {latestNews.map((_, i) => (
-                                    <button
-                                        key={i}
-                                        className={`har-pip ${i === alertIdx ? "active" : ""}`}
-                                        onClick={() => { setAlertVisible(false); setTimeout(() => { setAlertIdx(i); setAlertVisible(true); }, 420); }}
-                                        aria-label={`Alert ${i + 1}`}
-                                    />
-                                ))}
-                            </div>
-
-                        </div>
-                    </div>
-
                 </div>
+
             </section>
 
             {/* ═══════════════════════════════════════════════════
