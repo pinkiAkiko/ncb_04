@@ -1,0 +1,482 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+// ── CPGRAMS Notice ────────────────────────────────────────
+.grv-cpgrams-notice {
+    display: flex;
+    align-items: center;
+    gap: $space-4;
+    background: rgba($gold-500, 0.07);
+    border: 1px solid rgba($gold-500, 0.25);
+    border-radius: $radius-lg;
+    padding: $space-5;
+    margin-bottom: $space-7;
+
+    @include respond(md) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+.grv-cpgrams-icon {
+    font-size: 1.5rem;
+    color: $gold-600;
+    flex-shrink: 0;
+}
+
+.grv-cpgrams-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.87rem;
+    color: rgba($white, 0.72);
+
+    strong {
+        color: $white;
+        font-family: $font-heading;
+        font-size: 0.9rem;
+    }
+
+    a {
+        color: $gold-400;
+        font-weight: 600;
+
+        &:hover {
+            color: $gold-300;
+        }
+    }
+}
+
+.grv-cpgrams-btn {
+    @include navy-btn;
+    text-decoration: none;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+// ── Layout ────────────────────────────────────────────────
+.grv-layout {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: $space-7;
+    align-items: start;
+
+    @include respond(lg) {
+        grid-template-columns: 1fr;
+    }
+}
+
+// ── Form ──────────────────────────────────────────────────
+.grv-form {
+    background: $navy-700;
+    border: 1px solid rgba($white, 0.1);
+    border-radius: $radius-xl;
+    padding: $space-7;
+    box-shadow: none;
+
+    @include respond(sm) {
+        padding: $space-5;
+        border-radius: $radius-lg;
+    }
+}
+
+// Shared field styles (from Contact.scss pattern)
+.cf-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-4;
+    margin-bottom: $space-4;
+
+    @include respond(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.cf-field {
+    display: flex;
+    flex-direction: column;
+    gap: $space-1;
+    margin-bottom: $space-4;
+
+    &--full {
+        margin-bottom: $space-4;
+    }
+
+    label {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: rgba($white, 0.65);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    input,
+    select,
+    textarea {
+        padding: $space-3 $space-4;
+        border: 1px solid rgba($white, 0.15);
+        border-radius: $radius-sm;
+        font-family: $font-body;
+        font-size: 0.88rem;
+        color: rgba($white, 0.85);
+        background: rgba($white, 0.07);
+        outline: none;
+        transition: border-color $transition-fast, background $transition-fast;
+
+        &::placeholder {
+            color: rgba($white, 0.3);
+        }
+
+        &:focus {
+            border-color: $gold-500;
+            background: rgba($gold-500, 0.1);
+        }
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 140px;
+    }
+
+    select {
+        cursor: pointer;
+    }
+}
+
+.cf-error {
+    font-size: 0.75rem;
+    color: $red-400;
+    margin-top: 2px;
+}
+
+.cf-char-count {
+    font-size: 0.72rem;
+    color: rgba($white, 0.35);
+    font-weight: 400;
+}
+
+// ── File Input ────────────────────────────────────────────
+.grv-file-input {
+    input[type="file"] {
+        display: none;
+    }
+}
+
+.grv-file-label {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    padding: $space-3 $space-4;
+    border: 1px dashed rgba($white, 0.2);
+    border-radius: $radius-sm;
+    font-size: 0.87rem;
+    color: rgba($white, 0.5);
+    cursor: pointer;
+    transition: border-color $transition-fast, background $transition-fast;
+
+    &:hover {
+        border-color: $gold-500;
+        background: rgba($gold-500, 0.1);
+        color: rgba($white, 0.8);
+    }
+
+    i {
+        font-size: 1rem;
+        color: $gold-400;
+    }
+}
+
+// ── CAPTCHA Note ──────────────────────────────────────────
+.grv-captcha-note {
+    font-size: 0.78rem;
+    color: rgba($white, 0.5);
+    padding: $space-3 $space-4;
+    background: rgba($white, 0.05);
+    border-radius: $radius-sm;
+    margin-bottom: $space-4;
+
+    i {
+        color: $gold-400;
+        margin-right: $space-2;
+    }
+}
+
+.cf-disclaimer {
+    font-size: 0.75rem;
+    color: rgba($white, 0.35);
+    margin-bottom: $space-4;
+    line-height: 1.5;
+}
+
+.grv-submit-btn {
+    @include gold-btn;
+    width: 100%;
+    justify-content: center;
+    padding: $space-4;
+    font-size: 0.9rem;
+}
+
+// ── Success State ─────────────────────────────────────────
+.grv-success {
+    text-align: center;
+    padding: $space-9 $space-5;
+    border: 1px solid rgba($white, 0.1);
+    border-radius: $radius-xl;
+    background: $navy-700;
+}
+
+.grv-success-icon {
+    i {
+        font-size: 3.5rem;
+        color: #22c55e;
+        display: block;
+        margin-bottom: $space-4;
+    }
+}
+
+.grv-success h3 {
+    font-family: $font-heading;
+    font-size: 1.4rem;
+    color: $white;
+    margin-bottom: $space-3;
+}
+
+.grv-success>p {
+    font-size: 0.9rem;
+    color: rgba($white, 0.6);
+    margin-bottom: $space-5;
+}
+
+.grv-ref-box {
+    background: $navy-700;
+    border: 1px solid rgba($gold-500, 0.3);
+    border-radius: $radius-lg;
+    padding: $space-5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $space-2;
+    margin-bottom: $space-5;
+}
+
+.grv-ref-label {
+    font-size: 0.75rem;
+    color: rgba($white, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.grv-ref-num {
+    font-family: $font-heading;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: $gold-400;
+    letter-spacing: 2px;
+}
+
+.grv-success-note {
+    font-size: 0.85rem;
+    color: rgba($white, 0.6);
+    margin-bottom: $space-5;
+    line-height: 1.6;
+
+    a {
+        color: $gold-400;
+
+        &:hover {
+            color: $gold-300;
+        }
+    }
+}
+
+.grv-back-btn {
+    @include navy-btn;
+}
+
+// ── Sidebar ───────────────────────────────────────────────
+.grv-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: $space-5;
+}
+
+// ── Track Card ────────────────────────────────────────────
+.grv-track-card {
+    background: $navy-700;
+    border: 1px solid rgba($white, 0.1);
+    border-radius: $radius-lg;
+    padding: $space-5;
+    box-shadow: none;
+}
+
+.grv-track-heading {
+    font-family: $font-heading;
+    font-size: 1rem;
+    font-weight: 700;
+    color: $white;
+    margin-bottom: $space-4;
+
+    i {
+        color: $gold-400;
+        margin-right: $space-2;
+    }
+}
+
+.grv-track-btn {
+    @include gold-btn;
+    width: 100%;
+    justify-content: center;
+    padding: $space-3;
+    margin-top: 0;
+}
+
+.grv-track-result {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-2;
+    margin-top: $space-3;
+    padding: $space-3;
+    background: rgba($gold-500, 0.1);
+    border-radius: $radius-sm;
+    border: 1px solid rgba($gold-500, 0.25);
+    font-size: 0.82rem;
+    color: rgba($white, 0.75);
+    line-height: 1.5;
+
+    i {
+        color: $gold-400;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+}
+
+// ── Nodal Officer Card ────────────────────────────────────
+.grv-nodal-card {
+    background: $navy-700;
+    border: 1px solid rgba($gold-500, 0.2);
+    border-radius: $radius-lg;
+    padding: $space-5;
+}
+
+.grv-nodal-header {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    margin-bottom: $space-3;
+
+    i {
+        font-size: 1.1rem;
+        color: $gold-400;
+    }
+
+    span {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: $gold-400;
+    }
+}
+
+.grv-nodal-name {
+    font-family: $font-heading;
+    font-size: 1rem;
+    font-weight: 700;
+    color: $white;
+    margin-bottom: 4px;
+}
+
+.grv-nodal-org {
+    font-size: 0.8rem;
+    color: rgba($white, 0.55);
+    margin-bottom: $space-3;
+}
+
+.grv-nodal-contacts {
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+}
+
+.grv-nodal-contact {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    font-size: 0.85rem;
+    color: $gold-300;
+    text-decoration: none;
+
+    &:hover {
+        color: $gold-400;
+    }
+
+    i {
+        font-size: 0.85rem;
+    }
+}
+
+// ── External Links Card ───────────────────────────────────
+.grv-links-card {
+    background: $navy-700;
+    border: 1px solid rgba($white, 0.1);
+    border-radius: $radius-lg;
+    padding: $space-5;
+    box-shadow: none;
+}
+
+.grv-links-heading {
+    font-family: $font-heading;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: rgba($white, 0.9);
+    margin-bottom: $space-4;
+    @include gold-border-left;
+}
+
+.grv-links-list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+}
+
+.grv-ext-link {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-3;
+    text-decoration: none;
+    padding: $space-3;
+    border: 1px solid rgba($white, 0.1);
+    border-radius: $radius-md;
+    transition: all $transition-fast;
+
+    &:hover {
+        border-color: $gold-500;
+        background: rgba($gold-500, 0.1);
+    }
+
+    >i {
+        font-size: 1rem;
+        color: $gold-400;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    div {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+
+        strong {
+            font-size: 0.85rem;
+            color: rgba($white, 0.88);
+            font-weight: 700;
+        }
+
+        span {
+            font-size: 0.75rem;
+            color: rgba($white, 0.5);
+        }
+    }
+}

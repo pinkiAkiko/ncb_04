@@ -1,0 +1,490 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+// ── Stat Strip ────────────────────────────────────────────
+.da-stat-strip {
+    background: $navy-700;
+    border-bottom: 3px solid $gold-500;
+    padding: $space-6 0;
+}
+
+.da-stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $space-5;
+
+    @include respond(lg) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.da-stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: $space-1;
+    padding: $space-4;
+    border-right: 1px solid rgba($gold-500, 0.2);
+
+    &:last-child {
+        border-right: none;
+    }
+
+    @include respond(lg) {
+        border-right: none;
+        border-bottom: 1px solid rgba($gold-500, 0.15);
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+}
+
+.da-stat-num {
+    font-family: $font-heading;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 800;
+    color: $gold-400;
+    letter-spacing: 0.5px;
+}
+
+.da-stat-label {
+    font-size: 0.82rem;
+    color: rgba($white, 0.7);
+    line-height: 1.4;
+    max-width: 160px;
+}
+
+.da-stat-src {
+    font-size: 0.7rem;
+    color: rgba($white, 0.4);
+    font-style: italic;
+}
+
+// ── Shared section spacing ────────────────────────────────
+.da-section {
+    margin-bottom: $space-9;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+// ── Drug Category Cards ───────────────────────────────────
+.da-drug-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $space-5;
+
+    @include respond(lg) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+$card-colors: (
+    red: (#e74c3c, #fff5f5),
+    green: (#27ae60, #f0fff4),
+    orange: (#e67e22, #fff8f0),
+    purple: (#8e44ad, #f8f0ff),
+    blue: (#2980b9, #f0f8ff),
+    teal: (#16a085, #f0fffc),
+);
+
+.da-drug-card {
+    background: $white;
+    border: 1px solid $gray-200;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    box-shadow: $shadow-sm;
+    display: flex;
+    flex-direction: column;
+    @include card-hover;
+
+    @each $name, $vals in $card-colors {
+        &--#{$name} {
+            .da-drug-card-header {
+                background: nth($vals, 2);
+                border-bottom: 3px solid nth($vals, 1);
+            }
+
+            .da-drug-icon {
+                background: nth($vals, 1);
+            }
+        }
+    }
+}
+
+.da-drug-card-header {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    padding: $space-4 $space-5;
+}
+
+.da-drug-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: $radius-md;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    i {
+        font-size: 1.1rem;
+        color: $white;
+    }
+}
+
+.da-drug-name {
+    font-family: $font-heading;
+    font-size: 1rem;
+    font-weight: 700;
+    color: $navy-700;
+    margin: 0;
+    letter-spacing: 0.3px;
+}
+
+.da-drug-body {
+    padding: $space-4 $space-5;
+    flex: 1;
+}
+
+.da-drug-row {
+    margin-bottom: $space-3;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    &--danger {
+        padding: $space-2 $space-3;
+        background: rgba($red-500, 0.06);
+        border-radius: $radius-sm;
+        border-left: 3px solid $red-500;
+    }
+}
+
+.da-drug-row-label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: $gray-500;
+    margin-bottom: 2px;
+
+    i {
+        color: $red-500;
+        margin-right: 4px;
+    }
+}
+
+.da-drug-row-val {
+    font-size: 0.82rem;
+    color: $gray-700;
+    line-height: 1.5;
+}
+
+// ── Warning Signs ─────────────────────────────────────────
+.da-signs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-6;
+
+    @include respond(md) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.da-signs-col {
+    background: $white;
+    border: 1px solid $gray-200;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    box-shadow: $shadow-sm;
+}
+
+.da-signs-col-header {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    padding: $space-4 $space-5;
+
+    &--self {
+        background: $navy-700;
+
+        i,
+        h3 {
+            color: $gold-400;
+        }
+    }
+
+    &--others {
+        background: rgba($red-500, 0.06);
+        border-bottom: 3px solid $red-500;
+
+        i {
+            color: $red-500;
+        }
+
+        h3 {
+            color: $navy-700;
+        }
+    }
+
+    i {
+        font-size: 1.2rem;
+    }
+
+    h3 {
+        font-family: $font-heading;
+        font-size: 1rem;
+        font-weight: 700;
+        margin: 0;
+        letter-spacing: 0.3px;
+    }
+}
+
+.da-signs-list {
+    list-style: none;
+    padding: $space-4 $space-5;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+}
+
+.da-signs-item {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-2;
+    font-size: 0.87rem;
+    color: $gray-700;
+    line-height: 1.5;
+
+    i {
+        color: $gold-500;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+        margin-top: 1px;
+    }
+}
+
+// ── Help Cards ────────────────────────────────────────────
+.da-help-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $space-5;
+    margin-bottom: $space-5;
+
+    @include respond(lg) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.da-help-card {
+    background: $white;
+    border: 1px solid $gray-200;
+    border-radius: $radius-lg;
+    padding: $space-6;
+    text-align: center;
+    box-shadow: $shadow-sm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $space-2;
+    @include card-hover;
+
+    &--urgent {
+        border: 2px solid $gold-500;
+        background: $navy-700;
+
+        .da-help-title {
+            color: $gold-400;
+        }
+
+        .da-help-detail {
+            color: $white;
+            font-size: 1.4rem;
+            font-family: $font-heading;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .da-help-sub {
+            color: rgba($white, 0.6);
+        }
+
+        .da-help-icon {
+            background: rgba($gold-500, 0.15);
+
+            i {
+                color: $gold-400;
+            }
+        }
+    }
+}
+
+.da-help-icon {
+    width: 56px;
+    height: 56px;
+    background: rgba($gold-500, 0.1);
+    border-radius: $radius-xl;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: $space-2;
+
+    i {
+        font-size: 1.4rem;
+        color: $gold-600;
+    }
+}
+
+.da-help-title {
+    font-family: $font-heading;
+    font-size: 1rem;
+    font-weight: 700;
+    color: $navy-700;
+    margin: 0;
+}
+
+.da-help-detail {
+    font-size: 0.9rem;
+    color: $gray-600;
+    font-weight: 600;
+    margin: 0;
+}
+
+.da-help-sub {
+    font-size: 0.78rem;
+    color: $gray-400;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.da-help-btn {
+    @include navy-btn;
+    margin-top: $space-3;
+    font-size: 0.78rem;
+    text-decoration: none;
+}
+
+// ── Helpline Callout ──────────────────────────────────────
+.da-helpline-callout {
+    background: $navy-900;
+    border: 1px solid rgba($gold-500, 0.3);
+    border-radius: $radius-lg;
+    padding: $space-5 $space-6;
+    display: flex;
+    align-items: center;
+    gap: $space-5;
+
+    @include respond(md) {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    >i {
+        font-size: 2rem;
+        color: $gold-400;
+        flex-shrink: 0;
+    }
+
+    div {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        strong {
+            font-family: $font-heading;
+            font-size: 0.95rem;
+            color: $white;
+            font-weight: 700;
+        }
+
+        span {
+            font-size: 0.82rem;
+            color: rgba($white, 0.6);
+        }
+    }
+}
+
+.da-helpline-cta {
+    @include gold-btn;
+    text-decoration: none;
+    white-space: nowrap;
+    font-size: 1rem;
+    padding: $space-3 $space-7;
+}
+
+// ── NCB Role Cards ────────────────────────────────────────
+.da-role-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $space-5;
+
+    @include respond(lg) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.da-role-card {
+    background: $white;
+    border: 1px solid $gray-200;
+    border-radius: $radius-lg;
+    padding: $space-6;
+    border-top: 4px solid $gold-500;
+    box-shadow: $shadow-sm;
+    display: flex;
+    flex-direction: column;
+    @include card-hover;
+}
+
+.da-role-icon {
+    width: 48px;
+    height: 48px;
+    background: $navy-700;
+    border-radius: $radius-md;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: $space-4;
+
+    i {
+        font-size: 1.2rem;
+        color: $gold-400;
+    }
+}
+
+.da-role-title {
+    font-family: $font-heading;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: $navy-700;
+    margin-bottom: $space-2;
+    letter-spacing: 0.3px;
+}
+
+.da-role-body {
+    font-size: 0.87rem;
+    color: $gray-600;
+    line-height: 1.7;
+    margin: 0;
+    flex: 1;
+}

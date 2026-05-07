@@ -1,16 +1,21 @@
 @use '../styles/variables' as *;
 @use '../styles/mixins' as *;
 
-.rti-page { }
+.rti-page {}
 
 // Officers grid — CBI 2-col layout
-.rti-officers-section { margin-bottom: $space-9; }
+.rti-officers-section {
+    margin-bottom: $space-9;
+}
 
 .rti-officers-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: $space-5;
-    @include respond(md) { grid-template-columns: 1fr; }
+
+    @include respond(md) {
+        grid-template-columns: 1fr;
+    }
 }
 
 .rti-officer-card {
@@ -18,14 +23,23 @@
     overflow: hidden;
     box-shadow: $shadow-md;
     transition: transform $transition-base, box-shadow $transition-base;
-    &:hover { transform: translateY(-3px); box-shadow: $shadow-lg; }
 
-    &.rti-card--primary { border-top: 4px solid $gold-500; }
-    &.rti-card--secondary { border-top: 4px solid $navy-500; }
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: $shadow-lg;
+    }
+
+    &.rti-card--primary {
+        border-top: 4px solid $gold-500;
+    }
+
+    &.rti-card--secondary {
+        border-top: 4px solid $navy-500;
+    }
 }
 
 .roc-header {
-    background: $navy-800;
+    background: $navy-700;
     padding: $space-4 $space-5;
     display: flex;
     align-items: center;
@@ -53,13 +67,16 @@
     font-size: 1.1rem;
 }
 
-.roc-body { background: $white; padding: $space-5; }
+.roc-body {
+    background: $white;
+    padding: $space-5;
+}
 
 .roc-name {
     font-family: $font-heading;
     font-size: 1.2rem;
     font-weight: 700;
-    color: $navy-800;
+    color: $navy-700;
     margin-bottom: 4px;
 }
 
@@ -69,7 +86,12 @@
     margin-bottom: $space-4;
 }
 
-.roc-contact-list { display: flex; flex-direction: column; gap: $space-2; margin-bottom: $space-4; }
+.roc-contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+    margin-bottom: $space-4;
+}
 
 .roc-contact-item {
     display: flex;
@@ -78,8 +100,21 @@
     font-size: 0.82rem;
     color: $gray-600;
 
-    i { color: $gold-500; font-size: 0.8rem; margin-top: 2px; flex-shrink: 0; }
-    a { color: $navy-500; &:hover { color: $gold-600; text-decoration: underline; } }
+    i {
+        color: $gold-500;
+        font-size: 0.8rem;
+        margin-top: 2px;
+        flex-shrink: 0;
+    }
+
+    a {
+        color: $navy-500;
+
+        &:hover {
+            color: $gold-600;
+            text-decoration: underline;
+        }
+    }
 }
 
 .roc-file-btn {
@@ -91,16 +126,30 @@
 }
 
 // Steps — CBI horizontal card flow
-.rti-steps-section { margin-bottom: $space-9; }
-.rti-steps-header { margin-bottom: $space-5; }
+.rti-steps-section {
+    margin-bottom: $space-9;
+}
+
+.rti-steps-header {
+    margin-bottom: $space-5;
+}
 
 .rti-steps-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: $space-4;
-    @include respond(xl) { grid-template-columns: repeat(3, 1fr); }
-    @include respond(md) { grid-template-columns: 1fr 1fr; }
-    @include respond(sm) { grid-template-columns: 1fr; }
+
+    @include respond(xl) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include respond(md) {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    @include respond(sm) {
+        grid-template-columns: 1fr;
+    }
 }
 
 .rti-step-card {
@@ -148,7 +197,7 @@
     font-family: $font-heading;
     font-size: 0.95rem;
     font-weight: 700;
-    color: $navy-800;
+    color: $navy-700;
     margin-bottom: $space-2;
 }
 
@@ -159,8 +208,13 @@
 }
 
 // Section 4 tabs — CBI sidebar layout
-.rti-17-section { margin-bottom: $space-9; }
-.rti-17-header { margin-bottom: $space-5; }
+.rti-17-section {
+    margin-bottom: $space-9;
+}
+
+.rti-17-header {
+    margin-bottom: $space-5;
+}
 
 .rti-tab-layout {
     display: grid;
@@ -169,18 +223,25 @@
     border: 1px solid $gray-200;
     border-radius: $radius-lg;
     overflow: hidden;
-    @include respond(md) { grid-template-columns: 1fr; }
+
+    @include respond(md) {
+        grid-template-columns: 1fr;
+    }
 }
 
 .rti-tab-sidebar {
-    background: $navy-800;
+    background: $navy-700;
     display: flex;
     flex-direction: column;
+
     @include respond(md) {
         flex-direction: row;
         overflow-x: auto;
         scrollbar-width: none;
-        &::-webkit-scrollbar { display: none; }
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
     }
 }
 
@@ -201,13 +262,20 @@
     transition: all $transition-fast;
     white-space: nowrap;
 
-    .rt-arrow { font-size: 0.6rem; opacity: 0; transition: opacity $transition-fast; }
+    .rt-arrow {
+        font-size: 0.6rem;
+        opacity: 0;
+        transition: opacity $transition-fast;
+    }
 
     &.active {
         background: rgba($gold-500, 0.1);
         border-left-color: $gold-500;
         color: $gold-300;
-        .rt-arrow { opacity: 1; }
+
+        .rt-arrow {
+            opacity: 1;
+        }
     }
 
     &:hover:not(.active) {
@@ -225,12 +293,16 @@
     font-family: $font-heading;
     font-size: 1.1rem;
     font-weight: 700;
-    color: $navy-800;
+    color: $navy-700;
     margin-bottom: $space-4;
     @include gold-border-left;
 }
 
-.rtc-list { display: flex; flex-direction: column; gap: $space-2; }
+.rtc-list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+}
 
 .rtc-item {
     display: flex;
@@ -240,15 +312,26 @@
     background: $gray-100;
     border-radius: $radius-sm;
     transition: background $transition-fast;
-    &:hover { background: $gold-100; }
 
-    span { flex: 1; font-size: 0.85rem; color: $gray-700; }
+    &:hover {
+        background: $gold-100;
+    }
+
+    span {
+        flex: 1;
+        font-size: 0.85rem;
+        color: $gray-700;
+    }
 }
 
-.rtc-icon { color: $gold-500; font-size: 0.85rem; flex-shrink: 0; }
+.rtc-icon {
+    color: $gold-500;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+}
 
 .rtc-download-btn {
-    background: $navy-800;
+    background: $navy-700;
     border: none;
     color: $white;
     width: 30px;
@@ -261,18 +344,30 @@
     font-size: 0.8rem;
     flex-shrink: 0;
     transition: background $transition-fast;
-    &:hover { background: $gold-500; color: $navy-900; }
+
+    &:hover {
+        background: $gold-500;
+        color: $navy-900;
+    }
 }
 
 // Resources grid
-.rti-resources-section { margin-bottom: $space-9; }
+.rti-resources-section {
+    margin-bottom: $space-9;
+}
 
 .rti-resources-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: $space-4;
-    @include respond(lg) { grid-template-columns: 1fr 1fr; }
-    @include respond(sm) { grid-template-columns: 1fr; }
+
+    @include respond(lg) {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    @include respond(sm) {
+        grid-template-columns: 1fr;
+    }
 }
 
 .rti-resource-card {
@@ -299,17 +394,24 @@
     flex-shrink: 0;
 }
 
-.rrc-info { flex: 1; min-width: 0; }
+.rrc-info {
+    flex: 1;
+    min-width: 0;
+}
 
 .rrc-title {
     font-family: $font-heading;
     font-size: 0.9rem;
     font-weight: 700;
-    color: $navy-800;
+    color: $navy-700;
     margin-bottom: 4px;
 }
 
-.rrc-desc { font-size: 0.78rem; color: $gray-500; line-height: 1.5; }
+.rrc-desc {
+    font-size: 0.78rem;
+    color: $gray-500;
+    line-height: 1.5;
+}
 
 .rrc-meta {
     display: flex;
@@ -319,7 +421,13 @@
     flex-shrink: 0;
 }
 
-.rrc-size { font-size: 0.7rem; color: $gray-400; display: flex; align-items: center; gap: 3px; }
+.rrc-size {
+    font-size: 0.7rem;
+    color: $gray-400;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
 
 .rrc-download-btn {
     background: $gold-500;
@@ -334,7 +442,10 @@
     cursor: pointer;
     font-size: 0.9rem;
     transition: background $transition-fast;
-    &:hover { background: $gold-400; }
+
+    &:hover {
+        background: $gold-400;
+    }
 }
 
 // Portal highlight
@@ -342,16 +453,29 @@
     display: flex;
     align-items: center;
     gap: $space-5;
-    background: $navy-800;
+    background: $navy-700;
     border-radius: $radius-lg;
     padding: $space-5 $space-6;
     border-left: 4px solid $gold-500;
-    @include respond(md) { flex-direction: column; text-align: center; }
-    @include respond(sm) { padding: $space-4; }
 
-    > i { font-size: 2.5rem; color: $gold-400; flex-shrink: 0; }
+    @include respond(md) {
+        flex-direction: column;
+        text-align: center;
+    }
 
-    div { flex: 1; }
+    @include respond(sm) {
+        padding: $space-4;
+    }
+
+    >i {
+        font-size: 2.5rem;
+        color: $gold-400;
+        flex-shrink: 0;
+    }
+
+    div {
+        flex: 1;
+    }
 
     h3 {
         font-family: $font-heading;
@@ -361,7 +485,11 @@
         margin-bottom: 4px;
     }
 
-    p { font-size: 0.85rem; color: rgba($white, 0.6); line-height: 1.5; }
+    p {
+        font-size: 0.85rem;
+        color: rgba($white, 0.6);
+        line-height: 1.5;
+    }
 }
 
 .rph-btn {

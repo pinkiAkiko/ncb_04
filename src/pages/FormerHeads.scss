@@ -1,0 +1,250 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.former-heads-page {}
+
+// Header strip
+.fh-header-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space-4;
+    background: $navy-700;
+    border-radius: $radius-lg;
+    padding: $space-4 $space-5;
+    border-left: 4px solid $gold-500;
+    margin-bottom: $space-6;
+
+    @include respond(md) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+.fh-header-info {
+    display: flex;
+    align-items: center;
+    gap: $space-4;
+
+    >i {
+        font-size: 1.8rem;
+        color: $gold-400;
+        flex-shrink: 0;
+    }
+
+    strong {
+        display: block;
+        font-family: $font-heading;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: $white;
+        margin-bottom: 4px;
+    }
+
+    span {
+        font-size: 0.8rem;
+        color: rgba($white, 0.5);
+    }
+}
+
+.fh-count-badge {
+    background: rgba($gold-500, 0.15);
+    color: $gold-400;
+    font-family: $font-heading;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: $space-2 $space-4;
+    border-radius: $radius-full;
+    border: 1px solid rgba($gold-500, 0.3);
+    white-space: nowrap;
+}
+
+// Grid — 3-col desktop, 2-col tablet, 1-col mobile
+.fh-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $space-5;
+    margin-bottom: $space-6;
+
+    @include respond(lg) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+// Former head card
+.fh-card {
+    border-radius: $radius-lg;
+    overflow: hidden;
+    box-shadow: $shadow-sm;
+    transition: transform $transition-base, box-shadow $transition-base;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: $shadow-lg;
+    }
+
+    &.fh-card--primary {
+        border-top: 3px solid $gold-500;
+
+        .fh-card-header {
+            background: $navy-700;
+        }
+    }
+
+    &.fh-card--secondary {
+        border-top: 3px solid $navy-500;
+
+        .fh-card-header {
+            background: $navy-700;
+        }
+    }
+}
+
+.fh-card-header {
+    padding: $space-4 $space-4 $space-5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $space-3;
+    position: relative;
+}
+
+.fh-serial-badge {
+    position: absolute;
+    top: $space-3;
+    left: $space-3;
+    background: $gold-500;
+    color: $navy-900;
+    font-family: $font-heading;
+    font-size: 0.7rem;
+    font-weight: 700;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    @include flex-center;
+}
+
+.fh-avatar {
+    width: 72px;
+    height: 72px;
+    background: rgba($gold-500, 0.12);
+    border: 2px solid rgba($gold-500, 0.3);
+    border-radius: 50%;
+    @include flex-center;
+    color: $gold-400;
+    font-size: 2.2rem;
+    margin-top: $space-2;
+}
+
+.fh-period-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-1;
+    background: $gold-500;
+    color: $navy-900;
+    font-family: $font-heading;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 4px 12px;
+    border-radius: $radius-full;
+
+    i {
+        font-size: 0.65rem;
+    }
+}
+
+.fh-card-body {
+    background: $white;
+    padding: $space-4 $space-5;
+}
+
+.fh-name {
+    font-family: $font-heading;
+    font-size: 1rem;
+    font-weight: 700;
+    color: $navy-700;
+    margin-bottom: $space-3;
+    line-height: 1.3;
+}
+
+.fh-meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2;
+    margin-bottom: $space-3;
+}
+
+.fh-meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.75rem;
+    color: $gray-500;
+    background: $gray-100;
+    padding: 3px 10px;
+    border-radius: $radius-full;
+
+    i {
+        color: $gold-500;
+        font-size: 0.7rem;
+    }
+}
+
+.fh-notable {
+    font-size: 0.8rem;
+    color: $gray-600;
+    line-height: 1.6;
+    padding-left: $space-4;
+    border-left: 3px solid $gold-300;
+    display: flex;
+    align-items: flex-start;
+    gap: $space-2;
+    margin: 0;
+}
+
+.fh-star-icon {
+    color: $gold-500;
+    font-size: 0.65rem;
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+
+// Note strip
+.fh-note-strip {
+    background: $gold-100;
+    border: 1px solid $gold-300;
+    border-radius: $radius-lg;
+    padding: $space-4 $space-5;
+    display: flex;
+    align-items: flex-start;
+    gap: $space-3;
+
+    i {
+        color: $gold-600;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    p {
+        font-size: 0.82rem;
+        color: $gray-600;
+        line-height: 1.5;
+
+        a {
+            color: $navy-500;
+            text-decoration: underline;
+
+            &:hover {
+                color: $gold-600;
+            }
+        }
+    }
+}

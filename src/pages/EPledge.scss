@@ -1,0 +1,528 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+// ── Pledge Card ───────────────────────────────────────────
+.ep-pledge-section {
+    margin-bottom: $space-7;
+}
+
+.ep-pledge-card {
+    background: $navy-700;
+    border: 1px solid rgba($gold-500, 0.25);
+    border-radius: $radius-xl;
+    padding: $space-8 $space-9;
+    position: relative;
+    overflow: hidden;
+
+    @include respond(md) {
+        padding: $space-6 $space-5;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, $gold-700, $gold-400, $gold-700);
+    }
+}
+
+.ep-pledge-quote-icon {
+    font-size: 4rem;
+    color: rgba($gold-500, 0.15);
+    line-height: 1;
+    margin-bottom: $space-3;
+}
+
+.ep-pledge-para {
+    font-size: 1rem;
+    color: rgba($white, 0.85);
+    line-height: 1.9;
+    margin-bottom: $space-4;
+    font-style: italic;
+
+    &:last-of-type {
+        margin-bottom: $space-5;
+    }
+
+    @include respond(sm) {
+        font-size: 0.9rem;
+    }
+}
+
+.ep-pledge-footer {
+    font-family: $font-heading;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: $gold-400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+    i {
+        margin-right: $space-2;
+    }
+}
+
+// ── Counter ───────────────────────────────────────────────
+.ep-counter-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: $gold-100;
+    border: 1px solid rgba($gold-500, 0.3);
+    border-radius: $radius-xl;
+    padding: $space-6 $space-8;
+    margin-bottom: $space-8;
+    gap: $space-5;
+
+    @include respond(md) {
+        flex-direction: column;
+        text-align: center;
+        padding: $space-6;
+    }
+}
+
+.ep-counter-inner {
+    display: flex;
+    flex-direction: column;
+    gap: $space-1;
+}
+
+.ep-counter-num {
+    font-family: $font-heading;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 800;
+    color: $gold-700;
+    letter-spacing: 1px;
+    line-height: 1;
+}
+
+.ep-counter-label {
+    font-family: $font-heading;
+    font-size: 1rem;
+    font-weight: 600;
+    color: $navy-700;
+    letter-spacing: 0.3px;
+}
+
+.ep-counter-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $space-2;
+
+    i {
+        font-size: 3rem;
+        color: $gold-600;
+    }
+
+    span {
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: $gray-500;
+    }
+}
+
+// ── Layout ────────────────────────────────────────────────
+.ep-layout {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: $space-8;
+    align-items: start;
+
+    @include respond(lg) {
+        grid-template-columns: 1fr;
+    }
+}
+
+// ── Form ──────────────────────────────────────────────────
+.ep-form {
+    background: $white;
+    border: 1px solid $gray-200;
+    border-radius: $radius-xl;
+    padding: $space-7;
+    box-shadow: $shadow-sm;
+
+    @include respond(sm) {
+        padding: $space-5;
+    }
+}
+
+// Field reuse
+.cf-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-4;
+    margin-bottom: $space-4;
+
+    @include respond(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.cf-field {
+    display: flex;
+    flex-direction: column;
+    gap: $space-1;
+    margin-bottom: $space-4;
+
+    label {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: $gray-600;
+    }
+
+    input,
+    select,
+    textarea {
+        padding: $space-3 $space-4;
+        border: 1px solid $gray-300;
+        border-radius: $radius-sm;
+        font-family: $font-body;
+        font-size: 0.88rem;
+        color: $gray-700;
+        background: $white;
+        outline: none;
+        transition: border-color $transition-fast, background $transition-fast;
+
+        &::placeholder {
+            color: $gray-400;
+        }
+
+        &:focus {
+            border-color: $gold-500;
+            background: $gold-100;
+        }
+    }
+
+    select {
+        cursor: pointer;
+    }
+}
+
+.cf-error {
+    font-size: 0.75rem;
+    color: $red-500;
+}
+
+.ep-agree-row {
+    margin-bottom: $space-5;
+}
+
+.ep-agree-label {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-3;
+    cursor: pointer;
+    font-size: 0.87rem;
+    color: $gray-700;
+    line-height: 1.5;
+
+    input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        flex-shrink: 0;
+        margin-top: 2px;
+        accent-color: $gold-500;
+    }
+}
+
+.ep-pledge-btn {
+    @include gold-btn;
+    width: 100%;
+    justify-content: center;
+    padding: $space-4;
+    font-size: 0.95rem;
+
+    &:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+        transform: none !important;
+    }
+}
+
+// ── Success ───────────────────────────────────────────────
+.ep-success {
+    text-align: center;
+    padding: $space-7 $space-5;
+    border: 1px solid $gray-200;
+    border-radius: $radius-xl;
+    background: $white;
+}
+
+.ep-success-icon {
+    i {
+        font-size: 3.5rem;
+        color: $gold-500;
+        display: block;
+        margin-bottom: $space-4;
+    }
+}
+
+.ep-success h3 {
+    font-family: $font-heading;
+    font-size: 1.4rem;
+    color: $navy-700;
+    margin-bottom: $space-5;
+}
+
+.ep-cert-card {
+    background: $navy-700;
+    border: 1px solid rgba($gold-500, 0.3);
+    border-radius: $radius-lg;
+    padding: $space-5;
+    margin-bottom: $space-5;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, $gold-700, $gold-400, $gold-700);
+    }
+}
+
+.ep-cert-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $space-2;
+    margin-bottom: $space-3;
+
+    i {
+        font-size: 1.2rem;
+        color: $gold-400;
+    }
+
+    span {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: $gold-400;
+    }
+}
+
+.ep-cert-name {
+    font-family: $font-heading;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: $white;
+    margin-bottom: $space-2;
+}
+
+.ep-cert-num {
+    font-size: 0.9rem;
+    color: rgba($white, 0.7);
+    margin-bottom: $space-2;
+
+    strong {
+        color: $gold-300;
+    }
+}
+
+.ep-cert-msg {
+    font-size: 0.82rem;
+    color: rgba($white, 0.55);
+    line-height: 1.5;
+    margin: 0;
+}
+
+// ── Share Strip ───────────────────────────────────────────
+.ep-share-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $space-2;
+    flex-wrap: wrap;
+    margin-bottom: $space-5;
+}
+
+.ep-share-label {
+    font-size: 0.8rem;
+    color: $gray-500;
+}
+
+.ep-share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-1;
+    padding: $space-2 $space-3;
+    border-radius: $radius-sm;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: opacity $transition-fast;
+
+    &:hover {
+        opacity: 0.85;
+    }
+
+    i {
+        font-size: 0.9rem;
+    }
+
+    &--wa {
+        background: #25d366;
+        color: $white;
+    }
+
+    &--tw {
+        background: #000000;
+        color: $white;
+    }
+
+    &--fb {
+        background: #1877f2;
+        color: $white;
+    }
+
+    &--ig {
+        background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+        color: $white;
+    }
+}
+
+.ep-back-btn {
+    @include navy-btn;
+}
+
+// ── Campaign Column ───────────────────────────────────────
+.ep-campaign-cards {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+    margin-bottom: $space-5;
+}
+
+.ep-campaign-card {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-4;
+    background: $white;
+    border: 1px solid $gray-200;
+    border-radius: $radius-lg;
+    padding: $space-4 $space-5;
+    box-shadow: $shadow-sm;
+    @include card-hover;
+
+    &--blue {
+        border-left: 4px solid $navy-500;
+
+        .ep-campaign-icon {
+            background: rgba($navy-500, 0.08);
+
+            i {
+                color: $navy-500;
+            }
+        }
+    }
+
+    &--gold {
+        border-left: 4px solid $gold-500;
+
+        .ep-campaign-icon {
+            background: rgba($gold-500, 0.1);
+
+            i {
+                color: $gold-600;
+            }
+        }
+    }
+
+    &--green {
+        border-left: 4px solid #16a34a;
+
+        .ep-campaign-icon {
+            background: rgba(#16a34a, 0.08);
+
+            i {
+                color: #16a34a;
+            }
+        }
+    }
+}
+
+.ep-campaign-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: $radius-md;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    i {
+        font-size: 1.1rem;
+    }
+}
+
+.ep-campaign-title {
+    font-family: $font-heading;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: $navy-700;
+    margin-bottom: 4px;
+}
+
+.ep-campaign-body {
+    font-size: 0.83rem;
+    color: $gray-600;
+    line-height: 1.6;
+    margin: 0;
+}
+
+// ── Helpline Box ──────────────────────────────────────────
+.ep-helpline-box {
+    background: $navy-700;
+    border: 1px solid rgba($gold-500, 0.2);
+    border-radius: $radius-lg;
+    padding: $space-5;
+    display: flex;
+    align-items: center;
+    gap: $space-4;
+
+    >i {
+        font-size: 1.5rem;
+        color: $gold-400;
+        flex-shrink: 0;
+    }
+
+    div {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+
+        strong {
+            font-family: $font-heading;
+            font-size: 0.9rem;
+            color: $white;
+        }
+
+        a {
+            font-family: $font-heading;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: $gold-400;
+            text-decoration: none;
+            letter-spacing: 1px;
+
+            &:hover {
+                color: $gold-300;
+            }
+        }
+
+        span {
+            font-size: 0.72rem;
+            color: rgba($white, 0.45);
+        }
+    }
+}

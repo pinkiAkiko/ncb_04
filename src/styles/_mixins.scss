@@ -1,16 +1,53 @@
 @use 'variables' as *;
 
 @mixin respond($bp) {
-  @if $bp == sm  { @media (max-width: #{$bp-sm})  { @content; } }
-  @if $bp == md  { @media (max-width: #{$bp-md})  { @content; } }
-  @if $bp == lg  { @media (max-width: #{$bp-lg})  { @content; } }
-  @if $bp == xl  { @media (max-width: #{$bp-xl})  { @content; } }
-  @if $bp == xxl { @media (max-width: #{$bp-xxl}) { @content; } }
+  @if $bp ==sm {
+    @media (max-width: #{$bp-sm}) {
+      @content;
+    }
+  }
+
+  @if $bp ==md {
+    @media (max-width: #{$bp-md}) {
+      @content;
+    }
+  }
+
+  @if $bp ==lg {
+    @media (max-width: #{$bp-lg}) {
+      @content;
+    }
+  }
+
+  @if $bp ==xl {
+    @media (max-width: #{$bp-xl}) {
+      @content;
+    }
+  }
+
+  @if $bp ==xxl {
+    @media (max-width: #{$bp-xxl}) {
+      @content;
+    }
+  }
 }
 
-@mixin flex-center { display: flex; align-items: center; justify-content: center; }
-@mixin flex-between { display: flex; align-items: center; justify-content: space-between; }
-@mixin flex-col { display: flex; flex-direction: column; }
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-col {
+  display: flex;
+  flex-direction: column;
+}
 
 @mixin gold-border-left {
   border-left: 4px solid $gold-500;
@@ -21,10 +58,11 @@
   font-family: $font-heading;
   font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 700;
-  color: $navy-800;
+  color: $navy-700;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   position: relative;
+
   &::after {
     content: '';
     display: block;
@@ -37,6 +75,7 @@
 
 @mixin card-hover {
   transition: transform $transition-base, box-shadow $transition-base, border-color $transition-base;
+
   &:hover {
     transform: translateY(-4px);
     box-shadow: $shadow-lg;
@@ -61,12 +100,19 @@
   display: inline-flex;
   align-items: center;
   gap: $space-2;
-  &:hover { background: $gold-400; transform: translateY(-1px); }
-  &:active { transform: translateY(0); }
+
+  &:hover {
+    background: $gold-400;
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
 }
 
 @mixin navy-btn {
-  background: $navy-800;
+  background: $navy-700;
   color: $white;
   font-family: $font-heading;
   font-weight: 700;
@@ -74,7 +120,7 @@
   letter-spacing: 1px;
   text-transform: uppercase;
   padding: $space-3 $space-5;
-  border: 2px solid $navy-800;
+  border: 2px solid $navy-700;
   border-radius: $radius-sm;
   cursor: pointer;
   transition: all $transition-fast;
@@ -82,5 +128,9 @@
   display: inline-flex;
   align-items: center;
   gap: $space-2;
-  &:hover { background: transparent; color: $navy-800; }
+
+  &:hover {
+    background: transparent;
+    color: $navy-700;
+  }
 }

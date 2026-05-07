@@ -761,7 +761,7 @@ function Home() {
                                         <span className="sf-embed-name">{s.platform}</span>
                                         <a href={s.profileUrl} target="_blank" rel="noopener noreferrer"
                                             className="sf-visit-btn" style={{ color: s.color, borderColor: `${s.color}55` }}>
-                                            Visit <i className="bi bi-arrow-up-right" />
+                                            <i className={`bi ${s.icon}`} /> View Channel
                                         </a>
                                     </div>
 
@@ -785,7 +785,7 @@ function Home() {
                                                 </div>
                                             ))}
                                             <a href={s.profileUrl} target="_blank" rel="noopener noreferrer" className="sf-custom-footer" style={{ color: s.color }}>
-                                                View all tweets <i className="bi bi-arrow-up-right" />
+                                                <i className="bi bi-twitter-x" /> View Channel
                                             </a>
                                         </div>
                                     )}
@@ -807,7 +807,7 @@ function Home() {
                                                 </div>
                                             ))}
                                             <a href={s.profileUrl} target="_blank" rel="noopener noreferrer" className="sf-custom-footer" style={{ color: s.color }}>
-                                                View channel <i className="bi bi-arrow-up-right" />
+                                                <i className="bi bi-youtube" /> View Channel
                                             </a>
                                         </div>
                                     )}

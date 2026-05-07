@@ -1,0 +1,561 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.vacancies-page {}
+
+// Alert banner
+.vac-alert-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-4;
+    background: rgba($red-500, 0.06);
+    border: 1px solid rgba($red-500, 0.25);
+    border-left: 4px solid $red-500;
+    border-radius: $radius-lg;
+    padding: $space-4 $space-5;
+    margin-bottom: $space-6;
+
+    >i {
+        color: $red-500;
+        font-size: 1.4rem;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    strong {
+        display: block;
+        font-family: $font-heading;
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: $red-600;
+        margin-bottom: $space-1;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    p {
+        font-size: 0.84rem;
+        color: rgba($white, 0.65);
+        line-height: 1.5;
+    }
+}
+
+// Stats strip
+.vac-stats-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $space-4;
+    margin-bottom: $space-5;
+    background: $navy-700;
+    border-radius: $radius-lg;
+    padding: $space-4;
+
+    @include respond(md) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.vstat-item {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    padding: $space-3;
+    border-right: 1px solid rgba($white, 0.07);
+
+    &:last-child {
+        border-right: none;
+    }
+
+    @include respond(md) {
+        border-right: none;
+    }
+}
+
+.vstat-icon {
+    width: 42px;
+    height: 42px;
+    background: rgba($gold-500, 0.1);
+    border-radius: $radius-sm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $gold-400;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.vstat-value {
+    display: block;
+    font-family: $font-heading;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: $white;
+    line-height: 1;
+}
+
+.vstat-label {
+    display: block;
+    font-size: 0.72rem;
+    color: rgba($white, 0.5);
+    letter-spacing: 0.3px;
+}
+
+// Filter bar
+.vac-filter-bar {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    flex-wrap: wrap;
+    background: $gray-100;
+    border: 1px solid $gray-200;
+    border-radius: $radius-lg;
+    padding: $space-3 $space-5;
+    margin-bottom: $space-4;
+}
+
+.filter-label {
+    font-family: $font-heading;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: $gray-500;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    i {
+        color: $gold-500;
+    }
+}
+
+.filter-pill {
+    padding: 4px 14px;
+    border: 1px solid $gray-300;
+    background: $white;
+    color: $gray-600;
+    font-family: $font-body;
+    font-size: 0.78rem;
+    border-radius: $radius-full;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &.active {
+        background: $navy-700;
+        border-color: $navy-700;
+        color: $white;
+    }
+
+    &:hover:not(.active) {
+        border-color: $navy-500;
+        color: $navy-600;
+    }
+}
+
+// Count
+.vac-count-row {
+    margin-bottom: $space-4;
+
+    span {
+        font-size: 0.82rem;
+        color: rgba($white, 0.55);
+        font-style: italic;
+    }
+}
+
+// Empty
+.vac-empty {
+    text-align: center;
+    padding: $space-8 $space-5;
+    color: $gray-400;
+
+    i {
+        font-size: 3rem;
+        display: block;
+        margin-bottom: $space-3;
+    }
+
+    p {
+        font-size: 0.9rem;
+    }
+}
+
+// Vacancy cards
+.vac-cards-list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+    margin-bottom: $space-6;
+}
+
+.vac-card {
+    display: flex;
+    background: $white;
+    border: 1px solid $gray-200;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    transition: box-shadow $transition-base, transform $transition-base;
+
+    &:hover {
+        box-shadow: $shadow-md;
+        transform: translateY(-2px);
+    }
+
+    &.vac-card--open {
+        .vc-status-bar {
+            background: #16a34a;
+        }
+    }
+
+    &.vac-card--closing {
+        .vc-status-bar {
+            background: $red-500;
+        }
+    }
+
+    &.vac-card--closed {
+        .vc-status-bar {
+            background: $gray-300;
+        }
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}
+
+.vc-status-bar {
+    width: 5px;
+    flex-shrink: 0;
+}
+
+.vc-body {
+    flex: 1;
+    padding: $space-4 $space-5;
+
+    @include respond(sm) {
+        padding: $space-3 $space-4;
+    }
+}
+
+.vc-header-row {
+    @include flex-between;
+    margin-bottom: $space-3;
+    gap: $space-3;
+    flex-wrap: wrap;
+}
+
+.vc-id-type {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    flex-wrap: wrap;
+}
+
+.vc-id {
+    font-family: $font-heading;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: $gray-500;
+    background: $gray-100;
+    padding: 2px 8px;
+    border-radius: $radius-sm;
+    letter-spacing: 0.5px;
+}
+
+.vc-type-tag {
+    font-size: 0.7rem;
+    color: $gray-400;
+    font-style: italic;
+}
+
+.vc-right-badges {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+}
+
+.vc-posts-badge {
+    font-family: $font-heading;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    background: rgba($gold-500, 0.12);
+    color: $gold-700;
+    border-radius: $radius-full;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    i {
+        font-size: 0.65rem;
+    }
+}
+
+.vc-status-badge {
+    font-family: $font-heading;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: $radius-full;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+
+    &.status--open {
+        background: rgba(22, 163, 74, 0.1);
+        color: #16a34a;
+
+        i {
+            font-size: 0.4rem;
+        }
+    }
+
+    &.status--closing {
+        background: rgba($red-500, 0.1);
+        color: $red-500;
+    }
+
+    &.status--closed {
+        background: $gray-100;
+        color: $gray-400;
+    }
+}
+
+.vc-post-title {
+    font-family: $font-heading;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: $navy-700;
+    line-height: 1.3;
+    margin-bottom: $space-1;
+}
+
+.vc-dept {
+    font-size: 0.82rem;
+    color: $gray-500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: $space-4;
+
+    i {
+        color: $navy-400;
+    }
+}
+
+.vc-details-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $space-4;
+    margin-bottom: $space-4;
+    padding: $space-3 $space-4;
+    background: $gray-100;
+    border-radius: $radius-md;
+
+    @include respond(lg) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.vc-detail-item {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-2;
+
+    >i {
+        color: $gold-500;
+        font-size: 0.85rem;
+        margin-top: 2px;
+        flex-shrink: 0;
+    }
+
+    div {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    &.vc-detail--urgent {
+        >i {
+            color: $red-500;
+        }
+
+        .vdi-value {
+            color: $red-500;
+            font-weight: 600;
+        }
+    }
+}
+
+.vdi-label {
+    font-size: 0.68rem;
+    color: $gray-400;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.vdi-value {
+    font-size: 0.82rem;
+    color: $navy-700;
+    font-weight: 500;
+}
+
+.vc-actions {
+    display: flex;
+    gap: $space-3;
+    flex-wrap: wrap;
+}
+
+.vc-apply-btn {
+    @include gold-btn;
+    font-size: 0.8rem;
+    padding: $space-2 $space-5;
+    text-decoration: none;
+
+    &.vc-apply-btn--closed {
+        background: $gray-200;
+        color: $gray-400;
+        cursor: not-allowed;
+
+        &:hover {
+            background: $gray-200;
+            color: $gray-400;
+            transform: none;
+        }
+    }
+}
+
+.vc-notice-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-2;
+    padding: $space-2 $space-4;
+    background: transparent;
+    border: 1px solid $gray-300;
+    color: $gray-600;
+    font-family: $font-heading;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    i {
+        color: $red-500;
+    }
+
+    &:hover {
+        background: $navy-700;
+        color: $white;
+        border-color: $navy-700;
+
+        i {
+            color: $gold-400;
+        }
+    }
+}
+
+// Download section
+.vac-download-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space-4;
+    background: rgba($navy-500, 0.05);
+    border: 1px solid rgba($navy-500, 0.15);
+    border-left: 4px solid $navy-500;
+    border-radius: $radius-lg;
+    padding: $space-4 $space-5;
+    margin-bottom: $space-5;
+
+    @include respond(md) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+.vds-left {
+    display: flex;
+    align-items: center;
+    gap: $space-4;
+
+    >i {
+        font-size: 1.8rem;
+        color: $navy-500;
+        flex-shrink: 0;
+    }
+
+    h4 {
+        font-family: $font-heading;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: $navy-700;
+        margin-bottom: 3px;
+    }
+
+    p {
+        font-size: 0.82rem;
+        color: rgba($white, 0.65);
+    }
+}
+
+.vds-btn {
+    @include navy-btn;
+    white-space: nowrap;
+    flex-shrink: 0;
+    text-decoration: none;
+}
+
+// Important note
+.vac-important-note {
+    background: $gold-100;
+    border: 1px solid $gold-300;
+    border-radius: $radius-lg;
+    padding: $space-4 $space-5;
+}
+
+.vin-header {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    margin-bottom: $space-3;
+
+    i {
+        color: $gold-600;
+        font-size: 1rem;
+    }
+
+    strong {
+        font-family: $font-heading;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: $gold-700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+}
+
+.vin-list {
+    padding-left: $space-5;
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+
+    li {
+        font-size: 0.83rem;
+        color: $gray-600;
+        line-height: 1.5;
+    }
+}

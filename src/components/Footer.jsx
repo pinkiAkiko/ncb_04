@@ -104,13 +104,13 @@ function Footer() {
                                 <a href="tel:1933" className="hl-number">1933</a>
                             </div>
                         </div>
-                        <div className="footer-social-row">
+                        {/* <div className="footer-social-row">
                             <span className="footer-social-label">Follow Us:</span>
-                            <a href="https://x.com/narcoticsbureau" target="_blank" rel="noopener noreferrer" className="social-icon-btn social-icon-btn--x" aria-label="X / Twitter"><i className="bi bi-twitter-x" /></a>
-                            <a href="https://www.facebook.com/narcoticscontrolbureauindia" target="_blank" rel="noopener noreferrer" className="social-icon-btn social-icon-btn--fb" aria-label="Facebook"><i className="bi bi-facebook" /></a>
-                            <a href="https://www.youtube.com/channel/UCb3-9pF4m0BbLpW-yfR1Ipg" target="_blank" rel="noopener noreferrer" className="social-icon-btn social-icon-btn--yt" aria-label="YouTube"><i className="bi bi-youtube" /></a>
-                            <a href="https://www.instagram.com/india.ncb" target="_blank" rel="noopener noreferrer" className="social-icon-btn social-icon-btn--ig" aria-label="Instagram"><i className="bi bi-instagram" /></a>
-                        </div>
+                            <a href="https://x.com/narcoticsbureau" target="_blank" rel="noopener noreferrer" className="social-icon-btn social-icon-btn--x" aria-label="X / Twitter"><i className="bi bi-twitter-x" /><span>X</span></a>
+                            <a href="https://www.facebook.com/narcoticscontrolbureauindia" target="_blank" rel="noopener noreferrer" className="social-icon-btn social-icon-btn--fb" aria-label="Facebook"><i className="bi bi-facebook" /><span>Facebook</span></a>
+                            <a href="https://www.youtube.com/channel/UCb3-9pF4m0BbLpW-yfR1Ipg" target="_blank" rel="noopener noreferrer" className="social-icon-btn social-icon-btn--yt" aria-label="YouTube"><i className="bi bi-youtube" /><span>YouTube</span></a>
+                            <a href="https://www.instagram.com/india.ncb" target="_blank" rel="noopener noreferrer" className="social-icon-btn social-icon-btn--ig" aria-label="Instagram"><i className="bi bi-instagram" /><span>Instagram</span></a>
+                        </div> */}
                     </div>
 
                     {/* Link columns */}

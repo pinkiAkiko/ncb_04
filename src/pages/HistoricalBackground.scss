@@ -1,0 +1,328 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.history-page {}
+
+// ── Intro Grid ────────────────────────────────────────────────────
+.history-intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-8;
+    align-items: center;
+    margin-bottom: $space-9;
+
+    @include respond(md) {
+        grid-template-columns: 1fr;
+        gap: $space-6;
+    }
+
+    @include respond(sm) {
+        gap: $space-5;
+        margin-bottom: $space-7;
+    }
+}
+
+.history-intro-text {
+    p {
+        font-size: 0.9rem;
+        color: rgba($white, 0.72);
+        line-height: 1.7;
+        margin-bottom: $space-3;
+
+        strong {
+            color: $gold-300;
+        }
+    }
+}
+
+.history-intro-img {
+    @include respond(md) {
+        order: -1;
+    }
+}
+
+.history-img-frame {
+    border-radius: $radius-xl;
+    overflow: hidden;
+    border: 3px solid rgba($gold-500, 0.25);
+    box-shadow: $shadow-lg;
+
+    img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+}
+
+// ── Timeline Section ──────────────────────────────────────────────
+.history-timeline-section {
+    margin-bottom: $space-9;
+}
+
+.section-header-row.center {
+    text-align: center;
+    margin-bottom: $space-7;
+}
+
+.section-divider--center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.history-timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+
+    // Central vertical line
+    &::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(to bottom, $gold-500, rgba($gold-500, 0.2));
+        transform: translateX(-50%);
+
+        @include respond(md) {
+            left: 28px;
+        }
+    }
+
+    @include respond(md) {
+        padding-left: $space-5;
+    }
+}
+
+.timeline-item {
+    display: grid;
+    grid-template-columns: 1fr 40px 1fr;
+    gap: 0;
+    align-items: flex-start;
+    margin-bottom: $space-6;
+
+    @include respond(md) {
+        grid-template-columns: 40px 1fr;
+        margin-bottom: $space-5;
+    }
+
+    &--left {
+        .timeline-card {
+            grid-column: 1;
+            grid-row: 1;
+            text-align: right;
+
+            @include respond(md) {
+                grid-column: 2;
+                grid-row: 1;
+                text-align: left;
+            }
+        }
+
+        .timeline-connector {
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+        // Empty right column on desktop
+        &::after {
+            content: '';
+            grid-column: 3;
+
+            @include respond(md) {
+                display: none;
+            }
+        }
+    }
+
+    &--right {
+        .timeline-card {
+            grid-column: 3;
+            grid-row: 1;
+
+            @include respond(md) {
+                grid-column: 2;
+                grid-row: 1;
+                text-align: left;
+            }
+        }
+
+        .timeline-connector {
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+        // Empty left column on desktop
+        &::before {
+            content: '';
+            grid-column: 1;
+
+            @include respond(md) {
+                display: none;
+            }
+        }
+    }
+}
+
+.timeline-connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: $space-3;
+
+    @include respond(md) {
+        padding-top: $space-2;
+    }
+}
+
+.timeline-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: $gold-500;
+    border: 3px solid $white;
+    box-shadow: 0 0 0 3px $gold-500;
+    flex-shrink: 0;
+    z-index: 1;
+}
+
+.timeline-card {
+    background: $white;
+    border: 1px solid $gray-200;
+    border-radius: $radius-lg;
+    padding: $space-4 $space-5;
+    box-shadow: $shadow-sm;
+    transition: box-shadow $transition-base, border-color $transition-base;
+    margin: 0 $space-4;
+
+    &:hover {
+        box-shadow: $shadow-md;
+        border-color: $gold-300;
+    }
+
+    @include respond(md) {
+        margin: 0 0 0 $space-3;
+        text-align: left;
+    }
+
+    @include respond(sm) {
+        padding: $space-3 $space-4;
+    }
+}
+
+.timeline-year-badge {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    background: $navy-700;
+    color: $gold-400;
+    font-family: $font-heading;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 4px $space-3;
+    border-radius: $radius-sm;
+    margin-bottom: $space-2;
+    line-height: 1.2;
+    letter-spacing: 0.5px;
+
+    .tyb-sub {
+        font-size: 0.65rem;
+        color: $gold-300;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+}
+
+.timeline-title {
+    font-family: $font-heading;
+    font-size: 1rem;
+    font-weight: 700;
+    color: $navy-700;
+    margin-bottom: $space-2;
+}
+
+.timeline-desc {
+    font-size: 0.82rem;
+    color: $gray-600;
+    line-height: 1.6;
+    margin: 0;
+}
+
+// ── Key Facts Strip ───────────────────────────────────────────────
+.history-facts-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    background: $navy-700;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    border: 1px solid rgba($gold-500, 0.2);
+
+    @include respond(md) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond(sm) {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.hfs-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: $space-6 $space-4;
+    border-right: 1px solid rgba($white, 0.08);
+    transition: background $transition-base;
+
+    &:last-child {
+        border-right: none;
+    }
+
+    &:hover {
+        background: rgba($gold-500, 0.08);
+    }
+
+    @include respond(md) {
+        &:nth-child(2) {
+            border-right: none;
+        }
+
+        &:nth-child(3) {
+            border-top: 1px solid rgba($white, 0.08);
+        }
+
+        &:nth-child(4) {
+            border-top: 1px solid rgba($white, 0.08);
+            border-right: none;
+        }
+    }
+}
+
+.hfs-icon {
+    font-size: 1.6rem;
+    color: $gold-400;
+    margin-bottom: $space-2;
+}
+
+.hfs-value {
+    font-family: $font-heading;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: $white;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+}
+
+.hfs-label {
+    font-size: 0.75rem;
+    color: rgba($white, 0.5);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 4px;
+}

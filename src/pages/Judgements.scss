@@ -1,0 +1,378 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.judgements-page {}
+
+// Filter wrap
+.jdg-filter-wrap {
+    background: rgba($white, 0.05);
+    border: 1px solid rgba(#fff, 0.1);
+    border-radius: $radius-lg;
+    padding: $space-4 $space-5;
+    margin-bottom: $space-4;
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+
+    @include respond(sm) {
+        padding: $space-3 $space-4;
+    }
+}
+
+.jdg-filter-row {
+    display: flex;
+    gap: $space-5;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.jdg-filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+}
+
+.jdg-filter-label {
+    font-family: $font-heading;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba($white, 0.55);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    i {
+        color: $gold-500;
+    }
+}
+
+.filter-pills {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    flex-wrap: wrap;
+}
+
+.filter-pill {
+    padding: 4px 12px;
+    border: 1px solid rgba(#fff, 0.15);
+    background: rgba($white, 0.07);
+    color: rgba($white, 0.72);
+    font-family: $font-body;
+    font-size: 0.78rem;
+    border-radius: $radius-full;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &.active {
+        background: $navy-700;
+        border-color: $navy-700;
+        color: $white;
+    }
+
+    &:hover:not(.active) {
+        border-color: $navy-500;
+        color: $navy-600;
+    }
+}
+
+.jdg-search {
+    flex: 1;
+    min-width: 260px;
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    background: $white;
+    border: 1px solid $gray-200;
+    border-radius: $radius-sm;
+    padding: 0 $space-3;
+    align-self: flex-end;
+
+    i {
+        color: $gray-400;
+        font-size: 0.85rem;
+        flex-shrink: 0;
+    }
+
+    input {
+        flex: 1;
+        border: none;
+        outline: none;
+        padding: $space-2 0;
+        font-size: 0.85rem;
+        font-family: $font-body;
+        color: $gray-700;
+        background: transparent;
+
+        &::placeholder {
+            color: $gray-400;
+        }
+    }
+}
+
+// Count
+.jdg-count-row {
+    margin-bottom: $space-4;
+
+    span {
+        font-size: 0.82rem;
+        color: rgba($white, 0.55);
+        font-style: italic;
+    }
+}
+
+// Empty
+.jdg-empty {
+    text-align: center;
+    padding: $space-8 $space-5;
+    color: $gray-400;
+
+    i {
+        font-size: 3rem;
+        display: block;
+        margin-bottom: $space-3;
+    }
+
+    p {
+        font-size: 0.9rem;
+    }
+}
+
+// Cards list
+.jdg-cards-list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+    margin-bottom: $space-5;
+}
+
+.jdg-card {
+    display: flex;
+    background: $white;
+    border: 1px solid $gray-200;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    transition: box-shadow $transition-base, transform $transition-base;
+
+    &:hover {
+        box-shadow: $shadow-md;
+        transform: translateY(-2px);
+    }
+}
+
+.jc-left-bar {
+    width: 5px;
+    background: $gold-500;
+    flex-shrink: 0;
+}
+
+.jc-body {
+    flex: 1;
+    padding: $space-4 $space-5;
+
+    @include respond(sm) {
+        padding: $space-3 $space-4;
+    }
+}
+
+.jc-header-row {
+    @include flex-between;
+    margin-bottom: $space-3;
+    gap: $space-3;
+    flex-wrap: wrap;
+}
+
+.jc-badges {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    flex-wrap: wrap;
+}
+
+.jc-importance-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: $font-heading;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: $radius-full;
+
+    &.imp--landmark {
+        background: rgba($gold-500, 0.15);
+        color: $gold-700;
+
+        i {
+            color: $gold-500;
+        }
+    }
+
+    &.imp--key {
+        background: rgba($navy-500, 0.1);
+        color: $navy-500;
+
+        i {
+            color: $navy-500;
+        }
+    }
+
+    &.imp--procedural {
+        background: rgba(#0d9488, 0.1);
+        color: #0d9488;
+
+        i {
+            color: #0d9488;
+        }
+    }
+
+    &.imp--hc {
+        background: rgba(#7c3aed, 0.1);
+        color: #7c3aed;
+
+        i {
+            color: #7c3aed;
+        }
+    }
+}
+
+.jc-topic-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.72rem;
+    color: $gray-500;
+    background: $gray-100;
+    padding: 2px 9px;
+    border-radius: $radius-full;
+
+    i {
+        color: $gold-500;
+        font-size: 0.65rem;
+    }
+}
+
+.jc-year {
+    font-family: $font-heading;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: $gray-400;
+    flex-shrink: 0;
+}
+
+.jc-case-name {
+    font-family: $font-heading;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: $navy-700;
+    line-height: 1.3;
+    margin-bottom: $space-2;
+}
+
+.jc-meta-row {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    flex-wrap: wrap;
+    margin-bottom: $space-3;
+}
+
+.jc-meta-item {
+    font-size: 0.78rem;
+    color: $gray-500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    i {
+        color: $navy-400;
+        font-size: 0.75rem;
+    }
+}
+
+.jc-meta-sep {
+    color: $gray-300;
+}
+
+.jc-citation {
+    font-size: 0.78rem;
+    color: $gray-500;
+    font-style: italic;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    i {
+        color: $gold-500;
+        font-size: 0.85rem;
+    }
+}
+
+.jc-summary {
+    font-size: 0.85rem;
+    color: $gray-600;
+    line-height: 1.6;
+    margin-bottom: $space-4;
+    padding-left: $space-4;
+    border-left: 3px solid $gray-200;
+}
+
+.jc-view-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-2;
+    padding: $space-2 $space-4;
+    background: $navy-700;
+    border: none;
+    color: $white;
+    font-family: $font-heading;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: background $transition-fast;
+
+    &:hover {
+        background: $gold-500;
+        color: $navy-900;
+    }
+}
+
+// Disclaimer
+.jdg-disclaimer {
+    background: $gold-100;
+    border: 1px solid $gold-300;
+    border-radius: $radius-lg;
+    padding: $space-4 $space-5;
+    display: flex;
+    align-items: flex-start;
+    gap: $space-3;
+
+    i {
+        color: $gold-600;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    p {
+        font-size: 0.82rem;
+        color: $gray-600;
+        line-height: 1.5;
+
+        a {
+            color: $navy-500;
+            text-decoration: underline;
+
+            &:hover {
+                color: $gold-600;
+            }
+        }
+    }
+}

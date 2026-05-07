@@ -1,0 +1,353 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.org-page {}
+
+// ── Intro ─────────────────────────────────────────────────────────
+.org-intro-section {
+    margin-bottom: $space-9;
+}
+
+.org-intro-text {
+    font-size: 0.92rem;
+    color: rgba($white, 0.72);
+    line-height: 1.8;
+    max-width: 820px;
+    margin-top: $space-4;
+
+    strong {
+        color: $gold-300;
+    }
+}
+
+// ── Organogram ────────────────────────────────────────────────────
+.org-chart-section {
+    margin-bottom: $space-9;
+}
+
+.section-header-row.center {
+    text-align: center;
+    margin-bottom: $space-7;
+}
+
+.section-divider--center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.org-chart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+
+    @include respond(md) {
+        align-items: stretch;
+        overflow-x: auto;
+        padding-bottom: $space-3;
+    }
+}
+
+// Levels
+.org-level {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+// Connector lines
+.org-connector {
+    &--down {
+        width: 2px;
+        height: $space-5;
+        background: $gold-500;
+        flex-shrink: 0;
+    }
+}
+
+// Branch horizontal line above row
+.org-branch-line {
+    width: 70%;
+    height: 2px;
+    background: $gold-500;
+    margin-bottom: 0;
+
+    @include respond(lg) {
+        width: 90%;
+    }
+
+    @include respond(md) {
+        width: 100%;
+    }
+}
+
+// Rows of nodes
+.org-nodes-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: $space-4;
+    width: 100%;
+    padding: 0 $space-4;
+
+    &--wrap {
+        flex-wrap: wrap;
+        gap: $space-3;
+        padding: 0;
+    }
+
+    @include respond(lg) {
+        flex-wrap: wrap;
+        gap: $space-3;
+    }
+}
+
+// Node styles
+.org-node {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    background: $navy-700;
+    border: 1px solid rgba(#fff, 0.1);
+    border-radius: $radius-md;
+    box-shadow: none;
+    transition: box-shadow $transition-fast, border-color $transition-fast;
+
+    &:hover {
+        box-shadow: none;
+        border-color: rgba($gold-500, 0.35);
+    }
+
+    &--top {
+        padding: $space-4 $space-6;
+        border-top: 4px solid $gold-500;
+        border-radius: $radius-lg;
+        min-width: 280px;
+
+        .org-node-title {
+            font-size: 1rem;
+        }
+    }
+
+    &--l2 {
+        padding: $space-3 $space-4;
+        border-top: 3px solid $gold-500;
+        min-width: 200px;
+        flex: 1;
+        max-width: 260px;
+    }
+
+    &--l3 {
+        padding: $space-2 $space-3;
+        border-top: 2px solid $navy-500;
+        min-width: 140px;
+        flex: 1;
+        max-width: 180px;
+        flex-direction: column;
+        text-align: center;
+        gap: $space-2;
+
+        @include respond(md) {
+            min-width: 120px;
+        }
+    }
+}
+
+.org-node-icon {
+    width: 44px;
+    height: 44px;
+    background: rgba($gold-500, 0.1);
+    color: $gold-600;
+    border-radius: $radius-md;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+
+    &--sm {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+        background: rgba(#fff, 0.1);
+        color: $gold-400;
+    }
+
+    &--xs {
+        width: 30px;
+        height: 30px;
+        font-size: 0.85rem;
+        background: rgba(#fff, 0.08);
+        color: $gold-400;
+    }
+}
+
+.org-node-body {
+    flex: 1;
+}
+
+.org-node-title {
+    font-family: $font-heading;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: rgba($white, 0.9);
+    line-height: 1.2;
+}
+
+.org-node-subtitle {
+    font-size: 0.72rem;
+    color: rgba($white, 0.4);
+    margin-top: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+// ── Zones Grid ────────────────────────────────────────────────────
+.org-zones-section {
+    margin-bottom: $space-9;
+}
+
+.zones-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $space-4;
+
+    @include respond(xl) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include respond(lg) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.zone-card {
+    background: $navy-700;
+    border: 1px solid rgba(#fff, 0.1);
+    border-radius: $radius-lg;
+    padding: $space-4;
+    border-left: 4px solid $gold-500;
+    display: flex;
+    flex-direction: column;
+    @include card-hover;
+}
+
+.zone-card-header {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    margin-bottom: $space-2;
+}
+
+.zone-icon {
+    width: 36px;
+    height: 36px;
+    background: rgba(#fff, 0.1);
+    color: $gold-400;
+    border-radius: $radius-sm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.zone-name {
+    font-family: $font-heading;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: rgba($white, 0.9);
+    line-height: 1.2;
+}
+
+.zone-hq {
+    font-size: 0.75rem;
+    color: $gold-400;
+    font-weight: 600;
+}
+
+.zone-states {
+    font-size: 0.75rem;
+    color: rgba($white, 0.65);
+    line-height: 1.5;
+    margin: 0;
+    padding-left: calc(36px + #{$space-3});
+    flex: 1;
+}
+
+// ── Stats Strip ───────────────────────────────────────────────────
+.org-stats-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    background: $navy-700;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    border: 1px solid rgba($gold-500, 0.2);
+
+    @include respond(md) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.oss-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: $space-6 $space-4;
+    border-right: 1px solid rgba($white, 0.08);
+    transition: background $transition-base;
+
+    &:last-child {
+        border-right: none;
+    }
+
+    &:hover {
+        background: rgba($gold-500, 0.08);
+    }
+
+    @include respond(md) {
+        &:nth-child(2) {
+            border-right: none;
+        }
+
+        &:nth-child(3) {
+            border-top: 1px solid rgba($white, 0.08);
+        }
+
+        &:nth-child(4) {
+            border-top: 1px solid rgba($white, 0.08);
+            border-right: none;
+        }
+    }
+}
+
+.oss-icon {
+    font-size: 1.6rem;
+    color: $gold-400;
+    margin-bottom: $space-2;
+}
+
+.oss-value {
+    font-family: $font-heading;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: $white;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+}
+
+.oss-label {
+    font-size: 0.75rem;
+    color: rgba($white, 0.5);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 4px;
+}

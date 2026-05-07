@@ -1,0 +1,420 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+// ── Urgent Banner ─────────────────────────────────────────
+.aa-urgent-banner {
+    background: linear-gradient(135deg, #7b0000 0%, #c0392b 100%);
+    border-bottom: 3px solid $gold-500;
+    padding: $space-5 0;
+}
+
+.aa-urgent-inner {
+    display: flex;
+    align-items: center;
+    gap: $space-5;
+
+    @include respond(md) {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+.aa-urgent-icon {
+    font-size: 2rem;
+    color: $white;
+    flex-shrink: 0;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+}
+
+.aa-urgent-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    strong {
+        font-family: $font-heading;
+        font-size: 0.9rem;
+        font-weight: 800;
+        color: $gold-300;
+        letter-spacing: 1px;
+    }
+
+    span {
+        font-size: 0.88rem;
+        color: rgba($white, 0.9);
+        line-height: 1.5;
+    }
+}
+
+.aa-urgent-btn {
+    @include gold-btn;
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+// ── Shared ────────────────────────────────────────────────
+.aa-section {
+    margin-bottom: $space-9;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+// ── Alert Cards ───────────────────────────────────────────
+.aa-alerts-list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+}
+
+.aa-alert-card {
+    display: flex;
+    gap: $space-5;
+    background: $white;
+    border: 1px solid $gray-200;
+    border-radius: $radius-lg;
+    padding: $space-5;
+    box-shadow: $shadow-sm;
+    @include card-hover;
+
+    @include respond(md) {
+        flex-direction: column;
+    }
+
+    &--critical {
+        border-left: 5px solid #c0392b;
+    }
+
+    &--high {
+        border-left: 5px solid #e67e22;
+    }
+
+    &--medium {
+        border-left: 5px solid #f1c40f;
+    }
+
+    &--low {
+        border-left: 5px solid #27ae60;
+    }
+}
+
+.aa-alert-aside {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $space-2;
+    min-width: 130px;
+
+    @include respond(md) {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        min-width: auto;
+    }
+}
+
+.aa-severity-badge {
+    font-family: $font-heading;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: $radius-full;
+    color: $white;
+
+    &--critical {
+        background: #c0392b;
+    }
+
+    &--high {
+        background: #e67e22;
+    }
+
+    &--medium {
+        background: #d4ac0d;
+        color: $navy-900;
+    }
+
+    &--low {
+        background: #27ae60;
+    }
+}
+
+.aa-alert-type {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: $gray-600;
+
+    @include respond(md) {
+        display: none;
+    }
+}
+
+.aa-alert-date {
+    font-size: 0.75rem;
+    color: $gray-400;
+
+    i {
+        margin-right: 4px;
+    }
+}
+
+.aa-alert-body {
+    flex: 1;
+}
+
+.aa-alert-title {
+    font-family: $font-heading;
+    font-size: 1rem;
+    font-weight: 700;
+    color: $navy-700;
+    margin-bottom: $space-2;
+    line-height: 1.4;
+}
+
+.aa-alert-desc {
+    font-size: 0.87rem;
+    color: $gray-600;
+    line-height: 1.6;
+    margin-bottom: $space-3;
+}
+
+.aa-alert-more {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: $gold-600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+
+    &:hover {
+        color: $gold-500;
+    }
+}
+
+// ── Never Do ──────────────────────────────────────────────
+.aa-never-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $space-4;
+
+    @include respond(lg) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.aa-never-card {
+    background: $navy-700;
+    border: 1px solid rgba($red-500, 0.3);
+    border-radius: $radius-lg;
+    padding: $space-6;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $space-3;
+    @include card-hover;
+}
+
+.aa-never-x {
+    i {
+        font-size: 1.4rem;
+        color: $red-500;
+    }
+}
+
+.aa-never-icon {
+    i {
+        font-size: 1.8rem;
+        color: rgba($white, 0.5);
+    }
+}
+
+.aa-never-text {
+    font-size: 0.87rem;
+    font-weight: 600;
+    color: rgba($white, 0.8);
+    line-height: 1.4;
+    margin: 0;
+}
+
+// ── Report Steps ──────────────────────────────────────────
+.aa-report-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $space-5;
+
+    @include respond(lg) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.aa-report-card {
+    background: $white;
+    border: 1px solid $gray-200;
+    border-radius: $radius-lg;
+    padding: $space-5;
+    text-align: center;
+    box-shadow: $shadow-sm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $space-2;
+    @include card-hover;
+}
+
+.aa-report-step {
+    font-family: $font-heading;
+    font-size: 2rem;
+    font-weight: 800;
+    color: rgba($gold-500, 0.2);
+    line-height: 1;
+}
+
+.aa-report-icon {
+    width: 48px;
+    height: 48px;
+    background: $navy-700;
+    border-radius: $radius-md;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    i {
+        font-size: 1.2rem;
+        color: $gold-400;
+    }
+}
+
+.aa-report-title {
+    font-family: $font-heading;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: $navy-700;
+    margin: 0;
+}
+
+.aa-report-detail {
+    font-size: 0.85rem;
+    color: $gold-600;
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover {
+        color: $gold-500;
+        text-decoration: underline;
+    }
+}
+
+// ── Awareness Cards ───────────────────────────────────────
+.aa-awareness-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $space-5;
+
+    @include respond(lg) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.aa-awareness-card {
+    background: $white;
+    border: 1px solid $gray-200;
+    border-radius: $radius-lg;
+    padding: $space-6;
+    box-shadow: $shadow-sm;
+    display: flex;
+    flex-direction: column;
+    @include card-hover;
+
+    &--blue {
+        border-top: 4px solid $navy-500;
+
+        .aa-awareness-icon {
+            background: rgba($navy-500, 0.08);
+
+            i {
+                color: $navy-500;
+            }
+        }
+    }
+
+    &--green {
+        border-top: 4px solid #16a34a;
+
+        .aa-awareness-icon {
+            background: rgba(#16a34a, 0.08);
+
+            i {
+                color: #16a34a;
+            }
+        }
+    }
+
+    &--gold {
+        border-top: 4px solid $gold-500;
+
+        .aa-awareness-icon {
+            background: rgba($gold-500, 0.1);
+
+            i {
+                color: $gold-600;
+            }
+        }
+    }
+}
+
+.aa-awareness-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: $radius-md;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: $space-3;
+
+    i {
+        font-size: 1.3rem;
+    }
+}
+
+.aa-awareness-title {
+    font-family: $font-heading;
+    font-size: 1rem;
+    font-weight: 700;
+    color: $navy-700;
+    margin-bottom: $space-2;
+}
+
+.aa-awareness-body {
+    font-size: 0.87rem;
+    color: $gray-600;
+    line-height: 1.7;
+    margin: 0;
+    flex: 1;
+}

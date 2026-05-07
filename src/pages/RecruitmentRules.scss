@@ -1,0 +1,396 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.recruitment-rules-page {}
+
+// Intro wrap
+.rr-intro-wrap {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: $space-6;
+    margin-bottom: $space-7;
+    align-items: start;
+
+    @include respond(lg) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.rr-intro-para {
+    font-size: 0.9rem;
+    color: rgba($white, 0.72);
+    line-height: 1.7;
+    margin-bottom: $space-3;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.rr-intro-card {
+    background: $navy-700;
+    border-radius: $radius-lg;
+    padding: $space-5;
+    text-align: center;
+    border-top: 4px solid $gold-500;
+
+    >i {
+        font-size: 2.5rem;
+        color: $gold-400;
+        display: block;
+        margin-bottom: $space-3;
+    }
+
+    h4 {
+        font-family: $font-heading;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: $white;
+        margin-bottom: $space-2;
+        line-height: 1.35;
+    }
+
+    p {
+        font-size: 0.8rem;
+        color: rgba($white, 0.55);
+        line-height: 1.5;
+        margin-bottom: $space-4;
+    }
+}
+
+.rr-ssc-link {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-2;
+    @include gold-btn;
+    font-size: 0.78rem;
+    text-decoration: none;
+    justify-content: center;
+    width: 100%;
+}
+
+// Table section
+.rr-table-section {
+    margin-bottom: $space-7;
+}
+
+.rr-table-wrap {
+    background: $white;
+    border: 1px solid $gray-200;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    margin-bottom: $space-4;
+    overflow-x: auto;
+}
+
+.rr-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    thead {
+        background: $navy-700;
+
+        th {
+            padding: $space-3 $space-4;
+            font-family: $font-heading;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: rgba($white, 0.6);
+            text-align: left;
+            white-space: nowrap;
+        }
+    }
+
+    tbody tr {
+        border-bottom: 1px solid $gray-100;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        &:hover {
+            background: rgba($gold-100, 0.5);
+        }
+    }
+
+    td {
+        padding: $space-3 $space-4;
+        vertical-align: middle;
+    }
+}
+
+.rr-sn {
+    font-family: $font-heading;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: $gray-400;
+}
+
+.rr-post-cell {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+
+    i {
+        color: $gold-500;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+    }
+}
+
+.rr-post-name {
+    font-size: 0.88rem;
+    color: $navy-700;
+    font-weight: 500;
+}
+
+.rr-year-badge {
+    font-family: $font-heading;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: $navy-500;
+    background: rgba($navy-500, 0.08);
+    padding: 2px 9px;
+    border-radius: $radius-sm;
+}
+
+.rr-amended {
+    font-size: 0.82rem;
+    color: $gray-600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.rr-size {
+    font-size: 0.75rem;
+    color: $gray-400;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+
+    i {
+        font-size: 0.7rem;
+    }
+}
+
+.rr-dl-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-1;
+    padding: $space-2 $space-3;
+    background: $gold-500;
+    border: none;
+    color: $navy-900;
+    font-family: $font-heading;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: background $transition-fast;
+    white-space: nowrap;
+
+    &:hover {
+        background: $gold-400;
+    }
+}
+
+.rr-table-note {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-3;
+    background: $gold-100;
+    border: 1px solid $gold-300;
+    border-radius: $radius-md;
+    padding: $space-3 $space-4;
+
+    i {
+        color: $gold-600;
+        font-size: 0.95rem;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    p {
+        font-size: 0.8rem;
+        color: $gray-600;
+        line-height: 1.5;
+
+        a {
+            color: $navy-500;
+            text-decoration: underline;
+
+            &:hover {
+                color: $gold-600;
+            }
+        }
+    }
+}
+
+// Service rules section
+.rr-service-section {
+    margin-bottom: $space-7;
+}
+
+.rr-service-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-5;
+
+    @include respond(md) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.rr-service-card {
+    display: flex;
+    gap: $space-4;
+    padding: $space-5;
+    background: $navy-700;
+    border: 1px solid rgba($white, 0.1);
+    border-radius: $radius-lg;
+    @include card-hover;
+}
+
+.rsc-icon {
+    width: 52px;
+    height: 52px;
+    background: rgba($white, 0.1);
+    color: $gold-400;
+    border-radius: $radius-md;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.rsc-body {
+    flex: 1;
+}
+
+.rsc-title {
+    font-family: $font-heading;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: rgba($white, 0.9);
+    margin-bottom: $space-2;
+}
+
+.rsc-desc {
+    font-size: 0.84rem;
+    color: rgba($white, 0.55);
+    line-height: 1.6;
+}
+
+// Contact card
+.rr-contact-card {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: $space-5;
+    background: $navy-700;
+    border-radius: $radius-lg;
+    padding: $space-5 $space-6;
+    border-left: 4px solid $gold-500;
+    align-items: start;
+
+    @include respond(lg) {
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto auto;
+    }
+
+    @include respond(md) {
+        grid-template-columns: 1fr;
+        padding: $space-4;
+    }
+}
+
+.rcc-icon-wrap {
+    width: 60px;
+    height: 60px;
+    background: rgba($gold-500, 0.12);
+    border-radius: $radius-md;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $gold-400;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.rcc-title {
+    font-family: $font-heading;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: $white;
+    margin-bottom: 3px;
+}
+
+.rcc-subtitle {
+    font-size: 0.8rem;
+    color: rgba($white, 0.5);
+    margin-bottom: $space-4;
+    font-style: italic;
+}
+
+.rcc-details {
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+}
+
+.rcc-detail-item {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    font-size: 0.83rem;
+    color: rgba($white, 0.7);
+
+    i {
+        color: $gold-400;
+        font-size: 0.8rem;
+        flex-shrink: 0;
+    }
+
+    a {
+        color: $gold-300;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.rcc-note {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-2;
+    background: rgba($red-500, 0.1);
+    border: 1px solid rgba($red-500, 0.2);
+    border-radius: $radius-md;
+    padding: $space-3 $space-4;
+    max-width: 280px;
+
+    @include respond(lg) {
+        grid-column: 1 / -1;
+        max-width: 100%;
+    }
+
+    i {
+        color: $red-400;
+        font-size: 0.85rem;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    p {
+        font-size: 0.78rem;
+        color: rgba($white, 0.55);
+        line-height: 1.5;
+    }
+}

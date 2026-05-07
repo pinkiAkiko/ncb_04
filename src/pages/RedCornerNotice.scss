@@ -12,8 +12,16 @@
     border-radius: $radius-lg;
     padding: $space-5 $space-6;
     margin-bottom: $space-6;
-    @include respond(md) { flex-direction: column; align-items: flex-start; }
-    @include respond(sm) { padding: $space-4; border-radius: $radius-md; }
+
+    @include respond(md) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    @include respond(sm) {
+        padding: $space-4;
+        border-radius: $radius-md;
+    }
 }
 
 .mwf-tip-left {
@@ -22,7 +30,7 @@
     gap: $space-4;
     flex: 1;
 
-    > i {
+    >i {
         font-size: 1.8rem;
         color: $red-400;
         flex-shrink: 0;
@@ -30,12 +38,28 @@
     }
 
     div {
-        strong { color: $white; font-size: 1rem; font-family: $font-heading; display: block; margin-bottom: 4px; }
-        p { font-size: 0.85rem; color: rgba($white, 0.6); line-height: 1.5; margin: 0; }
+        strong {
+            color: $white;
+            font-size: 1rem;
+            font-family: $font-heading;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        p {
+            font-size: 0.85rem;
+            color: rgba($white, 0.6);
+            line-height: 1.5;
+            margin: 0;
+        }
     }
 }
 
-.mwf-tip-actions { display: flex; gap: $space-3; flex-wrap: wrap; }
+.mwf-tip-actions {
+    display: flex;
+    gap: $space-3;
+    flex-wrap: wrap;
+}
 
 .mwf-tip-call {
     display: inline-flex;
@@ -50,7 +74,10 @@
     padding: $space-3 $space-5;
     border-radius: $radius-sm;
     transition: background $transition-fast;
-    &:hover { background: $red-600; }
+
+    &:hover {
+        background: $red-600;
+    }
 }
 
 .mwf-tip-online {
@@ -67,7 +94,11 @@
     padding: $space-3 $space-5;
     border-radius: $radius-sm;
     transition: all $transition-fast;
-    &:hover { background: $gold-500; color: $navy-900; }
+
+    &:hover {
+        background: $gold-500;
+        color: $navy-900;
+    }
 }
 
 // ── Filters ───────────────────────────────────────────────
@@ -77,7 +108,11 @@
     gap: $space-3;
     margin-bottom: $space-6;
     flex-wrap: wrap;
-    @include respond(sm) { gap: $space-2; margin-bottom: $space-4; }
+
+    @include respond(sm) {
+        gap: $space-2;
+        margin-bottom: $space-4;
+    }
 }
 
 .mwf-filter-label {
@@ -86,7 +121,7 @@
     font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
-    color: $gray-500;
+    color: rgba($white, 0.55);
     display: flex;
     align-items: center;
     gap: $space-2;
@@ -104,16 +139,63 @@
     cursor: pointer;
     transition: all $transition-fast;
 
-    &.flt--all    { border-color: $gray-300; color: $gray-600; background: $white; &.active, &:hover { background: $navy-800; border-color: $navy-800; color: $white; } }
-    &.flt--high-alert { border-color: $red-400; color: $red-500; background: rgba($red-500, 0.05); &.active, &:hover { background: $red-500; border-color: $red-500; color: $white; } }
-    &.flt--wanted     { border-color: $gold-500; color: $gold-600; background: rgba($gold-500, 0.05); &.active, &:hover { background: $gold-500; border-color: $gold-500; color: $navy-900; } }
-    &.flt--fugitive   { border-color: $navy-500; color: $navy-600; background: rgba($navy-500, 0.05); &.active, &:hover { background: $navy-700; border-color: $navy-700; color: $white; } }
+    &.flt--all {
+        border-color: $gray-300;
+        color: $gray-600;
+        background: $white;
+
+        &.active,
+        &:hover {
+            background: $navy-700;
+            border-color: $navy-700;
+            color: $white;
+        }
+    }
+
+    &.flt--high-alert {
+        border-color: $red-400;
+        color: $red-500;
+        background: rgba($red-500, 0.05);
+
+        &.active,
+        &:hover {
+            background: $red-500;
+            border-color: $red-500;
+            color: $white;
+        }
+    }
+
+    &.flt--wanted {
+        border-color: $gold-500;
+        color: $gold-600;
+        background: rgba($gold-500, 0.05);
+
+        &.active,
+        &:hover {
+            background: $gold-500;
+            border-color: $gold-500;
+            color: $navy-900;
+        }
+    }
+
+    &.flt--fugitive {
+        border-color: $navy-500;
+        color: $navy-600;
+        background: rgba($navy-500, 0.05);
+
+        &.active,
+        &:hover {
+            background: $navy-700;
+            border-color: $navy-700;
+            color: $white;
+        }
+    }
 }
 
 .mwf-count {
     margin-left: auto;
     font-size: 0.78rem;
-    color: $gray-400;
+    color: rgba($white, 0.4);
     font-family: $font-heading;
 }
 
@@ -132,20 +214,47 @@
     border: 1px solid $gray-200;
     box-shadow: $shadow-sm;
     transition: box-shadow $transition-base;
-    &:hover, &.expanded { box-shadow: $shadow-lg; }
+
+    &:hover,
+    &.expanded {
+        box-shadow: $shadow-lg;
+    }
 
     &.mwf--high-alert {
-        .mwf-card-bar { background: $red-500; }
-        .mwf-wanted-stamp { background: $red-500; color: $white; }
-        .mwf-name { color: $red-600; }
+        .mwf-card-bar {
+            background: $red-500;
+        }
+
+        .mwf-wanted-stamp {
+            background: $red-500;
+            color: $white;
+        }
+
+        .mwf-name {
+            color: $red-600;
+        }
     }
+
     &.mwf--wanted {
-        .mwf-card-bar { background: $gold-500; }
-        .mwf-wanted-stamp { background: $gold-500; color: $navy-900; }
+        .mwf-card-bar {
+            background: $gold-500;
+        }
+
+        .mwf-wanted-stamp {
+            background: $gold-500;
+            color: $navy-900;
+        }
     }
+
     &.mwf--fugitive {
-        .mwf-card-bar { background: $navy-700; }
-        .mwf-wanted-stamp { background: $navy-700; color: $white; }
+        .mwf-card-bar {
+            background: $navy-700;
+        }
+
+        .mwf-wanted-stamp {
+            background: $navy-700;
+            color: $white;
+        }
     }
 }
 
@@ -157,7 +266,10 @@
 .mwf-card-main {
     display: grid;
     grid-template-columns: 220px 1fr;
-    @include respond(md) { grid-template-columns: 1fr; }
+
+    @include respond(md) {
+        grid-template-columns: 1fr;
+    }
 }
 
 // ── Photo column ──────────────────────────────────────────
@@ -169,7 +281,12 @@
     align-items: center;
     gap: $space-4;
     background: $gray-100;
-    @include respond(md) { flex-direction: row; border-right: none; border-bottom: 1px solid $gray-100; }
+
+    @include respond(md) {
+        flex-direction: row;
+        border-right: none;
+        border-bottom: 1px solid $gray-100;
+    }
 }
 
 .mwf-wanted-stamp {
@@ -192,9 +309,18 @@
     border: 3px solid $gray-300;
     background: $gray-100;
     flex-shrink: 0;
-    @include respond(md) { width: 100px; height: 130px; }
 
-    img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    @include respond(md) {
+        width: 100px;
+        height: 130px;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top;
+    }
 }
 
 .mwf-reward-badge {
@@ -203,7 +329,10 @@
     padding: $space-3 $space-4;
     text-align: center;
     width: 100%;
-    @include respond(md) { display: none; }
+
+    @include respond(md) {
+        display: none;
+    }
 }
 
 .mwf-reward-label {
@@ -255,7 +384,11 @@
     display: flex;
     align-items: center;
     gap: $space-2;
-    i { color: $gold-500; font-size: 0.75rem; }
+
+    i {
+        color: $gold-500;
+        font-size: 0.75rem;
+    }
 }
 
 .mwf-case-id {
@@ -296,7 +429,10 @@
     background: $gray-100;
     border-radius: $radius-md;
     border: 1px solid $gray-100;
-    @include respond(sm) { grid-template-columns: repeat(2, 1fr); }
+
+    @include respond(sm) {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 .mwf-phy-item {
@@ -325,8 +461,16 @@
     gap: $space-2;
     font-size: 0.82rem;
     color: $gray-600;
-    i { color: $gold-500; margin-top: 2px; flex-shrink: 0; }
-    strong { color: $navy-800; }
+
+    i {
+        color: $gold-500;
+        margin-top: 2px;
+        flex-shrink: 0;
+    }
+
+    strong {
+        color: $navy-700;
+    }
 }
 
 .mwf-caution-tag {
@@ -341,7 +485,10 @@
     font-weight: 600;
     padding: $space-2 $space-4;
     border-radius: $radius-sm;
-    i { font-size: 0.75rem; }
+
+    i {
+        font-size: 0.75rem;
+    }
 }
 
 .mwf-card-footer {
@@ -360,7 +507,11 @@
     align-items: center;
     gap: $space-2;
     flex-wrap: wrap;
-    i { color: $gold-500; font-size: 0.7rem; }
+
+    i {
+        color: $gold-500;
+        font-size: 0.7rem;
+    }
 }
 
 .mwf-expand-btn {
@@ -378,17 +529,23 @@
     padding: $space-5 $space-6;
     background: $navy-900;
     animation: panelIn 0.3s ease;
-    @include respond(sm) { padding: $space-4; }
+
+    @include respond(sm) {
+        padding: $space-4;
+    }
 }
 
 .mwf-exp-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: $space-6;
-    @include respond(md) { grid-template-columns: 1fr; }
+
+    @include respond(md) {
+        grid-template-columns: 1fr;
+    }
 }
 
-.mwf-exp-section { }
+.mwf-exp-section {}
 
 .mwf-exp-heading {
     font-family: $font-heading;
@@ -425,16 +582,28 @@
     padding: $space-3 $space-4;
     transition: all $transition-fast;
 
-    > i { font-size: 1.3rem; color: $gold-400; }
+    >i {
+        font-size: 1.3rem;
+        color: $gold-400;
+    }
 
     span {
         font-size: 0.78rem;
         color: rgba($white, 0.55);
         line-height: 1.4;
-        strong { color: $white; display: block; font-family: $font-heading; font-size: 0.9rem; }
+
+        strong {
+            color: $white;
+            display: block;
+            font-family: $font-heading;
+            font-size: 0.9rem;
+        }
     }
 
-    &:hover { background: rgba($gold-500, 0.12); border-color: rgba($gold-500, 0.35); }
+    &:hover {
+        background: rgba($gold-500, 0.12);
+        border-color: rgba($gold-500, 0.35);
+    }
 }
 
 // ── INTERPOL note ─────────────────────────────────────────
@@ -442,22 +611,44 @@
     display: flex;
     align-items: flex-start;
     gap: $space-5;
-    background: $navy-800;
+    background: $navy-700;
     border-radius: $radius-lg;
     padding: $space-5 $space-6;
-    @include respond(sm) { flex-direction: column; gap: $space-3; padding: $space-4; }
 
-    img { height: 48px; width: auto; filter: brightness(0) invert(1); flex-shrink: 0; opacity: 0.7; }
+    @include respond(sm) {
+        flex-direction: column;
+        gap: $space-3;
+        padding: $space-4;
+    }
+
+    img {
+        height: 48px;
+        width: auto;
+        filter: brightness(0) invert(1);
+        flex-shrink: 0;
+        opacity: 0.7;
+    }
 
     div {
         font-size: 0.82rem;
         color: rgba($white, 0.55);
         line-height: 1.65;
-        strong { color: $gold-300; font-family: $font-heading; }
+
+        strong {
+            color: $gold-300;
+            font-family: $font-heading;
+        }
     }
 }
 
 @keyframes panelIn {
-    from { opacity: 0; transform: translateY(-8px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

@@ -3,7 +3,7 @@
 
 // ── Section shell ─────────────────────────────────────────
 .ea-section {
-    background: linear-gradient(160deg, $navy-900 0%, $navy-800 60%, $navy-700 100%);
+    background: linear-gradient(160deg, $navy-900 0%, $navy-700 60%, $navy-700 100%);
     position: relative;
     overflow: hidden;
 
@@ -37,9 +37,17 @@
 }
 
 @keyframes ea-pulse {
-    0%   { box-shadow: 0 0 0 0 rgba($red-500, 0.6); }
-    70%  { box-shadow: 0 0 0 8px rgba($red-500, 0); }
-    100% { box-shadow: 0 0 0 0 rgba($red-500, 0); }
+    0% {
+        box-shadow: 0 0 0 0 rgba($red-500, 0.6);
+    }
+
+    70% {
+        box-shadow: 0 0 0 8px rgba($red-500, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba($red-500, 0);
+    }
 }
 
 .ea-title {
@@ -51,8 +59,13 @@
     line-height: 1.2;
 }
 
-.ea-title-white { color: $white; }
-.ea-title-gold  { color: $gold-400; }
+.ea-title-white {
+    color: $white;
+}
+
+.ea-title-gold {
+    color: $gold-400;
+}
 
 // ── Dashboard grid ────────────────────────────────────────
 .ea-dashboard {
@@ -61,10 +74,22 @@
     gap: $space-5;
     align-items: start;
 
-    @include respond(xl) { grid-template-columns: 240px 1fr 1fr; }
-    @include respond(lg) { grid-template-columns: 1fr 1fr; }
-    @include respond(md) { grid-template-columns: 1fr; gap: $space-4; }
-    @include respond(sm) { gap: $space-3; }
+    @include respond(xl) {
+        grid-template-columns: 240px 1fr 1fr;
+    }
+
+    @include respond(lg) {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    @include respond(md) {
+        grid-template-columns: 1fr;
+        gap: $space-4;
+    }
+
+    @include respond(sm) {
+        gap: $space-3;
+    }
 }
 
 // ── Stat cards column ─────────────────────────────────────
@@ -77,7 +102,11 @@
         grid-column: 1 / -1;
         flex-direction: row;
     }
-    @include respond(md) { flex-direction: column; }
+
+    @include respond(md) {
+        flex-direction: column;
+    }
+
     @include respond(sm) {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -100,7 +129,9 @@
     &::before {
         content: '';
         position: absolute;
-        left: 0; top: 0; bottom: 0;
+        left: 0;
+        top: 0;
+        bottom: 0;
         width: 3px;
         border-radius: $radius-sm 0 0 $radius-sm;
     }
@@ -111,7 +142,11 @@
     }
 }
 
-.ea-stat--gold { &::before { background: $gold-500; } }
+.ea-stat--gold {
+    &::before {
+        background: $gold-500;
+    }
+}
 
 .ea-stat-icon {
     width: 44px;
@@ -124,7 +159,10 @@
     font-size: 1.15rem;
 }
 
-.ea-ic--gold { background: rgba($gold-500, 0.14); color: $gold-400; }
+.ea-ic--gold {
+    background: rgba($gold-500, 0.14);
+    color: $gold-400;
+}
 
 .ea-stat-body {
     display: flex;
@@ -172,6 +210,7 @@
         color: $gold-400;
         border: 1px solid rgba($gold-500, 0.3);
     }
+
     &.phase2 {
         background: rgba(#0BC5EA, 0.12);
         color: #76E4F7;
@@ -188,7 +227,10 @@
     display: flex;
     flex-direction: column;
     gap: $space-2;
-    @include respond(sm) { padding: $space-4; }
+
+    @include respond(sm) {
+        padding: $space-4;
+    }
 }
 
 .ea-chart-title {

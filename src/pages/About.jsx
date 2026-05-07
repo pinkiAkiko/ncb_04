@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import PageBanner from "../components/PageBanner";
 import "./About.scss";
 import ncbHistoryImg from "../assets/ncb_history_thematic_1772780290946.png";
-import mottoImg from "../assets/motto_v2.png";
 
 function About() {
     return (
@@ -61,22 +60,6 @@ function About() {
                         </div>
                     </section>
 
-                    {/* Motto Image */}
-                    <section className="about-motto-section">
-                        <div className="motto-img-wrap">
-                            <img src={mottoImg} alt="NCB Motto, Mission & Vision" />
-                        </div>
-                        <div className="motto-text">
-                            <span className="section-label">Our Ethos</span>
-                            <h2 className="section-title">Motto, Mission & Vision</h2>
-                            <div className="section-divider" />
-                            <blockquote className="motto-quote">
-                                <strong>Motto:</strong> "सर्वे संतु निरामयः" — May all be free from affliction
-                            </blockquote>
-                            <p>NCB's mission is the elimination of illicit drug trafficking and the reduction of drug demand through stringent enforcement, intelligence gathering, and international cooperation.</p>
-                            <Link to="/motto-mission-vision" className="about-btn-primary">View Full Mission & Vision</Link>
-                        </div>
-                    </section>
                 </div>
             </div>
         </div>

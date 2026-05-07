@@ -7,10 +7,13 @@
     grid-template-columns: repeat(4, 1fr);
     gap: $space-4;
     margin-bottom: $space-5;
-    background: $navy-800;
+    background: $navy-700;
     border-radius: $radius-lg;
     padding: $space-4;
-    @include respond(md) { grid-template-columns: repeat(2, 1fr); }
+
+    @include respond(md) {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 .tstat-item {
@@ -19,8 +22,14 @@
     gap: $space-3;
     padding: $space-3;
     border-right: 1px solid rgba($white, 0.07);
-    &:last-child { border-right: none; }
-    @include respond(md) { border-right: none; }
+
+    &:last-child {
+        border-right: none;
+    }
+
+    @include respond(md) {
+        border-right: none;
+    }
 }
 
 .tstat-icon {
@@ -63,7 +72,11 @@
     flex-wrap: wrap;
     gap: $space-4;
     align-items: center;
-    @include respond(sm) { padding: $space-3 $space-4; gap: $space-3; }
+
+    @include respond(sm) {
+        padding: $space-3 $space-4;
+        gap: $space-3;
+    }
 }
 
 .filter-pills {
@@ -84,7 +97,10 @@
     display: flex;
     align-items: center;
     gap: 4px;
-    i { color: $gold-500; }
+
+    i {
+        color: $gold-500;
+    }
 }
 
 .filter-pill {
@@ -99,12 +115,15 @@
     transition: all $transition-fast;
 
     &.active {
-        background: $navy-800;
-        border-color: $navy-800;
+        background: $navy-700;
+        border-color: $navy-700;
         color: $white;
     }
 
-    &:hover:not(.active) { border-color: $navy-500; color: $navy-600; }
+    &:hover:not(.active) {
+        border-color: $navy-500;
+        color: $navy-600;
+    }
 }
 
 .tenders-search {
@@ -118,7 +137,10 @@
     border-radius: $radius-sm;
     padding: 0 $space-3;
 
-    i { color: $gray-400; font-size: 0.85rem; }
+    i {
+        color: $gray-400;
+        font-size: 0.85rem;
+    }
 
     input {
         flex: 1;
@@ -129,7 +151,10 @@
         font-family: $font-body;
         color: $gray-700;
         background: transparent;
-        &::placeholder { color: $gray-400; }
+
+        &::placeholder {
+            color: $gray-400;
+        }
     }
 }
 
@@ -139,7 +164,7 @@
 
     span {
         font-size: 0.82rem;
-        color: $gray-500;
+        color: rgba($white, 0.55);
         font-style: italic;
     }
 }
@@ -149,23 +174,39 @@
     font-size: 0.8rem;
     font-weight: 700;
     letter-spacing: 0.5px;
-    color: $navy-500;
+    color: $gold-300;
     display: flex;
     align-items: center;
     gap: $space-2;
     transition: color $transition-fast;
-    &:hover { color: $gold-600; }
+
+    &:hover {
+        color: $gold-400;
+    }
 }
 
 // Tenders list
-.tenders-list { display: flex; flex-direction: column; gap: $space-4; margin-bottom: $space-5; }
+.tenders-list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+    margin-bottom: $space-5;
+}
 
 .tenders-empty {
     text-align: center;
     padding: $space-8 $space-5;
-    color: $gray-400;
-    i { font-size: 3rem; display: block; margin-bottom: $space-3; }
-    p { font-size: 0.9rem; }
+    color: rgba($white, 0.4);
+
+    i {
+        font-size: 3rem;
+        display: block;
+        margin-bottom: $space-3;
+    }
+
+    p {
+        font-size: 0.9rem;
+    }
 }
 
 .tender-card {
@@ -175,11 +216,29 @@
     border-radius: $radius-lg;
     overflow: hidden;
     transition: box-shadow $transition-base, transform $transition-base;
-    &:hover { box-shadow: $shadow-md; transform: translateY(-2px); }
 
-    &.tender-card--open    { .tc-status-bar { background: #16a34a; } }
-    &.tender-card--closing { .tc-status-bar { background: $red-500; } }
-    &.tender-card--closed  { .tc-status-bar { background: $gray-300; } }
+    &:hover {
+        box-shadow: $shadow-md;
+        transform: translateY(-2px);
+    }
+
+    &.tender-card--open {
+        .tc-status-bar {
+            background: #16a34a;
+        }
+    }
+
+    &.tender-card--closing {
+        .tc-status-bar {
+            background: $red-500;
+        }
+    }
+
+    &.tender-card--closed {
+        .tc-status-bar {
+            background: $gray-300;
+        }
+    }
 }
 
 .tc-status-bar {
@@ -190,7 +249,10 @@
 .tc-main {
     flex: 1;
     padding: $space-4 $space-5;
-    @include respond(sm) { padding: $space-3 $space-4; }
+
+    @include respond(sm) {
+        padding: $space-3 $space-4;
+    }
 }
 
 .tc-header-row {
@@ -227,11 +289,30 @@
     padding: 2px 8px;
     border-radius: $radius-sm;
 
-    &.cat--procurement { background: rgba($navy-500, 0.1); color: $navy-500; }
-    &.cat--works       { background: rgba(#ea580c, 0.1); color: #ea580c; }
-    &.cat--services    { background: rgba(#0d9488, 0.1); color: #0d9488; }
-    &.cat--auction     { background: rgba($gold-500, 0.15); color: $gold-700; }
-    &.cat--empanelment { background: rgba(#7c3aed, 0.1); color: #7c3aed; }
+    &.cat--procurement {
+        background: rgba($navy-500, 0.1);
+        color: $navy-500;
+    }
+
+    &.cat--works {
+        background: rgba($gold-600, 0.1);
+        color: $gold-600;
+    }
+
+    &.cat--services {
+        background: rgba(#16a34a, 0.1);
+        color: #16a34a;
+    }
+
+    &.cat--auction {
+        background: rgba($gold-500, 0.15);
+        color: $gold-700;
+    }
+
+    &.cat--empanelment {
+        background: rgba($navy-500, 0.1);
+        color: $navy-500;
+    }
 }
 
 .tc-type {
@@ -253,16 +334,31 @@
     gap: 5px;
     flex-shrink: 0;
 
-    &.status--open    { background: rgba(22, 163, 74, 0.1); color: #16a34a; i { font-size: 0.4rem; } }
-    &.status--closing { background: rgba($red-500, 0.1); color: $red-500; }
-    &.status--closed  { background: $gray-100; color: $gray-400; }
+    &.status--open {
+        background: rgba(22, 163, 74, 0.1);
+        color: #16a34a;
+
+        i {
+            font-size: 0.4rem;
+        }
+    }
+
+    &.status--closing {
+        background: rgba($red-500, 0.1);
+        color: $red-500;
+    }
+
+    &.status--closed {
+        background: $gray-100;
+        color: $gray-400;
+    }
 }
 
 .tc-title {
     font-family: $font-heading;
     font-size: 1rem;
     font-weight: 700;
-    color: $navy-800;
+    color: $navy-700;
     line-height: 1.35;
     margin-bottom: $space-3;
 }
@@ -281,13 +377,31 @@
     display: flex;
     align-items: center;
     gap: 4px;
-    i { color: $gold-500; font-size: 0.7rem; }
-    &.tc-meta--urgent { color: $red-500; font-weight: 600; i { color: $red-500; } }
+
+    i {
+        color: $gold-500;
+        font-size: 0.7rem;
+    }
+
+    &.tc-meta--urgent {
+        color: $red-500;
+        font-weight: 600;
+
+        i {
+            color: $red-500;
+        }
+    }
 }
 
-.tc-meta-sep { color: $gray-300; }
+.tc-meta-sep {
+    color: $gray-300;
+}
 
-.tc-docs-row { display: flex; gap: $space-2; flex-wrap: wrap; }
+.tc-docs-row {
+    display: flex;
+    gap: $space-2;
+    flex-wrap: wrap;
+}
 
 .tc-doc-btn {
     display: inline-flex;
@@ -301,8 +415,20 @@
     font-size: 0.75rem;
     cursor: pointer;
     transition: all $transition-fast;
-    i { color: $red-500; }
-    &:hover { background: $navy-800; color: $white; border-color: $navy-800; i { color: $gold-400; } }
+
+    i {
+        color: $red-500;
+    }
+
+    &:hover {
+        background: $navy-700;
+        color: $white;
+        border-color: $navy-700;
+
+        i {
+            color: $gold-400;
+        }
+    }
 }
 
 // Archive note
@@ -315,12 +441,25 @@
     align-items: flex-start;
     gap: $space-3;
 
-    i { color: $gold-600; font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
+    i {
+        color: $gold-600;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
 
     p {
         font-size: 0.82rem;
         color: $gray-600;
         line-height: 1.5;
-        a { color: $navy-500; text-decoration: underline; &:hover { color: $gold-600; } }
+
+        a {
+            color: $navy-500;
+            text-decoration: underline;
+
+            &:hover {
+                color: $gold-600;
+            }
+        }
     }
 }

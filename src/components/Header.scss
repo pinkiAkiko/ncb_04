@@ -29,7 +29,8 @@
 }
 
 .hdr-utility-right {
-    flex-shrink: 0; /* right side (accessibility + helpline) must not shrink */
+    flex-shrink: 0;
+    /* right side (accessibility + helpline) must not shrink */
     gap: $space-2;
 }
 
@@ -81,8 +82,13 @@
     gap: 4px;
     white-space: nowrap;
 
-    i { color: $gold-500; }
-    &:hover { color: $gold-400; }
+    i {
+        color: $gold-500;
+    }
+
+    &:hover {
+        color: $gold-400;
+    }
 }
 
 .utility-lang-btn {
@@ -131,7 +137,9 @@
     justify-content: space-between;
     border-bottom: 1px solid rgba($white, 0.1);
 
-    @include respond(md) { display: flex; }
+    @include respond(md) {
+        display: flex;
+    }
 
     .hdr-mobile-helpline-left {
         display: flex;
@@ -140,8 +148,12 @@
         font-size: 0.7rem;
         color: $gold-400;
         font-weight: 600;
-        i { font-size: 0.72rem; }
+
+        i {
+            font-size: 0.72rem;
+        }
     }
+
     .hdr-mobile-helpline-right {
         display: flex;
         align-items: center;
@@ -180,7 +192,10 @@
 .hdr-brand-inner {
     @include flex-between;
     gap: $space-5;
-    @include respond(sm) { gap: $space-3; }
+
+    @include respond(sm) {
+        gap: $space-3;
+    }
 }
 
 .hdr-brand-left {
@@ -235,7 +250,7 @@
     font-family: $font-heading;
     font-size: 1.5rem;
     font-weight: 700;
-    color: $navy-800;
+    color: $navy-700;
     letter-spacing: 0.5px;
     line-height: 1;
     transition: font-size $transition-base;
@@ -282,8 +297,13 @@
         height: 38px;
     }
 
-    @include respond(md) { height: 42px; }
-    @include respond(sm) { height: 34px; }
+    @include respond(md) {
+        height: 42px;
+    }
+
+    @include respond(sm) {
+        height: 34px;
+    }
 }
 
 .hdr-partner-logos {
@@ -468,7 +488,7 @@
         left: -100%;
         width: min(320px, 90vw);
         height: 100vh;
-        background: $navy-800;
+        background: $navy-700;
         flex-direction: column;
         align-items: stretch;
         overflow-y: auto;
@@ -560,7 +580,7 @@
 
     .hdr-nav-ticker-row.sticky & {
         color: $navy-700;
-        
+
         &:hover,
         &.active {
             color: $gold-600;
@@ -572,7 +592,10 @@
         font-size: 0.65rem;
         margin-left: 2px;
         transition: transform $transition-fast;
-        &.rotated { transform: rotate(180deg); }
+
+        &.rotated {
+            transform: rotate(180deg);
+        }
     }
 
     @include respond(lg) {
@@ -613,12 +636,13 @@
 
     // Desktop: open on hover (CSS-only, no JS state needed)
     @media (min-width: #{$bp-lg + 1px}) {
-        .nav-item-li:hover > & {
+        .nav-item-li:hover>& {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
             pointer-events: auto;
         }
+
         // flip chevron on hover
         .nav-item-li:hover .nav-arrow {
             transform: rotate(180deg);
@@ -668,7 +692,7 @@
 
     &:hover {
         background: $gray-100;
-        color: $navy-800;
+        color: $navy-700;
         padding-left: calc($space-5 + 4px);
     }
 
@@ -714,7 +738,7 @@
 
         &:hover {
             background: $gray-100;
-            color: $navy-800;
+            color: $navy-700;
             padding-left: calc($space-5 + 4px);
         }
     }
@@ -725,12 +749,16 @@
         flex-shrink: 0;
         margin-left: auto;
         transition: transform $transition-fast;
+
         // points right by default; rotates 90deg when open (pointing down)
-        &.rotated { transform: rotate(90deg); }
+        &.rotated {
+            transform: rotate(90deg);
+        }
     }
 }
 
 .nav-sub-dropdown {
+
     // ── Desktop: right-side flyout ────────────────────────
     @media (min-width: #{$bp-lg + 1px}) {
         position: absolute;
@@ -753,7 +781,7 @@
         overflow: visible;
 
         // Open on hover of the parent li (CSS-only on desktop)
-        .has-sub-dropdown:hover > & {
+        .has-sub-dropdown:hover>& {
             opacity: 1;
             visibility: visible;
             transform: translateX(0);
@@ -775,11 +803,14 @@
             gap: $space-2;
             transition: all $transition-fast;
 
-            .drop-arrow { color: $gold-400; font-size: 0.75rem; }
+            .drop-arrow {
+                color: $gold-400;
+                font-size: 0.75rem;
+            }
 
             &:hover {
                 background: $gray-100;
-                color: $navy-800;
+                color: $navy-700;
                 padding-left: calc($space-5 + 4px);
             }
 
@@ -815,9 +846,19 @@
             padding: $space-2 $space-4;
             font-size: 0.82rem;
 
-            .drop-arrow { color: rgba($gold-500, 0.6); }
-            &:hover { color: $gold-300; background: rgba($white, 0.04); }
-            &.active { color: $gold-400; background: transparent; }
+            .drop-arrow {
+                color: rgba($gold-500, 0.6);
+            }
+
+            &:hover {
+                color: $gold-300;
+                background: rgba($white, 0.04);
+            }
+
+            &.active {
+                color: $gold-400;
+                background: transparent;
+            }
         }
     }
 }
@@ -858,8 +899,13 @@
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 // ── GIGW: Screen Reader link in utility bar ───────────────
@@ -874,18 +920,32 @@
     text-decoration: none;
     transition: color $transition-fast;
 
-    i { font-size: 0.8rem; color: $gold-500; }
+    i {
+        font-size: 0.8rem;
+        color: $gold-500;
+    }
 
     &:hover {
         color: $white;
-        i { color: $gold-400; }
+
+        i {
+            color: $gold-400;
+        }
     }
 
     @include respond(xl) {
-        span { display: none; } // icon-only below 1200px
+        span {
+            display: none;
+        }
+
+        // icon-only below 1200px
     }
 
-    @include respond(lg) { display: none; } // fully hidden when hamburger kicks in
+    @include respond(lg) {
+        display: none;
+    }
+
+    // fully hidden when hamburger kicks in
 }
 
 // ── GIGW: Single Accessibility Icon Button ────────────────
@@ -932,7 +992,7 @@
     right: 0;
     width: 300px;
     height: 100vh;
-    background: $navy-800;
+    background: $navy-700;
     border-left: 2px solid $gold-500;
     box-shadow: -8px 0 48px rgba(0, 0, 0, 0.5);
     z-index: 10001;
@@ -946,7 +1006,9 @@
         transform: translateX(0);
     }
 
-    @include respond(sm) { width: 100vw; }
+    @include respond(sm) {
+        width: 100vw;
+    }
 }
 
 .a11y-drawer-header {
@@ -971,7 +1033,10 @@
     align-items: center;
     gap: $space-2;
 
-    i { color: $gold-400; font-size: 1.1rem; }
+    i {
+        color: $gold-400;
+        font-size: 1.1rem;
+    }
 }
 
 .a11y-drawer-close {
@@ -988,14 +1053,20 @@
     cursor: pointer;
     transition: all $transition-fast;
 
-    &:hover { background: rgba($red-600, 0.25); color: $white; border-color: rgba($red-500, 0.4); }
+    &:hover {
+        background: rgba($red-600, 0.25);
+        color: $white;
+        border-color: rgba($red-500, 0.4);
+    }
 }
 
 .a11y-drawer-section {
     padding: $space-3 $space-4;
     border-bottom: 1px solid rgba($white, 0.06);
 
-    &:last-of-type { border-bottom: none; }
+    &:last-of-type {
+        border-bottom: none;
+    }
 }
 
 .a11y-drawer-label {
@@ -1030,24 +1101,42 @@
     text-decoration: none;
     transition: all $transition-fast;
 
-    > i:first-child { font-size: 1.4rem; color: $gold-400; flex-shrink: 0; }
+    >i:first-child {
+        font-size: 1.4rem;
+        color: $gold-400;
+        flex-shrink: 0;
+    }
 
-    > div {
+    >div {
         flex: 1;
         display: flex;
         flex-direction: column;
         gap: 2px;
 
-        strong { font-size: 0.85rem; color: $white; font-weight: 600; }
-        span   { font-size: 0.7rem;  color: rgba($white, 0.5); }
+        strong {
+            font-size: 0.85rem;
+            color: $white;
+            font-weight: 600;
+        }
+
+        span {
+            font-size: 0.7rem;
+            color: rgba($white, 0.5);
+        }
     }
 
-    > i:last-child { font-size: 0.7rem; color: rgba($white, 0.4); }
+    >i:last-child {
+        font-size: 0.7rem;
+        color: rgba($white, 0.4);
+    }
 
     &:hover {
         background: rgba($gold-500, 0.08);
         border-color: rgba($gold-500, 0.25);
-        > i:last-child { color: $gold-400; }
+
+        >i:last-child {
+            color: $gold-400;
+        }
     }
 }
 
@@ -1081,10 +1170,16 @@
 
         .a11y-tool-icon-wrap {
             background: rgba($gold-500, 0.15);
-            i, .a11y-tool-text-icon { color: $gold-300; }
+
+            i,
+            .a11y-tool-text-icon {
+                color: $gold-300;
+            }
         }
 
-        .a11y-tool-label { color: rgba($white, 0.9); }
+        .a11y-tool-label {
+            color: rgba($white, 0.9);
+        }
     }
 
     &.active {
@@ -1094,10 +1189,17 @@
 
         .a11y-tool-icon-wrap {
             background: rgba($gold-500, 0.2);
-            i, .a11y-tool-text-icon { color: $gold-300; }
+
+            i,
+            .a11y-tool-text-icon {
+                color: $gold-300;
+            }
         }
 
-        .a11y-tool-label { color: $gold-300; font-weight: 700; }
+        .a11y-tool-label {
+            color: $gold-300;
+            font-weight: 700;
+        }
     }
 
     &.disabled,
@@ -1177,9 +1279,14 @@
     cursor: pointer;
     transition: all $transition-fast;
 
-    i { font-size: 0.82rem; }
+    i {
+        font-size: 0.82rem;
+    }
 
-    &:hover { border-color: rgba($gold-500, 0.4); color: $gold-400; }
+    &:hover {
+        border-color: rgba($gold-500, 0.4);
+        color: $gold-400;
+    }
 }
 
 // Footer note
@@ -1201,7 +1308,9 @@
     color: $gold-500;
     text-decoration: underline;
 
-    &:hover { color: $gold-300; }
+    &:hover {
+        color: $gold-300;
+    }
 }
 
 @keyframes ticker {

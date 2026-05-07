@@ -5,10 +5,30 @@
     display: grid;
     grid-template-columns: 1fr 1.5fr;
     gap: $space-8;
-    @include respond(lg) { grid-template-columns: 1fr; }
+    align-items: stretch;
+
+    @include respond(lg) {
+        grid-template-columns: 1fr;
+    }
 }
 
-.contact-info-cards { display: flex; flex-direction: column; gap: $space-3; margin-bottom: $space-5; }
+.contact-info-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-info-cards {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+    margin-bottom: $space-5;
+    flex: 1;
+}
 
 .contact-info-card {
     display: flex;
@@ -34,26 +54,71 @@
     flex-shrink: 0;
 }
 
-.cic-title { font-family: $font-heading; font-size: 0.88rem; font-weight: 700; color: $navy-800; margin-bottom: 4px; }
-.cic-line { font-size: 0.8rem; color: $gray-500; line-height: 1.5; }
+.cic-title {
+    font-family: $font-heading;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: $navy-700;
+    margin-bottom: 4px;
+}
+
+.cic-line {
+    font-size: 0.8rem;
+    color: $gray-500;
+    line-height: 1.5;
+}
 
 .drug-helpline-card {
-    background: $navy-800;
+    background: $navy-700;
     border-radius: $radius-lg;
     padding: $space-5;
     display: flex;
     align-items: center;
     gap: $space-4;
     border: 1px solid rgba($gold-500, 0.2);
-    @include respond(sm) { padding: $space-4; }
 
-    > i { font-size: 2rem; color: $gold-400; flex-shrink: 0; }
-    div { display: flex; flex-direction: column; gap: 2px; }
+    @include respond(sm) {
+        padding: $space-4;
+    }
+
+    >i {
+        font-size: 2rem;
+        color: $gold-400;
+        flex-shrink: 0;
+    }
+
+    div {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
 }
 
-.dh-label { font-family: $font-heading; font-size: 0.78rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba($white, 0.55); }
-.dh-number { font-family: $font-heading; font-size: 2rem; font-weight: 700; color: $gold-400; letter-spacing: 1px; &:hover { color: $gold-300; } }
-.dh-sub { font-size: 0.72rem; color: rgba($white, 0.4); }
+.dh-label {
+    font-family: $font-heading;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba($white, 0.55);
+}
+
+.dh-number {
+    font-family: $font-heading;
+    font-size: 2rem;
+    font-weight: 700;
+    color: $gold-400;
+    letter-spacing: 1px;
+
+    &:hover {
+        color: $gold-300;
+    }
+}
+
+.dh-sub {
+    font-size: 0.72rem;
+    color: rgba($white, 0.4);
+}
 
 // Form
 .contact-form {
@@ -62,14 +127,21 @@
     border-radius: $radius-xl;
     padding: $space-6;
     box-shadow: $shadow-sm;
-    @include respond(sm) { padding: $space-4; border-radius: $radius-lg; }
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    @include respond(sm) {
+        padding: $space-4;
+        border-radius: $radius-lg;
+    }
 }
 
 .cf-heading {
     font-family: $font-heading;
     font-size: 1.3rem;
     font-weight: 700;
-    color: $navy-800;
+    color: $navy-700;
     margin-bottom: $space-5;
     @include gold-border-left;
 }
@@ -79,7 +151,10 @@
     grid-template-columns: 1fr 1fr;
     gap: $space-4;
     margin-bottom: $space-4;
-    @include respond(sm) { grid-template-columns: 1fr; }
+
+    @include respond(sm) {
+        grid-template-columns: 1fr;
+    }
 }
 
 .cf-field {
@@ -88,11 +163,26 @@
     gap: $space-1;
     margin-bottom: $space-4;
 
-    &--full { margin-bottom: $space-4; }
+    &--full {
+        margin-bottom: $space-4;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
 
-    label { font-size: 0.8rem; font-weight: 600; color: $gray-600; }
+        textarea {
+            flex: 1;
+        }
+    }
 
-    input, select, textarea {
+    label {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: $gray-600;
+    }
+
+    input,
+    select,
+    textarea {
         padding: $space-3 $space-4;
         border: 1px solid $gray-300;
         border-radius: $radius-sm;
@@ -102,15 +192,33 @@
         background: $white;
         outline: none;
         transition: border-color $transition-fast, background $transition-fast;
-        &::placeholder { color: $gray-400; }
-        &:focus { border-color: $gold-500; background: $gold-100; }
+
+        &::placeholder {
+            color: $gray-400;
+        }
+
+        &:focus {
+            border-color: $gold-500;
+            background: $gold-100;
+        }
     }
 
-    textarea { resize: vertical; min-height: 140px; }
-    select { cursor: pointer; }
+    textarea {
+        resize: vertical;
+        min-height: 140px;
+    }
+
+    select {
+        cursor: pointer;
+    }
 }
 
-.cf-disclaimer { font-size: 0.75rem; color: $gray-400; margin-bottom: $space-4; line-height: 1.5; }
+.cf-disclaimer {
+    font-size: 0.75rem;
+    color: $gray-400;
+    margin-bottom: $space-4;
+    line-height: 1.5;
+}
 
 .cf-submit-btn {
     @include gold-btn;
@@ -127,9 +235,28 @@
     border-radius: $radius-xl;
     background: $white;
 
-    i { font-size: 3rem; color: #16a34a; display: block; margin-bottom: $space-4; }
-    h3 { font-family: $font-heading; font-size: 1.3rem; color: $navy-800; margin-bottom: $space-3; }
-    p { font-size: 0.9rem; color: $gray-500; margin-bottom: $space-5; }
+    i {
+        font-size: 3rem;
+        color: #16a34a;
+        display: block;
+        margin-bottom: $space-4;
+    }
+
+    h3 {
+        font-family: $font-heading;
+        font-size: 1.3rem;
+        color: $navy-700;
+        margin-bottom: $space-3;
+    }
+
+    p {
+        font-size: 0.9rem;
+        color: $gray-500;
+        margin-bottom: $space-5;
+    }
 }
 
-.contact-back-btn { @include navy-btn; text-decoration: none; }
+.contact-back-btn {
+    @include navy-btn;
+    text-decoration: none;
+}

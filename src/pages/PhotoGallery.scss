@@ -1,0 +1,305 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.gallery-page {}
+
+// Filter tabs
+.gallery-filter-tabs {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    flex-wrap: wrap;
+    margin-bottom: $space-5;
+}
+
+.gallery-tab {
+    padding: 6px 18px;
+    border: 1px solid rgba(#fff, 0.15);
+    background: rgba($white, 0.07);
+    color: rgba($white, 0.72);
+    font-family: $font-heading;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border-radius: $radius-full;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &.active {
+        background: $navy-700;
+        border-color: $navy-700;
+        color: $white;
+    }
+
+    &:hover:not(.active) {
+        border-color: $gold-500;
+        color: $gold-400;
+    }
+}
+
+.gallery-count {
+    margin-left: auto;
+    font-family: $font-heading;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: rgba($white, 0.4);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+// Gallery grid — 3-col masonry-style
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $space-4;
+    margin-bottom: $space-6;
+
+    @include respond(lg) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    cursor: pointer;
+    aspect-ratio: 4/3;
+    background: $navy-700;
+    box-shadow: $shadow-sm;
+    transition: transform $transition-base, box-shadow $transition-base;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: $shadow-lg;
+
+        .gallery-item-overlay {
+            opacity: 1;
+        }
+
+        img {
+            transform: scale(1.05);
+        }
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform $transition-slow;
+    }
+
+    &:focus-visible {
+        outline: 3px solid $gold-500;
+        outline-offset: 2px;
+    }
+}
+
+.gallery-item-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba($navy-900, 0.92) 50%, rgba($navy-900, 0.2) 100%);
+    opacity: 0;
+    transition: opacity $transition-base;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: $space-4;
+}
+
+.gallery-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: $space-1;
+    margin-top: auto;
+}
+
+.gallery-item-category {
+    font-family: $font-heading;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: $gold-400;
+}
+
+.gallery-item-title {
+    font-family: $font-heading;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: $white;
+    line-height: 1.3;
+    margin: 0;
+}
+
+.gallery-item-date {
+    font-size: 0.72rem;
+    color: rgba($white, 0.55);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    i {
+        font-size: 0.65rem;
+    }
+}
+
+.gallery-item-zoom {
+    position: absolute;
+    top: $space-3;
+    right: $space-3;
+    width: 32px;
+    height: 32px;
+    background: rgba($gold-500, 0.9);
+    color: $navy-900;
+    border-radius: 50%;
+    @include flex-center;
+    font-size: 0.85rem;
+}
+
+// Lightbox modal
+.gallery-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba($navy-900, 0.95);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $space-5;
+
+    @include respond(sm) {
+        padding: $space-3;
+    }
+}
+
+.lightbox-close-btn {
+    position: absolute;
+    top: $space-4;
+    right: $space-4;
+    width: 44px;
+    height: 44px;
+    background: rgba($white, 0.1);
+    border: 1px solid rgba($white, 0.2);
+    border-radius: 50%;
+    color: $white;
+    font-size: 1rem;
+    cursor: pointer;
+    @include flex-center;
+    z-index: 10;
+    transition: background $transition-fast;
+
+    &:hover {
+        background: $red-500;
+        border-color: $red-500;
+    }
+}
+
+.lightbox-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    background: rgba($white, 0.1);
+    border: 1px solid rgba($white, 0.2);
+    border-radius: 50%;
+    color: $white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    @include flex-center;
+    z-index: 10;
+    transition: background $transition-fast, border-color $transition-fast;
+
+    &:hover {
+        background: $gold-500;
+        color: $navy-900;
+        border-color: $gold-500;
+    }
+
+    &--prev {
+        left: $space-4;
+    }
+
+    &--next {
+        right: $space-4;
+    }
+
+    @include respond(sm) {
+        width: 36px;
+        height: 36px;
+        font-size: 0.9rem;
+
+        &--prev {
+            left: $space-2;
+        }
+
+        &--next {
+            right: $space-2;
+        }
+    }
+}
+
+.lightbox-content {
+    max-width: 900px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $space-4;
+}
+
+.lightbox-image {
+    max-height: 65vh;
+    max-width: 100%;
+    border-radius: $radius-lg;
+    object-fit: contain;
+    box-shadow: $shadow-xl;
+}
+
+.lightbox-caption {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+    align-items: center;
+}
+
+.lightbox-category {
+    font-family: $font-heading;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: $gold-400;
+}
+
+.lightbox-title {
+    font-family: $font-heading;
+    font-size: 1rem;
+    font-weight: 700;
+    color: $white;
+    line-height: 1.3;
+    margin: 0;
+}
+
+.lightbox-date {
+    font-size: 0.78rem;
+    color: rgba($white, 0.5);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.lightbox-counter {
+    font-size: 0.75rem;
+    color: rgba($white, 0.4);
+    font-family: $font-heading;
+    letter-spacing: 0.5px;
+}

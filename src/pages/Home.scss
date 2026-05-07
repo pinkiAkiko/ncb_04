@@ -181,7 +181,7 @@
 // ── 1. HERO ───────────────────────────────────────────────
 .hero-dark {
     background: $navy-900;
-    padding: 32px 0 28px;
+    padding: 3rem 0 3rem;
     position: relative;
     overflow: hidden;
 
@@ -189,7 +189,7 @@
         content: "";
         position: absolute;
         inset: 0;
-        background-image: radial-gradient(circle, rgba(255,255,255,0.018) 1px, transparent 1px);
+        background-image: radial-gradient(circle, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
         background-size: 28px 28px;
         pointer-events: none;
         z-index: 0;
@@ -285,12 +285,10 @@
     left: 0;
     right: 0;
     padding: 40px $space-5 44px;
-    background: linear-gradient(
-        to top,
-        rgba(#05111f, 0.82) 0%,
-        rgba(#05111f, 0.3) 55%,
-        transparent 100%
-    );
+    background: linear-gradient(to top,
+            rgba(#05111f, 0.82) 0%,
+            rgba(#05111f, 0.3) 55%,
+            transparent 100%);
     z-index: 2;
     pointer-events: none;
 }
@@ -367,7 +365,9 @@
         color: $navy-900;
     }
 
-    i { font-size: 0.7rem; }
+    i {
+        font-size: 0.7rem;
+    }
 }
 
 .hgc-bottom {
@@ -516,7 +516,9 @@
         color: $gold-300;
     }
 
-    i { font-size: 0.58rem; }
+    i {
+        font-size: 0.58rem;
+    }
 }
 
 // Featured rotating alert
@@ -566,7 +568,9 @@
         background: rgba($red-500, 0.18);
         color: #f08080;
 
-        i { font-size: 0.55rem; }
+        i {
+            font-size: 0.55rem;
+        }
     }
 }
 
@@ -586,7 +590,9 @@
     align-items: center;
     gap: 4px;
 
-    i { font-size: 0.6rem; }
+    i {
+        font-size: 0.6rem;
+    }
 }
 
 .hap-pips {
@@ -681,7 +687,9 @@
     align-items: center;
     gap: 4px;
 
-    i { font-size: 0.58rem; }
+    i {
+        font-size: 0.58rem;
+    }
 }
 
 .hap-see-all {
@@ -707,7 +715,9 @@
         color: $gold-300;
     }
 
-    i { font-size: 0.62rem; }
+    i {
+        font-size: 0.62rem;
+    }
 }
 
 .hero-v2-badge {
@@ -754,7 +764,7 @@
     margin-bottom: $space-6;
 
     strong {
-        color: $navy-800;
+        color: $navy-700;
         font-weight: 700;
     }
 }
@@ -782,9 +792,9 @@
     border: 2px solid transparent;
 
     &--primary {
-        background: $navy-800;
+        background: $navy-700;
         color: $white;
-        border-color: $navy-800;
+        border-color: $navy-700;
 
         &:hover {
             background: $navy-600;
@@ -796,11 +806,11 @@
 
     &--outline {
         background: transparent;
-        color: $navy-800;
-        border-color: $navy-800;
+        color: $navy-700;
+        border-color: $navy-700;
 
         &:hover {
-            background: $navy-800;
+            background: $navy-700;
             color: $white;
             transform: translateY(-1px);
         }
@@ -868,7 +878,7 @@
     align-items: center;
     justify-content: space-between;
     padding: $space-4 $space-5;
-    background: $navy-800;
+    background: $navy-700;
     flex-shrink: 0;
 }
 
@@ -1131,7 +1141,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: $navy-800;
+    color: $navy-700;
     font-size: 1rem;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     transition: all $transition-fast;
@@ -1192,7 +1202,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: $navy-800;
+    color: $navy-700;
     font-size: 0.7rem;
     transition: background $transition-fast;
 
@@ -1694,7 +1704,7 @@
 
 // ── 4. KPI STRIP ─────────────────────────────────────────
 .kpi-strip {
-    background: $navy-800;
+    background: $navy-700;
     border-top: 1px solid rgba($gold-500, 0.2);
     border-bottom: 1px solid rgba($gold-500, 0.2);
     padding: $space-5 0;
@@ -2000,7 +2010,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: $navy-800;
+    background: $navy-700;
     border-radius: $radius-sm;
     padding: $space-2 $space-3;
     min-width: 44px;
@@ -2436,7 +2446,7 @@
     width: 100%;
     height: 240px;
     overflow: hidden;
-    background: $navy-800;
+    background: $navy-700;
     border-radius: $radius-sm;
 
     img {
@@ -2679,23 +2689,27 @@
 .sf-visit-btn {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    font-size: 0.72rem;
+    gap: 6px;
+    font-size: 0.75rem;
     font-weight: 700;
     font-family: $font-heading;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     border: 1px solid;
     border-radius: $radius-full;
-    padding: 3px 10px;
-    transition: opacity $transition-fast;
+    padding: 4px 14px;
+    transition: all $transition-fast;
+    background: transparent;
+    text-decoration: none;
 
     &:hover {
-        opacity: 0.75;
+        opacity: 1;
+        background: rgba($white, 0.1);
+        transform: translateY(-1px);
     }
 
     i {
-        font-size: 0.65rem;
+        font-size: 0.85rem;
     }
 }
 
@@ -2918,23 +2932,25 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
+    gap: 8px;
     padding: $space-3;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     font-weight: 700;
     font-family: $font-heading;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px;
     border-top: 1px solid rgba($white, 0.07);
     margin-top: auto;
     flex-shrink: 0;
-    transition: opacity $transition-fast;
+    transition: all $transition-fast;
+    text-decoration: none;
 
     &:hover {
-        opacity: 0.7;
+        background: rgba($white, 0.03);
+        color: inherit;
     }
 
     i {
-        font-size: 0.68rem;
+        font-size: 1rem;
     }
 }

@@ -1,0 +1,417 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.notifications-page {}
+
+// Year tabs
+.notif-year-tabs {
+    display: flex;
+    gap: $space-2;
+    margin-bottom: $space-4;
+    flex-wrap: wrap;
+}
+
+.notif-year-tab {
+    padding: $space-2 $space-5;
+    background: $gray-100;
+    border: 1px solid $gray-200;
+    border-radius: $radius-full;
+    font-family: $font-heading;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: $gray-600;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &.active {
+        background: $navy-700;
+        border-color: $navy-700;
+        color: $white;
+    }
+
+    &:hover:not(.active) {
+        border-color: $navy-500;
+        color: $navy-600;
+    }
+}
+
+// Filter bar
+.notif-filter-bar {
+    background: $gray-100;
+    border: 1px solid $gray-200;
+    border-radius: $radius-lg;
+    padding: $space-4 $space-5;
+    margin-bottom: $space-4;
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-4;
+    align-items: center;
+
+    @include respond(sm) {
+        padding: $space-3 $space-4;
+        gap: $space-3;
+    }
+}
+
+.filter-pills {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    flex-wrap: wrap;
+}
+
+.filter-label {
+    font-family: $font-heading;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: $gray-500;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    i {
+        color: $gold-500;
+    }
+}
+
+.filter-pill {
+    padding: 4px 12px;
+    border: 1px solid $gray-300;
+    background: $white;
+    color: $gray-600;
+    font-family: $font-body;
+    font-size: 0.78rem;
+    border-radius: $radius-full;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &.active {
+        background: $navy-700;
+        border-color: $navy-700;
+        color: $white;
+    }
+
+    &:hover:not(.active) {
+        border-color: $navy-500;
+        color: $navy-600;
+    }
+}
+
+.notif-search {
+    flex: 1;
+    min-width: 220px;
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    background: $white;
+    border: 1px solid $gray-200;
+    border-radius: $radius-sm;
+    padding: 0 $space-3;
+
+    i {
+        color: $gray-400;
+        font-size: 0.85rem;
+        flex-shrink: 0;
+    }
+
+    input {
+        flex: 1;
+        border: none;
+        outline: none;
+        padding: $space-2 0;
+        font-size: 0.85rem;
+        font-family: $font-body;
+        color: $gray-700;
+        background: transparent;
+
+        &::placeholder {
+            color: $gray-400;
+        }
+    }
+}
+
+.notif-clear-search {
+    background: none;
+    border: none;
+    color: $gray-400;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    font-size: 1rem;
+    transition: color $transition-fast;
+    flex-shrink: 0;
+
+    &:hover {
+        color: $gray-600;
+    }
+}
+
+// Count row
+.notif-count-row {
+    @include flex-between;
+    margin-bottom: $space-3;
+
+    span {
+        font-size: 0.82rem;
+        color: rgba($white, 0.55);
+        font-style: italic;
+    }
+
+    .notif-page-info {
+        font-size: 0.78rem;
+        color: rgba($white, 0.4);
+        font-style: normal;
+    }
+}
+
+// Table
+.notif-table-wrap {
+    background: $white;
+    border: 1px solid $gray-200;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    margin-bottom: $space-5;
+    overflow-x: auto;
+}
+
+.notif-empty {
+    text-align: center;
+    padding: $space-8 $space-5;
+    color: $gray-400;
+
+    i {
+        font-size: 3rem;
+        display: block;
+        margin-bottom: $space-3;
+    }
+
+    p {
+        font-size: 0.9rem;
+    }
+}
+
+.notif-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    thead {
+        background: $navy-700;
+
+        th {
+            padding: $space-3 $space-4;
+            font-family: $font-heading;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: rgba($white, 0.6);
+            text-align: left;
+            white-space: nowrap;
+        }
+    }
+
+    tbody tr {
+        border-bottom: 1px solid $gray-100;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        &:hover {
+            background: rgba($gold-100, 0.5);
+        }
+    }
+
+    td {
+        padding: $space-3 $space-4;
+        vertical-align: middle;
+    }
+}
+
+.notif-id {
+    font-family: $font-heading;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: $gray-500;
+    background: $gray-100;
+    padding: 2px 7px;
+    border-radius: $radius-sm;
+    white-space: nowrap;
+}
+
+.notif-date {
+    font-size: 0.78rem;
+    color: $gray-600;
+    white-space: nowrap;
+}
+
+.notif-title {
+    font-size: 0.85rem;
+    color: $navy-700;
+    line-height: 1.45;
+    font-weight: 500;
+}
+
+.notif-type-badge {
+    display: inline-block;
+    font-family: $font-heading;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 3px 9px;
+    border-radius: $radius-sm;
+    white-space: nowrap;
+
+    &.type--gazette {
+        background: rgba($navy-500, 0.1);
+        color: $navy-500;
+    }
+
+    &.type--circular {
+        background: rgba(#0d9488, 0.1);
+        color: #0d9488;
+    }
+
+    &.type--order {
+        background: rgba(#ea580c, 0.1);
+        color: #ea580c;
+    }
+
+    &.type--notice {
+        background: rgba($red-500, 0.1);
+        color: $red-500;
+    }
+}
+
+.notif-cat-badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: $radius-full;
+    white-space: nowrap;
+
+    &.cat--legislation {
+        background: rgba($gold-500, 0.12);
+        color: $gold-700;
+    }
+
+    &.cat--operations {
+        background: rgba($navy-500, 0.08);
+        color: $navy-500;
+    }
+
+    &.cat--judicial {
+        background: rgba(#7c3aed, 0.1);
+        color: #7c3aed;
+    }
+
+    &.cat--admin {
+        background: rgba($gray-500, 0.12);
+        color: $gray-600;
+    }
+
+    &.cat--alert {
+        background: rgba($red-500, 0.1);
+        color: $red-500;
+    }
+}
+
+.notif-dl-btn {
+    background: $gold-500;
+    border: none;
+    color: $navy-900;
+    width: 32px;
+    height: 32px;
+    border-radius: $radius-sm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background $transition-fast;
+
+    &:hover {
+        background: $gold-400;
+    }
+}
+
+// Pagination
+.notif-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $space-2;
+    margin-bottom: $space-5;
+}
+
+.notif-page-btn {
+    min-width: 36px;
+    height: 36px;
+    padding: 0 $space-3;
+    background: $white;
+    border: 1px solid $gray-200;
+    border-radius: $radius-sm;
+    font-family: $font-heading;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: $gray-600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all $transition-fast;
+
+    &.active {
+        background: $navy-700;
+        border-color: $navy-700;
+        color: $white;
+    }
+
+    &:hover:not(.active):not(:disabled) {
+        border-color: $navy-500;
+        color: $navy-600;
+    }
+
+    &:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+    }
+}
+
+// Archive note
+.notif-archive-note {
+    background: $gold-100;
+    border: 1px solid $gold-300;
+    border-radius: $radius-lg;
+    padding: $space-4 $space-5;
+    display: flex;
+    align-items: flex-start;
+    gap: $space-3;
+
+    i {
+        color: $gold-600;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    p {
+        font-size: 0.82rem;
+        color: $gray-600;
+        line-height: 1.5;
+
+        a {
+            color: $navy-500;
+            text-decoration: underline;
+
+            &:hover {
+                color: $gold-600;
+            }
+        }
+    }
+}

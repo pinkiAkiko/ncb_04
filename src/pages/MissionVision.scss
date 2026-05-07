@@ -1,0 +1,362 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.mission-page {}
+
+// ── Hero Section ──────────────────────────────────────────────────
+.mv-hero-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-8;
+    align-items: center;
+    margin-bottom: $space-9;
+
+    @include respond(md) {
+        grid-template-columns: 1fr;
+        gap: $space-5;
+        margin-bottom: $space-7;
+    }
+}
+
+.mv-hero-img {
+    border-radius: $radius-xl;
+    overflow: hidden;
+    box-shadow: $shadow-lg;
+    border: 3px solid rgba($gold-500, 0.25);
+
+    img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+}
+
+.mv-hero-text {
+    p {
+        font-size: 0.9rem;
+        color: rgba($white, 0.72);
+        line-height: 1.7;
+        margin-bottom: $space-3;
+    }
+}
+
+// ── Three Cards Grid ──────────────────────────────────────────────
+.mv-cards-section {
+    margin-bottom: $space-9;
+}
+
+.mv-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $space-5;
+
+    @include respond(lg) {
+        grid-template-columns: 1fr;
+        max-width: 640px;
+        margin: 0 auto;
+    }
+
+    @include respond(sm) {
+        max-width: 100%;
+    }
+}
+
+.mv-card {
+    border-radius: $radius-lg;
+    padding: $space-6;
+    position: relative;
+    overflow: hidden;
+    border-top: 4px solid $gold-500;
+    box-shadow: $shadow-md;
+    display: flex;
+    flex-direction: column;
+    transition: transform $transition-base, box-shadow $transition-base;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: $shadow-lg;
+    }
+
+    &--motto {
+        background: linear-gradient(135deg, $navy-700 0%, $navy-700 100%);
+        border-top-color: $gold-400;
+
+        .mvc-tag {
+            background: rgba($gold-500, 0.2);
+            color: $gold-300;
+        }
+
+        .mvc-title {
+            color: $gold-300;
+        }
+
+        .mvc-translation {
+            color: rgba($white, 0.75);
+        }
+
+        .mvc-body {
+            color: rgba($white, 0.65);
+        }
+
+        .mvc-icon {
+            color: $gold-400;
+            background: rgba($gold-500, 0.12);
+        }
+    }
+
+    &--mission {
+        background: $navy-700;
+        border: 1px solid rgba(#fff, 0.1);
+        border-top: 4px solid $gold-500;
+
+        .mvc-tag {
+            background: rgba($gold-500, 0.1);
+            color: $gold-400;
+        }
+
+        .mvc-title {
+            color: rgba($white, 0.9);
+        }
+
+        .mvc-body {
+            color: rgba($white, 0.55);
+        }
+
+        .mvc-icon {
+            color: $gold-400;
+            background: rgba(#fff, 0.1);
+        }
+    }
+
+    &--vision {
+        background: $navy-900;
+        border-top-color: $gold-500;
+
+        .mvc-tag {
+            background: rgba($gold-500, 0.15);
+            color: $gold-400;
+        }
+
+        .mvc-title {
+            color: $white;
+        }
+
+        .mvc-body {
+            color: rgba($white, 0.6);
+        }
+
+        .mvc-icon {
+            color: $gold-400;
+            background: rgba($gold-500, 0.1);
+        }
+    }
+}
+
+.mvc-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: $radius-md;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: $space-3;
+}
+
+.mvc-tag {
+    display: inline-block;
+    font-family: $font-heading;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 3px $space-3;
+    border-radius: $radius-full;
+    margin-bottom: $space-3;
+}
+
+.mvc-title {
+    font-family: $font-heading;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: $space-2;
+    line-height: 1.3;
+
+    &--devanagari {
+        font-size: 1.5rem;
+        letter-spacing: 1px;
+    }
+}
+
+.mvc-translation {
+    font-size: 0.85rem;
+    font-style: italic;
+    margin-bottom: $space-3;
+    font-family: $font-heading;
+}
+
+.mvc-body {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    margin: 0;
+    flex: 1;
+}
+
+// ── Core Values Section ───────────────────────────────────────────
+.mv-values-section {
+    margin-bottom: $space-9;
+}
+
+.section-header-row.center {
+    text-align: center;
+    margin-bottom: $space-7;
+}
+
+.section-divider--center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.core-values-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: $space-4;
+
+    @include respond(xl) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include respond(md) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.cv-card {
+    background: $navy-700;
+    border: 1px solid rgba(#fff, 0.1);
+    border-radius: $radius-lg;
+    border-top: 3px solid $gold-500;
+    padding: $space-5 $space-4;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @include card-hover;
+}
+
+.cv-icon {
+    width: 52px;
+    height: 52px;
+    background: rgba(#fff, 0.1);
+    color: $gold-400;
+    border-radius: $radius-md;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin: 0 auto $space-3;
+}
+
+.cv-title {
+    font-family: $font-heading;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: rgba($white, 0.9);
+    margin-bottom: $space-2;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.cv-desc {
+    font-size: 0.8rem;
+    color: rgba($white, 0.65);
+    line-height: 1.6;
+    margin: 0;
+    flex: 1;
+}
+
+// ── Strategic Objectives Section ──────────────────────────────────
+.mv-objectives-section {
+    margin-bottom: $space-8;
+}
+
+.objectives-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $space-5;
+
+    @include respond(lg) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.obj-card {
+    background: $navy-700;
+    border: 1px solid rgba(#fff, 0.1);
+    border-radius: $radius-lg;
+    padding: $space-5;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    @include card-hover;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: $gold-500;
+    }
+}
+
+.obj-number {
+    position: absolute;
+    top: $space-4;
+    right: $space-4;
+    font-family: $font-heading;
+    font-size: 2rem;
+    font-weight: 700;
+    color: rgba($white, 0.08);
+    line-height: 1;
+    pointer-events: none;
+}
+
+.obj-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(#fff, 0.1);
+    color: $gold-400;
+    border-radius: $radius-md;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    margin-bottom: $space-3;
+}
+
+.obj-title {
+    font-family: $font-heading;
+    font-size: 1rem;
+    font-weight: 700;
+    color: rgba($white, 0.9);
+    margin-bottom: $space-2;
+}
+
+.obj-desc {
+    font-size: 0.82rem;
+    color: rgba($white, 0.65);
+    line-height: 1.6;
+    margin: 0;
+    flex: 1;
+}

@@ -1,0 +1,589 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.legislations-page {}
+
+// Intro banner
+.leg-intro-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-3;
+    background: rgba($navy-500, 0.06);
+    border: 1px solid rgba($navy-500, 0.15);
+    border-left: 4px solid $gold-500;
+    border-radius: $radius-lg;
+    padding: $space-4 $space-5;
+    margin-bottom: $space-6;
+
+    i {
+        color: $gold-500;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    p {
+        font-size: 0.88rem;
+        color: rgba($white, 0.72);
+        line-height: 1.6;
+        margin: 0;
+    }
+}
+
+// Tab layout — sidebar + content
+.leg-tab-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 0;
+    border: 1px solid $gray-200;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    margin-bottom: $space-7;
+    box-shadow: $shadow-sm;
+
+    @include respond(md) {
+        grid-template-columns: 1fr;
+    }
+}
+
+// Sidebar
+.leg-tab-sidebar {
+    background: $navy-700;
+    display: flex;
+    flex-direction: column;
+
+    @include respond(md) {
+        flex-direction: row;
+        overflow-x: auto;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+}
+
+.leg-sidebar-tab {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    padding: $space-4 $space-5;
+    background: none;
+    border: none;
+    border-left: 4px solid transparent;
+    border-bottom: 1px solid rgba($white, 0.06);
+    color: rgba($white, 0.6);
+    font-family: $font-body;
+    font-size: 0.85rem;
+    text-align: left;
+    cursor: pointer;
+    transition: all $transition-fast;
+    white-space: nowrap;
+
+    >i:first-child {
+        color: rgba($gold-400, 0.5);
+        font-size: 0.95rem;
+        flex-shrink: 0;
+        transition: color $transition-fast;
+    }
+
+    span {
+        flex: 1;
+    }
+
+    .leg-tab-arrow {
+        font-size: 0.6rem;
+        opacity: 0;
+        transition: opacity $transition-fast;
+        margin-left: auto;
+    }
+
+    &.active {
+        background: rgba($gold-500, 0.1);
+        border-left-color: $gold-500;
+        color: $gold-300;
+
+        .leg-tab-arrow {
+            opacity: 1;
+        }
+
+        >i:first-child {
+            color: $gold-400;
+        }
+    }
+
+    &:hover:not(.active) {
+        background: rgba($white, 0.04);
+        color: $white;
+    }
+
+    @include respond(md) {
+        border-left: none;
+        border-bottom: 3px solid transparent;
+
+        &.active {
+            border-bottom-color: $gold-500;
+            border-left: none;
+        }
+    }
+}
+
+.leg-sidebar-note {
+    margin-top: auto;
+    padding: $space-4 $space-5;
+    border-top: 1px solid rgba($white, 0.06);
+
+    i {
+        color: $gold-400;
+        font-size: 0.85rem;
+        margin-bottom: $space-2;
+        display: block;
+    }
+
+    p {
+        font-size: 0.72rem;
+        color: rgba($white, 0.45);
+        line-height: 1.5;
+        margin-bottom: $space-2;
+    }
+
+    @include respond(md) {
+        display: none;
+    }
+}
+
+.leg-egazette-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.72rem;
+    font-family: $font-heading;
+    font-weight: 700;
+    color: $gold-300;
+    text-decoration: none;
+    transition: color $transition-fast;
+
+    &:hover {
+        color: $gold-400;
+        text-decoration: underline;
+    }
+}
+
+// Content panel
+.leg-tab-content {
+    background: $navy-700;
+    padding: $space-6;
+
+    @include respond(sm) {
+        padding: $space-4;
+    }
+}
+
+.leg-panel-heading {
+    font-family: $font-heading;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: $white;
+    margin-bottom: $space-2;
+    @include gold-border-left;
+}
+
+.leg-panel-sub {
+    font-size: 0.85rem;
+    color: rgba($white, 0.55);
+    line-height: 1.6;
+    margin-bottom: $space-5;
+    padding-left: $space-5;
+}
+
+// Primary Acts grid
+.leg-primary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-5;
+
+    @include respond(lg) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.leg-primary-card {
+    border: 1px solid rgba($white, 0.1);
+    border-radius: $radius-lg;
+    overflow: hidden;
+    @include card-hover;
+}
+
+.lpc-accent-bar {
+    height: 5px;
+    background: linear-gradient(90deg, $gold-500, $gold-300);
+}
+
+.lpc-body {
+    padding: $space-5;
+}
+
+.lpc-icon-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $space-4;
+}
+
+.lpc-icon {
+    width: 52px;
+    height: 52px;
+    background: rgba($white, 0.1);
+    color: $gold-400;
+    border-radius: $radius-md;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+.lpc-category-badge {
+    font-family: $font-heading;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    background: rgba($gold-500, 0.2);
+    color: $gold-400;
+    border-radius: $radius-full;
+}
+
+.lpc-title {
+    font-family: $font-heading;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: rgba($white, 0.9);
+    line-height: 1.3;
+    margin-bottom: $space-2;
+}
+
+.lpc-subtitle {
+    font-size: 0.78rem;
+    color: rgba($white, 0.5);
+    font-style: italic;
+    margin-bottom: $space-3;
+}
+
+.lpc-desc {
+    font-size: 0.84rem;
+    color: rgba($white, 0.65);
+    line-height: 1.6;
+    margin-bottom: $space-4;
+}
+
+.lpc-meta-row {
+    display: flex;
+    gap: $space-4;
+    flex-wrap: wrap;
+    margin-bottom: $space-4;
+    padding-top: $space-3;
+    border-top: 1px solid rgba($white, 0.08);
+}
+
+.lpc-meta-item {
+    font-size: 0.78rem;
+    color: rgba($white, 0.55);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    i {
+        color: $gold-500;
+        font-size: 0.75rem;
+    }
+
+    strong {
+        color: rgba($white, 0.85);
+    }
+}
+
+.lpc-actions {
+    display: flex;
+    gap: $space-3;
+    flex-wrap: wrap;
+}
+
+.lpc-download-btn {
+    @include gold-btn;
+    font-size: 0.78rem;
+    padding: $space-2 $space-4;
+}
+
+.lpc-view-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-2;
+    padding: $space-2 $space-4;
+    background: transparent;
+    border: 1px solid rgba($white, 0.3);
+    color: rgba($white, 0.75);
+    font-family: $font-heading;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+    text-transform: uppercase;
+
+    &:hover {
+        background: rgba($white, 0.1);
+        color: $white;
+        border-color: rgba($white, 0.6);
+    }
+}
+
+// Conventions grid
+.leg-conventions-grid {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+}
+
+.leg-conv-card {
+    border: 1px solid rgba($white, 0.1);
+    border-radius: $radius-lg;
+    overflow: hidden;
+    @include card-hover;
+}
+
+.lcc-header {
+    background: $navy-700;
+    padding: $space-3 $space-5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space-3;
+
+    @include respond(sm) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+.lcc-un-badge {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    font-family: $font-heading;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba($white, 0.6);
+
+    i {
+        color: $gold-400;
+    }
+}
+
+.lcc-ratified-badge {
+    font-family: $font-heading;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: $gold-300;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    i {
+        color: $gold-400;
+    }
+}
+
+.lcc-body {
+    padding: $space-4 $space-5;
+    background: $navy-700;
+}
+
+.lcc-title {
+    font-family: $font-heading;
+    font-size: 1rem;
+    font-weight: 700;
+    color: rgba($white, 0.9);
+    margin-bottom: $space-2;
+}
+
+.lcc-desc {
+    font-size: 0.84rem;
+    color: rgba($white, 0.65);
+    line-height: 1.5;
+    margin-bottom: $space-4;
+}
+
+.lcc-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-2;
+    padding: $space-2 $space-4;
+    background: rgba($white, 0.08);
+    border: 1px solid rgba($white, 0.15);
+    color: rgba($white, 0.8);
+    font-family: $font-heading;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    i {
+        color: $gold-400;
+    }
+
+    &:hover {
+        background: $gold-500;
+        color: $navy-900;
+        border-color: $gold-500;
+
+        i {
+            color: $navy-900;
+        }
+    }
+}
+
+// Rules list
+.leg-rules-list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+}
+
+.leg-rule-item {
+    display: flex;
+    align-items: center;
+    gap: $space-4;
+    padding: $space-4;
+    background: rgba($white, 0.04);
+    border: 1px solid rgba($white, 0.1);
+    border-radius: $radius-md;
+    transition: background $transition-fast, border-color $transition-fast;
+
+    &:hover {
+        background: rgba($gold-500, 0.1);
+        border-color: rgba($gold-500, 0.35);
+    }
+}
+
+.lri-icon {
+    width: 42px;
+    height: 42px;
+    background: rgba($white, 0.1);
+    color: $gold-400;
+    border-radius: $radius-md;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.lri-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.lri-title {
+    font-family: $font-heading;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: rgba($white, 0.9);
+    margin-bottom: 3px;
+}
+
+.lri-desc {
+    font-size: 0.78rem;
+    color: rgba($white, 0.5);
+}
+
+.lri-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: $space-2;
+    flex-shrink: 0;
+}
+
+.lri-size {
+    font-size: 0.72rem;
+    color: rgba($white, 0.38);
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.lri-download-btn {
+    background: $gold-500;
+    border: none;
+    color: $navy-900;
+    width: 32px;
+    height: 32px;
+    border-radius: $radius-sm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background $transition-fast;
+
+    &:hover {
+        background: $gold-400;
+    }
+}
+
+// Bottom highlight
+.leg-bottom-highlight {
+    display: flex;
+    align-items: center;
+    gap: $space-5;
+    background: $navy-700;
+    border-radius: $radius-lg;
+    padding: $space-5 $space-6;
+    border-left: 4px solid $gold-500;
+
+    @include respond(md) {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    @include respond(sm) {
+        padding: $space-4;
+    }
+
+    >i {
+        font-size: 2.5rem;
+        color: $gold-400;
+        flex-shrink: 0;
+    }
+
+    div {
+        flex: 1;
+    }
+
+    h3 {
+        font-family: $font-heading;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: $white;
+        margin-bottom: 4px;
+    }
+
+    p {
+        font-size: 0.85rem;
+        color: rgba($white, 0.6);
+        line-height: 1.5;
+    }
+}
+
+.leg-portal-btn {
+    @include gold-btn;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
