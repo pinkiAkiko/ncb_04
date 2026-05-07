@@ -23,6 +23,9 @@ import g10 from "../assets/gallary-img/5martime.jpeg";
 import c1 from "../assets/criminal/c1.png";
 import c2 from "../assets/criminal/c2.png";
 import c3 from "../assets/criminal/c3.png";
+import c4 from "../assets/criminal/c4.png";
+import c5 from "../assets/criminal/c5.png";
+import c6 from "../assets/criminal/c6.png";
 import manasLogo from "../assets/link-img/MANAS_LogoE.jpeg";
 import pmnrfLogo from "../assets/link-img/PMNRF.png";
 import dataGovLogo from "../assets/link-img/data-gov.png";
@@ -168,11 +171,14 @@ const wantedPreview = [
     { name: "Vikram Dayal", alias: "Kana", crime: "International Drug Trafficking", status: "High Alert", photo: c1 },
     { name: "Harpreet Singh", alias: "Monu", crime: "Narco-Terror Network Operations", status: "Wanted", photo: c2 },
     { name: "Fahim Raza", alias: "Chikna", crime: "Cross-Border Heroin Smuggling", status: "Fugitive", photo: c3 },
+    { name: "Amit Sharma", alias: "Raju", crime: "Synthetic Drug Distribution", status: "High Alert", photo: c4 },
+    { name: "Suresh Gopi", alias: "Ustad", crime: "Illicit Chemical Sourcing", status: "Wanted", photo: c5 },
+    { name: "Rajesh Kumar", alias: "Chhotu", crime: "Money Laundering (Narco-Funds)", status: "Fugitive", photo: c6 },
 ];
 
 const socialEmbeds = [
     {
-        platform: "Twitter / X", icon: "bi-twitter-x", color: "#062544",
+        platform: "Twitter / X", icon: "bi-twitter-x", color: "#c8a84b",
         profileUrl: "https://twitter.com/NCBIndia",
         custom: "twitter",
         tweets: [
@@ -182,12 +188,12 @@ const socialEmbeds = [
         ],
     },
     {
-        platform: "Facebook", icon: "bi-facebook", color: "#062544",
+        platform: "Facebook", icon: "bi-facebook", color: "#c8a84b",
         profileUrl: "https://www.facebook.com/narcoticscontrolbureauindia",
-        src: "https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fnarcoticscontrolbureauindia&tabs=timeline&width=340&height=380&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=false",
+        src: "https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fnarcoticscontrolbureauindia&tabs=timeline&width=300&height=300&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=false",
     },
     {
-        platform: "YouTube", icon: "bi-youtube", color: "#062544",
+        platform: "YouTube", icon: "bi-youtube", color: "#c8a84b",
         profileUrl: "https://www.youtube.com/@NCBIndiaOfficial",
         custom: "youtube",
         videos: [
@@ -197,7 +203,7 @@ const socialEmbeds = [
         ],
     },
     {
-        platform: "Instagram", icon: "bi-instagram", color: "#062544",
+        platform: "Instagram", icon: "bi-instagram", color: "#c8a84b",
         profileUrl: "https://www.instagram.com/ncb_india/",
         src: "https://www.instagram.com/ncb_india/embed/",
     },
@@ -247,7 +253,7 @@ function Home() {
     const dgImgRef = useScrollReveal("is-visible");
     const dgTextRef = useScrollReveal("is-visible");
     const newsRef2 = useScrollReveal("is-visible");
-    const tilesRef = useStaggerReveal(".quick-tile", "is-visible", 70);
+
     const galleryRef = useScrollReveal("is-visible");
     const portalsSecRef = useScrollReveal("is-visible");
     const aboutStripRef = useScrollReveal("is-visible");
@@ -668,36 +674,7 @@ function Home() {
                 </div>
             </section>
 
-            {/* ═══════════════════════════════════════════════════
-                7. QUICK ACCESS TILES
-                ═══════════════════════════════════════════════════ */}
-            <section className="quick-access-section page-section page-section--dark">
-                <div className="container">
-                    <div className="section-header-row center">
-                        <span className="section-label">Services</span>
-                        <h2 className="section-title">Quick Access</h2>
-                        <div className="section-divider section-divider--center" />
-                    </div>
 
-                    <div className="quick-tiles-grid" ref={tilesRef}>
-                        {[
-                            { icon: "bi-shield-exclamation", label: "Red Corner Notice", path: "/red-corner-notice" },
-                            { icon: "bi-file-earmark-text", label: "RTI", path: "/rti" },
-                            { icon: "bi-hammer", label: "Tenders & Auctions", path: "/tenders" },
-                            { icon: "bi-geo-alt-fill", label: "Office Locator", path: "/office-locator" },
-                            { icon: "bi-person-check", label: "Career", path: "/career/vacancies" },
-                            { icon: "bi-people-fill", label: "Grievance", path: "/grievance" },
-                            { icon: "bi-book-fill", label: "Legislation", path: "/legislations" },
-                            { icon: "bi-headset", label: "Contact", path: "/contact" },
-                        ].map(tile => (
-                            <Link key={tile.label} to={tile.path} className="quick-tile reveal">
-                                <div className="qt-icon"><i className={`bi ${tile.icon}`} /></div>
-                                <span className="qt-label">{tile.label}</span>
-                            </Link>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
             {/* ═══════════════════════════════════════════════════
                 7. MEDIA GALLERY — card grid
@@ -740,9 +717,6 @@ function Home() {
                         <span className="section-label">Connect With Us</span>
                         <h2 className="section-title">Follow NCB</h2>
                         <div className="section-divider section-divider--center" />
-                        <p className="social-sub">
-                            Stay updated with the latest operations, alerts and announcements from NCB India
-                        </p>
                     </div>
 
                     <div className="sf-carousel-wrapper">
@@ -816,8 +790,8 @@ function Home() {
                                     {!s.custom && (
                                         <iframe
                                             src={s.src}
-                                            width="340"
-                                            height="380"
+                                            width="300"
+                                            height="300"
                                             style={{ border: "none", display: "block" }}
                                             allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
                                             title={s.platform}
@@ -838,14 +812,8 @@ function Home() {
             {/* ═══════════════════════════════════════════════════
                 8. IMPORTANT PORTALS — auto-scroll strip
                 ═══════════════════════════════════════════════════ */}
-            <section className="portals-section page-section reveal" ref={portalsSecRef}>
+            <section className="portals-section reveal" ref={portalsSecRef}>
                 <div className="container">
-                    <div className="section-header-row center">
-                        <span className="section-label">Government Resources</span>
-                        <h2 className="section-title">Important Websites</h2>
-                        <div className="section-divider section-divider--center" />
-                    </div>
-
                     <div className="portals-track-wrapper" ref={portalsRef}>
                         <div className="portals-inner-track">
                             {[...portals, ...portals].map((p, i) => (
