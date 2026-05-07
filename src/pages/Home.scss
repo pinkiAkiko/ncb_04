@@ -43,8 +43,8 @@
 .view-all-link {
     font-family: $font-heading;
     font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 1px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
     color: $gold-600;
     display: flex;
@@ -78,7 +78,7 @@
     color: $white;
     font-family: $font-heading;
     font-size: 0.85rem;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.3px;
     padding: 12px 24px;
     border-radius: 4px;
@@ -125,9 +125,9 @@
     background: $gold-500;
     color: $navy-900;
     font-family: $font-heading;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 0.7rem;
-    letter-spacing: 1.5px;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
     padding: 0 $space-4;
     height: 100%;
@@ -315,8 +315,8 @@
     color: $gold-300;
     font-family: $font-heading;
     font-size: 0.6rem;
-    font-weight: 700;
-    letter-spacing: 2px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
     text-transform: uppercase;
     padding: 4px 12px;
     border-radius: $radius-full;
@@ -327,7 +327,7 @@
 .hgc-slide-title {
     font-family: $font-heading;
     font-size: clamp(1rem, 1.8vw, 1.4rem);
-    font-weight: 800;
+    font-weight: 700;
     color: $white;
     line-height: 1.25;
     margin: 0 0 $space-2;
@@ -351,7 +351,7 @@
     color: $navy-900;
     font-family: $font-heading;
     font-size: 0.75rem;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.8px;
     text-transform: uppercase;
     padding: 7px 18px;
@@ -391,7 +391,7 @@
 
 .hgc-count-cur {
     font-size: 1.1rem;
-    font-weight: 800;
+    font-weight: 700;
     color: $gold-400;
     line-height: 1;
 }
@@ -494,8 +494,8 @@
 .hap-header-label {
     font-family: $font-heading;
     font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 1.5px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
     color: $white;
 }
@@ -503,7 +503,7 @@
 .hap-view-all {
     font-family: $font-heading;
     font-size: 0.62rem;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.8px;
     text-transform: uppercase;
     color: $gold-500;
@@ -555,7 +555,7 @@
     gap: 5px;
     font-family: $font-heading;
     font-size: 0.58rem;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 1.2px;
     text-transform: uppercase;
     padding: 3px 9px;
@@ -577,7 +577,7 @@
 .hap-featured-title {
     font-family: $font-heading;
     font-size: 1rem;
-    font-weight: 700;
+    font-weight: 600;
     color: $white;
     line-height: 1.5;
     margin: 0;
@@ -663,8 +663,8 @@
 .hap-item-cat {
     font-family: $font-heading;
     font-size: 0.55rem;
-    font-weight: 700;
-    letter-spacing: 1px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
     color: $gold-500;
 
@@ -706,7 +706,7 @@
     border-top: 1px solid rgba($gold-500, 0.18);
     font-family: $font-heading;
     font-size: 0.68rem;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.8px;
     text-transform: uppercase;
     color: $gold-400;
@@ -734,7 +734,7 @@
     font-family: $font-body;
     font-size: 0.72rem;
     font-weight: 600;
-    letter-spacing: 1.8px;
+    letter-spacing: 1.2px;
     text-transform: uppercase;
     padding: 6px 16px;
     border-radius: $radius-full;
@@ -749,7 +749,7 @@
 .hero-v2-heading {
     font-family: $font-heading;
     font-size: clamp(2.6rem, 5vw, 4rem);
-    font-weight: 800;
+    font-weight: 700;
     color: $navy-900;
     line-height: 1.08;
     letter-spacing: -0.5px;
@@ -769,7 +769,7 @@
 
     strong {
         color: $navy-700;
-        font-weight: 700;
+        font-weight: 600;
     }
 }
 
@@ -786,8 +786,8 @@
     gap: 8px;
     font-family: $font-heading;
     font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 1.8px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
     text-transform: uppercase;
     padding: 14px 28px;
     border-radius: $radius-md;
@@ -919,7 +919,7 @@
 .hac-title {
     font-family: $font-heading;
     font-size: 0.82rem;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 1.2px;
     text-transform: uppercase;
     color: $white;
@@ -928,7 +928,7 @@
 .hac-view-all {
     font-family: $font-heading;
     font-size: 0.72rem;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.8px;
     text-transform: uppercase;
     color: $gold-300;
@@ -1000,8 +1000,8 @@
 .hac-cat {
     font-family: $font-heading;
     font-size: 0.62rem;
-    font-weight: 700;
-    letter-spacing: 1px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
     padding: 2px 8px;
     border-radius: $radius-sm;
@@ -1278,8 +1278,8 @@
     color: $gold-300;
     font-family: $font-heading;
     font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 2px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
     text-transform: uppercase;
     padding: $space-1 $space-4;
     border-radius: $radius-full;
@@ -1289,7 +1289,7 @@
 .hero-title {
     font-family: $font-heading;
     font-size: clamp(2.2rem, 5vw, 3.8rem);
-    font-weight: 700;
+    font-weight: 600;
     color: $white;
     line-height: 1.1;
     letter-spacing: 0.5px;
@@ -1331,9 +1331,9 @@
     border: 2px solid rgba($white, 0.4);
     color: $white;
     font-family: $font-heading;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 0.88rem;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
     border-radius: $radius-sm;
     transition: all $transition-fast;
@@ -1378,7 +1378,7 @@
 .qs-value {
     font-family: $font-heading;
     font-size: 1.6rem;
-    font-weight: 700;
+    font-weight: 600;
     color: $gold-400;
     line-height: 1;
 }
@@ -1490,11 +1490,16 @@
 .mission-card {
     background: $navy-700;
     border: 1px solid rgba($white, 0.1);
-    border-top: 3px solid $gold-500;
+    border-top: 3px solid transparent;
     border-radius: $radius-lg;
     padding: $space-6;
     box-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+    transition: border-color $transition-base, transform $transition-base, box-shadow $transition-base;
     @include card-hover;
+
+    &:hover {
+        border-top-color: $gold-500;
+    }
 
     .mc-icon-box {
         background: rgba($gold-500, 0.12);
@@ -1520,16 +1525,16 @@
 .mc-label {
     font-family: $font-heading;
     font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 2px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
     text-transform: uppercase;
     margin-bottom: $space-2;
 }
 
 .mc-heading {
     font-family: $font-heading;
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 1.4rem;
+    font-weight: 600;
     color: $white;
     line-height: 1.2;
     margin-bottom: $space-3;
@@ -1545,8 +1550,8 @@
 .mc-read-more {
     font-family: $font-heading;
     font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 1px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
     color: $gold-400;
     display: inline-flex;
@@ -1622,8 +1627,8 @@
     color: $navy-900;
     font-family: $font-heading;
     font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 1.5px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
     padding: $space-2 $space-4;
     border-radius: $radius-full;
@@ -1673,7 +1678,7 @@
 
 .dg-quote-text {
     font-family: $font-heading;
-    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-size: clamp(0.95rem, 1.8vw, 1.1rem);
     font-weight: 400;
     color: rgba($white, 0.88);
     line-height: 1.65;
@@ -1690,7 +1695,7 @@
 .dg-name {
     font-family: $font-heading;
     font-size: 1.1rem;
-    font-weight: 700;
+    font-weight: 600;
     color: $gold-400;
     letter-spacing: 0.5px;
 }
@@ -1773,7 +1778,7 @@
 .kpi-value {
     font-family: $font-heading;
     font-size: 1.3rem;
-    font-weight: 700;
+    font-weight: 600;
     color: $white;
     line-height: 1;
 
@@ -1800,7 +1805,7 @@
 .kpi-trend {
     font-family: $font-heading;
     font-size: 0.72rem;
-    font-weight: 700;
+    font-weight: 600;
     color: $gray-500;
     background: rgba($white, 0.05);
     padding: 2px 6px;
@@ -1912,8 +1917,8 @@
 .news-cat {
     font-family: $font-heading;
     font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 1.5px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
     padding: 1px 6px;
     border-radius: $radius-sm;
@@ -1997,8 +2002,8 @@
     color: $navy-900;
     font-family: $font-heading;
     font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 1px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
     padding: 2px 8px;
     border-radius: $radius-sm;
@@ -2024,7 +2029,7 @@
 .ed-day {
     font-family: $font-heading;
     font-size: 1.3rem;
-    font-weight: 700;
+    font-weight: 600;
     color: $gold-400;
     line-height: 1;
 }
@@ -2283,7 +2288,7 @@
 .afc-value {
     font-family: $font-heading;
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 600;
     color: $white;
     line-height: 1;
 }
@@ -2293,7 +2298,7 @@
     font-weight: 600;
     color: rgba($white, 0.55);
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
 }
 
 // ── MOST WANTED TEASER — CAROUSEL ─────────────────────────
@@ -2386,6 +2391,7 @@
         .mwt-silhouette::after {
             opacity: 0;
         }
+
         .mwt-silhouette img {
             transform: scale(1.08);
         }
@@ -2435,7 +2441,7 @@
     top: $space-3;
     left: $space-3;
     font-size: 0.6rem;
-    font-weight: 800;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.7px;
     padding: 3px 10px;
@@ -2472,7 +2478,7 @@
 .mwt-name {
     font-family: $font-heading;
     font-size: 1rem;
-    font-weight: 700;
+    font-weight: 600;
     color: $white;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -2533,7 +2539,7 @@
 .mwt-tip-number {
     font-family: $font-heading;
     font-size: 1.1rem;
-    font-weight: 700;
+    font-weight: 600;
     color: $gold-400;
 
     &:hover {
@@ -2616,6 +2622,10 @@
     &:hover {
         transform: translateY(-3px);
         box-shadow: $shadow-lg;
+
+        .sf-embed-header {
+            border-top-color: var(--platform-color, #c8a84b);
+        }
     }
 
     @include respond(md) {
@@ -2631,45 +2641,49 @@
     display: flex;
     align-items: center;
     gap: $space-3;
-    padding: $space-3 $space-4;
+    padding: $space-3 12px;
     border-top: 3px solid transparent;
     border-bottom: 1px solid rgba($white, 0.08);
     background: $navy-700;
+    transition: border-color $transition-fast;
 }
 
 .sf-embed-icon {
-    width: 36px;
-    height: 36px;
+    width: 30px;
+    height: 30px;
     border-radius: $radius-sm;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     flex-shrink: 0;
 }
 
 .sf-embed-name {
     font-family: $font-heading;
-    font-size: 0.88rem;
-    font-weight: 700;
+    font-size: 0.65rem;
+    font-weight: 600;
     color: $white;
     text-transform: uppercase;
     letter-spacing: 0.4px;
     flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .sf-visit-btn {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    font-size: 0.75rem;
-    font-weight: 700;
+    gap: 4px;
+    font-size: 0.55rem;
+    font-weight: 600;
     font-family: $font-heading;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     border: 1px solid;
     border-radius: $radius-full;
-    padding: 4px 14px;
+    padding: 3px 10px;
     transition: all $transition-fast;
     background: transparent;
     text-decoration: none;
@@ -2783,7 +2797,7 @@
 
 .sf-tweet-handle {
     font-size: 0.72rem;
-    font-weight: 700;
+    font-weight: 600;
     color: #1DA1F2;
 }
 
@@ -2847,7 +2861,7 @@
     background: rgba(0, 0, 0, 0.85);
     color: $white;
     font-size: 0.6rem;
-    font-weight: 700;
+    font-weight: 600;
     padding: 1px 5px;
     border-radius: 2px;
 }
@@ -2908,7 +2922,7 @@
     gap: 8px;
     padding: $space-3;
     font-size: 0.8rem;
-    font-weight: 700;
+    font-weight: 600;
     font-family: $font-heading;
     text-transform: uppercase;
     letter-spacing: 0.8px;

@@ -47,7 +47,7 @@
     strong {
         font-family: $font-heading;
         font-size: 0.9rem;
-        font-weight: 800;
+        font-weight: 600;
         color: $gold-300;
         letter-spacing: 1px;
     }
@@ -131,7 +131,7 @@
 .aa-severity-badge {
     font-family: $font-heading;
     font-size: 0.68rem;
-    font-weight: 800;
+    font-weight: 600;
     letter-spacing: 1px;
     text-transform: uppercase;
     padding: 3px 10px;
@@ -291,7 +291,7 @@
 .aa-report-step {
     font-family: $font-heading;
     font-size: 2rem;
-    font-weight: 800;
+    font-weight: 600;
     color: rgba($gold-500, 0.2);
     line-height: 1;
 }
@@ -350,10 +350,16 @@
     box-shadow: $shadow-sm;
     display: flex;
     flex-direction: column;
+    border-top: 4px solid transparent;
+    transition: all $transition-base;
     @include card-hover;
 
+    &:hover {
+        border-top-color: var(--accent-color);
+    }
+
     &--blue {
-        border-top: 4px solid $navy-500;
+        --accent-color: #{$navy-500};
 
         .aa-awareness-icon {
             background: rgba($navy-500, 0.08);
@@ -365,7 +371,7 @@
     }
 
     &--green {
-        border-top: 4px solid #16a34a;
+        --accent-color: #16a34a;
 
         .aa-awareness-icon {
             background: rgba(#16a34a, 0.08);
@@ -377,7 +383,7 @@
     }
 
     &--gold {
-        border-top: 4px solid $gold-500;
+        --accent-color: #{$gold-500};
 
         .aa-awareness-icon {
             background: rgba($gold-500, 0.1);

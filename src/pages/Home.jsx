@@ -728,14 +728,14 @@ function Home() {
                             {socialEmbeds.map(s => (
                                 <div className="sf-embed-card" key={s.platform}>
                                     {/* ── Header ── */}
-                                    <div className="sf-embed-header" style={{ borderTopColor: s.color }}>
+                                    <div className="sf-embed-header" style={{ "--platform-color": s.color }}>
                                         <div className="sf-embed-icon" style={{ background: `${s.color}18`, color: s.color }}>
                                             <i className={`bi ${s.icon}`} />
                                         </div>
                                         <span className="sf-embed-name">{s.platform}</span>
                                         <a href={s.profileUrl} target="_blank" rel="noopener noreferrer"
                                             className="sf-visit-btn" style={{ color: s.color, borderColor: `${s.color}55` }}>
-                                            <i className={`bi ${s.icon}`} /> View Channel
+                                            <i className={`bi ${s.icon}`} /> VIEW CHANNEL
                                         </a>
                                     </div>
 

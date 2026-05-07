@@ -115,7 +115,7 @@
     background: $gold-500;
     color: $navy-900;
     font-size: 0.72rem;
-    font-weight: 700;
+    font-weight: 600;
     padding: 4px 12px;
     border-radius: $radius-sm;
     display: flex;
@@ -249,7 +249,7 @@
 .hdr-name {
     font-family: $font-heading;
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 600;
     color: $navy-700;
     letter-spacing: 0.5px;
     line-height: 1;
@@ -521,7 +521,7 @@
 
     span {
         font-family: $font-heading;
-        font-weight: 700;
+        font-weight: 600;
         color: $white;
         font-size: 1.1rem;
     }
@@ -556,12 +556,12 @@
     display: flex;
     align-items: center;
     gap: $space-1;
-    padding: 0 $space-4;
+    padding: 0 14px;
     height: 52px;
     font-family: $font-heading;
     font-weight: 600;
-    font-size: 0.82rem;
-    letter-spacing: 0.8px;
+    font-size: 0.78rem;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
     color: $white;
     background: none;
@@ -1025,7 +1025,7 @@
 .a11y-drawer-title {
     font-family: $font-heading;
     font-size: 0.95rem;
-    font-weight: 700;
+    font-weight: 600;
     color: $white;
     text-transform: uppercase;
     letter-spacing: 0.8px;
@@ -1074,7 +1074,7 @@
     align-items: center;
     gap: $space-2;
     font-size: 0.65rem;
-    font-weight: 700;
+    font-weight: 600;
     color: rgba($white, 0.35);
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -1198,7 +1198,7 @@
 
         .a11y-tool-label {
             color: $gold-300;
-            font-weight: 700;
+            font-weight: 600;
         }
     }
 
@@ -1232,7 +1232,7 @@
 // Text icon (A+ / A−)
 .a11y-tool-text-icon {
     font-family: $font-heading;
-    font-weight: 800;
+    font-weight: 700;
     font-size: 1.3rem;
     color: rgba($white, 0.6);
     line-height: 1;

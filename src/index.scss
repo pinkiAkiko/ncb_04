@@ -10,7 +10,7 @@
 
 html {
   scroll-behavior: smooth;
-  font-size: 16px;
+  font-size: 14.5px;
   overflow-x: hidden;
   /* prevent horizontal shift at html level */
 }
@@ -59,8 +59,8 @@ ol {
 .section-label {
   font-family: $font-heading;
   font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 2px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
   color: $gold-500;
   display: block;
@@ -69,10 +69,10 @@ ol {
 
 .section-title {
   font-family: $font-heading;
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
-  font-weight: 700;
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  font-weight: 600;
   color: $white !important;
-  letter-spacing: 0.5px;
+  letter-spacing: 0;
   text-transform: uppercase;
   line-height: 1.2;
 }
@@ -89,7 +89,7 @@ ol {
   width: 56px;
   height: 3px;
   background: $gold-500;
-  margin: $space-3 0 $space-5;
+  margin: $space-3 0 $space-3;
 }
 
 .section-divider--center {
