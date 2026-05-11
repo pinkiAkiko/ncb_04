@@ -466,8 +466,8 @@ function Home() {
                     </div>
 
                     <div className="dg-text-col reveal-right" ref={dgTextRef}>
-                        <span className="section-label">Leadership</span>
-                        <h2 className="section-title section-title--white">Director General's Message</h2>
+
+                        <h2 className="section-title section-title--white">From the Desk of Director General</h2>
                         <div className="section-divider" />
                         <div className="dg-quote-block">
                             <i className="bi bi-quote dg-quote-icon" />

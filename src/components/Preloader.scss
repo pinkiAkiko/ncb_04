@@ -1,93 +1,109 @@
 @use '../styles/variables' as *;
 
-.ncb-preloader {
+.ncb-logo-loader {
     position: fixed;
     inset: 0;
     z-index: 9999;
-    background: $navy-900;
+    background: #0a0a0a;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: $space-5;
-    transition: opacity 0.7s ease;
+    transition: opacity 0.8s ease;
 
     &.fade-out {
         opacity: 0;
         pointer-events: none;
     }
-}
 
-.preloader-inner {
-    position: relative;
-    width: 120px;
-    height: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.preloader-ring {
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    border: 3px solid transparent;
-
-    &.outer {
-        border-top-color: $gold-500;
-        border-right-color: rgba($gold-500, 0.3);
-        animation: spin 1.2s linear infinite;
+    .loader-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2.5rem;
     }
 
-    &.inner {
-        inset: 14px;
-        border-top-color: transparent;
-        border-left-color: $gold-300;
-        animation: spin 0.8s linear infinite reverse;
+    .logo-wrapper {
+        position: relative;
+        width: 140px;
+        height: 140px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .main-logo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            position: relative;
+            z-index: 2;
+            animation: pulse-logo 2s ease-in-out infinite;
+        }
+
+        .pulse-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: rgba($gold-500, 0.15);
+            animation: ping-ring 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+    }
+
+    .loader-text {
+        text-align: center;
+        
+        .org-name {
+            font-family: $font-heading;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: $white;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(180deg, #fff 0%, rgba(#fff, 0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gov-text {
+            font-family: $font-body;
+            font-size: 0.85rem;
+            color: $gold-500;
+            font-weight: 600;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+        }
+    }
+
+    .progress-container {
+        width: 180px;
+        height: 2px;
+        background: rgba($white, 0.1);
+        position: relative;
+        overflow: hidden;
+
+        .progress-bar {
+            height: 100%;
+            width: 100%;
+            background: $gold-500;
+            position: absolute;
+            left: -100%;
+            animation: slide-progress 2s ease-in-out infinite;
+        }
     }
 }
 
-.preloader-emblem {
-    width: 70px;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: pulse 1.5s ease infinite;
-
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        filter: brightness(0) invert(1);
-    }
+@keyframes pulse-logo {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.85; }
 }
 
-.preloader-text {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: $space-1;
-    animation: fadeIn 0.8s ease 0.5s both;
+@keyframes ping-ring {
+    75%, 100% { transform: scale(2); opacity: 0; }
 }
 
-.preloader-org {
-    font-family: $font-heading;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: $white;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+@keyframes slide-progress {
+    0% { left: -100%; }
+    50% { left: 0; }
+    100% { left: 100%; }
 }
-
-.preloader-sub {
-    font-family: $font-body;
-    font-size: 0.8rem;
-    color: $gold-400;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-}
-
-@keyframes spin  { to { transform: rotate(360deg); } }
-@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.65; } }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }

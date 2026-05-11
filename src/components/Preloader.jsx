@@ -13,17 +13,16 @@ function Preloader({ onDone }) {
     if (phase === "gone") return null;
 
     return (
-        <div className={`ncb-preloader ${phase === "fade" ? "fade-out" : ""}`}>
-            <div className="preloader-inner">
-                <div className="preloader-ring outer" />
-                <div className="preloader-ring inner" />
-                <div className="preloader-emblem">
-                    <img src="/logo.svg" alt="NCB Emblem" />
+        <div className={`ncb-logo-loader ${phase === "fade" ? "fade-out" : ""}`}>
+            <div className="loader-content">
+                <div className="logo-wrapper">
+                    <div className="pulse-ring" />
+                    <img src="/logo.svg" alt="NCB Emblem" className="main-logo" />
                 </div>
-            </div>
-            <div className="preloader-text">
-                <span className="preloader-org">Narcotics Control Bureau</span>
-                <span className="preloader-sub">Government of India</span>
+                <div className="loader-text">
+                    <h1 className="org-name">Narcotics Control Bureau</h1>
+                    <p className="gov-text">Government of India</p>
+                </div>
             </div>
         </div>
     );
