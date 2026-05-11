@@ -8,7 +8,6 @@ import Banner_1 from "../assets/slider/Banner_1.png";
 import Banner_2 from "../assets/slider/Banner_2.png";
 import Banner_3 from "../assets/slider/Banner_3.png";
 import Banner_4 from "../assets/slider/Banner_4.png";
-import Banner_5 from "../assets/slider/Banner_5.png";
 import dgProfile from "../assets/profile.jpeg";
 import g1 from "../assets/gallary-img/10trainee-bsf.jpeg";
 import g2 from "../assets/gallary-img/11apppa-51batch.jpeg";
@@ -65,14 +64,6 @@ const slides = [
     {
         id: 4,
         image: Banner_4,
-        badge: "Community Outreach",
-        title: "Awareness &\nCommunity Engagement",
-        description: "Empowering the youth and communities to resist drug abuse through nationwide educational programs.",
-        cta: { label: "Awareness Programs", path: "/mou" },
-    },
-    {
-        id: 5,
-        image: Banner_5,
         badge: "Community Outreach",
         title: "Awareness &\nCommunity Engagement",
         description: "Empowering the youth and communities to resist drug abuse through nationwide educational programs.",
