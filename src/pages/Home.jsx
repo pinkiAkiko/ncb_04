@@ -4,10 +4,17 @@ import "./Home.scss";
 import { useScrollReveal, useStaggerReveal } from "../hooks/useScrollReveal";
 import EnforcementAnalytics from "../components/EnforcementAnalytics";
 
-import Banner_1 from "../assets/slider/Banner_1.png";
-import Banner_2 from "../assets/slider/Banner_2.png";
-import Banner_3 from "../assets/slider/Banner_3.png";
-import Banner_4 from "../assets/slider/Banner_4.png";
+import Banner_1 from "../assets/slider/banner_001.jpg";
+import Banner_2 from "../assets/slider/banner_002.jpg";
+import Banner_3 from "../assets/slider/banner_003.jpg";
+import Banner_4 from "../assets/slider/banner_004.jpg";
+import Banner_5 from "../assets/slider/banner_005.jpg";
+import Banner_6 from "../assets/slider/banner_006.jpg";
+import Banner_7 from "../assets/slider/banner_007.jpg";
+import Banner_8 from "../assets/slider/banner_008.jpg";
+import Banner_9 from "../assets/slider/banner_009.jpg";
+import Banner_10 from "../assets/slider/banner_010.jpg";
+import Banner_11 from "../assets/slider/banner_011.jpg";
 import dgProfile from "../assets/profile.jpeg";
 import g1 from "../assets/gallary-img/10trainee-bsf.jpeg";
 import g2 from "../assets/gallary-img/11apppa-51batch.jpeg";
@@ -65,9 +72,65 @@ const slides = [
         id: 4,
         image: Banner_4,
         badge: "Community Outreach",
-        title: "Awareness &\nCommunity Engagement",
-        description: "Empowering the youth and communities to resist drug abuse through nationwide educational programs.",
-        cta: { label: "Awareness Programs", path: "/mou" },
+        title: "Protecting Our\nFuture Generations",
+        description: "Building a resilient society through comprehensive drug awareness and youth empowerment initiatives across the country.",
+        cta: { label: "Learn More", path: "/about" },
+    },
+    {
+        id: 5,
+        image: Banner_5,
+        badge: "Enforcement Excellence",
+        title: "Dismantling Illicit\nDrug Networks",
+        description: "Relentless pursuit of drug traffickers and disrupting supply chains through specialized operations and inter-agency coordination.",
+        cta: { label: "Operations", path: "/coordination" },
+    },
+    {
+        id: 6,
+        image: Banner_6,
+        badge: "Strategic Coordination",
+        title: "Unified Front\nAgainst Narcotics",
+        description: "Strengthening the collaborative efforts of state and central agencies to ensure a drug-free national environment.",
+        cta: { label: "Coordination", path: "/mou" },
+    },
+    {
+        id: 7,
+        image: Banner_7,
+        badge: "Intelligence Led",
+        title: "Advanced Data &\nIntelligence Analysis",
+        description: "Harnessing the power of technology and data-driven insights to effectively combat modern trafficking methods.",
+        cta: { label: "Intelligence", path: "/coordination" },
+    },
+    {
+        id: 8,
+        image: Banner_8,
+        badge: "International Ties",
+        title: "Global Partnership\nin Drug Control",
+        description: "Collaborating with international organizations and law enforcement to address transnational drug-related crimes.",
+        cta: { label: "Global Ties", path: "/mou" },
+    },
+    {
+        id: 9,
+        image: Banner_9,
+        badge: "Law Enforcement",
+        title: "Upholding Integrity\nand Public Safety",
+        description: "Maintaining strict enforcement of the NDPS Act while ensuring the highest standards of institutional transparency.",
+        cta: { label: "NCB Mandate", path: "/about" },
+    },
+    {
+        id: 10,
+        image: Banner_10,
+        badge: "Public Awareness",
+        title: "Say Yes to Life\nNo to Drugs",
+        description: "Spreading the message of a healthy lifestyle and the importance of saying no to drugs through nationwide campaigns.",
+        cta: { label: "Campaigns", path: "/mou" },
+    },
+    {
+        id: 11,
+        image: Banner_11,
+        badge: "National Resolve",
+        title: "Zero Tolerance\nto Narcotic Trade",
+        description: "Our unwavering commitment to securing India's sovereignty from the threats of narcotics and organized crime.",
+        cta: { label: "Our Mission", path: "/about" },
     },
 ];
 
@@ -341,9 +404,28 @@ function Home() {
                     <div className="hero-carousel-col">
                         <div className="hero-galaxy-card">
                             <div className="hgc-slides">
+                                {/* Invisible spacer to set height based on image aspect ratio */}
+                                <img
+                                    src={slides[0].image}
+                                    alt=""
+                                    style={{ width: '100%', height: 'auto', display: 'block', opacity: 0, pointerEvents: 'none' }}
+                                    aria-hidden
+                                />
                                 {slides.map((s, i) => (
                                     <div key={s.id} className={`hgc-slide ${i === slideIdx ? "active" : ""}`}>
-                                        <img src={s.image} alt={s.badge} />
+                                        {/* Blurred background layer */}
+                                        <div 
+                                            className="hgc-blur-bg"
+                                            style={{ 
+                                                position: 'absolute', inset: 0, 
+                                                backgroundImage: `url(${s.image})`, 
+                                                backgroundSize: 'cover', backgroundPosition: 'center',
+                                                filter: 'blur(30px)', opacity: 0.4, transform: 'scale(1.1)'
+                                            }}
+                                        />
+                                        {/* Foreground image - contained and no cut */}
+                                        <img src={s.image} alt={s.badge} className="hgc-main-img" />
+
                                     </div>
                                 ))}
                             </div>

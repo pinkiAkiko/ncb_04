@@ -9,16 +9,10 @@ function AppInner() {
     const [preloaderDone, setPreloaderDone] = useState(false);
     const { selectedLang, showModal } = useLanguage();
 
-    if (!preloaderDone) {
-        return <Preloader onDone={() => setPreloaderDone(true)} />;
-    }
-
-    if (!selectedLang || showModal) {
-        return <LanguageModal />;
-    }
-
     return (
         <>
+            {!preloaderDone && <Preloader onDone={() => setPreloaderDone(true)} />}
+            {preloaderDone && (!selectedLang || showModal) && <LanguageModal />}
             <ScrollToTop />
             <AppRoutes />
         </>
