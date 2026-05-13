@@ -5,8 +5,11 @@ function Preloader({ onDone }) {
     const [phase, setPhase] = useState("visible"); // visible → fade → gone
 
     useEffect(() => {
-        const t1 = setTimeout(() => setPhase("fade"), 2200);
-        const t2 = setTimeout(() => { setPhase("gone"); onDone?.(); }, 2900);
+        const t1 = setTimeout(() => {
+            setPhase("fade");
+            onDone?.(); // Trigger early to eliminate gap
+        }, 2200);
+        const t2 = setTimeout(() => setPhase("gone"), 2900);
         return () => { clearTimeout(t1); clearTimeout(t2); };
     }, [onDone]);
 

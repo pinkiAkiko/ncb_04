@@ -1,1 +1,10 @@
+.app-content {
+    transition: filter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: 100vh;
+}
 
+.app-content.blurred {
+    filter: blur(15px) brightness(0.7);
+    pointer-events: none;
+    user-select: none;
+}
