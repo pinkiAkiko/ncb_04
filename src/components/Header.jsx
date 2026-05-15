@@ -54,7 +54,7 @@ const navItems = [
             { label: "Acts & Rules", path: "/legislations" },
             { label: "Treaties", path: "/international/mlats" },
             { label: "Publications", path: "/media/annual-reports" },
-            { label: "NDPS Exclusive Court Cases", path: "/legal/court-cases" },
+            { label: "NDPS Exclusive Courts", path: "/legal/court-cases" },
         ]
     },
     { label: "Alert Awareness", path: "/alert-awareness" },
